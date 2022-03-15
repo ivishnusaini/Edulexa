@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Edulexa</string>
+
+    <!--dialog validation popup-->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <!--Enter School Code Screen-->
+    <string name="enter_school_code">Enter School Code</string>
+    <string name="enter_school_code_hint">Enter school code</string>
+    <string name="submit_enter_school_code">Submit</string>
+    <string name="enter_school_code_empty_validation">Please enter school code</string>
+
+    <!--Login Screen-->
+    <string name="back_login">Back</string>
+    <string name="staff">Staff</string>
+    <string name="student">Student</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="submit">Submit</string>
+    <string name="forgot_password">Forgot Password?</string>
+
+    <!--Dashboard Staff Screen-->
+    <string name="no_data_dashboard">No Data</string>
+    <string name="exit_message">Are you sure you want to exit?</string>
+    <string name="logout">Logout</string>
+
+</resources>

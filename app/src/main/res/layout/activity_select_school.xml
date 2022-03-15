@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activity.SelectSchoolActivity">
+
+    <ImageView
+        android:id="@+id/iv_exit"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/ic_exit_select_school_code"
+        android:backgroundTint="@color/white"
+        android:layout_margin="@dimen/_10sdp"
+        android:contentDescription="@string/app_name" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_enter_school_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/_20sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_15sdp">
+
+            <com.agot.views.BoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_school_code"
+                android:textColor="@color/primaray_text_color"
+                android:textSize="@dimen/_16ssp" />
+
+            <com.agot.views.RegularEditText
+                android:id="@+id/et_school_code"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/edit_text_bg_25"
+                android:hint="@string/enter_school_code_hint"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:paddingStart="@dimen/_10sdp"
+                android:maxLength="20"
+                android:paddingEnd="@dimen/_10sdp"
+                android:textColor="@color/primaray_text_color"
+                android:textSize="@dimen/_14ssp" />
+
+            <com.agot.views.BoldButton
+                android:id="@+id/btn_submit"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/ripple_effect_25"
+                android:text="@string/submit_enter_school_code"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
