@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_50sdp"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_5sdp">
+
+    <com.agot.views.RegularTextView
+        android:id="@+id/tv_homework_tab_name"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edit_text_bg_25"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:paddingStart="@dimen/_30sdp"
+        android:paddingEnd="@dimen/_30sdp"
+        android:text="@string/app_name"
+        android:textColor="@color/primaray_text_color"
+        android:textSize="@dimen/_14ssp" />
+
+
+</RelativeLayout>

@@ -31,11 +31,13 @@
 
     </RelativeLayout>
 
-    <TableLayout
-        android:id="@+id/tab_layout_homework"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp" />
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_tab_homework"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_gravity="center_vertical"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager_homework"
