@@ -23,6 +23,7 @@
     <!--Dashboard Staff Screen-->
     <string name="no_data_dashboard">No Data</string>
     <string name="exit_message">Are you sure you want to exit?</string>
+    <string name="logout_message">Are you sure you want to logout?</string>
     <string name="logout">Logout</string>
 
 </resources>
