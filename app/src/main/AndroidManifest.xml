@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.student.dashboard.activity.DashboardStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.student.homework.activity.HomeworkStudentActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.staff.dashboard.activity.DashboardStaffActivity"
             android:exported="false" />
         <activity

@@ -26,4 +26,8 @@
     <string name="logout_message">Are you sure you want to logout?</string>
     <string name="logout">Logout</string>
 
+    <!--Homework Student Screen-->
+    <string name="homework_student">Homework</string>
+
+
 </resources>
