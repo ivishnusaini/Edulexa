@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.student.homework.ViewpagerModel
+import com.edulexa.activity.student.homework.model.ViewpagerModel
 import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
 
 class HomeworkTabAdapter(context: Activity, list: List<ViewpagerModel>?) :

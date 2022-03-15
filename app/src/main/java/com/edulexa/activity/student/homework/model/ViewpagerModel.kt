@@ -1,4 +1,4 @@
-package com.edulexa.activity.student.homework
+package com.edulexa.activity.student.homework.model
 
 class ViewpagerModel(name:String,selectFlag:Boolean) {
     var name:String? = null

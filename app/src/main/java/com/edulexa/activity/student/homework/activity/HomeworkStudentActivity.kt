@@ -4,12 +4,11 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.edulexa.R
-import com.edulexa.activity.student.homework.ViewpagerModel
+import com.edulexa.activity.student.homework.model.ViewpagerModel
 import com.edulexa.activity.student.homework.adapter.HomeworkTabAdapter
 import com.edulexa.activity.student.homework.adapter.ViewpagerAdapter
 import com.edulexa.databinding.ActivityHomeworkStudentBinding
