@@ -1,5 +1,6 @@
 package com.edulexa.support
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
@@ -26,6 +27,10 @@ import com.edulexa.BuildConfig
 import com.edulexa.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.YearMonth
+import java.util.*
 import java.util.regex.Pattern
 
 class Utils {
@@ -163,6 +168,86 @@ class Utils {
             snackbar.setBackgroundTint(ContextCompat.getColor(context, R.color.red))
             snackbar.view.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
             snackbar.show()
+        }
+        fun getCurrentDate(): String? {
+            @SuppressLint("SimpleDateFormat") val dateFormat: DateFormat =
+                SimpleDateFormat("yyyy-MM-dd")
+            val date = Date()
+            return dateFormat.format(date)
+        }
+        fun getCurrentYear() : Int{
+            return Calendar.getInstance().get(Calendar.YEAR);
+        }
+        fun getCurrentMonth() : Int{
+            return Calendar.getInstance().get(Calendar.MONTH);
+        }
+        fun getCurrentDayNumber():Int{
+            val currentDate = getCurrentDate()
+            val tokenizer = StringTokenizer(currentDate,"-")
+            val year = tokenizer.nextToken()
+            val month = tokenizer.nextToken()
+            return (tokenizer.nextToken()).toInt()
+        }
+        fun getNumberOfDaysInMonth(year : Int, month : Int) : Int{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                val yearMonthObject: YearMonth = YearMonth.of(year, month)
+                val daysInMonth: Int = yearMonthObject.lengthOfMonth()
+                return daysInMonth
+            }else{
+                val calendar = GregorianCalendar(year,month,1)
+                val daysInMonth: Int = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+                return daysInMonth
+            }
+        }
+        @SuppressLint("SimpleDateFormat")
+        fun getCurrentDayOfWeek(dateStr : String) : String{
+            val inFormat = SimpleDateFormat("yyyy-MM-dd")
+            val date = inFormat.parse(dateStr)
+            val outFormat = SimpleDateFormat("EEEE")
+            return outFormat.format(date!!)
+        }
+        fun getMonthNameFromMonthNo(monthNo : Int) : String{
+            when(monthNo){
+                1 -> {
+                    return "January"
+                }
+                2 -> {
+                    return "February"
+                }
+                3 -> {
+                    return "March"
+                }
+                4 -> {
+                    return "April"
+                }
+                5 -> {
+                    return "May"
+                }
+                6 -> {
+                    return "June"
+                }
+                7 -> {
+                    return "July"
+                }
+                8 -> {
+                    return "August"
+                }
+                9 -> {
+                    return "September"
+                }
+                10 -> {
+                    return "Octomber"
+                }
+                11 -> {
+                    return "November"
+                }
+                12 -> {
+                    return "December"
+                }
+                else -> {
+                    return ""
+                }
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
 import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
 
@@ -42,10 +43,10 @@ class DashboardStudentAdapter(context: Activity) :
                     viewHolder.tvName!!.text = "Fee Details"
                 }
                 3 -> {
-                    viewHolder.tvName!!.text = "Exam"
+                    viewHolder.tvName!!.text = "Examination"
                 }
                 4 -> {
-                    viewHolder.tvName!!.text = "Report Card"
+                    viewHolder.tvName!!.text = "Report Cards"
                 }
                 5 -> {
                     viewHolder.tvName!!.text = "Calendar"
@@ -57,6 +58,9 @@ class DashboardStudentAdapter(context: Activity) :
                     viewHolder.tvName!!.text = "Multimedia"
                 }
                 8 -> {
+                    viewHolder.tvName!!.text = "Acadmic Year"
+                }
+                9 -> {
                     viewHolder.tvName!!.text = "Profile"
                 }
             }
@@ -66,6 +70,9 @@ class DashboardStudentAdapter(context: Activity) :
                     when(viewHolder.tvName!!.text){
                         "Homework" -> {
                             context!!.startActivity(Intent(context!!, HomeworkStudentActivity::class.java))
+                        }
+                        "Attendance" -> {
+                            context!!.startActivity(Intent(context!!, AttendanceStudentActivity::class.java))
                         }
                     }
                 }
@@ -78,7 +85,7 @@ class DashboardStudentAdapter(context: Activity) :
     }
 
     override fun getItemCount(): Int {
-        return 12;
+        return 10;
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

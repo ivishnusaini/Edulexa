@@ -29,5 +29,8 @@
     <!--Homework Student Screen-->
     <string name="homework_student">Homework</string>
 
+    <!--Attendance Student Screen-->
+    <string name="attendance_student">Attendance</string>
+
 
 </resources>
