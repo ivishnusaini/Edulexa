@@ -44,4 +44,10 @@
     <!--Examination Student Screen-->
     <string name="exam_student">Exam</string>
 
+    <!--Report Card Student Screen-->
+    <string name="report_card_student">Report Card</string>
+
+    <!--NoticeBoard Student Screen-->
+    <string name="notice_board_student">Notice Board</string>
+
 </resources>

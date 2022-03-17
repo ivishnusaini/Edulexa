@@ -9,10 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
-import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
 import com.edulexa.activity.student.examination.activity.ExamStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
 import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
+import com.edulexa.activity.student.noticeboard.activity.NoticeBoardStudentActivity
+import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
 
 class DashboardStudentAdapter(context: Activity) :
     RecyclerView.Adapter<DashboardStudentAdapter.ViewHolder>() {
@@ -81,6 +82,12 @@ class DashboardStudentAdapter(context: Activity) :
                         }
                         "Examination" -> {
                             context!!.startActivity(Intent(context!!, ExamStudentActivity::class.java))
+                        }
+                        "Report Cards" -> {
+                            context!!.startActivity(Intent(context!!, ReportCardStudentActivity::class.java))
+                        }
+                        "Notice Board" -> {
+                            context!!.startActivity(Intent(context!!, NoticeBoardStudentActivity::class.java))
                         }
                     }
                 }
