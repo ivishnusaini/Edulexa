@@ -360,7 +360,7 @@ class AttendanceStudentActivity : AppCompatActivity(), View.OnClickListener {
             val month = tokenizer.nextToken()
             val currentDateOfMonth = tokenizer.nextToken()
 
-            binding!!.tvMonthYear.text = Utils.getMonthNameFromMonthNo((month).toInt()) + " " + year
+            binding!!.tvMonthYear.setText(getString(R.string.concat_string_with_text_format,Utils.getMonthNameFromMonthNo((month).toInt())," ",year))
 
             val monthMinusOne = (month).toInt() - 1
             if (monthMinusOne == currentMonthGlobal)

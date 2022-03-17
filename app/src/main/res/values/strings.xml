@@ -31,6 +31,17 @@
 
     <!--Attendance Student Screen-->
     <string name="attendance_student">Attendance</string>
+    <string name="concat_string_with_text_format">%s%s%s</string>
 
+    <!--Fee Student Screen-->
+    <string name="fee_student">Fee</string>
+    <string name="general_fee_student">General Fee</string>
+    <string name="transport_fee_student">Transport Fee</string>
+    <string name="fee_qr_code_student">QR Code</string>
+    <string name="fee_upload_student">Upload</string>
+    <string name="fee_receipts_student">Receipts</string>
+
+    <!--Examination Student Screen-->
+    <string name="exam_student">Exam</string>
 
 </resources>
