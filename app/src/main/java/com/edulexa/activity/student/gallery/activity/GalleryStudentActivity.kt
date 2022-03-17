@@ -1,4 +1,4 @@
-package com.edulexa.activity.student.examination.activity
+package com.edulexa.activity.student.gallery.activity
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.student.examination.adapter.ExamAdapter
-import com.edulexa.activity.student.fee.adapter.FeeTypeAdapter
-import com.edulexa.databinding.ActivityExamStudentBinding
-import com.edulexa.databinding.ActivityFeeStudentBinding
+import com.edulexa.activity.student.gallery.adapter.GalleryAlbumAdapter
+import com.edulexa.activity.student.noticeboard.adapter.NoticeBoardAdapter
+import com.edulexa.databinding.ActivityGalleryStudentBinding
+import com.edulexa.databinding.ActivityNoticeboardStudentBinding
 
-class ExamStudentActivity : AppCompatActivity(),View.OnClickListener {
+class GalleryStudentActivity : AppCompatActivity(),View.OnClickListener {
     var mActivity: Activity? = null
-    var binding: ActivityExamStudentBinding? = null
+    var binding: ActivityGalleryStudentBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityExamStudentBinding.inflate(layoutInflater)
+        binding = ActivityGalleryStudentBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         init()
     }
@@ -30,11 +30,15 @@ class ExamStudentActivity : AppCompatActivity(),View.OnClickListener {
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
     }
-    private fun setUpExamList(){
-        binding!!.recyclerViewExam.layoutManager = GridLayoutManager(mActivity!!,2,
-            RecyclerView.VERTICAL,false)
-        binding!!.recyclerViewExam.adapter = ExamAdapter(mActivity!!)
+
+    private fun setUpExamList() {
+        binding!!.recyclerViewGallery.layoutManager = GridLayoutManager(
+            mActivity!!,2,
+            RecyclerView.VERTICAL, false
+        )
+        binding!!.recyclerViewGallery.adapter = GalleryAlbumAdapter(mActivity!!)
     }
+
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.iv_back)

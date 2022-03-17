@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/_10sdp"
-    tools:context=".activity.student.examination.activity.ExamStudentActivity">
+    tools:context=".activity.student.gallery.activity.GalleryStudentImageZoomActivity">
 
     <RelativeLayout
-        android:id="@+id/fee_header_lay"
+        android:id="@+id/gallery_header_lay"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary">
@@ -27,18 +26,19 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/exam_student"
+            android:text="@string/gallery_student"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_exam"
+    <ImageView
+        android:id="@+id/iv_gallery_zoom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_5sdp"/>
+        android:layout_height="match_parent"
+        android:background="@drawable/app_icon"
+        android:contentDescription="@string/app_name"
+        android:transitionName="@string/gallery_student_transition_name" />
 
 </LinearLayout>

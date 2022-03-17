@@ -114,7 +114,7 @@ class FeeStudentActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.iv_back)
-            finish()
+            onBackPressed()
         else if (id == R.id.iv_menu)
             visibleMenuOptions()
         else if (id == R.id.top_lay)

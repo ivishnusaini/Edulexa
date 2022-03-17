@@ -41,6 +41,6 @@ class NoticeBoardStudentActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.iv_back)
-            finish()
+            onBackPressed()
     }
 }

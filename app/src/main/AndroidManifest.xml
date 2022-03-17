@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.student.gallery.activity.GalleryStudentImageZoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.student.gallery.activity.GalleryStudentActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.student.noticeboard.activity.NoticeBoardStudentActivity"
             android:exported="false" />
         <activity

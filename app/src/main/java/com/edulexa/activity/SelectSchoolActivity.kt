@@ -51,7 +51,7 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.iv_exit)
-            finish()
+            onBackPressed()
         else if (id == R.id.btn_submit)
             submit()
     }

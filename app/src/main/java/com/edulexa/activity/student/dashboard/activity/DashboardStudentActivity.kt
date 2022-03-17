@@ -80,7 +80,7 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCanceledOnTouchOutside(false)
             val tvMessage = dialog.findViewById<TextView>(R.id.tv_message)
-            tvMessage.text = getString(R.string.exit_message)
+            tvMessage.text = getString(R.string.logout_message)
             val cvCancel: CardView = dialog.findViewById(R.id.cv_cancel)
             val cvOk: CardView = dialog.findViewById(R.id.cv_ok)
             cvCancel.setOnClickListener { v: View? -> dialog.dismiss() }

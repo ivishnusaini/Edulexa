@@ -50,4 +50,8 @@
     <!--NoticeBoard Student Screen-->
     <string name="notice_board_student">Notice Board</string>
 
+    <!--Gallery Student Screen-->
+    <string name="gallery_student">Gallery</string>
+    <string name="gallery_student_transition_name">Gallery Zoom</string>
+
 </resources>
