@@ -14,6 +14,7 @@ import com.edulexa.activity.student.fee.activity.FeeStudentActivity
 import com.edulexa.activity.student.gallery.activity.GalleryStudentActivity
 import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
 import com.edulexa.activity.student.noticeboard.activity.NoticeBoardStudentActivity
+import com.edulexa.activity.student.profile.activity.ProfileStudentActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
 
 class DashboardStudentAdapter(context: Activity) :
@@ -92,6 +93,9 @@ class DashboardStudentAdapter(context: Activity) :
                         }
                         "Multimedia" -> {
                             context!!.startActivity(Intent(context!!, GalleryStudentActivity::class.java))
+                        }
+                        "Profile" -> {
+                            context!!.startActivity(Intent(context!!, ProfileStudentActivity::class.java))
                         }
                     }
                 }

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.student.profile.activity.LanguageStudentActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_back_white" />
+
+        <com.agot.views.MediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_toEndOf="@+id/iv_back"
+            android:text="@string/language_student"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp" />
+
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/student_hindi_english_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_15sdp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_student_hindi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:buttonTint="@android:color/black"
+            android:text="@string/language_student_hindi"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+
+        <RadioButton
+            android:id="@+id/radio_student_english"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:buttonTint="@android:color/black"
+            android:text="@string/language_student_english"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+
+    </RadioGroup>
+
+    <com.agot.views.RegularButton
+        android:id="@+id/tv_submit"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:background="@drawable/ripple_effect_25"
+        android:gravity="center"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="@string/apply_student"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp" />
+
+
+</LinearLayout>

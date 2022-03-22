@@ -20,7 +20,7 @@
     <string name="submit">Submit</string>
     <string name="forgot_password">Forgot Password?</string>
 
-    <!--Dashboard Staff Screen-->
+    <!--Dashboard Student Screen-->
     <string name="no_data_dashboard">No Data</string>
     <string name="exit_message">Are you sure you want to exit?</string>
     <string name="logout_message">Are you sure you want to logout?</string>
@@ -53,5 +53,32 @@
     <!--Gallery Student Screen-->
     <string name="gallery_student">Gallery</string>
     <string name="gallery_student_transition_name">Gallery Zoom</string>
+
+    <!--Profile Student Screen-->
+    <string name="profile_student">Profile</string>
+    <string name="name_profile_student">Name</string>
+    <string name="class_profile_student">Class</string>
+    <string name="dummy_class_profile_student">ix</string>
+    <string name="section_profile_student">Section</string>
+    <string name="dummy_section_profile_student">B</string>
+    <string name="language_profile_student">Language</string>
+    <string name="about_us_profile_student">About Us</string>
+
+
+    <!--Language Student Screen-->
+    <string name="language_student">Change Language</string>
+    <string name="language_student_hindi">Hindi</string>
+    <string name="language_student_english">English</string>
+    <string name="apply_student">Apply</string>
+
+    <!--About us Student Screen-->
+    <string name="about_us_student">About Us</string>
+    <string name="about_us_student_school_name">School Name</string>
+    <string name="about_us_student_address">Address</string>
+    <string name="about_us_student_phone">Phone</string>
+    <string name="about_us_student_email">Email</string>
+    <string name="about_us_student_school_code">School Code</string>
+    <string name="about_us_student_current_session">Current Session</string>
+    <string name="about_us_student_session_month">Session Month</string>
 
 </resources>
