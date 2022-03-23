@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.edulexa.R
+import com.edulexa.activity.student.fee.adapter.FeeTypeAdapter
 import com.edulexa.activity.student.fee.adapter.ViewpagerFeeAdapter
 import com.edulexa.activity.student.homework.model.ViewpagerModel
 import com.edulexa.databinding.ActivityFeeStudentBinding
@@ -24,6 +27,7 @@ class FeeStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun init() {
         mActivity = this
         setUpClickListener()
+        setUpFeeTypeAdapter()
         setUpViewPager()
     }
 
@@ -36,6 +40,12 @@ class FeeStudentActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.tvQrCode.setOnClickListener(this)
         binding!!.tvUpload.setOnClickListener(this)
         binding!!.tvReceipts.setOnClickListener(this)
+    }
+
+    private fun setUpFeeTypeAdapter(){
+        binding!!.recyclerViewFeeType.layoutManager = LinearLayoutManager(mActivity!!,
+            RecyclerView.HORIZONTAL,false)
+        binding!!.recyclerViewFeeType.adapter = FeeTypeAdapter(mActivity!!)
     }
 
     private fun resetTab(position: Int) {

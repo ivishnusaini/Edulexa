@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.edulexa.activity.student.fee.adapter.FeeListAdapter
 import com.edulexa.activity.student.fee.adapter.FeeTypeAdapter
 import com.edulexa.databinding.FragmentFeeViewpagerStudentBinding
 import com.edulexa.databinding.FragmentHomeworkViewpagerStudentBinding
@@ -41,10 +42,12 @@ class FeeViewpagerFragment : Fragment() {
     }
     private fun init(){
         mActivity = activity
-        setUpFeeTypeAdapter()
+        setUpFeeList()
     }
-    private fun setUpFeeTypeAdapter(){
-        binding!!.recyclerViewFeeType.layoutManager = LinearLayoutManager(mActivity!!,RecyclerView.HORIZONTAL,false)
-        binding!!.recyclerViewFeeType.adapter = FeeTypeAdapter(mActivity!!)
+    private fun setUpFeeList(){
+        binding!!.recyclerViewFeeList.layoutManager = LinearLayoutManager(mActivity!!,
+            RecyclerView.VERTICAL,false)
+        binding!!.recyclerViewFeeList.adapter = FeeListAdapter(mActivity!!)
     }
+
 }

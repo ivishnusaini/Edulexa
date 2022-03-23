@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/_10sdp"
+    android:paddingBottom="@dimen/_5sdp"
     tools:context=".activity.student.fee.activity.FeeStudentActivity">
 
     <RelativeLayout
@@ -80,11 +80,18 @@
 
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_fee_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/general_transport_lay" />
+
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager_fee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/general_transport_lay" />
+        android:layout_below="@+id/recycler_view_fee_type" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_menu"

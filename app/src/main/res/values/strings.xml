@@ -40,6 +40,11 @@
     <string name="fee_qr_code_student">QR Code</string>
     <string name="fee_upload_student">Upload</string>
     <string name="fee_receipts_student">Receipts</string>
+    <string name="fee_student_amount">Amount :</string>
+    <string name="fee_student_paid_amount">Paid Amount :</string>
+    <string name="fee_student_balance_amount">Balance Amount :</string>
+    <string name="fee_student_due_date">Due Date :</string>
+    <string name="fee_student_pay_fee">Pay Fees</string>
 
     <!--Examination Student Screen-->
     <string name="exam_student">Exam</string>
