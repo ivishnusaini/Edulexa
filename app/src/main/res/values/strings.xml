@@ -32,6 +32,10 @@
     <!--Attendance Student Screen-->
     <string name="attendance_student">Attendance</string>
     <string name="concat_string_with_text_format">%s%s%s</string>
+    <string name="attendance_student_date">Date :</string>
+    <string name="attendance_student_in_time">In Time :</string>
+    <string name="attendance_student_out_time">Out Time :</string>
+
 
     <!--Fee Student Screen-->
     <string name="fee_student">Fee</string>

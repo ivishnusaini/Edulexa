@@ -7,10 +7,13 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.attendance.adapter.AttendanceListAdapter
 import com.edulexa.activity.student.attendance.adapter.MonthAdapter
 import com.edulexa.activity.student.attendance.model.MonthModel
+import com.edulexa.activity.student.fee.adapter.FeeTypeAdapter
 import com.edulexa.databinding.ActivityAttendanceStudentBinding
 import com.edulexa.support.Utils
 import java.text.SimpleDateFormat
@@ -35,6 +38,7 @@ class AttendanceStudentActivity : AppCompatActivity(), View.OnClickListener {
         setUpClickListener()
         setUpCurrentMonthData()
         setUpMonthData()
+        setUpAttendanceList()
     }
 
     private fun setUpClickListener() {
@@ -419,6 +423,12 @@ class AttendanceStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun getPreviousMonth() {
         calendarGlobal.add(Calendar.MONTH, -1)
         setUpMonthData()
+    }
+
+    private fun setUpAttendanceList(){
+        binding!!.recyclerViewAttendance.layoutManager = LinearLayoutManager(mActivity!!,
+            RecyclerView.VERTICAL,false)
+        binding!!.recyclerViewAttendance.adapter = AttendanceListAdapter(mActivity!!)
     }
 
     override fun onClick(view: View?) {

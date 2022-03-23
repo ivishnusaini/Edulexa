@@ -242,14 +242,17 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_attendance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
