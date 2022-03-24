@@ -53,6 +53,13 @@
     <!--Examination Student Screen-->
     <string name="exam_student">Exam</string>
 
+    <!--Examination Detail Student Screen-->
+    <string name="exam_student_detail">Exam Detail</string>
+    <string name="exam_student_detail_subject">Subject Name :</string>
+    <string name="exam_student_detail_duration">Duration :</string>
+    <string name="exam_student_detail_date_time">Date/Time :</string>
+    <string name="exam_student_detail_room_no">Room No :</string>
+
     <!--Report Card Student Screen-->
     <string name="report_card_student">Report Card</string>
 

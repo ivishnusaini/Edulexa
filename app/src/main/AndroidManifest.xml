@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.student.examination.activity.ExamDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.student.profile.activity.AboutUsStudentActivity"
             android:exported="false" />
         <activity

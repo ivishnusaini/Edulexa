@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
-import com.edulexa.activity.student.examination.activity.ExamDetailActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
 import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
 
-class ExamAdapter(context: Activity) :
-    RecyclerView.Adapter<ExamAdapter.ViewHolder>() {
+class ExamDetailAdapter(context: Activity) :
+    RecyclerView.Adapter<ExamDetailAdapter.ViewHolder>() {
     var context: Activity? = null
 
     init {
@@ -28,32 +27,27 @@ class ExamAdapter(context: Activity) :
     ): ViewHolder {
         val itemView: View =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_exam, parent, false)
+                .inflate(R.layout.item_student_exam_detail, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         try {
-            viewHolder.itemView.setOnClickListener(object :View.OnClickListener{
-                override fun onClick(p0: View?) {
-                    context!!.startActivity(Intent(context,ExamDetailActivity::class.java))
-                }
 
-            })
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
     override fun getItemCount(): Int {
-        return 20;
+        return 4;
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvName: TextView? = null
 
         init {
-            tvName = itemView.findViewById(R.id.tv_dashboard_name)
+
         }
     }
 }
