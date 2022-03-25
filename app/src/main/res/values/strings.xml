@@ -63,6 +63,15 @@
     <!--Report Card Student Screen-->
     <string name="report_card_student">Report Card</string>
 
+    <!--Report Card Student Screen-->
+    <string name="report_card_detail_subjects">Subjects</string>
+    <string name="report_card_detail_passing_marks">Passing \n Marks</string>
+    <string name="report_card_detail_obtained_marks">Obtained \n Marks</string>
+    <string name="report_card_detail_result">Result</string>
+    <string name="report_card_detail_grand_total">Grand Total</string>
+    <string name="report_card_detail_percentage">Percentage</string>
+    <string name="report_card_detail_grade">Grade</string>
+
     <!--NoticeBoard Student Screen-->
     <string name="notice_board_student">Notice Board</string>
 

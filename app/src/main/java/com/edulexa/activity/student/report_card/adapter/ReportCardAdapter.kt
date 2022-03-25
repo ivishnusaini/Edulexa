@@ -2,6 +2,7 @@ package com.edulexa.activity.student.report_card.adapter
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivit
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
 import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
+import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
+import com.edulexa.api.Constants
 
 class ReportCardAdapter(context: Activity) :
     RecyclerView.Adapter<ReportCardAdapter.ViewHolder>() {
@@ -33,7 +36,13 @@ class ReportCardAdapter(context: Activity) :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         try {
-
+            viewHolder.itemView.setOnClickListener(object :View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    val bundle = Bundle()
+                    bundle.putString(Constants.ReportCardDetail.TITLE,"Report Card 2022")
+                    context!!.startActivity(Intent(context,ReportCardDetailActivity::class.java).putExtras(bundle))
+                }
+            })
         } catch (e: Exception) {
             e.printStackTrace()
         }

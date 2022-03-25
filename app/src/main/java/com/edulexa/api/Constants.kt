@@ -5,6 +5,9 @@ class Constants {
         private const val BASE_URL_DOMAIN = ""
         val BASE_URL = BASE_URL_DOMAIN + ""
     }
+    object ReportCardDetail{
+        val TITLE = "title"
+    }
     object AppSaveData {
 
     }
