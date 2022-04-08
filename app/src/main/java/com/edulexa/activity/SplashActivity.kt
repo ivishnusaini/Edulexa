@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         val slideAnimation = AnimationUtils.loadAnimation(this, R.anim.splash_side_slide)
         binding!!.ivSplash.startAnimation(slideAnimation)
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(mActivity!!, SelectSchoolActivity::class.java))
+            startActivity(Intent(mActivity!!, LoginActivity::class.java))
             finish()
         }, 3000)
     }
