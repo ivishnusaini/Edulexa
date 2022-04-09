@@ -95,10 +95,7 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun scrollAtBottom(){
-        binding!!.recyclerView.getParent().requestChildFocus(binding!!.recyclerView,binding!!.recyclerView);
-       /* binding!!.scrollView.post {
-            binding!!.scrollView.fullScroll(View.FOCUS_DOWN)
-        }*/
+        binding!!.recyclerView.getParent().requestChildFocus(binding!!.recyclerView,binding!!.recyclerView)
     }
 
     override fun onClick(view: View?) {

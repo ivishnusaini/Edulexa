@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.attendance.model.MonthModel
-import com.edulexa.activity.student.homework.model.ViewpagerModel
-import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
 
 class MonthAdapter(context: Activity, list: List<MonthModel>?) :
     RecyclerView.Adapter<MonthAdapter.ViewHolder>() {

@@ -11,7 +11,6 @@ import androidx.viewpager.widget.ViewPager
 import com.edulexa.R
 import com.edulexa.activity.student.fee.adapter.FeeTypeAdapter
 import com.edulexa.activity.student.fee.adapter.ViewpagerFeeAdapter
-import com.edulexa.activity.student.homework.model.ViewpagerModel
 import com.edulexa.databinding.ActivityFeeStudentBinding
 
 class FeeStudentActivity : AppCompatActivity(), View.OnClickListener {

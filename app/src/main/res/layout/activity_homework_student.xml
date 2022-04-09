@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,14 +7,21 @@
     tools:context=".activity.student.homework.activity.HomeworkStudentActivity">
 
     <RelativeLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary">
+        android:background="@drawable/header_bg_staff">
 
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_8sdp"
             android:contentDescription="@string/app_name"
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_back_white" />
@@ -31,16 +38,17 @@
 
     </RelativeLayout>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_tab_homework"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_gravity="center_vertical"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:background="@drawable/header_top_right_radius">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_homework"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/student_homework_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
