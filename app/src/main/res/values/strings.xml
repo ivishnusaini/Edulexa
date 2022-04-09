@@ -18,7 +18,21 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="submit">Submit</string>
-    <string name="forgot_password">Forgot Password?</string>
+    <string name="forgot_password">Forgot Password</string>
+
+    <!--Forgot Password-->
+    <string name="phone_number_forgot_password">Phone Number</string>
+    <string name="country_code_forgot_password">+91</string>
+    <string name="dummy_phone_number_forgot_password">1234567890</string>
+    <string name="generate_otp_forgot_password">Generate OTP</string>
+    <string name="cancel_forgot_password">Cancel</string>
+    <string name="enter_otp_forgot_password">Enter OTP</string>
+    <string name="send_again_forgot_password">Send Again</string>
+    <string name="verify_forgot_password">Verify</string>
+    <string name="create_new_password_forgot_password">Create New Password</string>
+    <string name="confirm_new_password_forgot_password">Confirm New Password</string>
+    <string name="dummy_password_hint_forgot_password">********</string>
+    <string name="submit_forgot_password">Submit</string>
 
     <!--Dashboard Student Screen-->
     <string name="no_data_dashboard">No Data</string>

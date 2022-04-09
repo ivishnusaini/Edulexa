@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.tvBack.setOnClickListener(this)
         binding!!.tvStaff.setOnClickListener(this)
         binding!!.tvStudent.setOnClickListener(this)
+        binding!!.tvForgotPassword.setOnClickListener(this)
         binding!!.tvSubmit.setOnClickListener(this)
     }
 
@@ -75,6 +76,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    private fun goToForgotPasswordActivity(){
+        startActivity(Intent(mActivity!!, ForgotPasswordActivity::class.java))
+    }
+
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.tv_back)
@@ -85,5 +90,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             resetStaffStudentButton("student")
         else if (id == R.id.tv_submit)
             goToHomeActivity()
+        else if (id == R.id.tv_forgot_password)
+            goToForgotPasswordActivity()
     }
 }
