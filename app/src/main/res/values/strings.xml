@@ -39,6 +39,10 @@
     <string name="exit_message">Are you sure you want to exit?</string>
     <string name="logout_message">Are you sure you want to logout?</string>
     <string name="logout">Logout</string>
+    <string name="dummy_student_name">Neha Saini</string>
+    <string name="dummy_student_class">Class VII B</string>
+    <string name="dashboard_student_today_homework">Today\'s Homework</string>
+    <string name="dashboard_student_you_are_present">You are present today</string>
 
     <!--Homework Student Screen-->
     <string name="homework_student">Homework</string>

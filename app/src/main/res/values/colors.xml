@@ -16,4 +16,8 @@
     <color name="primaray_text_color">#000000</color>
     <color name="secondary_text_color">#9F000000</color>
     <color name="green">#0BAFA0</color>
+
+    <color name="notice_board_bg_1">#d4ffea</color>
+    <color name="notice_board_bg_2">#d4f5ff</color>
+    <color name="notice_board_bg_3">#ffd4d4</color>
 </resources>

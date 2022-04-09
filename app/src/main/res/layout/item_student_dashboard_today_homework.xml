@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:elevation="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_5sdp">
+
+    <LinearLayout
+        android:id="@+id/notice_board_top_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff1ec"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp">
+
+
+        <com.agot.views.RegularTextView
+            android:id="@+id/tv_today_homework_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_12ssp" />
+
+        <com.agot.views.RegularTextView
+            android:id="@+id/tv_today_homework_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text=""
+            android:textColor="@color/secondary_text_color"
+            android:textSize="@dimen/_10ssp" />
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -6,70 +6,184 @@
     tools:context=".activity.student.dashboard.activity.DashboardStudentActivity">
 
     <RelativeLayout
-        android:id="@+id/header"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_70sdp"
         android:background="@drawable/header_bg_staff">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_user_image"
+
+        <RelativeLayout
+            android:id="@+id/menu_lay"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_margin="@dimen/_10sdp"
-            android:src="@drawable/app_icon" />
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_splash"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/dot_menu"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/app_name" />
+
+
+        </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_toEndOf="@+id/iv_user_image"
+            android:layout_toStartOf="@+id/iv_student_image"
+            android:layout_toEndOf="@+id/menu_lay"
             android:orientation="vertical">
 
-            <com.agot.views.RegularTextView
-                android:id="@+id/tv_staff_name"
+
+            <com.agot.views.MediumTextView
+                android:id="@+id/tv_student_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alex Mun"
+                android:maxLines="1"
+                android:text="@string/dummy_student_name"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16ssp" />
 
+            <com.agot.views.RegularTextView
+                android:id="@+id/tv_student_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@string/dummy_student_class"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+
         </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_student_image"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/dummy_profile" />
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_logout"
-        android:layout_below="@+id/header"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_5sdp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:background="@drawable/header_top_right_radius">
 
-    <com.agot.views.RegularTextView
-        android:id="@+id/tv_dashboard_no_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/no_data_dashboard"
-        android:textColor="@color/primaray_text_color"
-        android:textSize="@dimen/_16ssp"
-        android:visibility="gone" />
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/student_dashboard_bottom_lay">
 
-    <com.agot.views.RegularButton
-        android:id="@+id/tv_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:background="@drawable/ripple_effect_25"
-        android:paddingStart="@dimen/_30sdp"
-        android:paddingEnd="@dimen/_30sdp"
-        android:text="@string/logout"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_16ssp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.agot.views.MediumTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:maxLines="1"
+                    android:text="@string/notice_board_student"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_16ssp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/student_notice_board_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp" />
+
+                <com.agot.views.MediumTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:maxLines="1"
+                    android:text="@string/dashboard_student_today_homework"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_16ssp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/student_today_homework_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:nestedScrollingEnabled="false" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_5sdp" />
+
+                <com.agot.views.RegularButton
+                    android:id="@+id/tv_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/ripple_effect_25"
+                    android:paddingStart="@dimen/_30sdp"
+                    android:paddingEnd="@dimen/_30sdp"
+                    android:text="@string/logout"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp" />
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:id="@+id/student_dashboard_bottom_lay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentBottom="true"
+            android:background="#DCFFD4">
+
+            <com.agot.views.MediumTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:maxLines="1"
+                android:text="@string/dashboard_student_you_are_present"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_16ssp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

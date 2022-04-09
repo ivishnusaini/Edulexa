@@ -2,6 +2,7 @@ package com.edulexa.activity.student.dashboard.activity
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -11,10 +12,14 @@ import android.view.Window
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.ForgotCreatePasswordActivity
 import com.edulexa.activity.staff.dashboard.adapter.DashboardStaffAdapter
 import com.edulexa.activity.student.dashboard.adapter.DashboardStudentAdapter
+import com.edulexa.activity.student.dashboard.adapter.DashboardStudentNoticeBoardAdapter
+import com.edulexa.activity.student.dashboard.adapter.DashboardStudentTodayHomeworkAdapter
 import com.edulexa.databinding.ActivityDashboardStaffBinding
 import com.edulexa.databinding.ActivityDashboardStudentBinding
 import com.edulexa.support.Utils
@@ -36,11 +41,28 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun init() {
         mActivity = this
         setUpclickListener()
+        setUpNoticeBoardData()
+        setUpTodayHomeworkData()
         setUpDashboardData()
     }
 
     private fun setUpclickListener() {
-        binding!!.tvLogout.setOnClickListener(this)
+        binding!!.menuLay.setOnClickListener(this)
+    }
+
+
+    private fun setUpNoticeBoardData() {
+        binding!!.studentNoticeBoardRecycler.layoutManager =
+            LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL, false)
+        binding!!.studentNoticeBoardRecycler.adapter =
+            DashboardStudentNoticeBoardAdapter(mActivity!!)
+    }
+
+    private fun setUpTodayHomeworkData() {
+        binding!!.studentTodayHomeworkRecycler.layoutManager =
+            LinearLayoutManager(mActivity, RecyclerView.VERTICAL, false)
+        binding!!.studentTodayHomeworkRecycler.adapter =
+            DashboardStudentTodayHomeworkAdapter(mActivity!!)
     }
 
     private fun setUpDashboardData() {
@@ -72,32 +94,16 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun logoutPopup() {
-        try {
-            val dialog = Dialog(mActivity!!)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.dialog_exit)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.setCanceledOnTouchOutside(false)
-            val tvMessage = dialog.findViewById<TextView>(R.id.tv_message)
-            tvMessage.text = getString(R.string.logout_message)
-            val cvCancel: CardView = dialog.findViewById(R.id.cv_cancel)
-            val cvOk: CardView = dialog.findViewById(R.id.cv_ok)
-            cvCancel.setOnClickListener { v: View? -> dialog.dismiss() }
-            cvOk.setOnClickListener { v: View? ->
-                Utils.hideKeyboard(mActivity!!)
-                finishAffinity()
-                dialog.dismiss()
-            }
-            dialog.show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    private fun scrollAtBottom(){
+        binding!!.recyclerView.getParent().requestChildFocus(binding!!.recyclerView,binding!!.recyclerView);
+       /* binding!!.scrollView.post {
+            binding!!.scrollView.fullScroll(View.FOCUS_DOWN)
+        }*/
     }
 
     override fun onClick(view: View?) {
         val id = view!!.id
-        if (id == R.id.tv_logout)
-            logoutPopup()
+        if (id == R.id.menu_lay)
+            scrollAtBottom()
     }
 }

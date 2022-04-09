@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/_150sdp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    android:elevation="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_5sdp">
+
+    <LinearLayout
+        android:id="@+id/notice_board_top_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#d4ffea"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_50sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardPreventCornerOverlap="false">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/app_icon"
+                android:contentDescription="@string/app_name" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.agot.views.RegularTextView
+            android:id="@+id/tv_notice_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_12ssp" />
+
+        <com.agot.views.RegularTextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="02 March 2020"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="@dimen/_10ssp" />
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
