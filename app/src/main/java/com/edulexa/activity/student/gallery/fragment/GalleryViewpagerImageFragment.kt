@@ -18,7 +18,7 @@ import com.edulexa.databinding.FragmentFeeViewpagerStudentBinding
 import com.edulexa.databinding.FragmentGalleryViewpagerStudentBinding
 import com.edulexa.databinding.FragmentHomeworkViewpagerStudentBinding
 
-class GalleryViewpagerFragment : Fragment() {
+class GalleryViewpagerImageFragment : Fragment() {
     var binding: FragmentGalleryViewpagerStudentBinding? = null
     var mActivity: Activity? = null
     var rootView: View? = null
@@ -26,14 +26,14 @@ class GalleryViewpagerFragment : Fragment() {
 
     companion object {
         @SuppressLint("StaticFieldLeak")
-        var fragment: GalleryViewpagerFragment? = null
-        fun newInstance(): GalleryViewpagerFragment? {
-            fragment = GalleryViewpagerFragment()
+        var fragment: GalleryViewpagerImageFragment? = null
+        fun newInstance(): GalleryViewpagerImageFragment? {
+            fragment = GalleryViewpagerImageFragment()
             return fragment
         }
 
-        fun getInstance(): GalleryViewpagerFragment? {
-            return if (fragment == null) GalleryViewpagerFragment() else fragment
+        fun getInstance(): GalleryViewpagerImageFragment? {
+            return if (fragment == null) GalleryViewpagerImageFragment() else fragment
         }
     }
     override fun onCreateView(
@@ -45,21 +45,28 @@ class GalleryViewpagerFragment : Fragment() {
         init()
         return rootView
     }
+
     private fun init(){
         mActivity = activity
         setUpFeeList()
     }
-    private fun setUpFeeList(){
-        binding!!.galleryStudentRecyclerView.layoutManager = LinearLayoutManager(mActivity!!,
-            RecyclerView.VERTICAL,false)
+    fun setUpFeeList(){
+        (galleryList as ArrayList<GalleryTypeModel>).clear()
         (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("document"))
         (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("video"))
         (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("document"))
         (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("document"))
         (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("document"))
         (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("document"))
+        (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("video"))
         (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("image"))
-        binding!!.galleryStudentRecyclerView.adapter = GalleryAlbumAdapter(mActivity!!,galleryList!!,Constants.AppSaveData.gallerystudenttype)
+        (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("image"))
+        (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("image"))
+        (galleryList as ArrayList<GalleryTypeModel>).add(GalleryTypeModel("video"))
+
+        binding!!.galleryStudentRecyclerView.layoutManager = LinearLayoutManager(mActivity!!,
+            RecyclerView.VERTICAL,false)
+        binding!!.galleryStudentRecyclerView.adapter = GalleryAlbumAdapter(mActivity!!,galleryList!!,"image")
     }
 
 }
