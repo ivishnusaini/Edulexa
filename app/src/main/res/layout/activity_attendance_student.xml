@@ -14,7 +14,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="@dimen/_60sdp"
         android:background="@drawable/header_bg_staff">
 
         <ImageView
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="?actionBarSize"
+        android:layout_marginTop="@dimen/_60sdp"
         android:background="@drawable/header_top_right_radius">
 
         <LinearLayout
