@@ -26,7 +26,6 @@ class FeeStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun init() {
         mActivity = this
         setUpClickListener()
-        setUpFeeTypeAdapter()
         setUpViewPager()
     }
 
@@ -34,59 +33,110 @@ class FeeStudentActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.ivBack.setOnClickListener(this)
         binding!!.ivMenu.setOnClickListener(this)
         binding!!.topLay.setOnClickListener(this)
-        binding!!.tvGeneralFee.setOnClickListener(this)
-        binding!!.tvTransportFee.setOnClickListener(this)
+        binding!!.schoolFeeAttendanceLay.setOnClickListener(this)
+        binding!!.examFeeAttendanceLay.setOnClickListener(this)
+        binding!!.activityFeeAttendanceLay.setOnClickListener(this)
+        binding!!.otherFeeAttendanceLay.setOnClickListener(this)
         binding!!.tvQrCode.setOnClickListener(this)
         binding!!.tvUpload.setOnClickListener(this)
         binding!!.tvReceipts.setOnClickListener(this)
     }
 
-    private fun setUpFeeTypeAdapter(){
-        binding!!.recyclerViewFeeType.layoutManager = LinearLayoutManager(mActivity!!,
-            RecyclerView.HORIZONTAL,false)
-        binding!!.recyclerViewFeeType.adapter = FeeTypeAdapter(mActivity!!)
-    }
 
     private fun resetTab(position: Int) {
-        binding!!.tvGeneralFee.setBackgroundResource(R.drawable.edit_text_bg_25)
-        binding!!.tvGeneralFee.setTextColor(
+        binding!!.tvSchoolFee.setTextColor(
             ContextCompat.getColor(
                 mActivity!!,
                 R.color.primaray_text_color
             )
         )
-        binding!!.tvTransportFee.setBackgroundResource(R.drawable.edit_text_bg_25)
-        binding!!.tvTransportFee.setTextColor(
+        binding!!.viewSchoolFee.visibility = View.GONE
+        binding!!.tvExamFee.setTextColor(
             ContextCompat.getColor(
                 mActivity!!,
                 R.color.primaray_text_color
             )
         )
+        binding!!.viewExamFee.visibility = View.GONE
+        binding!!.tvActivityFee.setTextColor(
+            ContextCompat.getColor(
+                mActivity!!,
+                R.color.primaray_text_color
+            )
+        )
+        binding!!.viewActivityFee.visibility = View.GONE
+        binding!!.tvOtherFee.setTextColor(
+            ContextCompat.getColor(
+                mActivity!!,
+                R.color.primaray_text_color
+            )
+        )
+        binding!!.viewOtherFee.visibility = View.GONE
+
         when (position) {
             0 -> {
-                binding!!.tvGeneralFee.setBackgroundResource(R.drawable.bg_button_25)
-                binding!!.tvGeneralFee.setTextColor(
+                binding!!.tvSchoolFee.setTextColor(ContextCompat.getColor(mActivity!!, R.color.red))
+                binding!!.viewSchoolFee.visibility = View.VISIBLE
+                binding!!.viewSchoolFee.setBackgroundColor(
                     ContextCompat.getColor(
                         mActivity!!,
-                        R.color.white
+                        R.color.red
                     )
                 )
+                val x = binding!!.tvSchoolFee.left
+                val y = binding!!.tvSchoolFee.top
+                binding!!.attendanceHorizontalScrollView.smoothScrollTo(x, y)
             }
             1 -> {
-                binding!!.tvTransportFee.setBackgroundResource(R.drawable.bg_button_25)
-                binding!!.tvTransportFee.setTextColor(
+                binding!!.tvExamFee.setTextColor(ContextCompat.getColor(mActivity!!, R.color.red))
+                binding!!.viewExamFee.visibility = View.VISIBLE
+                binding!!.viewExamFee.setBackgroundColor(
                     ContextCompat.getColor(
                         mActivity!!,
-                        R.color.white
+                        R.color.red
                     )
                 )
+                val x = binding!!.tvExamFee.left
+                val y = binding!!.tvExamFee.top
+                binding!!.attendanceHorizontalScrollView.smoothScrollTo(x, y)
+            }
+            2 -> {
+                binding!!.tvActivityFee.setTextColor(
+                    ContextCompat.getColor(
+                        mActivity!!,
+                        R.color.red
+                    )
+                )
+                binding!!.viewActivityFee.visibility = View.VISIBLE
+                binding!!.viewActivityFee.setBackgroundColor(
+                    ContextCompat.getColor(
+                        mActivity!!,
+                        R.color.red
+                    )
+                )
+                val x = binding!!.tvActivityFee.left
+                val y = binding!!.tvActivityFee.top
+                binding!!.attendanceHorizontalScrollView.smoothScrollTo(x, y)
+            }
+            3 -> {
+                binding!!.tvOtherFee.setTextColor(ContextCompat.getColor(mActivity!!, R.color.red))
+                binding!!.viewOtherFee.visibility = View.VISIBLE
+                binding!!.viewOtherFee.setBackgroundColor(
+                    ContextCompat.getColor(
+                        mActivity!!,
+                        R.color.red
+                    )
+                )
+                val x = binding!!.tvOtherFee.right
+                val y = binding!!.tvOtherFee.top
+                binding!!.attendanceHorizontalScrollView.smoothScrollTo(x, y)
             }
         }
     }
 
     private fun setUpViewPager() {
         binding!!.viewPagerFee.adapter =
-            ViewpagerFeeAdapter(supportFragmentManager, 2)
+            ViewpagerFeeAdapter(supportFragmentManager, 4)
         binding!!.viewPagerFee.addOnPageChangeListener(object :
             ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
@@ -112,11 +162,11 @@ class FeeStudentActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.viewPagerFee.setCurrentItem(position)
     }
 
-    private fun visibleMenuOptions(){
+    private fun visibleMenuOptions() {
         binding!!.cvMenu.visibility = View.VISIBLE
     }
 
-    private fun hideMenuOptions(){
+    private fun hideMenuOptions() {
         binding!!.cvMenu.visibility = View.GONE
     }
 
@@ -128,10 +178,14 @@ class FeeStudentActivity : AppCompatActivity(), View.OnClickListener {
             visibleMenuOptions()
         else if (id == R.id.top_lay)
             hideMenuOptions()
-        else if (id == R.id.tv_general_fee)
+        else if (id == R.id.school_fee_attendance_lay)
             setViewPagerFromTabClick(0)
-        else if (id == R.id.tv_transport_fee)
+        else if (id == R.id.exam_fee_attendance_lay)
             setViewPagerFromTabClick(1)
+        else if (id == R.id.activity_fee_attendance_lay)
+            setViewPagerFromTabClick(2)
+        else if (id == R.id.other_fee_attendance_lay)
+            setViewPagerFromTabClick(3)
         else if (id == R.id.tv_qr_code)
             hideMenuOptions()
         else if (id == R.id.tv_upload)

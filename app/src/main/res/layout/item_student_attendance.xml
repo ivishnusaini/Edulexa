@@ -21,100 +21,92 @@
             android:padding="@dimen/_10sdp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <com.agot.views.RegularTextView
+                <RelativeLayout
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/circle"
+                    android:backgroundTint="@color/red">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true">
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_attendance_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:maxLines="2"
+                            android:text="01"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_attendance_month"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_attendance_date"
+                            android:layout_centerHorizontal="true"
+                            android:maxLines="2"
+                            android:text="Mar"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12ssp" />
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/notice_board_top_lay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/attendance_student_date"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
-
-
-                <com.agot.views.RegularTextView
-                    android:id="@+id/tv_fee_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="23-03-2022"
+                    android:background="#fff1ec"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
 
+
+                    <com.agot.views.RegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="National Day"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <com.agot.views.RegularTextView
+                        android:id="@+id/tv_today_homework_subject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="Hodilay"
+                        android:textColor="@color/secondary_text_color"
+                        android:textSize="@dimen/_10ssp" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.agot.views.RegularTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/attendance_student_in_time"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
-
-
-                <com.agot.views.RegularTextView
-                    android:id="@+id/tv_fee_paid_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="10:00 AM"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.agot.views.RegularTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/attendance_student_out_time"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
-
-
-                <com.agot.views.RegularTextView
-                    android:id="@+id/tv_fee_balance_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="04:00 PM"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
-
-
-            </LinearLayout>
 
             <com.agot.views.RegularTextView
                 android:id="@+id/tv_fee_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="2"
                 android:layout_gravity="end"
-                android:text="Present"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:maxLines="2"
+                android:text="Present"
                 android:textColor="@color/teal_700"
                 android:textSize="@dimen/_14ssp" />
 
 
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 

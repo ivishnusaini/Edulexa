@@ -6,9 +6,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_fee_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/tv_pay_fee"
-        android:layout_marginTop="@dimen/_5sdp"/>
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_pay_fee" />
 
     <com.agot.views.RegularButton
         android:id="@+id/tv_pay_fee"
@@ -18,7 +17,8 @@
         android:gravity="center"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
-        android:text="@string/fee_student_pay_fee"
+        android:text=""
+        android:visibility="gone"
         android:textColor="@color/white"
         android:layout_alignParentBottom="true"
         android:textSize="@dimen/_16ssp" />

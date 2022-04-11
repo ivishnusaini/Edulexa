@@ -57,16 +57,17 @@
 
     <!--Fee Student Screen-->
     <string name="fee_student">Fee</string>
-    <string name="general_fee_student">General Fee</string>
-    <string name="transport_fee_student">Transport Fee</string>
+    <string name="school_fee_student">School Fee</string>
+    <string name="exam_fee_student">Exam Fee</string>
+    <string name="activity_fee_student">Activity Fee</string>
+    <string name="other_fee_student">Other Fee</string>
     <string name="fee_qr_code_student">QR Code</string>
     <string name="fee_upload_student">Upload</string>
     <string name="fee_receipts_student">Receipts</string>
-    <string name="fee_student_amount">Amount :</string>
-    <string name="fee_student_paid_amount">Paid Amount :</string>
-    <string name="fee_student_balance_amount">Balance Amount :</string>
-    <string name="fee_student_due_date">Due Date :</string>
-    <string name="fee_student_pay_fee">Pay Fees</string>
+    <string name="total_fee">Total Fee</string>
+    <string name="extra_fee">Extra Fee</string>
+    <string name="late_charges_fee">Late Charges</string>
+    <string name="paid_fee">Paid Fee</string>
 
     <!--Examination Student Screen-->
     <string name="exam_student">Exam</string>
@@ -123,5 +124,6 @@
     <string name="about_us_student_school_code">School Code</string>
     <string name="about_us_student_current_session">Current Session</string>
     <string name="about_us_student_session_month">Session Month</string>
+
 
 </resources>

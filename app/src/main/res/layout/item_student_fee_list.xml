@@ -17,151 +17,316 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/_10sdp">
+            android:background="#d4f5ff"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp">
 
                 <com.agot.views.RegularTextView
-                    android:id="@+id/tv_fee_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/check_box_fee"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toStartOf="@+id/tv_date_fee"
                     android:maxLines="2"
-                    android:text="Admission Fee"
-                    android:textColor="@color/primaray_text_color"
+                    android:text="School Fee for January"
+                    android:textColor="@color/secondary_text_color"
                     android:textSize="@dimen/_14ssp" />
 
+                <com.agot.views.RegularTextView
+                    android:id="@+id/tv_date_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:maxLines="2"
+                    android:text="06 May"
+                    android:textColor="@color/secondary_text_color"
+                    android:textSize="@dimen/_14ssp" />
 
-                <CheckBox
-                    android:id="@+id/check_box_fee"
-                    android:layout_width="@dimen/_22sdp"
-                    android:layout_height="@dimen/_22sdp"
-                    android:layout_alignParentEnd="true" />
 
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp">
 
-                <com.agot.views.RegularTextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/fee_student_amount"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/rupee_sign"
+                        android:contentDescription="@string/app_name" />
+
+                    <com.agot.views.BoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:maxLines="1"
+                        android:text="16,600"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_20ssp" />
+
+                    <com.agot.views.RegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:background="@drawable/bg_button_25"
+                        android:backgroundTint="@color/green"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_15sdp"
+                        android:text="Paid"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp" />
 
 
-                <com.agot.views.RegularTextView
-                    android:id="@+id/tv_fee_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="1000"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_expand_less_more_fee"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_vertical"
+                    android:backgroundTint="@color/red"
+                    android:contentDescription="@string/app_name"
+                    android:padding="@dimen/_2sdp"
+                    android:src="@drawable/ic_expand_more" />
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.agot.views.RegularTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/fee_student_paid_amount"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
-
-
-                <com.agot.views.RegularTextView
-                    android:id="@+id/tv_fee_paid_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="1000"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.agot.views.RegularTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/fee_student_balance_amount"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
-
-
-                <com.agot.views.RegularTextView
-                    android:id="@+id/tv_fee_balance_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="1000"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
-
-
-            </LinearLayout>
+            <View
+                android:id="@+id/view_expand_less_more_fee"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/secondary_text_color"
+                android:visibility="gone" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/fee_description_lay"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone">
 
-                <com.agot.views.RegularTextView
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.agot.views.RegularTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/total_fee"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/rupee_sign"
+                            android:contentDescription="@string/app_name" />
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_total_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:maxLines="1"
+                            android:text="14,500"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_16ssp" />
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/fee_student_due_date"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <com.agot.views.RegularTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/extra_fee"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/rupee_sign"
+                            android:contentDescription="@string/app_name" />
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_extra_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:maxLines="1"
+                            android:text="2,000"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_16ssp" />
 
 
-                <com.agot.views.RegularTextView
-                    android:id="@+id/tv_fee_due_date"
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="23-03-2022"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/primaray_text_color"
-                    android:textSize="@dimen/_14ssp" />
+                    android:layout_marginTop="@dimen/_5sdp">
 
+                    <com.agot.views.RegularTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/late_charges_fee"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/rupee_sign"
+                            android:contentDescription="@string/app_name" />
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_late_charges_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:maxLines="1"
+                            android:text="600"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_16ssp" />
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <com.agot.views.RegularTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Discount(20%)"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/rupee_sign"
+                            android:contentDescription="@string/app_name" />
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_discount_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:maxLines="1"
+                            android:text="-500"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_16ssp" />
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <com.agot.views.BoldTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/paid_fee"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/rupee_sign"
+                            android:contentDescription="@string/app_name" />
+
+                        <com.agot.views.BoldTextView
+                            android:id="@+id/tv_paid_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:maxLines="1"
+                            android:text="16,600"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_16ssp" />
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </LinearLayout>
-
-            <com.agot.views.RegularTextView
-                android:id="@+id/tv_fee_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="2"
-                android:layout_gravity="end"
-                android:text="Unpaid"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:textColor="@color/red"
-                android:textSize="@dimen/_14ssp" />
-
 
         </LinearLayout>
 
