@@ -73,6 +73,8 @@ class Url {
     }
 
     fun getSchoolImage(): String? {
+        if (schoolImage == null)
+            return ""
         return schoolImage
     }
 

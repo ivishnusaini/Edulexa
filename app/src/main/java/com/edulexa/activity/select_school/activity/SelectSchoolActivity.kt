@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.edulexa.R
 import com.edulexa.activity.LoginActivity
+import com.edulexa.activity.SplashActivity
 import com.edulexa.activity.select_school.model.FetchBaseUrlResponse
 import com.edulexa.api.Communicator
 import com.edulexa.api.Constants
@@ -50,8 +51,6 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
         if (schoolCodeStr.isEmpty())
             Utils.showSnackBar(mActivity!!, getString(R.string.enter_school_code_empty_validation))
         else {
-            startActivity(Intent(mActivity!!, LoginActivity::class.java))
-            finish()
             if (Utils.isNetworkAvailable(mActivity!!)){
                 Utils.showProgressBar(mActivity!!)
                 Utils.hideKeyboard(mActivity!!)
@@ -75,6 +74,27 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
                                         response,
                                         FetchBaseUrlResponse::class.java
                                     ) as FetchBaseUrlResponse
+                                    var studentBaseUrl = ""
+                                    if (modelResponse.getUrl()!!.getUrl()!!.endsWith("/"))
+                                        studentBaseUrl = modelResponse.getUrl()!!.getUrl()!!
+                                    else studentBaseUrl = modelResponse.getUrl()!!.getUrl()!!+"/"
+                                    Utils.saveStudentBaseUrl(mActivity!!,studentBaseUrl)
+                                    Utils.saveStudentBackgroundImage(mActivity!!,modelResponse.getUrl()!!.getBackgroundImage()!!)
+                                    Utils.saveStudentSchoolName(mActivity!!,modelResponse.getUrl()!!.getSchoolName()!!)
+                                    Utils.saveStudentLogoutStatus(mActivity!!,Constants.Preference.LOGOUTSTATUS_VALUE)
+                                    Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!)
+                                    Utils.saveSchoolLogo(mActivity!!,modelResponse.getUrl()!!.getSchoolImage()!!)
+                                    Constants.BASE_URL_SCHOOL_LOGO_STUDENT = Utils.getSchoolLogo(mActivity!!)
+
+                                    var staffBaseUrl = ""
+                                    if (modelResponse.getUrl()!!.getUrl()!!.endsWith("/"))
+                                        staffBaseUrl = modelResponse.getUrl()!!.getUrl()!!
+                                    else staffBaseUrl = modelResponse.getUrl()!!.getUrl()!!+"/"
+                                    Utils.saveStaffBaseUrl(mActivity!!,staffBaseUrl)
+                                    Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!)
+
+                                    startActivity(Intent(mActivity!!, SplashActivity::class.java))
+                                    finish()
                                 }
                             }else Utils.showToastPopup(
                                 mActivity!!,

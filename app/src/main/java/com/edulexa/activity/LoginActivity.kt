@@ -2,15 +2,17 @@ package com.edulexa.activity
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.edulexa.R
 import com.edulexa.activity.select_school.activity.SelectSchoolActivity
 import com.edulexa.activity.staff.dashboard.activity.DashboardStaffActivity
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
 import com.edulexa.databinding.ActivityLoginBinding
+import com.edulexa.support.Utils
+import java.lang.Exception
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
@@ -26,6 +28,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun init() {
         mActivity = this
         setUpClickListener()
+        setUpData()
     }
 
     private fun setUpClickListener() {
@@ -34,6 +37,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.tvStudent.setOnClickListener(this)
         binding!!.tvForgotPassword.setOnClickListener(this)
         binding!!.tvSubmit.setOnClickListener(this)
+    }
+
+    private fun setUpData(){
+        try {
+            Utils.setImageUsingGlide(mActivity!!,Utils.getSchoolLogo(mActivity!!),binding!!.ivLoginLogo)
+            binding!!.tvLoginSchoolName.text = Utils.getStudentSchoolName(mActivity!!)
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
     }
 
     private fun resetStaffStudentButton(type: String) {
@@ -73,7 +85,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
             finish()
         }
-
     }
 
     private fun goToForgotPasswordActivity(){

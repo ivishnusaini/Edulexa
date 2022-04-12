@@ -25,6 +25,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.edulexa.BuildConfig
 import com.edulexa.R
+import com.edulexa.api.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.text.DateFormat
@@ -167,45 +168,52 @@ class Utils {
             snackbar.view.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
             snackbar.show()
         }
+
         fun getCurrentDate(): String? {
             @SuppressLint("SimpleDateFormat") val dateFormat: DateFormat =
                 SimpleDateFormat("yyyy-MM-dd")
             val date = Date()
             return dateFormat.format(date)
         }
-        fun getCurrentYear() : Int{
+
+        fun getCurrentYear(): Int {
             return Calendar.getInstance().get(Calendar.YEAR);
         }
-        fun getCurrentMonth() : Int{
+
+        fun getCurrentMonth(): Int {
             return Calendar.getInstance().get(Calendar.MONTH);
         }
-        fun getCurrentDayNumber():Int{
+
+        fun getCurrentDayNumber(): Int {
             val currentDate = getCurrentDate()
-            val tokenizer = StringTokenizer(currentDate,"-")
+            val tokenizer = StringTokenizer(currentDate, "-")
             val year = tokenizer.nextToken()
             val month = tokenizer.nextToken()
             return (tokenizer.nextToken()).toInt()
         }
-        fun getNumberOfDaysInMonth(year : Int, month : Int) : Int{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+
+        fun getNumberOfDaysInMonth(year: Int, month: Int): Int {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val yearMonthObject: YearMonth = YearMonth.of(year, month)
                 val daysInMonth: Int = yearMonthObject.lengthOfMonth()
                 return daysInMonth
-            }else{
-                val calendar = GregorianCalendar(year,month,1)
+            } else {
+                val calendar = GregorianCalendar(year, month, 1)
                 val daysInMonth: Int = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
                 return daysInMonth
             }
         }
+
         @SuppressLint("SimpleDateFormat")
-        fun getCurrentDayOfWeek(dateStr : String) : String{
+        fun getCurrentDayOfWeek(dateStr: String): String {
             val inFormat = SimpleDateFormat("yyyy-MM-dd")
             val date = inFormat.parse(dateStr)
             val outFormat = SimpleDateFormat("EEEE")
             return outFormat.format(date!!)
         }
-        fun getMonthNameFromMonthNo(monthNo : Int) : String{
-            when(monthNo){
+
+        fun getMonthNameFromMonthNo(monthNo: Int): String {
+            when (monthNo) {
                 1 -> {
                     return "January"
                 }
@@ -247,6 +255,7 @@ class Utils {
                 }
             }
         }
+
         fun showProgressBar(activity: Activity) {
             try {
                 if (dialog != null && dialog!!.isShowing()) {
@@ -270,6 +279,129 @@ class Utils {
         fun hideProgressBar() {
             if (dialog != null)
                 dialog!!.dismiss()
+        }
+
+        fun saveStudentBaseUrl(context: Activity, baseUrl: String) {
+            try {
+                val preference = Preference().getInstance(context)
+                preference!!.putString(Constants.Preference.STUDENT_BASE_URL, baseUrl)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun getStudentBaseUrl(context: Activity): String {
+            var studentBaseUrl = "";
+            try {
+                val preference = Preference().getInstance(context)
+                studentBaseUrl = preference!!.getString(Constants.Preference.STUDENT_BASE_URL)!!
+            } catch (e: Exception) {
+                e.printStackTrace()
+                studentBaseUrl = ""
+            }
+            return studentBaseUrl
+        }
+
+        fun saveStudentBackgroundImage(context: Activity, backgroundImage: String) {
+            try {
+                val preference = Preference().getInstance(context)
+                preference!!.putString(Constants.Preference.BACKGROUND_IMAGE, backgroundImage)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun getStudentBackgroundImage(context: Activity): String {
+            var backgroundImage = "";
+            try {
+                val preference = Preference().getInstance(context)
+                backgroundImage = preference!!.getString(Constants.Preference.BACKGROUND_IMAGE)!!
+            } catch (e: Exception) {
+                e.printStackTrace()
+                backgroundImage = ""
+            }
+            return backgroundImage
+        }
+        fun saveStudentSchoolName(context: Activity, schoolName: String) {
+            try {
+                val preference = Preference().getInstance(context)
+                preference!!.putString(Constants.Preference.SCHOOL_NAME, schoolName)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun getStudentSchoolName(context: Activity): String {
+            var schoolName = "";
+            try {
+                val preference = Preference().getInstance(context)
+                schoolName = preference!!.getString(Constants.Preference.SCHOOL_NAME)!!
+            } catch (e: Exception) {
+                e.printStackTrace()
+                schoolName = ""
+            }
+            return schoolName
+        }
+        fun saveStudentLogoutStatus(context: Activity, logoutStatus: String) {
+            try {
+                val preference = Preference().getInstance(context)
+                preference!!.putString(Constants.Preference.LOGOUTSTATUS, logoutStatus)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun getStudentLogoutStatus(context: Activity): String {
+            var logoutStatus = "";
+            try {
+                val preference = Preference().getInstance(context)
+                logoutStatus = preference!!.getString(Constants.Preference.LOGOUTSTATUS)!!
+            } catch (e: Exception) {
+                e.printStackTrace()
+                logoutStatus = ""
+            }
+            return logoutStatus
+        }
+        fun saveSchoolLogo(context: Activity, schoolLogo: String) {
+            try {
+                val preference = Preference().getInstance(context)
+                preference!!.putString(Constants.Preference.SCHOOL_LOGO, schoolLogo)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun getSchoolLogo(context: Activity): String {
+            var schoolLogo = "";
+            try {
+                val preference = Preference().getInstance(context)
+                schoolLogo = preference!!.getString(Constants.Preference.SCHOOL_LOGO)!!
+            } catch (e: Exception) {
+                e.printStackTrace()
+                schoolLogo = ""
+            }
+            return schoolLogo
+        }
+
+        fun saveStaffBaseUrl(context: Activity, staffBaseUrl: String) {
+            try {
+                val preference = Preference().getInstance(context)
+                preference!!.putString(Constants.Preference.STAFF_BASE_URL, staffBaseUrl)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun getStaffBaseUrl(context: Activity): String {
+            var staffBaseUrl = "";
+            try {
+                val preference = Preference().getInstance(context)
+                staffBaseUrl = preference!!.getString(Constants.Preference.STAFF_BASE_URL)!!
+            } catch (e: Exception) {
+                e.printStackTrace()
+                staffBaseUrl = ""
+            }
+            return staffBaseUrl
         }
     }
 }
