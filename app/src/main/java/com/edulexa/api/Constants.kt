@@ -9,7 +9,7 @@ class Constants {
         val TITLE = "title"
     }
     object AppSaveData {
-
+        var gallerystudenttype = "all";
     }
 
     object Preference {

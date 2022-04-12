@@ -97,6 +97,11 @@
     <!--Gallery Student Screen-->
     <string name="gallery_student">Gallery</string>
     <string name="gallery_student_transition_name">Gallery Zoom</string>
+    <string name="gallery_student_all">All</string>
+    <string name="gallery_student_video">Video</string>
+    <string name="gallery_student_image">Images</string>
+    <string name="gallery_student_documents">Documents</string>
+    <string name="gallery_student_links">Links</string>
 
     <!--Profile Student Screen-->
     <string name="profile_student">Profile</string>
