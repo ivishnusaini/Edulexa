@@ -8,6 +8,9 @@ class Constants {
     object ReportCardDetail{
         val TITLE = "title"
     }
+    object StudentExamDetail{
+        val TITLE = "title"
+    }
     object AppSaveData {
         var gallerystudenttype = "all";
     }

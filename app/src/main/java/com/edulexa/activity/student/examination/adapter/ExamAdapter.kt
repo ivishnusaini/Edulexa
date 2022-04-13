@@ -2,6 +2,7 @@ package com.edulexa.activity.student.examination.adapter
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.examination.activity.ExamDetailActivity
+import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
+import com.edulexa.api.Constants
 
 class ExamAdapter(context: Activity) :
     RecyclerView.Adapter<ExamAdapter.ViewHolder>() {
@@ -40,7 +43,9 @@ class ExamAdapter(context: Activity) :
             }
             viewHolder.itemView.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(p0: View?) {
-                    context!!.startActivity(Intent(context, ExamDetailActivity::class.java))
+                    val bundle = Bundle()
+                    bundle.putString(Constants.StudentExamDetail.TITLE,"Science Basic Assessment Test")
+                    context!!.startActivity(Intent(context, ExamDetailActivity::class.java).putExtras(bundle))
                 }
 
             })

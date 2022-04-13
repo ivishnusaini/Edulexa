@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,10 +8,16 @@
     tools:context=".activity.student.examination.activity.ExamDetailActivity">
 
     <RelativeLayout
-        android:id="@+id/fee_header_lay"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary"
+        android:visibility="visible" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary">
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/header_bg_staff">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -21,11 +28,15 @@
             android:src="@drawable/ic_back_white" />
 
         <com.agot.views.MediumTextView
+            android:id="@+id/tv_student_exam_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_toEndOf="@+id/iv_back"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/exam_student_detail"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
@@ -33,11 +44,349 @@
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_exam_detail"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_5sdp"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:background="@drawable/header_top_right_radius"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/exam_code_lay">
+
+                <RelativeLayout
+                    android:id="@+id/progress_lay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true">
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/circle_border"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="40"
+                        android:progressDrawable="@drawable/circular_progress_bar" />
+
+                    <ImageView
+                        android:id="@+id/iv_play_header"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_pause"
+                        android:contentDescription="@string/app_name"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <com.agot.views.RegularTextView
+                    android:id="@+id/tv_student_exam_detail_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@+id/progress_lay"
+                    android:text="30 Min"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_16ssp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/exam_code_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true">
+
+                <com.agot.views.RegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/student_exam_detail_exam_code"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.agot.views.RegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="121"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/student_exam_detail_question_no_lay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp">
+
+            <com.agot.views.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Questions : "
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_16ssp" />
+
+            <com.agot.views.RegularTextView
+                android:id="@+id/tv_student_exam_detail_question_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_16ssp" />
+
+            <com.agot.views.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@string/student_exam_detail_divider"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_16ssp" />
+
+            <com.agot.views.RegularTextView
+                android:id="@+id/tv_student_exam_detail_total_question_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="30"
+                android:textColor="@color/primaray_text_color"
+                android:textSize="@dimen/_16ssp" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_10sdp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/_60sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_1sdp"
+                        android:elevation="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_10sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#e8eaec"
+                            android:padding="@dimen/_10sdp">
+
+                            <com.agot.views.RegularTextView
+                                android:id="@+id/tv_student_exam_detail_question"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Praesent ultricies mauris en eros malesuada,Praesent ultricies mauris en eros malesuada,Praesent ultricies malesuada."
+                                android:textColor="@color/primaray_text_color"
+                                android:textSize="@dimen/_14ssp" />
+
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:id="@+id/student_option_1_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp">
+
+                        <ImageView
+                            android:id="@+id/iv_student_option_1"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/ic_question_option_unselect"
+                            android:contentDescription="@string/app_name" />
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_student_option_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Option 1"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_16ssp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/student_option_2_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp">
+
+                        <ImageView
+                            android:id="@+id/iv_student_option_2"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/ic_question_option_unselect"
+                            android:contentDescription="@string/app_name" />
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_student_option_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Option 2"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_16ssp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/student_option_3_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp">
+
+                        <ImageView
+                            android:id="@+id/iv_student_option_3"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/ic_question_option_unselect"
+                            android:contentDescription="@string/app_name" />
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_student_option_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Option 3"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_16ssp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/student_option_4_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp">
+
+                        <ImageView
+                            android:id="@+id/iv_student_option_4"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/ic_question_option_unselect"
+                            android:contentDescription="@string/app_name" />
+
+                        <com.agot.views.RegularTextView
+                            android:id="@+id/tv_student_option_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Option 4"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_16ssp" />
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:id="@+id/student_exam_detail_previous_lay"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:gravity="center"
+                            android:background="@drawable/ripple_effect_25"
+                            android:backgroundTint="@color/colorPrimary">
+
+                            <com.agot.views.RegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/student_exam_detail_previous"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_14ssp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/student_exam_detail_next_lay"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:gravity="center"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/ripple_effect_25"
+                            android:backgroundTint="@color/colorPrimary">
+
+                            <com.agot.views.RegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/student_exam_detail_next"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_14ssp" />
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <com.agot.views.RegularButton
+                android:id="@+id/tv_student_exam_detail_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/ripple_effect_25"
+                android:backgroundTint="@color/red"
+                android:gravity="center"
+                android:text="@string/student_exam_detail_submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

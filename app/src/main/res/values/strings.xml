@@ -88,6 +88,11 @@
     <string name="exam_student_detail_duration">Duration :</string>
     <string name="exam_student_detail_date_time">Date/Time :</string>
     <string name="exam_student_detail_room_no">Room No :</string>
+    <string name="student_exam_detail_divider">/</string>
+    <string name="student_exam_detail_exam_code">Exam Code :</string>
+    <string name="student_exam_detail_submit">Submit</string>
+    <string name="student_exam_detail_previous">Previous</string>
+    <string name="student_exam_detail_next">Next</string>
 
     <!--Report Card Student Screen-->
     <string name="report_card_student">Report Card</string>
@@ -139,6 +144,7 @@
     <string name="about_us_student_school_code">School Code</string>
     <string name="about_us_student_current_session">Current Session</string>
     <string name="about_us_student_session_month">Session Month</string>
+
 
 
 </resources>
