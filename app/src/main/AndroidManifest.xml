@@ -57,7 +57,7 @@
             android:name=".activity.student.fee.activity.FeeStudentActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.student.attendance.activity.AttendanceStudentActivity"
+            android:name=".activity.student.calendar.activity.CalendarStudentActivity"
             android:exported="false" />
         <activity
             android:name=".activity.student.dashboard.activity.DashboardStudentActivity"

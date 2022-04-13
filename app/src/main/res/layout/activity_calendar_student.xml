@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.student.attendance.activity.AttendanceStudentActivity">
+    tools:context=".activity.student.calendar.activity.CalendarStudentActivity">
 
 
     <RelativeLayout
@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/attendance_student"
+            android:text="@string/calendar_student"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 

@@ -47,8 +47,8 @@
     <!--Homework Student Screen-->
     <string name="homework_student">Homework</string>
 
-    <!--Attendance Student Screen-->
-    <string name="attendance_student">Attendance</string>
+    <!--Calendar Student Screen-->
+    <string name="calendar_student">Calendar</string>
     <string name="concat_string_with_text_format">%s%s%s</string>
     <string name="attendance_student_date">Date :</string>
     <string name="attendance_student_in_time">In Time :</string>

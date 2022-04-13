@@ -1,4 +1,4 @@
-package com.edulexa.activity.student.attendance.adapter
+package com.edulexa.activity.student.calendar.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
-import com.edulexa.activity.student.attendance.model.MonthModel
+import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
+import com.edulexa.activity.student.calendar.model.MonthModel
 
 class MonthAdapter(context: Activity, list: List<MonthModel>?) :
     RecyclerView.Adapter<MonthAdapter.ViewHolder>() {
@@ -85,7 +85,7 @@ class MonthAdapter(context: Activity, list: List<MonthModel>?) :
                             model.setSelectStatus(false)
                         }
                         list!!.get(position).setSelectStatus(true)
-                        (context as AttendanceStudentActivity).updateList(list!!,list!!.get(position).getCompleteDate()!!)
+                        (context as CalendarStudentActivity).updateList(list!!,list!!.get(position).getCompleteDate()!!)
                     }
 
                 })

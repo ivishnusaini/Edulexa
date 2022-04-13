@@ -1,4 +1,4 @@
-package com.edulexa.activity.student.attendance.model
+package com.edulexa.activity.student.calendar.model
 
 class MonthModel(name:String,selectFlag:Boolean,dateStartFlag:Boolean,currentDateFlag:Boolean,completeDate:String) {
     var name:String? = null

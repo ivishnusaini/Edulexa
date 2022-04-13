@@ -1,4 +1,4 @@
-package com.edulexa.activity.student.attendance.activity
+package com.edulexa.activity.student.calendar.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -10,25 +10,24 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.student.attendance.adapter.AttendanceListAdapter
-import com.edulexa.activity.student.attendance.adapter.MonthAdapter
-import com.edulexa.activity.student.attendance.model.MonthModel
-import com.edulexa.activity.student.fee.adapter.FeeTypeAdapter
-import com.edulexa.databinding.ActivityAttendanceStudentBinding
+import com.edulexa.activity.student.calendar.adapter.CalendarListAdapter
+import com.edulexa.activity.student.calendar.adapter.MonthAdapter
+import com.edulexa.activity.student.calendar.model.MonthModel
+import com.edulexa.databinding.ActivityCalendarStudentBinding
 import com.edulexa.support.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AttendanceStudentActivity : AppCompatActivity(), View.OnClickListener {
+class CalendarStudentActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
-    var binding: ActivityAttendanceStudentBinding? = null
+    var binding: ActivityCalendarStudentBinding? = null
     val calendarGlobal: Calendar = Calendar.getInstance()
     var currentDateGlobal = 0
     var currentMonthGlobal = 0
     private var monthList: List<MonthModel>? = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAttendanceStudentBinding.inflate(layoutInflater)
+        binding = ActivityCalendarStudentBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         init()
     }
@@ -428,7 +427,7 @@ class AttendanceStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun setUpAttendanceList(){
         binding!!.recyclerViewAttendance.layoutManager = LinearLayoutManager(mActivity!!,
             RecyclerView.VERTICAL,false)
-        binding!!.recyclerViewAttendance.adapter = AttendanceListAdapter(mActivity!!)
+        binding!!.recyclerViewAttendance.adapter = CalendarListAdapter(mActivity!!)
     }
 
     override fun onClick(view: View?) {

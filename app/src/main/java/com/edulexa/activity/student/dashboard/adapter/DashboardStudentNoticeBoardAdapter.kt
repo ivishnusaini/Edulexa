@@ -1,8 +1,6 @@
 package com.edulexa.activity.student.dashboard.adapter
 
 import android.app.Activity
-import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +9,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
-import com.edulexa.activity.student.examination.activity.ExamStudentActivity
-import com.edulexa.activity.student.fee.activity.FeeStudentActivity
-import com.edulexa.activity.student.gallery.activity.GalleryStudentActivity
-import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
-import com.edulexa.activity.student.noticeboard.activity.NoticeBoardStudentActivity
-import com.edulexa.activity.student.profile.activity.ProfileStudentActivity
-import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
 
 class DashboardStudentNoticeBoardAdapter(context: Activity) :
     RecyclerView.Adapter<DashboardStudentNoticeBoardAdapter.ViewHolder>() {

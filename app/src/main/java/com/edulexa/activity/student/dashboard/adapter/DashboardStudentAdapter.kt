@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
+import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
 import com.edulexa.activity.student.examination.activity.ExamStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
 import com.edulexa.activity.student.gallery.activity.GalleryStudentActivity
@@ -76,8 +76,8 @@ class DashboardStudentAdapter(context: Activity) :
                         "Homework" -> {
                             context!!.startActivity(Intent(context!!, HomeworkStudentActivity::class.java))
                         }
-                        "Attendance" -> {
-                            context!!.startActivity(Intent(context!!, AttendanceStudentActivity::class.java))
+                        "Calendar" -> {
+                            context!!.startActivity(Intent(context!!, CalendarStudentActivity::class.java))
                         }
                         "Fee Details" -> {
                             context!!.startActivity(Intent(context!!, FeeStudentActivity::class.java))
