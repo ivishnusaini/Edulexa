@@ -9,8 +9,8 @@
         android:layout_width="@dimen/_100sdp"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:visibility="visible"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -49,7 +49,8 @@
             android:id="@+id/attendance_horizontal_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:paddingTop="@dimen/_10sdp"
             android:scrollbars="none">
 
@@ -63,7 +64,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
 
                     <com.agot.views.RegularTextView
                         android:id="@+id/tv_gallery_student_all"
@@ -88,7 +91,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
 
                     <com.agot.views.RegularTextView
                         android:id="@+id/tv_gallery_student_video"
@@ -114,7 +119,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
 
                     <com.agot.views.RegularTextView
                         android:id="@+id/tv_gallery_student_image"
@@ -140,7 +147,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
 
                     <com.agot.views.RegularTextView
                         android:id="@+id/tv_gallery_student_document"
@@ -166,7 +175,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
 
                     <com.agot.views.RegularTextView
                         android:id="@+id/tv_gallery_student_link"

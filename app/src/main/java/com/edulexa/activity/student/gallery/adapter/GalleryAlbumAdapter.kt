@@ -1,17 +1,12 @@
 package com.edulexa.activity.student.gallery.adapter
 
 import android.app.Activity
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.student.gallery.activity.GalleryStudentImageZoomActivity
 import com.edulexa.activity.student.gallery.model.GalleryTypeModel
 
 class GalleryAlbumAdapter(context: Activity, list: List<GalleryTypeModel>, type: String) :
@@ -38,19 +33,19 @@ class GalleryAlbumAdapter(context: Activity, list: List<GalleryTypeModel>, type:
             return ViewHolderAll(itemView)
         } else if (type.equals("video")) {
             itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_gallery_all, parent, false)
+                .inflate(R.layout.item_student_gallery_video, parent, false)
             return ViewHolderVideo(itemView)
         } else if (type.equals("image")) {
             itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_gallery_all, parent, false)
+                .inflate(R.layout.item_student_gallery_image, parent, false)
             return ViewHolderImage(itemView)
         } else if (type.equals("document")) {
             itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_gallery_all, parent, false)
+                .inflate(R.layout.item_student_gallery_document, parent, false)
             return ViewHolderDocument(itemView)
         } else {
             itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_gallery_all, parent, false)
+                .inflate(R.layout.item_student_gallery_link, parent, false)
             return ViewHolderLink(itemView)
         }
 
@@ -60,7 +55,7 @@ class GalleryAlbumAdapter(context: Activity, list: List<GalleryTypeModel>, type:
         try {
             if (type.equals("all")) {
                 val viewHolderAll = viewHolder as ViewHolderAll
-                when(list!!.get(position).getGalleryType()){
+                when (list!!.get(position).getGalleryType()) {
                     "document" -> {
                         viewHolderAll.documentLay!!.visibility = View.VISIBLE
                     }
@@ -71,27 +66,15 @@ class GalleryAlbumAdapter(context: Activity, list: List<GalleryTypeModel>, type:
                         viewHolderAll.imageLay!!.visibility = View.VISIBLE
                     }
                 }
-                /*viewHolderAll.itemView.setOnClickListener(object : View.OnClickListener {
-                    override fun onClick(p0: View?) {
-                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                            context!!,
-                            viewHolder.ivGallery!!,
-                            context!!.resources.getString(R.string.gallery_student_transition_name)
-                        )
-                        context!!.startActivity(
-                            Intent(
-                                context,
-                                GalleryStudentImageZoomActivity::class.java
-                            ), options.toBundle()
-                        )
-                    }
-                })*/
             } else if (type.equals("video")) {
-
+                val viewHolderVideo = viewHolder as ViewHolderVideo
+                viewHolderVideo.videoLay!!.visibility = View.VISIBLE
             } else if (type.equals("image")) {
-
+                val viewHolderImage = viewHolder as ViewHolderImage
+                viewHolderImage.imageLay!!.visibility = View.VISIBLE
             } else if (type.equals("document")) {
-
+                val viewHolderDocument = viewHolder as ViewHolderDocument
+                viewHolderDocument.documentLay!!.visibility = View.VISIBLE
             } else {
 
             }
@@ -105,10 +88,15 @@ class GalleryAlbumAdapter(context: Activity, list: List<GalleryTypeModel>, type:
         return list!!.size;
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     class ViewHolderAll(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var documentLay: LinearLayout? = null
         var videoLay: LinearLayout? = null
         var imageLay: LinearLayout? = null
+
         init {
             documentLay = itemView.findViewById(R.id.gallery_student_document_lay)
             videoLay = itemView.findViewById(R.id.gallery_student_video_lay)
@@ -117,36 +105,30 @@ class GalleryAlbumAdapter(context: Activity, list: List<GalleryTypeModel>, type:
     }
 
     class ViewHolderVideo(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var ivGallery: ImageView? = null
-        var tvGallery: TextView? = null
+        var videoLay: LinearLayout? = null
 
         init {
-
+            videoLay = itemView.findViewById(R.id.gallery_student_video_lay)
         }
     }
 
     class ViewHolderImage(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var ivGallery: ImageView? = null
-        var tvGallery: TextView? = null
+        var imageLay: LinearLayout? = null
 
         init {
-
+            imageLay = itemView.findViewById(R.id.gallery_student_image_lay)
         }
     }
 
     class ViewHolderDocument(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var ivGallery: ImageView? = null
-        var tvGallery: TextView? = null
+        var documentLay: LinearLayout? = null
 
         init {
-
+            documentLay = itemView.findViewById(R.id.gallery_student_document_lay)
         }
     }
 
     class ViewHolderLink(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var ivGallery: ImageView? = null
-        var tvGallery: TextView? = null
-
         init {
 
         }
