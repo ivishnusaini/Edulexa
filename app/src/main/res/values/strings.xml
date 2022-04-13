@@ -53,6 +53,13 @@
     <string name="attendance_student_date">Date :</string>
     <string name="attendance_student_in_time">In Time :</string>
     <string name="attendance_student_out_time">Out Time :</string>
+    <string name="attendance_student_sun">Sun</string>
+    <string name="attendance_student_mon">Mon</string>
+    <string name="attendance_student_tue">Tue</string>
+    <string name="attendance_student_wed">Wed</string>
+    <string name="attendance_student_thu">Thu</string>
+    <string name="attendance_student_fri">Fri</string>
+    <string name="attendance_student_sat">Sat</string>
 
 
     <!--Fee Student Screen-->
@@ -70,7 +77,10 @@
     <string name="paid_fee">Paid Fee</string>
 
     <!--Examination Student Screen-->
-    <string name="exam_student">Exam</string>
+    <string name="exam_student">Examination</string>
+    <string name="examination_list">Examination List</string>
+    <string name="examination_student_start_test">Start Test</string>
+    <string name="examination_student_completed">Completed</string>
 
     <!--Examination Detail Student Screen-->
     <string name="exam_student_detail">Exam Detail</string>

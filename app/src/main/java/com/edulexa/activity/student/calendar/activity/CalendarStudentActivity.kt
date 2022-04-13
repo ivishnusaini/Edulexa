@@ -363,7 +363,14 @@ class CalendarStudentActivity : AppCompatActivity(), View.OnClickListener {
             val month = tokenizer.nextToken()
             val currentDateOfMonth = tokenizer.nextToken()
 
-            binding!!.tvMonthYear.setText(getString(R.string.concat_string_with_text_format,Utils.getMonthNameFromMonthNo((month).toInt())," ",year))
+            binding!!.tvMonthYear.setText(
+                getString(
+                    R.string.concat_string_with_text_format,
+                    Utils.getMonthNameFromMonthNo((month).toInt()),
+                    " ",
+                    year
+                )
+            )
 
             val monthMinusOne = (month).toInt() - 1
             if (monthMinusOne == currentMonthGlobal)
@@ -371,7 +378,7 @@ class CalendarStudentActivity : AppCompatActivity(), View.OnClickListener {
             else currentDateGlobal = 0
             val numberOfDays = Utils.getNumberOfDaysInMonth((year).toInt(), monthMinusOne)
             for (i in 1..numberOfDays) {
-                completeDateStr = year + "-"+month+"-"+i
+                completeDateStr = year + "-" + month + "-" + i
                 if (i == (currentDateOfMonth).toInt()) {
                     var flag = false
                     if (i == currentDateGlobal)
@@ -409,7 +416,7 @@ class CalendarStudentActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun updateList(list: List<MonthModel>,completeDate : String) {
+    fun updateList(list: List<MonthModel>, completeDate: String) {
         binding!!.recyclerViewMonth.adapter = MonthAdapter(mActivity!!, list)
         setCurrentDayOfWeek(completeDate)
     }
@@ -424,9 +431,11 @@ class CalendarStudentActivity : AppCompatActivity(), View.OnClickListener {
         setUpMonthData()
     }
 
-    private fun setUpAttendanceList(){
-        binding!!.recyclerViewAttendance.layoutManager = LinearLayoutManager(mActivity!!,
-            RecyclerView.VERTICAL,false)
+    private fun setUpAttendanceList() {
+        binding!!.recyclerViewAttendance.layoutManager = LinearLayoutManager(
+            mActivity!!,
+            RecyclerView.VERTICAL, false
+        )
         binding!!.recyclerViewAttendance.adapter = CalendarListAdapter(mActivity!!)
     }
 

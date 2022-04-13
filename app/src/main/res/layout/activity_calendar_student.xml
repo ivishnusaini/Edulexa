@@ -112,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Sun"
+                        android:text="@string/attendance_student_sun"
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_10ssp" />
 
@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Mon"
+                        android:text="@string/attendance_student_mon"
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_10ssp" />
 
@@ -148,7 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Tue"
+                        android:text="@string/attendance_student_tue"
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_10ssp" />
 
@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Wed"
+                        android:text="@string/attendance_student_wed"
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_10ssp" />
 
@@ -184,7 +184,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Thu"
+                        android:text="@string/attendance_student_thu"
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_10ssp" />
 
@@ -202,7 +202,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Fri"
+                        android:text="@string/attendance_student_fri"
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_10ssp" />
 
@@ -220,7 +220,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Sat"
+                        android:text="@string/attendance_student_sat"
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_10ssp" />
 

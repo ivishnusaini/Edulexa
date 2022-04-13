@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
@@ -30,9 +31,16 @@ class ExamAdapter(context: Activity) :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         try {
-            viewHolder.itemView.setOnClickListener(object :View.OnClickListener{
+            if (position % 2 == 0){
+                viewHolder.startTestLay!!.visibility = View.VISIBLE
+                viewHolder.completedLay!!.visibility = View.GONE
+            }else{
+                viewHolder.startTestLay!!.visibility = View.GONE
+                viewHolder.completedLay!!.visibility = View.VISIBLE
+            }
+            viewHolder.itemView.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(p0: View?) {
-                    context!!.startActivity(Intent(context,ExamDetailActivity::class.java))
+                    context!!.startActivity(Intent(context, ExamDetailActivity::class.java))
                 }
 
             })
@@ -42,14 +50,16 @@ class ExamAdapter(context: Activity) :
     }
 
     override fun getItemCount(): Int {
-        return 20;
+        return 10;
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvName: TextView? = null
+        var startTestLay: LinearLayout? = null
+        var completedLay: LinearLayout? = null
 
         init {
-            tvName = itemView.findViewById(R.id.tv_dashboard_name)
+            startTestLay = itemView.findViewById(R.id.exam_student_start_test_lay)
+            completedLay = itemView.findViewById(R.id.exam_student_completed_lay)
         }
     }
 }

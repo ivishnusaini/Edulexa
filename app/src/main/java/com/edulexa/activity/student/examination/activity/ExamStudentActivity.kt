@@ -13,7 +13,7 @@ import com.edulexa.activity.student.fee.adapter.FeeTypeAdapter
 import com.edulexa.databinding.ActivityExamStudentBinding
 import com.edulexa.databinding.ActivityFeeStudentBinding
 
-class ExamStudentActivity : AppCompatActivity(),View.OnClickListener {
+class ExamStudentActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityExamStudentBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,19 +22,25 @@ class ExamStudentActivity : AppCompatActivity(),View.OnClickListener {
         setContentView(binding!!.root)
         init()
     }
+
     private fun init() {
         mActivity = this
         setUpClickListener()
         setUpExamList()
     }
+
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
     }
-    private fun setUpExamList(){
-        binding!!.recyclerViewExam.layoutManager = GridLayoutManager(mActivity!!,2,
-            RecyclerView.VERTICAL,false)
+
+    private fun setUpExamList() {
+        binding!!.recyclerViewExam.layoutManager = LinearLayoutManager(
+            mActivity!!,
+            RecyclerView.VERTICAL, false
+        )
         binding!!.recyclerViewExam.adapter = ExamAdapter(mActivity!!)
     }
+
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.iv_back)
