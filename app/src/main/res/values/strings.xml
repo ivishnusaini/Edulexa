@@ -120,11 +120,15 @@
 
     <!--Profile Student Screen-->
     <string name="profile_student">Profile</string>
-    <string name="name_profile_student">Name</string>
-    <string name="class_profile_student">Class</string>
-    <string name="dummy_class_profile_student">ix</string>
-    <string name="section_profile_student">Section</string>
-    <string name="dummy_section_profile_student">B</string>
+    <string name="student_profile_roll_number">Roll Number</string>
+    <string name="student_profile_dob">Date Of Birth</string>
+    <string name="student_profile_blood_group">Blood Group</string>
+    <string name="student_profile_emergency_contact">Emergency Contact</string>
+    <string name="student_profile_position_in_class">Position in Class</string>
+    <string name="student_profile_father_name">Father\'s Name</string>
+    <string name="student_profile_mother_name">Mother\'s Name</string>
+    <string name="student_profile_ask_for_update">Ask For Update</string>
+
     <string name="language_profile_student">Language</string>
     <string name="about_us_profile_student">About Us</string>
 

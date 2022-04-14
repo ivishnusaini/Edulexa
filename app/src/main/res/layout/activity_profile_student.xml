@@ -1,122 +1,347 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".activity.student.profile.activity.ProfileStudentActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="@dimen/_50sdp"
+        <RelativeLayout
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="match_parent"
-            android:contentDescription="@string/app_name"
-            android:padding="@dimen/_8sdp"
-            android:src="@drawable/ic_back_white" />
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimary" />
 
-        <com.agot.views.MediumTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/profile_student"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16ssp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_260sdp"
+            android:background="@drawable/header_bg_staff">
+
+            <RelativeLayout
+                android:id="@+id/student_profile_lay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:padding="@dimen/_8sdp"
+                    android:src="@drawable/ic_back_white" />
+
+                <com.agot.views.MediumTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_toEndOf="@+id/iv_back"
+                    android:text="@string/profile_student"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/student_profile_lay">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_student_profile"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:src="@drawable/dummy_profile" />
+
+                    <com.agot.views.MediumTextView
+                        android:id="@+id/tv_student_profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_20ssp"
+                        android:maxLines="1"
+                        android:text="@string/dummy_student_name"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <com.agot.views.RegularTextView
+                        android:id="@+id/tv_student__profile_class"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:maxLines="1"
+                        android:text="@string/dummy_student_class"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14ssp" />
 
 
-    </RelativeLayout>
+                </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/_10sdp">
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_260sdp"
+            android:background="@drawable/header_top_right_radius">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:weightSum="2">
+
+                <com.agot.views.RegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/student_profile_roll_number"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.agot.views.RegularTextView
+                    android:id="@+id/tv_student_profile_roll_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="0175"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/primaray_text_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:weightSum="2">
+
+                <com.agot.views.RegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/student_profile_dob"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.agot.views.RegularTextView
+                    android:id="@+id/tv_student_profile_dob"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="10 Oct 1996"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/primaray_text_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:weightSum="2">
+
+                <com.agot.views.RegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/student_profile_blood_group"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.agot.views.RegularTextView
+                    android:id="@+id/tv_student_profile_blood_group"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="B+"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/primaray_text_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:weightSum="2">
+
+                <com.agot.views.RegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/student_profile_emergency_contact"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.agot.views.RegularTextView
+                    android:id="@+id/tv_student_profile_emergency_contact"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="+91 1234567890"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/primaray_text_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:weightSum="2">
+
+                <com.agot.views.RegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/student_profile_position_in_class"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.agot.views.RegularTextView
+                    android:id="@+id/tv_student_profile_position_in_class"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="12th"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/primaray_text_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:weightSum="2">
+
+                <com.agot.views.RegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/student_profile_father_name"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.agot.views.RegularTextView
+                    android:id="@+id/tv_student_profile_father_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="Mr. Raj Saini"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/primaray_text_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:weightSum="2">
+
+                <com.agot.views.RegularTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/student_profile_mother_name"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <com.agot.views.RegularTextView
+                    android:id="@+id/tv_student_profile_mother_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="Mrs. Priya Saini"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/primaray_text_color"
+                android:visibility="gone" />
+
+
+            <com.agot.views.RegularButton
+                android:id="@+id/tv_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/app_icon" />
-
-            <com.agot.views.RegularTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/name_profile_student"
-                android:textColor="@color/primaray_text_color"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/ripple_effect_25"
+                android:backgroundTint="@color/red"
+                android:gravity="center"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:text="@string/student_profile_ask_for_update"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
 
-            <com.agot.views.RegularTextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/app_name"
-                android:textColor="@color/primaray_text_color"
-                android:textSize="@dimen/_16ssp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/primaray_text_color" />
-
-
-            <com.agot.views.RegularTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/class_profile_student"
-                android:textColor="@color/primaray_text_color"
-                android:textSize="@dimen/_14ssp" />
-
-            <com.agot.views.RegularTextView
-                android:id="@+id/tv_class"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/dummy_class_profile_student"
-                android:textColor="@color/primaray_text_color"
-                android:textSize="@dimen/_16ssp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/primaray_text_color" />
-
-            <com.agot.views.RegularTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/section_profile_student"
-                android:textColor="@color/primaray_text_color"
-                android:textSize="@dimen/_14ssp" />
-
-            <com.agot.views.RegularTextView
-                android:id="@+id/tv_section"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/dummy_section_profile_student"
-                android:textColor="@color/primaray_text_color"
-                android:textSize="@dimen/_16ssp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/primaray_text_color" />
 
             <RelativeLayout
                 android:id="@+id/language_student_lay"
@@ -124,7 +349,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/ripple_effect_5"
-                android:backgroundTint="@color/teal_200">
+                android:backgroundTint="@color/colorPrimary">
 
                 <com.agot.views.RegularTextView
                     android:layout_width="wrap_content"
@@ -134,7 +359,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:text="@string/language_profile_student"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_16ssp" />
 
                 <ImageView
@@ -144,7 +369,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/ic_previous_white"
-                    android:backgroundTint="@color/black"
+                    android:backgroundTint="@color/white"
                     android:contentDescription="@string/app_name"
                     android:rotation="180" />
 
@@ -156,7 +381,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/ripple_effect_5"
-                android:backgroundTint="@color/teal_200">
+                android:backgroundTint="@color/colorPrimary">
 
                 <com.agot.views.RegularTextView
                     android:layout_width="wrap_content"
@@ -166,7 +391,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:text="@string/about_us_profile_student"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_16ssp" />
 
                 <ImageView
@@ -176,7 +401,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/ic_previous_white"
-                    android:backgroundTint="@color/black"
+                    android:backgroundTint="@color/white"
                     android:contentDescription="@string/app_name"
                     android:rotation="180" />
 
@@ -184,7 +409,7 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </RelativeLayout>
 
 
-</LinearLayout>
+</ScrollView>

@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
@@ -31,8 +32,8 @@ class NoticeBoardStudentActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setUpExamList() {
-        binding!!.recyclerViewNoticeBoard.layoutManager = LinearLayoutManager(
-            mActivity!!,
+        binding!!.recyclerViewNoticeBoard.layoutManager = GridLayoutManager(
+            mActivity!!,2,
             RecyclerView.VERTICAL, false
         )
         binding!!.recyclerViewNoticeBoard.adapter = NoticeBoardAdapter(mActivity!!)
