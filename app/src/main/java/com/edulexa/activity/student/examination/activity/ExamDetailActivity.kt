@@ -32,6 +32,7 @@ class ExamDetailActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.ivBack.setOnClickListener(this)
     }
 
+
     private fun getBundleData() {
         try {
             val bundle = intent.extras
