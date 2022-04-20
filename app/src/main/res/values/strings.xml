@@ -50,16 +50,16 @@
     <!--Calendar Student Screen-->
     <string name="calendar_student">Calendar</string>
     <string name="concat_string_with_text_format">%s%s%s</string>
-    <string name="attendance_student_date">Date :</string>
-    <string name="attendance_student_in_time">In Time :</string>
-    <string name="attendance_student_out_time">Out Time :</string>
-    <string name="attendance_student_sun">Sun</string>
-    <string name="attendance_student_mon">Mon</string>
-    <string name="attendance_student_tue">Tue</string>
-    <string name="attendance_student_wed">Wed</string>
-    <string name="attendance_student_thu">Thu</string>
-    <string name="attendance_student_fri">Fri</string>
-    <string name="attendance_student_sat">Sat</string>
+    <string name="calendar_student_date">Date :</string>
+    <string name="calendar_student_in_time">In Time :</string>
+    <string name="calendar_student_out_time">Out Time :</string>
+    <string name="calendar_student_sun">Sun</string>
+    <string name="calendar_student_mon">Mon</string>
+    <string name="calendar_student_tue">Tue</string>
+    <string name="calendar_student_wed">Wed</string>
+    <string name="calendar_student_thu">Thu</string>
+    <string name="calendar_student_fri">Fri</string>
+    <string name="calendar_student_sat">Sat</string>
 
 
     <!--Fee Student Screen-->
@@ -149,6 +149,10 @@
     <string name="about_us_student_current_session">Current Session</string>
     <string name="about_us_student_session_month">Session Month</string>
 
-
+    <!--Attendance Student Screen-->
+    <string name="attendance_student">Attendance</string>
+    <string name="attendance_student_present">Present</string>
+    <string name="attendance_student_absent">Absent</string>
+    <string name="attendance_student_holiday">Holiday</string>
 
 </resources>

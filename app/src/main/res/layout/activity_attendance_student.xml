@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.student.calendar.activity.CalendarStudentActivity">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.student.attendance.activity.AttendanceStudentActivity">
 
     <RelativeLayout
         android:layout_width="@dimen/_100sdp"
@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/calendar_student"
+            android:text="@string/attendance_student"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 
@@ -237,14 +237,126 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_attendance"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp" />
+            android:layout_marginTop="@dimen/_15sdp"
+            android:weightSum="3">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                android:elevation="@dimen/_5sdp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@color/present_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <com.agot.views.RegularTextView
+                        android:id="@+id/tv_attendance_present_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="23"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/present_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.agot.views.RegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/attendance_student_present"
+                        android:textColor="@color/present_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                android:elevation="@dimen/_5sdp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@color/absent_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <com.agot.views.RegularTextView
+                        android:id="@+id/tv_attendance_absent_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/absent_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.agot.views.RegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/attendance_student_absent"
+                        android:textColor="@color/absent_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                android:elevation="@dimen/_5sdp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@color/holiday_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <com.agot.views.RegularTextView
+                        android:id="@+id/tv_attendance_holiday_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/holiday_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.agot.views.RegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/attendance_student_holiday"
+                        android:textColor="@color/holiday_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
 
     </LinearLayout>
-
 
 </RelativeLayout>

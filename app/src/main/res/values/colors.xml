@@ -20,4 +20,12 @@
     <color name="notice_board_bg_1">#d4ffea</color>
     <color name="notice_board_bg_2">#d4f5ff</color>
     <color name="notice_board_bg_3">#ffd4d4</color>
+
+    <color name="present_bg">#d4ffea</color>
+    <color name="present_text_color">#047C43</color>
+    <color name="absent_bg">#fff1ec</color>
+    <color name="absent_text_color">#A30329</color>
+    <color name="holiday_bg">#d4f5ff</color>
+    <color name="holiday_text_color">#03058E</color>
+
 </resources>

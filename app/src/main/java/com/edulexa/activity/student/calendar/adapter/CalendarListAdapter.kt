@@ -22,7 +22,7 @@ class CalendarListAdapter(context: Activity) :
     ): ViewHolder {
         val itemView: View =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_attendance, parent, false)
+                .inflate(R.layout.item_student_calendar, parent, false)
         return ViewHolder(itemView)
     }
 

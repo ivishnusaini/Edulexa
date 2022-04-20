@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
 import com.edulexa.activity.student.examination.activity.ExamStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
@@ -96,6 +97,9 @@ class DashboardStudentAdapter(context: Activity) :
                         }
                         "Profile" -> {
                             context!!.startActivity(Intent(context!!, ProfileStudentActivity::class.java))
+                        }
+                        "Attendance" -> {
+                            context!!.startActivity(Intent(context!!, AttendanceStudentActivity::class.java))
                         }
                     }
                 }

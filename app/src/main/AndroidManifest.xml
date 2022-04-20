@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.student.dashboard.activity.DashboardMenuStudentActivity"
+            android:name=".activity.student.attendance.activity.AttendanceStudentActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ForgotCreatePasswordActivity"
