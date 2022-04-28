@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.edulexa.R
+import com.edulexa.activity.select_school.activity.SelectSchoolActivity
 import com.edulexa.activity.staff.dashboard.activity.DashboardStaffActivity
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
 import com.edulexa.databinding.ActivityLoginBinding
-import com.edulexa.databinding.ActivitySelectSchoolBinding
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null

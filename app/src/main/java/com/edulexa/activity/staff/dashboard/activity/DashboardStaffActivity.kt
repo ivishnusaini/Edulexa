@@ -2,7 +2,6 @@ package com.edulexa.activity.staff.dashboard.activity
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -14,10 +13,8 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.SelectSchoolActivity
 import com.edulexa.activity.staff.dashboard.adapter.DashboardStaffAdapter
 import com.edulexa.databinding.ActivityDashboardStaffBinding
-import com.edulexa.databinding.ActivityLoginBinding
 import com.edulexa.support.Utils
 
 class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {

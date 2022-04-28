@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Edulexa</string>
 
+    <!--Validation-->
+    <string name="internet_connection_error">Internet connection is required</string>
+    <string name="api_response_failure">Api Response is Failure</string>
+    <string name="response_null_or_empty_validation">Response is null or empty.</string>
+
     <!--dialog validation popup-->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -154,5 +159,8 @@
     <string name="attendance_student_present">Present</string>
     <string name="attendance_student_absent">Absent</string>
     <string name="attendance_student_holiday">Holiday</string>
+
+    <!--ProgressBar-->
+    <string name="progress_bar_please_wait">Please wait…</string>
 
 </resources>

@@ -76,10 +76,7 @@
             android:exported="false"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.SelectSchoolActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.SplashActivity"
+            android:name=".activity.select_school.activity.SelectSchoolActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

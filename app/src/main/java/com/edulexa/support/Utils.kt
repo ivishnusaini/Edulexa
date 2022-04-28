@@ -35,6 +35,7 @@ import java.util.regex.Pattern
 
 class Utils {
     companion object {
+        private var dialog: Dialog? = null
         fun hideStatusBar(context: Activity) {
             @Suppress("DEPRECATION")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -155,9 +156,6 @@ class Utils {
             }
         }
 
-        fun hideProgressBar() {
-
-        }
 
         fun showSnackBar(context: Activity, message: String) {
             val snackbar = Snackbar.make(
@@ -248,6 +246,30 @@ class Utils {
                     return ""
                 }
             }
+        }
+        fun showProgressBar(activity: Activity) {
+            try {
+                if (dialog != null && dialog!!.isShowing()) {
+                    return
+                }
+                dialog = Dialog(activity)
+                dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog!!.setContentView(R.layout.progress_bar)
+                Objects.requireNonNull(dialog!!.getWindow())!!.setBackgroundDrawable(
+                    ColorDrawable(
+                        Color.TRANSPARENT
+                    )
+                )
+                dialog!!.setCancelable(false)
+                dialog!!.show()
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun hideProgressBar() {
+            if (dialog != null)
+                dialog!!.dismiss()
         }
     }
 }

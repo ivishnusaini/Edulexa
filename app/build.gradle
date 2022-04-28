@@ -55,5 +55,6 @@ dependencies {
     /*Initial Library*/
     implementation 'io.github.aghajari:ZoomHelper:1.1.0'// zoom image
     implementation 'com.github.aabhasr1:OtpView:v1.1.2' // otp
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0' // progress bar
 
 }
