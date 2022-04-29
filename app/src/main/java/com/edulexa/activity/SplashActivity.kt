@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils
 import com.edulexa.R
+import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivitySplashBinding
 import com.edulexa.support.Utils
 
@@ -24,7 +25,18 @@ class SplashActivity : AppCompatActivity() {
     private fun init() {
         mActivity = this
         Utils.hideStatusBar(mActivity!!)
+        setBaseUrl()
         startAnimation()
+    }
+
+    private fun setBaseUrl(){
+        if (Utils.getStudentBaseUrl(mActivity!!).endsWith("/"))
+            Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!)
+        else Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!) + "/"
+        if (Constants.BASE_URL_STUDENT.endsWith(("/")))
+            Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT
+        else Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT + "/"
+        Constants.BASE_URL_SCHOOL_LOGO_STUDENT = Utils.getSchoolLogo(mActivity!!)
     }
 
     private fun startAnimation() {

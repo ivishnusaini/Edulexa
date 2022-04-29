@@ -12,6 +12,7 @@ class Constants {
         var PG_RETURN_TRANSPORT_BULK_URL_STUDENT = BASE_URL_STUDENT + "/api/Traknpay/balkTransportFeeAdd"
         var BASEURL_WEBVIEW_STUDENT = BASE_URL_STUDENT + "/site/Userlogin?username="
         var BASE_URL_SCHOOL_LOGO_STUDENT = ""
+        var IMAGESURL_STUDENT = BASE_URL_STUDENT
 
         var BASE_URL_WEBVIEW_DOMAIN_STAFF = ""
         val BASE_URL_STAFF = BASE_URL_WEBVIEW_DOMAIN_STAFF + "staff_api/webservice/"
