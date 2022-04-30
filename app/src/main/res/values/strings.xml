@@ -5,6 +5,7 @@
     <string name="internet_connection_error">Internet connection is required</string>
     <string name="api_response_failure">Api Response is Failure</string>
     <string name="response_null_or_empty_validation">Response is null or empty.</string>
+    <string name="did_not_fetch_data">Did not fetch data</string>
 
     <!--dialog validation popup-->
     <string name="ok">OK</string>

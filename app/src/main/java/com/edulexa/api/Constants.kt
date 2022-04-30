@@ -39,10 +39,23 @@ class Constants {
         const val LOGOUTSTATUS = "logoutStatus"
         const val LOGOUTSTATUS_VALUE = "manual"
         const val SCHOOL_LOGO = "school_logo"
+        const val LANG_CODE_STUDENT = "lang_code_student"
+        const val STUDENT_IS_LOGIN = "student_is_login"
+        const val STUDENT_IS_LOGIN_YES = "yes"
 
         /*Staff*/
-        const val BASE_URL_WEBVIEW_DOMAIN = ""
         const val STAFF_BASE_URL = "staff_base_url"
+        const val LANG_CODE_STAFF = "lang_code_staff"
+        const val STAFF_IS_LOGIN = "staff_is_login"
+        const val STAFF_IS_LOGIN_YES = "yes"
+
+
+        /*App Used*/
+        const val APP_TYPE = "app_type"
+        const val APP_TYPE_STAFF = "staff"
+        const val APP_TYPE_STUDENT = "student"
+        const val FETCH_BASE_URL = "fetch_base_url"
+
     }
 
     object Params {

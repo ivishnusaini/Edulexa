@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/select_school_code_lay"
     android:layout_height="match_parent"
+    android:visibility="gone"
     android:background="@color/colorPrimary"
     tools:context=".activity.select_school.activity.SelectSchoolActivity">
 
@@ -46,7 +48,7 @@
                 android:background="@drawable/edit_text_bg_25"
                 android:hint="@string/enter_school_code_hint"
                 android:imeOptions="actionDone"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:paddingStart="@dimen/_10sdp"
                 android:maxLength="20"
                 android:paddingEnd="@dimen/_10sdp"

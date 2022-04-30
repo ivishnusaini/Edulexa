@@ -35,9 +35,7 @@ class GalleryStudentImageZoomActivity : AppCompatActivity(), View.OnClickListene
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        return ZoomHelper.getInstance().dispatchTouchEvent(ev!!, this) || super.dispatchTouchEvent(
-            ev
-        )
+        return ZoomHelper.getInstance().dispatchTouchEvent(ev!!, this) || super.dispatchTouchEvent(ev)
     }
 
     override fun onClick(view: View?) {

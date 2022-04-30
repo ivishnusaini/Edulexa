@@ -25,6 +25,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.edulexa.BuildConfig
 import com.edulexa.R
+import com.edulexa.activity.select_school.model.FetchBaseUrlResponse
 import com.edulexa.api.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -281,6 +282,27 @@ class Utils {
                 dialog!!.dismiss()
         }
 
+        fun saveBaseUrlResponse(context : Activity,fetchBaseUrlResponse : FetchBaseUrlResponse){
+            try {
+                val gson = Gson()
+                val preference = Preference().getInstance(context)
+                preference!!.putString(Constants.Preference.FETCH_BASE_URL, gson.toJson(fetchBaseUrlResponse))
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun getBaseUrlResponse(context: Activity?): FetchBaseUrlResponse? {
+            val preference = Preference().getInstance(context!!)
+            val resposne = preference!!.getString(Constants.Preference.FETCH_BASE_URL)
+            if (!resposne.isNullOrEmpty())
+                return getObject(
+                    resposne,
+                    FetchBaseUrlResponse::class.java
+                ) as FetchBaseUrlResponse
+            else return null
+        }
+
         fun saveStudentBaseUrl(context: Activity, baseUrl: String) {
             try {
                 val preference = Preference().getInstance(context)
@@ -322,6 +344,7 @@ class Utils {
             }
             return backgroundImage
         }
+
         fun saveStudentSchoolName(context: Activity, schoolName: String) {
             try {
                 val preference = Preference().getInstance(context)
@@ -342,6 +365,7 @@ class Utils {
             }
             return schoolName
         }
+
         fun saveStudentLogoutStatus(context: Activity, logoutStatus: String) {
             try {
                 val preference = Preference().getInstance(context)
@@ -362,6 +386,7 @@ class Utils {
             }
             return logoutStatus
         }
+
         fun saveSchoolLogo(context: Activity, schoolLogo: String) {
             try {
                 val preference = Preference().getInstance(context)

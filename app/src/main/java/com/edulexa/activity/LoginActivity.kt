@@ -10,6 +10,7 @@ import com.edulexa.R
 import com.edulexa.activity.select_school.activity.SelectSchoolActivity
 import com.edulexa.activity.staff.dashboard.activity.DashboardStaffActivity
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
+import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityLoginBinding
 import com.edulexa.support.Utils
 import java.lang.Exception
@@ -28,6 +29,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun init() {
         mActivity = this
         setUpClickListener()
+        setBaseUrl()
         setUpData()
     }
 
@@ -37,6 +39,20 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.tvStudent.setOnClickListener(this)
         binding!!.tvForgotPassword.setOnClickListener(this)
         binding!!.tvSubmit.setOnClickListener(this)
+    }
+
+    private fun setBaseUrl(){
+        if (Utils.getStudentBaseUrl(mActivity!!).endsWith("/"))
+            Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!)
+        else Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!) + "/"
+        if (Constants.BASE_URL_STUDENT.endsWith(("/")))
+            Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT
+        else Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT + "/"
+        Constants.BASE_URL_SCHOOL_LOGO_STUDENT = Utils.getSchoolLogo(mActivity!!)
+
+        if (Utils.getStaffBaseUrl(mActivity!!).endsWith("/"))
+            Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!)
+        else Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!) + "/"
     }
 
     private fun setUpData(){
