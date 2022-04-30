@@ -48,6 +48,8 @@ class Constants {
         const val LANG_CODE_STAFF = "lang_code_staff"
         const val STAFF_IS_LOGIN = "staff_is_login"
         const val STAFF_IS_LOGIN_YES = "yes"
+        const val BASE_URL_GET_OR_NOT = "base_url_get_or_not"
+        const val BASE_URL_GET_OR_NOT_YES = "yes"
 
 
         /*App Used*/

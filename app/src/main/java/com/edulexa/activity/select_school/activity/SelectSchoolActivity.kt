@@ -59,8 +59,14 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
                     startActivity(Intent(mActivity!!, SplashActivity::class.java))
                     finish()
                 } else {
-                    binding!!.selectSchoolCodeLay.visibility = View.VISIBLE
-                    startAnimation()
+                    val baseUrlFetchOrNot = preference!!.getString(Constants.Preference.BASE_URL_GET_OR_NOT)
+                    if (baseUrlFetchOrNot.equals(Constants.Preference.BASE_URL_GET_OR_NOT_YES)){
+                        startActivity(Intent(mActivity!!, SplashActivity::class.java))
+                        finish()
+                    }else{
+                        binding!!.selectSchoolCodeLay.visibility = View.VISIBLE
+                        startAnimation()
+                    }
                 }
             }
         }, 1000)
@@ -112,6 +118,7 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
                                             FetchBaseUrlResponse::class.java
                                         ) as FetchBaseUrlResponse
                                         Utils.saveBaseUrlResponse(mActivity!!, modelResponse)
+                                        preference!!.putString(Constants.Preference.BASE_URL_GET_OR_NOT,Constants.Preference.BASE_URL_GET_OR_NOT_YES)
                                         var studentBaseUrl = ""
                                         if (modelResponse.getUrl()!!.getUrl()!!.endsWith("/"))
                                             studentBaseUrl = modelResponse.getUrl()!!.getUrl()!!
