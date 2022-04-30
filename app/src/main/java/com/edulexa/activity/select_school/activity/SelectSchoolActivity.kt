@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -122,29 +123,24 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
                                         var studentBaseUrl = ""
                                         if (modelResponse.getUrl()!!.getUrl()!!.endsWith("/"))
                                             studentBaseUrl = modelResponse.getUrl()!!.getUrl()!!
-                                        else studentBaseUrl =
-                                            modelResponse.getUrl()!!.getUrl()!! + "/"
+                                        else studentBaseUrl = modelResponse.getUrl()!!.getUrl()!! + "/"
+
                                         Utils.saveStudentBaseUrl(mActivity!!, studentBaseUrl)
-                                        Utils.saveStudentBackgroundImage(
-                                            mActivity!!,
-                                            modelResponse.getUrl()!!.getBackgroundImage()!!
-                                        )
-                                        Utils.saveStudentSchoolName(
-                                            mActivity!!,
-                                            modelResponse.getUrl()!!.getSchoolName()!!
-                                        )
-                                        Utils.saveStudentLogoutStatus(
-                                            mActivity!!,
-                                            Constants.Preference.LOGOUTSTATUS_VALUE
-                                        )
-                                        Constants.BASE_URL_STUDENT =
-                                            Utils.getStudentBaseUrl(mActivity!!)
-                                        Utils.saveSchoolLogo(
-                                            mActivity!!,
-                                            modelResponse.getUrl()!!.getSchoolImage()!!
-                                        )
-                                        Constants.BASE_URL_SCHOOL_LOGO_STUDENT =
-                                            Utils.getSchoolLogo(mActivity!!)
+                                        Utils.saveStudentBackgroundImage(mActivity!!, modelResponse.getUrl()!!.getBackgroundImage()!!)
+                                        Utils.saveStudentSchoolName(mActivity!!, modelResponse.getUrl()!!.getSchoolName()!!)
+                                        Utils.saveStudentLogoutStatus(mActivity!!, Constants.Preference.LOGOUTSTATUS_VALUE)
+                                        Utils.saveSchoolLogo(mActivity!!, modelResponse.getUrl()!!.getSchoolImage()!!)
+
+                                        Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!)
+                                        Constants.DOMAIN_STUDENT = Constants.BASE_URL_STUDENT + Constants.API
+                                        Constants.APIURL_STUDENT = Constants.BASE_URL_STUDENT
+                                        Constants.PG_RETURN_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY
+                                        Constants.PG_RETURN_BULK_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY_BALKFEEADD
+                                        Constants.PG_RETURN_TRANSPORT_BULK_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY_BALKTRANSPORTFEEADD
+                                        Constants.BASEURL_WEBVIEW_STUDENT = Constants.BASE_URL_STUDENT+Constants.SITE_USERLOGIN_USERNAME
+                                        Constants.BASE_URL_SCHOOL_LOGO_STUDENT = Utils.getSchoolLogo(mActivity!!)
+                                        Constants.SCHOOL_NAME = Utils.getStudentSchoolName(mActivity!!)
+                                        Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT
 
                                         var staffBaseUrl = ""
                                         if (modelResponse.getUrl()!!.getUrl()!!.endsWith("/"))
@@ -152,15 +148,22 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
                                         else staffBaseUrl =
                                             modelResponse.getUrl()!!.getUrl()!! + "/"
                                         Utils.saveStaffBaseUrl(mActivity!!, staffBaseUrl)
-                                        Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF =
-                                            Utils.getStaffBaseUrl(mActivity!!)
+                                        Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!)
+                                        Constants.BASE_URL_STAFF = Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF + Constants.STAFF_API_WEBSERVICE
+                                        Constants.BASE_URL_WEBVIEW_STAFF = Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF + Constants.SITE_WEBVIEWLOGIN_USERNAME
 
-                                        startActivity(
-                                            Intent(
-                                                mActivity!!,
-                                                SplashActivity::class.java
-                                            )
-                                        )
+
+                                        Log.e("key",Constants.DOMAIN_STUDENT)
+                                        Log.e("key",Constants.APIURL_STUDENT)
+                                        Log.e("key",Constants.PG_RETURN_URL_STUDENT)
+                                        Log.e("key",Constants.PG_RETURN_BULK_URL_STUDENT)
+                                        Log.e("key",Constants.PG_RETURN_TRANSPORT_BULK_URL_STUDENT)
+                                        Log.e("key",Constants.BASEURL_WEBVIEW_STUDENT)
+                                        Log.e("key",Constants.BASE_URL_SCHOOL_LOGO_STUDENT)
+                                        Log.e("key",Constants.BASE_URL_STAFF)
+                                        Log.e("key",Constants.BASE_URL_WEBVIEW_STAFF)
+
+                                        startActivity(Intent(mActivity!!, SplashActivity::class.java))
                                         finish()
                                     }else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
                                 } else Utils.showToastPopup(

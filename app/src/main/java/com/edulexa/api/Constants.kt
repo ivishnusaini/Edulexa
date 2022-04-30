@@ -4,6 +4,7 @@ class Constants {
     companion object {
         val BASE_URL_SCHOOL_CODE = "https://edulexa.online/edulexa/staff_api/app/web_url"
 
+        /*Student Base Url and Value*/
         var BASE_URL_STUDENT = ""
         var DOMAIN_STUDENT = BASE_URL_STUDENT + "api"
         var APIURL_STUDENT = DOMAIN_STUDENT
@@ -12,11 +13,25 @@ class Constants {
         var PG_RETURN_TRANSPORT_BULK_URL_STUDENT = BASE_URL_STUDENT + "/api/Traknpay/balkTransportFeeAdd"
         var BASEURL_WEBVIEW_STUDENT = BASE_URL_STUDENT + "/site/Userlogin?username="
         var BASE_URL_SCHOOL_LOGO_STUDENT = ""
+        var SCHOOL_NAME = ""
         var IMAGESURL_STUDENT = BASE_URL_STUDENT
 
+        val API = "api"
+        val API_TRAKNPAY = "api/Traknpay"
+        val API_TRAKNPAY_BALKFEEADD = "api/Traknpay/balkFeeAdd"
+        val API_TRAKNPAY_BALKTRANSPORTFEEADD = "api/Traknpay/balkTransportFeeAdd"
+        val SITE_USERLOGIN_USERNAME = "site/Userlogin?username="
+        /*Student Base Url and Value*/
+
+
+        /*Staff Base Url and Value*/
         var BASE_URL_WEBVIEW_DOMAIN_STAFF = ""
-        val BASE_URL_STAFF = BASE_URL_WEBVIEW_DOMAIN_STAFF + "staff_api/webservice/"
-        val BASE_URL_WEBVIEW_STAFF = BASE_URL_WEBVIEW_DOMAIN_STAFF + "site/webviewLogin?username="
+        var BASE_URL_STAFF = BASE_URL_WEBVIEW_DOMAIN_STAFF + "staff_api/webservice/"
+        var BASE_URL_WEBVIEW_STAFF = BASE_URL_WEBVIEW_DOMAIN_STAFF + "site/webviewLogin?username="
+
+        val STAFF_API_WEBSERVICE = "staff_api/webservice/"
+        val SITE_WEBVIEWLOGIN_USERNAME = "site/webviewLogin?username="
+        /*Staff Base Url and Value*/
     }
 
     object ReportCardDetail {

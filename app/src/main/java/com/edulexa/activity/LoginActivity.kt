@@ -3,6 +3,7 @@ package com.edulexa.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -42,17 +43,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setBaseUrl(){
-        if (Utils.getStudentBaseUrl(mActivity!!).endsWith("/"))
-            Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!)
-        else Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!) + "/"
-        if (Constants.BASE_URL_STUDENT.endsWith(("/")))
-            Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT
-        else Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT + "/"
-        Constants.BASE_URL_SCHOOL_LOGO_STUDENT = Utils.getSchoolLogo(mActivity!!)
-
-        if (Utils.getStaffBaseUrl(mActivity!!).endsWith("/"))
-            Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!)
-        else Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!) + "/"
+        Utils.saveStudentBaseUrl(mActivity!!,Constants.BASE_URL_STUDENT)
+        Utils.saveSchoolLogo(mActivity!!, Constants.BASE_URL_SCHOOL_LOGO_STUDENT)
+        Utils.saveStudentSchoolName(mActivity!!, Constants.SCHOOL_NAME)
+        Utils.saveStaffBaseUrl(mActivity!!,Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF)
+        Log.e("key",Constants.DOMAIN_STUDENT)
+        Log.e("key",Constants.APIURL_STUDENT)
+        Log.e("key",Constants.PG_RETURN_URL_STUDENT)
+        Log.e("key",Constants.PG_RETURN_BULK_URL_STUDENT)
+        Log.e("key",Constants.PG_RETURN_TRANSPORT_BULK_URL_STUDENT)
+        Log.e("key",Constants.BASEURL_WEBVIEW_STUDENT)
+        Log.e("key",Constants.BASE_URL_SCHOOL_LOGO_STUDENT)
+        Log.e("key",Constants.BASE_URL_STAFF)
+        Log.e("key",Constants.BASE_URL_WEBVIEW_STAFF)
     }
 
     private fun setUpData(){

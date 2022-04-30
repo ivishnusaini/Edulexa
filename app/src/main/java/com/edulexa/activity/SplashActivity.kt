@@ -47,6 +47,7 @@ class SplashActivity : AppCompatActivity() {
                 Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT
             else Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT + "/"
             Constants.BASE_URL_SCHOOL_LOGO_STUDENT = Utils.getSchoolLogo(mActivity!!)
+            Constants.SCHOOL_NAME = Utils.getStudentSchoolName(mActivity!!)
 
             if (Utils.getStaffBaseUrl(mActivity!!).endsWith("/"))
                 Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!)
