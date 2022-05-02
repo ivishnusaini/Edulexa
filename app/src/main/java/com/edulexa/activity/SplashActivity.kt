@@ -40,18 +40,26 @@ class SplashActivity : AppCompatActivity() {
 
     private fun setBaseUrl(){
         try {
-            if (Utils.getStudentBaseUrl(mActivity!!).endsWith("/"))
-                Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!)
-            else Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!) + "/"
-            if (Constants.BASE_URL_STUDENT.endsWith(("/")))
-                Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT
-            else Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT + "/"
-            Constants.BASE_URL_SCHOOL_LOGO_STUDENT = Utils.getSchoolLogo(mActivity!!)
-            Constants.SCHOOL_NAME = Utils.getStudentSchoolName(mActivity!!)
+            Constants.BASE_URL_STUDENT = preference!!.getString(Constants.Preference.STUDENT_BASE_URL)!!
+            Constants.DOMAIN_STUDENT = Constants.BASE_URL_STUDENT + Constants.API
+            preference!!.putString(Constants.Preference.APIURL_STUDENT,Constants.DOMAIN_STUDENT)
+            if (Constants.BASE_URL_STUDENT.endsWith("/"))
+                preference!!.putString(Constants.Preference.IMAGESURL_STUDENT,Constants.BASE_URL_STUDENT)
+            else preference!!.putString(Constants.Preference.IMAGESURL_STUDENT,Constants.BASE_URL_STUDENT+"/")
 
-            if (Utils.getStaffBaseUrl(mActivity!!).endsWith("/"))
-                Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!)
-            else Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!) + "/"
+            Constants.PG_RETURN_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY
+            Constants.PG_RETURN_BULK_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY_BALKFEEADD
+            Constants.PG_RETURN_TRANSPORT_BULK_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY_BALKTRANSPORTFEEADD
+            Constants.BASEURL_WEBVIEW_STUDENT = Constants.BASE_URL_STUDENT+Constants.SITE_USERLOGIN_USERNAME
+            Constants.BASE_URL_SCHOOL_LOGO = preference!!.getString(Constants.Preference.SCHOOL_LOGO)!!
+            Constants.SCHOOL_NAME = preference!!.getString(Constants.Preference.SCHOOL_NAME)!!
+
+            Constants.BASE_URL_STAFF = preference!!.getString(Constants.Preference.STAFF_BASE_URL)!!
+            if (Constants.BASE_URL_STAFF.endsWith("/"))
+                Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Constants.BASE_URL_STAFF
+            else Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Constants.BASE_URL_STAFF+"/"
+            Constants.BASE_URL_STAFF = Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF + Constants.STAFF_API_WEBSERVICE
+            Constants.BASE_URL_WEBVIEW_STAFF = Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF + Constants.SITE_WEBVIEWLOGIN_USERNAME
         }catch (e : Exception){
             e.printStackTrace()
         }
@@ -81,8 +89,8 @@ class SplashActivity : AppCompatActivity() {
 
     private fun setUpData(){
         try{
-            Utils.setImageUsingGlide(mActivity,Utils.getSchoolLogo(mActivity!!),binding!!.ivSplashLogoBg)
-            Utils.setImageUsingGlide(mActivity,Utils.getSchoolLogo(mActivity!!),binding!!.ivSplashLogo)
+            Utils.setImageUsingGlide(mActivity,preference!!.getString(Constants.Preference.SCHOOL_LOGO),binding!!.ivSplashLogoBg)
+            Utils.setImageUsingGlide(mActivity,preference!!.getString(Constants.Preference.SCHOOL_LOGO),binding!!.ivSplashLogo)
         }catch (e : Exception){
             e.printStackTrace()
         }

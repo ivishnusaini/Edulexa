@@ -56,18 +56,13 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
                 }
             } else {
                 val studentIsLogin = preference!!.getString(Constants.Preference.STUDENT_IS_LOGIN)
-                if (studentIsLogin.equals(Constants.Preference.STUDENT_IS_LOGIN_YES)) {
+                val logoutStatus = preference!!.getString(Constants.Preference.LOGOUTSTATUS)
+                if (studentIsLogin.equals(Constants.Preference.STUDENT_IS_LOGIN_YES) || logoutStatus.equals(Constants.Preference.LOGOUTSTATUS_VALUE)) {
                     startActivity(Intent(mActivity!!, SplashActivity::class.java))
                     finish()
                 } else {
-                    val baseUrlFetchOrNot = preference!!.getString(Constants.Preference.BASE_URL_GET_OR_NOT)
-                    if (baseUrlFetchOrNot.equals(Constants.Preference.BASE_URL_GET_OR_NOT_YES)){
-                        startActivity(Intent(mActivity!!, SplashActivity::class.java))
-                        finish()
-                    }else{
-                        binding!!.selectSchoolCodeLay.visibility = View.VISIBLE
-                        startAnimation()
-                    }
+                    binding!!.selectSchoolCodeLay.visibility = View.VISIBLE
+                    startAnimation()
                 }
             }
         }, 1000)
@@ -118,37 +113,39 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
                                             response,
                                             FetchBaseUrlResponse::class.java
                                         ) as FetchBaseUrlResponse
-                                        Utils.saveBaseUrlResponse(mActivity!!, modelResponse)
                                         preference!!.putString(Constants.Preference.BASE_URL_GET_OR_NOT,Constants.Preference.BASE_URL_GET_OR_NOT_YES)
+
                                         var studentBaseUrl = ""
                                         if (modelResponse.getUrl()!!.getUrl()!!.endsWith("/"))
                                             studentBaseUrl = modelResponse.getUrl()!!.getUrl()!!
                                         else studentBaseUrl = modelResponse.getUrl()!!.getUrl()!! + "/"
 
-                                        Utils.saveStudentBaseUrl(mActivity!!, studentBaseUrl)
-                                        Utils.saveStudentBackgroundImage(mActivity!!, modelResponse.getUrl()!!.getBackgroundImage()!!)
-                                        Utils.saveStudentSchoolName(mActivity!!, modelResponse.getUrl()!!.getSchoolName()!!)
-                                        Utils.saveStudentLogoutStatus(mActivity!!, Constants.Preference.LOGOUTSTATUS_VALUE)
-                                        Utils.saveSchoolLogo(mActivity!!, modelResponse.getUrl()!!.getSchoolImage()!!)
+                                        preference!!.putString(Constants.Preference.STUDENT_BASE_URL,studentBaseUrl)
+                                        preference!!.putString(Constants.Preference.BACKGROUND_IMAGE,modelResponse.getUrl()!!.getBackgroundImage()!!)
+                                        preference!!.putString(Constants.Preference.SCHOOL_NAME,modelResponse.getUrl()!!.getSchoolName()!!)
+                                        preference!!.putString(Constants.Preference.LOGOUTSTATUS,Constants.Preference.LOGOUTSTATUS_VALUE)
 
-                                        Constants.BASE_URL_STUDENT = Utils.getStudentBaseUrl(mActivity!!)
+                                        Constants.BASE_URL_STUDENT = preference!!.getString(Constants.Preference.STUDENT_BASE_URL)!!
                                         Constants.DOMAIN_STUDENT = Constants.BASE_URL_STUDENT + Constants.API
                                         Constants.APIURL_STUDENT = Constants.BASE_URL_STUDENT
+
                                         Constants.PG_RETURN_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY
                                         Constants.PG_RETURN_BULK_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY_BALKFEEADD
                                         Constants.PG_RETURN_TRANSPORT_BULK_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY_BALKTRANSPORTFEEADD
                                         Constants.BASEURL_WEBVIEW_STUDENT = Constants.BASE_URL_STUDENT+Constants.SITE_USERLOGIN_USERNAME
-                                        Constants.BASE_URL_SCHOOL_LOGO_STUDENT = Utils.getSchoolLogo(mActivity!!)
-                                        Constants.SCHOOL_NAME = Utils.getStudentSchoolName(mActivity!!)
-                                        Constants.IMAGESURL_STUDENT = Constants.BASE_URL_STUDENT
+
+                                        preference!!.putString(Constants.Preference.SCHOOL_LOGO,modelResponse.getUrl()!!.getSchoolImage()!!)
+                                        Constants.BASE_URL_SCHOOL_LOGO = preference!!.getString(Constants.Preference.SCHOOL_LOGO)!!
+
 
                                         var staffBaseUrl = ""
                                         if (modelResponse.getUrl()!!.getUrl()!!.endsWith("/"))
                                             staffBaseUrl = modelResponse.getUrl()!!.getUrl()!!
-                                        else staffBaseUrl =
-                                            modelResponse.getUrl()!!.getUrl()!! + "/"
-                                        Utils.saveStaffBaseUrl(mActivity!!, staffBaseUrl)
-                                        Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = Utils.getStaffBaseUrl(mActivity!!)
+                                        else staffBaseUrl = modelResponse.getUrl()!!.getUrl()!! + "/"
+                                        preference!!.putString(Constants.Preference.STAFF_BASE_URL,staffBaseUrl)
+                                        preference!!.putString(Constants.Preference.STAFF_BASE_URL,staffBaseUrl)
+
+                                        Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = preference!!.getString(Constants.Preference.STAFF_BASE_URL)!!
                                         Constants.BASE_URL_STAFF = Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF + Constants.STAFF_API_WEBSERVICE
                                         Constants.BASE_URL_WEBVIEW_STAFF = Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF + Constants.SITE_WEBVIEWLOGIN_USERNAME
 
@@ -159,7 +156,7 @@ class SelectSchoolActivity : AppCompatActivity(), View.OnClickListener {
                                         Log.e("key",Constants.PG_RETURN_BULK_URL_STUDENT)
                                         Log.e("key",Constants.PG_RETURN_TRANSPORT_BULK_URL_STUDENT)
                                         Log.e("key",Constants.BASEURL_WEBVIEW_STUDENT)
-                                        Log.e("key",Constants.BASE_URL_SCHOOL_LOGO_STUDENT)
+                                        Log.e("key",Constants.BASE_URL_SCHOOL_LOGO)
                                         Log.e("key",Constants.BASE_URL_STAFF)
                                         Log.e("key",Constants.BASE_URL_WEBVIEW_STAFF)
 

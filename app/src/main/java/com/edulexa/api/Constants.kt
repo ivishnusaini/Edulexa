@@ -12,8 +12,8 @@ class Constants {
         var PG_RETURN_BULK_URL_STUDENT = BASE_URL_STUDENT + "/api/Traknpay/balkFeeAdd"
         var PG_RETURN_TRANSPORT_BULK_URL_STUDENT = BASE_URL_STUDENT + "/api/Traknpay/balkTransportFeeAdd"
         var BASEURL_WEBVIEW_STUDENT = BASE_URL_STUDENT + "/site/Userlogin?username="
-        var BASE_URL_SCHOOL_LOGO_STUDENT = ""
         var SCHOOL_NAME = ""
+        var BASE_URL_SCHOOL_LOGO = ""
         var IMAGESURL_STUDENT = BASE_URL_STUDENT
 
         val API = "api"
@@ -50,13 +50,13 @@ class Constants {
         /*Student*/
         const val STUDENT_BASE_URL = "student_base_url"
         const val BACKGROUND_IMAGE = "background_image"
-        const val SCHOOL_NAME = "school_name"
         const val LOGOUTSTATUS = "logoutStatus"
         const val LOGOUTSTATUS_VALUE = "manual"
-        const val SCHOOL_LOGO = "school_logo"
         const val LANG_CODE_STUDENT = "lang_code_student"
         const val STUDENT_IS_LOGIN = "student_is_login"
         const val STUDENT_IS_LOGIN_YES = "yes"
+        const val APIURL_STUDENT = "apiUrl"
+        const val IMAGESURL_STUDENT = "imagesUrl"
 
         /*Staff*/
         const val STAFF_BASE_URL = "staff_base_url"
@@ -72,6 +72,8 @@ class Constants {
         const val APP_TYPE_STAFF = "staff"
         const val APP_TYPE_STUDENT = "student"
         const val FETCH_BASE_URL = "fetch_base_url"
+        const val SCHOOL_LOGO = "school_logo"
+        const val SCHOOL_NAME = "school_name"
 
     }
 

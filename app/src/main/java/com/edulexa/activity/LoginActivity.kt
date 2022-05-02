@@ -13,12 +13,14 @@ import com.edulexa.activity.staff.dashboard.activity.DashboardStaffActivity
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityLoginBinding
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import java.lang.Exception
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityLoginBinding? = null
+    var preference : Preference? = null
     var staffStudentType = "";
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun init() {
         mActivity = this
+        preference = Preference().getInstance(mActivity!!)
         setUpClickListener()
         setBaseUrl()
         setUpData()
@@ -43,25 +46,32 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setBaseUrl(){
-        Utils.saveStudentBaseUrl(mActivity!!,Constants.BASE_URL_STUDENT)
-        Utils.saveSchoolLogo(mActivity!!, Constants.BASE_URL_SCHOOL_LOGO_STUDENT)
-        Utils.saveStudentSchoolName(mActivity!!, Constants.SCHOOL_NAME)
-        Utils.saveStaffBaseUrl(mActivity!!,Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF)
-        Log.e("key",Constants.DOMAIN_STUDENT)
-        Log.e("key",Constants.APIURL_STUDENT)
-        Log.e("key",Constants.PG_RETURN_URL_STUDENT)
-        Log.e("key",Constants.PG_RETURN_BULK_URL_STUDENT)
-        Log.e("key",Constants.PG_RETURN_TRANSPORT_BULK_URL_STUDENT)
-        Log.e("key",Constants.BASEURL_WEBVIEW_STUDENT)
-        Log.e("key",Constants.BASE_URL_SCHOOL_LOGO_STUDENT)
-        Log.e("key",Constants.BASE_URL_STAFF)
-        Log.e("key",Constants.BASE_URL_WEBVIEW_STAFF)
+        preference!!.putString(Constants.Preference.STUDENT_BASE_URL,Constants.BASE_URL_STUDENT)
+        preference!!.putString(Constants.Preference.APIURL_STUDENT,Constants.DOMAIN_STUDENT)
+        Constants.BASE_URL_STUDENT = preference!!.getString(Constants.Preference.STUDENT_BASE_URL)!!
+        if (Constants.BASE_URL_STUDENT.endsWith("/"))
+            preference!!.putString(Constants.Preference.IMAGESURL_STUDENT,Constants.BASE_URL_STUDENT)
+        else preference!!.putString(Constants.Preference.IMAGESURL_STUDENT,Constants.BASE_URL_STUDENT + "/")
+        Constants.DOMAIN_STUDENT = preference!!.getString(Constants.Preference.APIURL_STUDENT)!!
+        Constants.PG_RETURN_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY
+        Constants.PG_RETURN_BULK_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY_BALKFEEADD
+        Constants.PG_RETURN_TRANSPORT_BULK_URL_STUDENT = Constants.BASE_URL_STUDENT+Constants.API_TRAKNPAY_BALKTRANSPORTFEEADD
+        preference!!.putString(Constants.Preference.SCHOOL_LOGO,Constants.BASE_URL_SCHOOL_LOGO)
+        Constants.BASE_URL_SCHOOL_LOGO = preference!!.getString(Constants.Preference.SCHOOL_LOGO)!!
+
+        preference!!.putString(Constants.Preference.STAFF_BASE_URL,Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF)
+        if (preference!!.getString(Constants.Preference.STAFF_BASE_URL)!!.endsWith("/"))
+            Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = preference!!.getString(Constants.Preference.STAFF_BASE_URL)!!
+        else Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF = preference!!.getString(Constants.Preference.STAFF_BASE_URL)!! + "/"
+        Constants.BASE_URL_STAFF = Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF + Constants.STAFF_API_WEBSERVICE
+        Constants.BASE_URL_WEBVIEW_STAFF = Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF + Constants.SITE_WEBVIEWLOGIN_USERNAME
+
     }
 
     private fun setUpData(){
         try {
-            Utils.setImageUsingGlide(mActivity!!,Utils.getSchoolLogo(mActivity!!),binding!!.ivLoginLogo)
-            binding!!.tvLoginSchoolName.text = Utils.getStudentSchoolName(mActivity!!)
+            Utils.setImageUsingGlide(mActivity!!,preference!!.getString(Constants.Preference.SCHOOL_LOGO),binding!!.ivLoginLogo)
+            binding!!.tvLoginSchoolName.text = preference!!.getString(Constants.Preference.SCHOOL_NAME)
         }catch (e : Exception){
             e.printStackTrace()
         }
