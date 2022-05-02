@@ -3,7 +3,6 @@ package com.edulexa.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -11,17 +10,24 @@ import com.edulexa.R
 import com.edulexa.activity.select_school.activity.SelectSchoolActivity
 import com.edulexa.activity.staff.dashboard.activity.DashboardStaffActivity
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
+import com.edulexa.api.Communicator
 import com.edulexa.api.Constants
+import com.edulexa.api.CustomResponseListener
 import com.edulexa.databinding.ActivityLoginBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
-import java.lang.Exception
+import com.google.android.gms.tasks.Task
+import com.google.firebase.messaging.FirebaseMessaging
+import com.loopj.android.http.RequestParams
+import kotlin.Exception
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityLoginBinding? = null
     var preference : Preference? = null
     var staffStudentType = "";
+    var branchId = "";
+    var firebaseToken: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -35,6 +41,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         setUpClickListener()
         setBaseUrl()
         setUpData()
+        getFirebaseToken()
+        getBranchCode()
     }
 
     private fun setUpClickListener() {
@@ -77,6 +85,23 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun getFirebaseToken() {
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task: Task<String?> ->
+                if (!task.isSuccessful) {
+                    return@addOnCompleteListener
+                }
+                firebaseToken = task.result
+            }
+    }
+
+    private fun getBranchCode(){
+        if (Utils.isNetworkAvailable(mActivity!!)){
+            Utils.showProgressBar(mActivity!!)
+            Utils.hideKeyboard(mActivity!!)
+        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+    }
+
     private fun resetStaffStudentButton(type: String) {
         binding!!.tvStaff.setBackgroundResource(R.drawable.edit_text_bg_25)
         binding!!.tvStudent.setBackgroundResource(R.drawable.edit_text_bg_25)
@@ -107,12 +132,54 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun goToHomeActivity() {
-        if (staffStudentType.equals("staff")) {
-            startActivity(Intent(mActivity!!, DashboardStaffActivity::class.java))
-            finish()
-        } else {
-            startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
-            finish()
+        if (binding!!.etUserName.text.toString().isEmpty())
+            Utils.showToastPopup(mActivity!!,getString(R.string.login_enter_user_name))
+        else if (binding!!.etPassword.text.toString().isEmpty())
+            Utils.showToastPopup(mActivity!!,getString(R.string.login_enter_password))
+        else if (staffStudentType.isEmpty())
+            Utils.showToastPopup(mActivity!!,getString(R.string.login_select_login_type))
+        else if (branchId.isEmpty())
+            Utils.showToastPopup(mActivity!!,getString(R.string.login_select_branch))
+        else{
+            if (staffStudentType.equals("staff")) {
+                if (Utils.isNetworkAvailable(mActivity!!)){
+                    Utils.showProgressBar(mActivity!!)
+                    Utils.hideKeyboard(mActivity!!)
+                    val requestParams = RequestParams()
+                    try {
+                        requestParams.put(Constants.ParamsStaff.USERNAME, binding!!.etUserName.text.toString())
+                        requestParams.put(Constants.ParamsStaff.PASSWORD, binding!!.etPassword.text.toString())
+                        requestParams.put(Constants.ParamsStaff.DEVICETOKEN, firebaseToken)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                    Utils.printLog("Staff Login Param:", requestParams.toString())
+                    val communicator = Communicator()
+                    communicator.postWithHeader(101,mActivity!!,Constants.ApisStaff.LOGIN,requestParams,object :CustomResponseListener{
+                        override fun onResponse(requestCode: Int, response: String?) {
+                            Utils.hideProgressBar()
+                            try{
+                                if (!response.isNullOrEmpty()){
+
+                                }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                            }catch (e : Exception){
+                                e.printStackTrace()
+                            }
+                        }
+
+                        override fun onFailure(statusCode: Int, error: Throwable?) {
+                            Utils.hideProgressBar()
+                            Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                        }
+
+                    })
+                }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+                startActivity(Intent(mActivity!!, DashboardStaffActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
+                finish()
+            }
         }
     }
 

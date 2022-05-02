@@ -6,6 +6,10 @@
     <string name="api_response_failure">Api Response is Failure</string>
     <string name="response_null_or_empty_validation">Response is null or empty.</string>
     <string name="did_not_fetch_data">Did not fetch data</string>
+    <string name="login_select_login_type">Please select login type</string>
+    <string name="login_enter_user_name">Please enter username</string>
+    <string name="login_enter_password">Please enter password</string>
+    <string name="login_select_branch">Please select branch</string>
 
     <!--dialog validation popup-->
     <string name="ok">OK</string>

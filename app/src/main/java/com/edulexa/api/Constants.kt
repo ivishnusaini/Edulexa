@@ -74,24 +74,33 @@ class Constants {
         const val FETCH_BASE_URL = "fetch_base_url"
         const val SCHOOL_LOGO = "school_logo"
         const val SCHOOL_NAME = "school_name"
+        const val BRANCH_ID = "branch_id"
 
     }
 
-    object Params {
-
-        /*Header Params*/
+    object HeaderParams{
         const val CLIENT_SERVICE = "Client-Service"
+        const val CLIENT_SERVICE_VALUE = "school"
         const val AUTH_KEY = "Auth-Key"
+        const val AUTH_KEY_VALUE = "schoolAdmin@"
+        const val CONTENT_TYPE = "Content-Type"
+        const val CONTENT_TYPE_VALUE = "application/json"
         const val NEW_KEY = "New-Key"
         const val USER_ID = "User-Id"
         const val DB_ID = "Db-Id"
-        /*Header Params*/
+    }
 
-
+    object Params {
         const val WEB_CODE = "web_code"
     }
 
-    object ApisStudent {
-        val LOGIN = BASE_URL_STUDENT + "login"
+    object ParamsStaff {
+        const val USERNAME = "username"
+        const val PASSWORD = "password"
+        const val DEVICETOKEN = "deviceToken"
+    }
+
+    object ApisStaff {
+        val LOGIN = BASE_URL_STAFF + "login"
     }
 }

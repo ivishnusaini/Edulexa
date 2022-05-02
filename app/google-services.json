@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1078429475399",
+    "project_id": "edulexa-4c608",
+    "storage_bucket": "edulexa-4c608.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078429475399:android:c61844e176f98b6ab88762",
+        "android_client_info": {
+          "package_name": "com.edulexa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078429475399-ltaeaqcdt0l1fk6to9s8s7ogutlb39b7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2Uwfumwqht618u7BfEkXDYCG89N63bas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078429475399-ltaeaqcdt0l1fk6to9s8s7ogutlb39b7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

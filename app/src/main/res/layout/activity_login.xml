@@ -99,12 +99,36 @@
 
                     </RelativeLayout>
 
+                    <RelativeLayout
+                        android:id="@+id/branch_spinn_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:visibility="visible"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/edit_text_bg_25">
+
+                        <Spinner
+                            android:id="@+id/branch_spinn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/ic_drop_down"
+                            android:contentDescription="@string/app_name" />
+
+                    </RelativeLayout>
 
                     <com.agot.views.RegularEditText
                         android:id="@+id/et_user_name"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
-                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:background="@drawable/edit_text_bg_25"
                         android:hint="@string/username"
                         android:imeOptions="actionNext"
