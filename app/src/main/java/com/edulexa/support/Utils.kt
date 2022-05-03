@@ -26,6 +26,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.edulexa.BuildConfig
 import com.edulexa.R
 import com.edulexa.activity.select_school.model.FetchBaseUrlResponse
+import com.edulexa.activity.staff.login.StaffLoginResponse
+import com.edulexa.activity.student.login.StudentLoginResponse
 import com.edulexa.api.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -60,6 +62,21 @@ class Utils {
                 .centerCrop()
                 .placeholder(R.drawable.app_icon)
                 .error(R.drawable.app_icon)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH)
+                .dontAnimate()
+                .dontTransform()
+            Glide.with(context!!)
+                .load(url)
+                .apply(options)
+                .into(imageView!!)
+        }
+
+        fun setpProfileImageUsingGlide(context: Activity?, url: String?, imageView: ImageView?) {
+            val options: RequestOptions = RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.dummy_profile)
+                .error(R.drawable.dummy_profile)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .priority(Priority.HIGH)
                 .dontAnimate()
@@ -280,6 +297,37 @@ class Utils {
         fun hideProgressBar() {
             if (dialog != null)
                 dialog!!.dismiss()
+        }
+        fun saveStaffLoginResponse(context: Activity?, loginResponse: StaffLoginResponse?) {
+            val gson = Gson()
+            val preference = Preference().getInstance(context!!)
+            preference!!.putString(Constants.Preference.STAFF_LOGIN, gson.toJson(loginResponse))
+        }
+        fun getStaffLoginResponse(context: Activity?): StaffLoginResponse? {
+            val preference = Preference().getInstance(context!!)
+            val resposne = preference!!.getString(Constants.Preference.STAFF_LOGIN)
+            if (!resposne.isNullOrEmpty())
+                return getObject(
+                    resposne,
+                    StaffLoginResponse::class.java
+                ) as StaffLoginResponse
+            else return null
+        }
+
+        fun saveStudentLoginResponse(context: Activity?, loginResponse: StudentLoginResponse?) {
+            val gson = Gson()
+            val preference = Preference().getInstance(context!!)
+            preference!!.putString(Constants.Preference.STUDENT_LOGIN, gson.toJson(loginResponse))
+        }
+        fun getStudentLoginResponse(context: Activity?): StudentLoginResponse? {
+            val preference = Preference().getInstance(context!!)
+            val resposne = preference!!.getString(Constants.Preference.STUDENT_LOGIN)
+            if (!resposne.isNullOrEmpty())
+                return getObject(
+                    resposne,
+                    StudentLoginResponse::class.java
+                ) as StudentLoginResponse
+            else return null
         }
     }
 }

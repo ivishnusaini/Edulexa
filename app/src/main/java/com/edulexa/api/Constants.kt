@@ -8,10 +8,10 @@ class Constants {
         var BASE_URL_STUDENT = ""
         var DOMAIN_STUDENT = BASE_URL_STUDENT + "api"
         var APIURL_STUDENT = DOMAIN_STUDENT
-        var PG_RETURN_URL_STUDENT = BASE_URL_STUDENT + "/api/Traknpay"
-        var PG_RETURN_BULK_URL_STUDENT = BASE_URL_STUDENT + "/api/Traknpay/balkFeeAdd"
-        var PG_RETURN_TRANSPORT_BULK_URL_STUDENT = BASE_URL_STUDENT + "/api/Traknpay/balkTransportFeeAdd"
-        var BASEURL_WEBVIEW_STUDENT = BASE_URL_STUDENT + "/site/Userlogin?username="
+        var PG_RETURN_URL_STUDENT = BASE_URL_STUDENT + "api/Traknpay"
+        var PG_RETURN_BULK_URL_STUDENT = BASE_URL_STUDENT + "api/Traknpay/balkFeeAdd"
+        var PG_RETURN_TRANSPORT_BULK_URL_STUDENT = BASE_URL_STUDENT + "api/Traknpay/balkTransportFeeAdd"
+        var BASEURL_WEBVIEW_STUDENT = BASE_URL_STUDENT + "site/Userlogin?username="
         var SCHOOL_NAME = ""
         var BASE_URL_SCHOOL_LOGO = ""
         var IMAGESURL_STUDENT = BASE_URL_STUDENT
@@ -54,9 +54,17 @@ class Constants {
         const val LOGOUTSTATUS_VALUE = "manual"
         const val LANG_CODE_STUDENT = "lang_code_student"
         const val STUDENT_IS_LOGIN = "student_is_login"
+        const val HAS_MULTIPLE_CHILD = "hasMultipleChild"
+        const val HAS_MULTIPLE_CHILD_YES = "yes"
+        const val HAS_MULTIPLE_CHILD_NO = "no"
         const val STUDENT_IS_LOGIN_YES = "yes"
         const val APIURL_STUDENT = "apiUrl"
         const val IMAGESURL_STUDENT = "imagesUrl"
+        const val STUDENT_ID = "studentId"
+        const val SESSION_ID = "session_id"
+        const val STUDENT_SESSION_ID = "student_session_id"
+        const val CLASS_SECTION = "classSection"
+        const val STUDENT_NAME = "studentName"
 
         /*Staff*/
         const val STAFF_BASE_URL = "staff_base_url"
@@ -75,6 +83,9 @@ class Constants {
         const val SCHOOL_LOGO = "school_logo"
         const val SCHOOL_NAME = "school_name"
         const val BRANCH_ID = "branch_id"
+        const val STAFF_LOGIN = "staff_login"
+        const val STUDENT_LOGIN = "student_login"
+
 
     }
 
@@ -100,7 +111,18 @@ class Constants {
         const val DEVICETOKEN = "deviceToken"
     }
 
+    object ParamsStudent {
+
+    }
+
+    object Api {
+        val GET_BRANCH_CODE = DOMAIN_STUDENT + "/webservice/getBranch"
+    }
+
     object ApisStaff {
         val LOGIN = BASE_URL_STAFF + "login"
+    }
+    object ApisStudent {
+        val LOGIN = DOMAIN_STUDENT + "/Webservice/login"
     }
 }

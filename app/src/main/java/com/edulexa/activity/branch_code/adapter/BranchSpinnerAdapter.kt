@@ -33,11 +33,11 @@ class BranchSpinnerAdapter(context: Activity,list : List<Branch?>?) : BaseAdapte
     }
 
     @SuppressLint("ViewHolder", "InflateParams")
-    override fun getView(position: Int, view: View, viewGroup: ViewGroup?): View? {
-        var view: View
+    override fun getView(position: Int, view: View?, viewGroup: ViewGroup): View {
+        var view = view
         view = inflter!!.inflate(R.layout.item_spinner_branch_code, null)
         val tvName = view.findViewById<TextView>(R.id.tv_name)
-        tvName.text = list!![position]!!.getInstituteName()
+        tvName.setText(list!![position]!!.getInstituteName())
         return view
     }
 }

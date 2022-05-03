@@ -29,6 +29,7 @@
     <string name="password">Password</string>
     <string name="submit">Submit</string>
     <string name="forgot_password">Forgot Password</string>
+    <string name="login_multiple_child_class_format">%s%s%s</string>
 
     <!--Forgot Password-->
     <string name="phone_number_forgot_password">Phone Number</string>

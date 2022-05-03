@@ -1,25 +1,41 @@
 package com.edulexa.activity
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.widget.AdapterView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.branch_code.adapter.BranchSpinnerAdapter
+import com.edulexa.activity.branch_code.model.Branch
+import com.edulexa.activity.branch_code.model.BranchCodeResponse
 import com.edulexa.activity.select_school.activity.SelectSchoolActivity
 import com.edulexa.activity.staff.dashboard.activity.DashboardStaffActivity
+import com.edulexa.activity.staff.login.StaffLoginResponse
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
+import com.edulexa.activity.student.login.ParentChildList
+import com.edulexa.activity.student.login.StudentLoginResponse
+import com.edulexa.activity.student.login.adapter.MultipleChildAdapter
 import com.edulexa.api.Communicator
 import com.edulexa.api.Constants
 import com.edulexa.api.CustomResponseListener
 import com.edulexa.databinding.ActivityLoginBinding
+import com.edulexa.databinding.DialogStudentMultipleChildBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
 import com.loopj.android.http.RequestParams
-import kotlin.Exception
+import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
@@ -27,6 +43,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     var preference : Preference? = null
     var staffStudentType = "";
     var branchId = "";
+    var branchListSpinn: List<Branch?> = ArrayList()
+    var branchSpinnerAdapter : BranchSpinnerAdapter? = null
     var firebaseToken: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +98,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         try {
             Utils.setImageUsingGlide(mActivity!!,preference!!.getString(Constants.Preference.SCHOOL_LOGO),binding!!.ivLoginLogo)
             binding!!.tvLoginSchoolName.text = preference!!.getString(Constants.Preference.SCHOOL_NAME)
+            binding!!.branchSpinn.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+                    if (branchListSpinn.get(position)!!.getId() != null)
+                        branchId = branchListSpinn.get(position)!!.getId()!!
+                    else branchId = ""
+                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            })
+
         }catch (e : Exception){
             e.printStackTrace()
         }
@@ -96,9 +123,47 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getBranchCode(){
+        (branchListSpinn as ArrayList<Branch?>).clear()
+        if (branchSpinnerAdapter != null)
+            branchSpinnerAdapter!!.notifyDataSetChanged()
+        branchId = ""
         if (Utils.isNetworkAvailable(mActivity!!)){
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
+            val communicator = Communicator()
+            communicator.post(101,mActivity!!,Constants.Api.GET_BRANCH_CODE, RequestParams(),object : CustomResponseListener{
+                override fun onResponse(requestCode: Int, response: String?) {
+                    Utils.hideProgressBar()
+                    try{
+                        if (!response.isNullOrEmpty()){
+                            val modelResponse = Utils.getObject(response, BranchCodeResponse::class.java) as BranchCodeResponse
+                            if (modelResponse.getStatus() == 200) {
+                                if (modelResponse.getBranch() != null) {
+                                    if (modelResponse.getBranch()!!.size > 1){
+                                        binding!!.branchSpinnLay.visibility = View.VISIBLE
+                                        val branch = Branch()
+                                        branch.setInstituteName("Select Branch")
+                                        branchListSpinn = modelResponse.getBranch() as List<Branch?>
+                                        (branchListSpinn as ArrayList<Branch?>).add(0,branch)
+                                        binding!!.branchSpinn.adapter = BranchSpinnerAdapter(mActivity!!,branchListSpinn)
+                                    }else{
+                                        if (modelResponse.getBranch()!!.size == 1)
+                                            branchId = modelResponse.getBranch()!!.get(0)!!.getId()!!
+                                    }
+                                }
+                            }else  Utils.showToastPopup(mActivity!!, getString(R.string.did_not_fetch_data))
+                        } else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                    }catch (e : Exception){
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onFailure(statusCode: Int, error: Throwable?) {
+                    Utils.hideProgressBar()
+                    Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                }
+
+            })
         }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
     }
 
@@ -141,6 +206,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         else if (branchId.isEmpty())
             Utils.showToastPopup(mActivity!!,getString(R.string.login_select_branch))
         else{
+            preference!!.putString(Constants.Preference.BRANCH_ID,branchId)
             if (staffStudentType.equals("staff")) {
                 if (Utils.isNetworkAvailable(mActivity!!)){
                     Utils.showProgressBar(mActivity!!)
@@ -160,7 +226,22 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Utils.hideProgressBar()
                             try{
                                 if (!response.isNullOrEmpty()){
-
+                                    val responseJsonObject = JSONObject(response)
+                                    val status = responseJsonObject.optInt("status")
+                                    if (status == 200){
+                                        val recordJsonObject = responseJsonObject.optJSONObject("record")
+                                        if (recordJsonObject != null){
+                                            val modelResponse = Utils.getObject(response, StaffLoginResponse::class.java) as StaffLoginResponse
+                                            Utils.saveStaffLoginResponse(mActivity,modelResponse)
+                                            startActivity(Intent(mActivity!!, DashboardStaffActivity::class.java))
+                                            finish()
+                                        }
+                                    }else {
+                                        val message = responseJsonObject.optString("message")
+                                        if (!message.isEmpty())
+                                            Utils.showToastPopup(mActivity!!,message)
+                                        else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
+                                    }
                                 }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
                             }catch (e : Exception){
                                 e.printStackTrace()
@@ -174,12 +255,105 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
                     })
                 }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
-                startActivity(Intent(mActivity!!, DashboardStaffActivity::class.java))
-                finish()
             } else {
-                startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
-                finish()
+                if (Utils.isNetworkAvailable(mActivity!!)){
+                    Utils.showProgressBar(mActivity!!)
+                    Utils.hideKeyboard(mActivity!!)
+                    val requestParams = RequestParams()
+                    try {
+                        requestParams.put(Constants.ParamsStaff.USERNAME, binding!!.etUserName.text.toString())
+                        requestParams.put(Constants.ParamsStaff.PASSWORD, binding!!.etPassword.text.toString())
+                        requestParams.put(Constants.ParamsStaff.DEVICETOKEN, firebaseToken)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                    Utils.printLog("Staff Login Param:", requestParams.toString())
+                    val communicator = Communicator()
+                    communicator.postWithHeader(101,mActivity!!,Constants.ApisStudent.LOGIN,requestParams,object :CustomResponseListener{
+                        override fun onResponse(requestCode: Int, response: String?) {
+                            Utils.hideProgressBar()
+                            try{
+                                if (!response.isNullOrEmpty()){
+                                    val responseJsonObject = JSONObject(response)
+                                    val status = responseJsonObject.optInt("status")
+                                    if (status == 200){
+                                        val recordJsonObject = responseJsonObject.optJSONObject("record")
+                                        if (recordJsonObject != null){
+                                            val modelResponse = Utils.getObject(response, StudentLoginResponse::class.java) as StudentLoginResponse
+                                            Utils.saveStudentLoginResponse(mActivity,modelResponse)
+                                            if (modelResponse.getRole().equals("parent")){
+                                                if (modelResponse.getRecord()!!.getParentChildList() != null
+                                                    && modelResponse.getRecord()!!.getParentChildList()!!.size == 1){
+                                                    preference!!.putString(Constants.Preference.STUDENT_IS_LOGIN,Constants.Preference.STUDENT_IS_LOGIN_YES)
+                                                    preference!!.putString(Constants.Preference.HAS_MULTIPLE_CHILD, Constants.Preference.HAS_MULTIPLE_CHILD_NO)
+                                                    preference!!.putString(Constants.Preference.STUDENT_ID, modelResponse.getRecord()!!.getParentChildList()!!.get(0).getStudentId())
+                                                    preference!!.putString(Constants.Preference.SESSION_ID, "")
+                                                    preference!!.putString(Constants.Preference.STUDENT_SESSION_ID, modelResponse.getRecord()!!.getParentChildList()!!.get(0).getStudentSessionId())
+                                                    preference!!.putString(Constants.Preference.CLASS_SECTION, modelResponse.getRecord()!!.getParentChildList()!!.get(0).getClass() + "-"+modelResponse.getRecord()!!.getParentChildList()!!.get(0).getSection())
+                                                    preference!!.putString(Constants.Preference.STUDENT_NAME, modelResponse.getRecord()!!.getParentChildList()!!.get(0).getName())
+                                                    startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
+                                                    finish()
+                                                }else{
+                                                    preference!!.putString(Constants.Preference.HAS_MULTIPLE_CHILD, Constants.Preference.HAS_MULTIPLE_CHILD_YES)
+                                                    showChildListPopup(modelResponse.getRecord()!!.getParentChildList())
+                                                }
+                                            }else if (modelResponse.getRole().equals("student")){
+                                                preference!!.putString(Constants.Preference.STUDENT_IS_LOGIN,Constants.Preference.STUDENT_IS_LOGIN_YES)
+                                                preference!!.putString(Constants.Preference.HAS_MULTIPLE_CHILD, Constants.Preference.HAS_MULTIPLE_CHILD_NO)
+                                                preference!!.putString(Constants.Preference.STUDENT_ID, modelResponse.getRecord()!!.getStudentId())
+                                                preference!!.putString(Constants.Preference.SESSION_ID,modelResponse.getRecord()!!.getSessionId())
+                                                preference!!.putString(Constants.Preference.STUDENT_SESSION_ID, modelResponse.getRecord()!!.getStudentSessionId())
+                                                preference!!.putString(Constants.Preference.CLASS_SECTION, modelResponse.getRecord()!!.getClass_() + "-"+modelResponse.getRecord()!!.getSection())
+                                                preference!!.putString(Constants.Preference.STUDENT_NAME, modelResponse.getRecord()!!.getUsername())
+                                                startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
+                                                finish()
+                                            }
+
+                                        }
+                                    }else {
+                                        val message = responseJsonObject.optString("message")
+                                        if (!message.isEmpty())
+                                            Utils.showToastPopup(mActivity!!,message)
+                                        else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
+                                    }
+                                }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                            }catch (e : Exception){
+                                e.printStackTrace()
+                            }
+                        }
+
+                        override fun onFailure(statusCode: Int, error: Throwable?) {
+                            Utils.hideProgressBar()
+                            Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                        }
+
+                    })
+                }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
             }
+        }
+    }
+
+    private fun showChildListPopup(list: List<ParentChildList>?){
+        try {
+            var binding : DialogStudentMultipleChildBinding? = null
+            val dialog = Dialog(mActivity!!)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            binding = DialogStudentMultipleChildBinding.inflate(layoutInflater)
+            dialog.setContentView(binding.root)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCanceledOnTouchOutside(false)
+
+            binding.studentMultipleChildRecycler.layoutManager = LinearLayoutManager(mActivity,RecyclerView.VERTICAL,false)
+            binding.studentMultipleChildRecycler.adapter = MultipleChildAdapter(mActivity!!,list)
+
+            binding.btnCancel.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(p0: View?) {
+                    dialog.dismiss()
+                }
+            })
+            dialog.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

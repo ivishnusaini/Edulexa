@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_5sdp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_student_login_multiple_child_image"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp" />
+
+    <com.agot.views.RegularTextView
+        android:id="@+id/tv_student_login_multiple_child_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14ssp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_toEndOf="@+id/iv_student_login_multiple_child_image"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:textColor="@color/primaray_text_color" />
+
+    <com.agot.views.RegularTextView
+        android:id="@+id/tv_student_login_multiple_child_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14ssp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_below="@+id/tv_student_login_multiple_child_name"
+        android:layout_toEndOf="@+id/iv_student_login_multiple_child_image"
+        android:textColor="@color/primaray_text_color" />
+
+
+</RelativeLayout>
