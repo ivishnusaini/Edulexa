@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.AdapterView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,9 +24,7 @@ import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
 import com.edulexa.activity.student.login.ParentChildList
 import com.edulexa.activity.student.login.StudentLoginResponse
 import com.edulexa.activity.student.login.adapter.MultipleChildAdapter
-import com.edulexa.api.Communicator
-import com.edulexa.api.Constants
-import com.edulexa.api.CustomResponseListener
+import com.edulexa.api.*
 import com.edulexa.databinding.ActivityLoginBinding
 import com.edulexa.databinding.DialogStudentMultipleChildBinding
 import com.edulexa.support.Preference
@@ -35,7 +32,14 @@ import com.edulexa.support.Utils
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
 import com.loopj.android.http.RequestParams
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
@@ -211,10 +215,59 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 if (Utils.isNetworkAvailable(mActivity!!)){
                     Utils.showProgressBar(mActivity!!)
                     Utils.hideKeyboard(mActivity!!)
-                    val requestParams = RequestParams()
+
+                    val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithHeader(mActivity!!).create(ApiInterfaceStaff::class.java)
+                    val userNameRequestBody = RequestBody.create(MediaType.parse("text/plain"), binding!!.etUserName.text.toString().trim())
+                    val passwordRequestBody = RequestBody.create(MediaType.parse("text/plain"), binding!!.etPassword.text.toString().trim())
+                    val tokenRequestBody = RequestBody.create(MediaType.parse("text/plain"), firebaseToken!!)
+
+                    Utils.printLog("Url",Constants.BASE_URL_STAFF+"login")
+
+                    val call: Call<ResponseBody> = apiInterfaceWithHeader.staffLogin(userNameRequestBody, passwordRequestBody, tokenRequestBody)
+                    call.enqueue(object :Callback<ResponseBody>{
+                        override fun onResponse(
+                            call: Call<ResponseBody>,
+                            response: Response<ResponseBody>
+                        ) {
+                            Utils.hideProgressBar()
+                            try{
+                                val responseStr = response.body()!!.string()
+                                if (!responseStr.isNullOrEmpty()){
+                                    val responseJsonObject = JSONObject(responseStr)
+                                    val status = responseJsonObject.optInt("status")
+                                    if (status == 200){
+                                        val recordJsonObject = responseJsonObject.optJSONObject("record")
+                                        if (recordJsonObject != null){
+                                            val modelResponse = Utils.getObject(responseStr, StaffLoginResponse::class.java) as StaffLoginResponse
+                                            Utils.saveStaffLoginResponse(mActivity,modelResponse)
+                                            preference!!.putString(Constants.Preference.APP_TYPE,Constants.Preference.APP_TYPE_STAFF)
+                                            preference!!.putString(Constants.Preference.STAFF_IS_LOGIN,Constants.Preference.STAFF_IS_LOGIN_YES)
+                                            startActivity(Intent(mActivity!!, DashboardStaffActivity::class.java))
+                                            finish()
+                                        }
+                                    }else {
+                                        val message = responseJsonObject.optString("message")
+                                        if (!message.isEmpty())
+                                            Utils.showToastPopup(mActivity!!,message)
+                                        else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
+                                    }
+                                }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                            }catch (e : Exception){
+                                e.printStackTrace()
+                            }
+
+                        }
+
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            Utils.hideProgressBar()
+                        }
+
+                    })
+
+                    /*val requestParams = RequestParams()
                     try {
-                        requestParams.put(Constants.ParamsStaff.USERNAME, binding!!.etUserName.text.toString())
-                        requestParams.put(Constants.ParamsStaff.PASSWORD, binding!!.etPassword.text.toString())
+                        requestParams.put(Constants.ParamsStaff.USERNAME, binding!!.etUserName.text.toString().trim())
+                        requestParams.put(Constants.ParamsStaff.PASSWORD, binding!!.etPassword.text.toString().trim())
                         requestParams.put(Constants.ParamsStaff.DEVICETOKEN, firebaseToken)
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -252,8 +305,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Utils.hideProgressBar()
                             Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
                         }
-
-                    })
+                    })*/
                 }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
             } else {
                 if (Utils.isNetworkAvailable(mActivity!!)){
@@ -267,7 +319,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
-                    Utils.printLog("Staff Login Param:", requestParams.toString())
+                    Utils.printLog("Student Login Param:", requestParams.toString())
                     val communicator = Communicator()
                     communicator.postWithHeader(101,mActivity!!,Constants.ApisStudent.LOGIN,requestParams,object :CustomResponseListener{
                         override fun onResponse(requestCode: Int, response: String?) {

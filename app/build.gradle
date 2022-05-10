@@ -66,4 +66,12 @@ dependencies {
     implementation 'com.github.aabhasr1:OtpView:v1.1.2' // otp
     implementation 'com.github.ybq:Android-SpinKit:1.4.0' // progress bar
 
+    /*Retrofit*/
+    implementation ('com.squareup.retrofit2:retrofit:2.6.1') {
+        exclude module: 'okhttp'
+    }
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    /*Retrofit*/
+
 }
