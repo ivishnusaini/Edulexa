@@ -112,7 +112,9 @@ class Constants {
     }
 
     object ParamsStudent {
-
+        const val USERNAME = "username"
+        const val PASSWORD = "password"
+        const val DEVICETOKEN = "deviceToken"
     }
 
     object Api {

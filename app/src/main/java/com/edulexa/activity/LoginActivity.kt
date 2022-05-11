@@ -260,78 +260,43 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                             Utils.hideProgressBar()
+                            Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
                         }
 
                     })
-
-                    /*val requestParams = RequestParams()
-                    try {
-                        requestParams.put(Constants.ParamsStaff.USERNAME, binding!!.etUserName.text.toString().trim())
-                        requestParams.put(Constants.ParamsStaff.PASSWORD, binding!!.etPassword.text.toString().trim())
-                        requestParams.put(Constants.ParamsStaff.DEVICETOKEN, firebaseToken)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                    Utils.printLog("Staff Login Param:", requestParams.toString())
-                    val communicator = Communicator()
-                    communicator.postWithHeader(101,mActivity!!,Constants.ApisStaff.LOGIN,requestParams,object :CustomResponseListener{
-                        override fun onResponse(requestCode: Int, response: String?) {
-                            Utils.hideProgressBar()
-                            try{
-                                if (!response.isNullOrEmpty()){
-                                    val responseJsonObject = JSONObject(response)
-                                    val status = responseJsonObject.optInt("status")
-                                    if (status == 200){
-                                        val recordJsonObject = responseJsonObject.optJSONObject("record")
-                                        if (recordJsonObject != null){
-                                            val modelResponse = Utils.getObject(response, StaffLoginResponse::class.java) as StaffLoginResponse
-                                            Utils.saveStaffLoginResponse(mActivity,modelResponse)
-                                            startActivity(Intent(mActivity!!, DashboardStaffActivity::class.java))
-                                            finish()
-                                        }
-                                    }else {
-                                        val message = responseJsonObject.optString("message")
-                                        if (!message.isEmpty())
-                                            Utils.showToastPopup(mActivity!!,message)
-                                        else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
-                                    }
-                                }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
-                            }catch (e : Exception){
-                                e.printStackTrace()
-                            }
-                        }
-
-                        override fun onFailure(statusCode: Int, error: Throwable?) {
-                            Utils.hideProgressBar()
-                            Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
-                        }
-                    })*/
                 }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
             } else {
                 if (Utils.isNetworkAvailable(mActivity!!)){
                     Utils.showProgressBar(mActivity!!)
                     Utils.hideKeyboard(mActivity!!)
-                    val requestParams = RequestParams()
-                    try {
-                        requestParams.put(Constants.ParamsStaff.USERNAME, binding!!.etUserName.text.toString())
-                        requestParams.put(Constants.ParamsStaff.PASSWORD, binding!!.etPassword.text.toString())
-                        requestParams.put(Constants.ParamsStaff.DEVICETOKEN, firebaseToken)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                    Utils.printLog("Student Login Param:", requestParams.toString())
-                    val communicator = Communicator()
-                    communicator.postWithHeader(101,mActivity!!,Constants.ApisStudent.LOGIN,requestParams,object :CustomResponseListener{
-                        override fun onResponse(requestCode: Int, response: String?) {
+
+                    val apiInterfaceWithHeader: ApiInterfaceStudent = APIClientStudent.getRetroFitClientWithHeader(mActivity!!).create(ApiInterfaceStudent::class.java)
+
+                    val jsonObject = JSONObject()
+                    jsonObject.put(Constants.ParamsStudent.USERNAME, binding!!.etUserName.text.toString().trim())
+                    jsonObject.put(Constants.ParamsStudent.PASSWORD, binding!!.etPassword.text.toString().trim())
+                    jsonObject.put(Constants.ParamsStudent.DEVICETOKEN, firebaseToken)
+
+                    val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+
+                    Utils.printLog("Url",Constants.DOMAIN_STUDENT+"/Webservice/login")
+
+                    val call: Call<ResponseBody> = apiInterfaceWithHeader.studentLogin(requestBody)
+                    call.enqueue(object :Callback<ResponseBody>{
+                        override fun onResponse(
+                            call: Call<ResponseBody>,
+                            response: Response<ResponseBody>
+                        ) {
                             Utils.hideProgressBar()
                             try{
-                                if (!response.isNullOrEmpty()){
-                                    val responseJsonObject = JSONObject(response)
+                                val responseStr = response.body()!!.string()
+                                if (!responseStr.isNullOrEmpty()){
+                                    val responseJsonObject = JSONObject(responseStr)
                                     val status = responseJsonObject.optInt("status")
                                     if (status == 200){
                                         val recordJsonObject = responseJsonObject.optJSONObject("record")
                                         if (recordJsonObject != null){
-                                            val modelResponse = Utils.getObject(response, StudentLoginResponse::class.java) as StudentLoginResponse
+                                            val modelResponse = Utils.getObject(responseStr, StudentLoginResponse::class.java) as StudentLoginResponse
                                             Utils.saveStudentLoginResponse(mActivity,modelResponse)
                                             if (modelResponse.getRole().equals("parent")){
                                                 if (modelResponse.getRecord()!!.getParentChildList() != null
@@ -372,9 +337,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             }catch (e : Exception){
                                 e.printStackTrace()
                             }
-                        }
 
-                        override fun onFailure(statusCode: Int, error: Throwable?) {
+                        }
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                             Utils.hideProgressBar()
                             Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
                         }
