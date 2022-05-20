@@ -20,9 +20,23 @@ import com.edulexa.activity.staff.dashboard.adapter.DashboardStaffAdapter
 import com.edulexa.activity.student.dashboard.adapter.DashboardStudentAdapter
 import com.edulexa.activity.student.dashboard.adapter.DashboardStudentNoticeBoardAdapter
 import com.edulexa.activity.student.dashboard.adapter.DashboardStudentTodayHomeworkAdapter
+import com.edulexa.activity.student.dashboard.model.DatumNotification
+import com.edulexa.activity.student.dashboard.model.StudentDashboardResponse
+import com.edulexa.activity.student.login.StudentLoginResponse
+import com.edulexa.api.APIClientStudent
+import com.edulexa.api.ApiInterfaceStudent
+import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityDashboardStaffBinding
 import com.edulexa.databinding.ActivityDashboardStudentBinding
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
@@ -41,7 +55,7 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun init() {
         mActivity = this
         setUpclickListener()
-        setUpNoticeBoardData()
+        getDashboardData();
         setUpTodayHomeworkData()
         setUpDashboardData()
     }
@@ -50,12 +64,77 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.menuLay.setOnClickListener(this)
     }
 
+    private fun getDashboardData(){
+        if (Utils.isNetworkAvailable(mActivity!!)){
+            Utils.showProgressBar(mActivity!!)
+            Utils.hideKeyboard(mActivity!!)
 
-    private fun setUpNoticeBoardData() {
+            val branchId = Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
+            val accessToken = Utils.getStudentLoginResponse(mActivity)!!.getToken()!!
+            val userId = Utils.getStudentUserId(mActivity!!)
+
+            val apiInterfaceWithHeader: ApiInterfaceStudent = APIClientStudent.getRetroFitClientWithNewKeyHeader(mActivity!!, accessToken,branchId,userId).create(
+                ApiInterfaceStudent::class.java)
+
+            val jsonObject = JSONObject()
+            jsonObject.put(Constants.ParamsStudent.STUDENT_ID,Utils.getStudentId(mActivity!!))
+            jsonObject.put(Constants.ParamsStudent.DATE_FROM, Utils.getFirstDateOfWeek())
+            jsonObject.put(Constants.ParamsStudent.DATE_TO, Utils.getLastDateOfWeek())
+
+            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+
+            Utils.printLog("Url", Constants.DOMAIN_STUDENT+"/Webservice/Dashboard")
+
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.getDashboardData(requestBody)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    Utils.hideProgressBar()
+                    try{
+                        val responseStr = response.body()!!.string()
+                        if (!responseStr.isNullOrEmpty()){
+                            val modelResponse = Utils.getObject(responseStr, StudentDashboardResponse::class.java) as StudentDashboardResponse
+                            if (modelResponse.getNotification() != null){
+                                if (modelResponse.getNotification()!!.getSuccess() == 1){
+                                    if (modelResponse.getNotification()!!.getData() != null && modelResponse.getNotification()!!.getData()!!.size > 0)
+                                        setUpNoticeBoardData(modelResponse.getNotification()!!.getData())
+                                    else{
+                                        binding!!.studentNoticeBoardRecycler.visibility = View.GONE
+                                        binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
+                                    }
+                                }else{
+                                    binding!!.studentNoticeBoardRecycler.visibility = View.GONE
+                                    binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
+                                }
+                            }else{
+                                binding!!.studentNoticeBoardRecycler.visibility = View.GONE
+                                binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
+                            }
+                        }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                    }catch (e : Exception){
+                        e.printStackTrace()
+                    }
+
+                }
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Utils.hideProgressBar()
+                    Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                }
+
+            })
+        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+
+    }
+
+    private fun setUpNoticeBoardData(list : List<DatumNotification?>?) {
+        binding!!.studentNoticeBoardRecycler.visibility = View.VISIBLE
+        binding!!.tvNoticeBoardNoData.visibility = View.GONE
         binding!!.studentNoticeBoardRecycler.layoutManager =
             LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL, false)
         binding!!.studentNoticeBoardRecycler.adapter =
-            DashboardStudentNoticeBoardAdapter(mActivity!!)
+            DashboardStudentNoticeBoardAdapter(mActivity!!,list)
     }
 
     private fun setUpTodayHomeworkData() {

@@ -115,6 +115,9 @@ class Constants {
         const val USERNAME = "username"
         const val PASSWORD = "password"
         const val DEVICETOKEN = "deviceToken"
+        const val STUDENT_ID = "student_id"
+        const val DATE_FROM = "Date_from"
+        const val DATE_TO = "date_to"
     }
 
     object Api {

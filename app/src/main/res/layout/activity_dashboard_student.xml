@@ -108,12 +108,29 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_16ssp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/student_notice_board_recycler"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp" />
+                    android:layout_height="@dimen/_150sdp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/student_notice_board_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp" />
+
+                    <com.agot.views.RegularTextView
+                        android:id="@+id/tv_notice_board_no_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/notice_board_no_data"
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/_14ssp"
+                        android:visibility="gone"
+                        android:textColor="@color/primaray_text_color"/>
+
+                </RelativeLayout>
+
 
                 <com.agot.views.MediumTextView
                     android:layout_width="wrap_content"

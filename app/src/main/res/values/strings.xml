@@ -119,6 +119,7 @@
 
     <!--NoticeBoard Student Screen-->
     <string name="notice_board_student">Notice Board</string>
+    <string name="notice_board_no_data">No Notice Board Data</string>
 
     <!--Gallery Student Screen-->
     <string name="gallery_student">Gallery</string>

@@ -25,7 +25,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.edulexa.BuildConfig
 import com.edulexa.R
-import com.edulexa.activity.select_school.model.FetchBaseUrlResponse
 import com.edulexa.activity.staff.login.StaffLoginResponse
 import com.edulexa.activity.student.login.StudentLoginResponse
 import com.edulexa.api.Constants
@@ -328,6 +327,40 @@ class Utils {
                     StudentLoginResponse::class.java
                 ) as StudentLoginResponse
             else return null
+        }
+        fun getFirstDateOfWeek() : String{
+            try {
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.DAY_OF_WEEK, 1)
+                val firstDateYear: Int = calendar.get(Calendar.YEAR)
+                val firstDateMonth: Int = calendar.get(Calendar.MONTH) + 1
+                val firstDateDay: Int = calendar.get(Calendar.DAY_OF_MONTH)
+                return firstDateYear.toString() + "-" + firstDateMonth + "-" + firstDateDay
+            }catch (e : Exception){
+                e.printStackTrace()
+                return getCurrentDate()!!
+            }
+        }
+        fun getLastDateOfWeek() : String{
+            try {
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.DAY_OF_WEEK, 7)
+                val lastDateYear: Int = calendar.get(Calendar.YEAR)
+                val lastDateMonth: Int = calendar.get(Calendar.MONTH) + 1
+                val lastDateDay: Int = calendar.get(Calendar.DAY_OF_MONTH)
+                return lastDateYear.toString() + "-" + lastDateMonth + "-" + lastDateDay
+            }catch (e : Exception){
+                e.printStackTrace()
+                return getCurrentDate()!!
+            }
+        }
+        fun getStudentId(context : Activity) : String{
+            val preference = Preference().getInstance(context)
+            val studentId = preference!!.getString(Constants.Preference.STUDENT_ID)
+            return studentId!!
+        }
+        fun getStudentUserId(context : Activity) : String{
+            return getStudentLoginResponse(context)!!.getId()!!
         }
     }
 }

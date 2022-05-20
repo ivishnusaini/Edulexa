@@ -55,6 +55,8 @@ class StudentLoginResponse {
     }
 
     fun getToken(): String? {
+        if (token == null)
+            return ""
         return token
     }
 
