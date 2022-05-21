@@ -110,7 +110,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_150sdp">
+                    android:layout_height="wrap_content">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/student_notice_board_recycler"
@@ -121,10 +121,10 @@
 
                     <com.agot.views.RegularTextView
                         android:id="@+id/tv_notice_board_no_data"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_150sdp"
                         android:text="@string/notice_board_no_data"
-                        android:layout_centerInParent="true"
+                        android:gravity="center"
                         android:textSize="@dimen/_14ssp"
                         android:visibility="gone"
                         android:textColor="@color/primaray_text_color"/>
@@ -143,12 +143,30 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_16ssp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/student_today_homework_recycler"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:nestedScrollingEnabled="false" />
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/student_today_homework_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+
+                    <com.agot.views.RegularTextView
+                        android:id="@+id/tv_today_homework_no_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_150sdp"
+                        android:text="@string/dashboard_student_no_today_homework"
+                        android:gravity="center"
+                        android:textSize="@dimen/_14ssp"
+                        android:visibility="gone"
+                        android:textColor="@color/primaray_text_color"/>
+
+
+                </RelativeLayout>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"

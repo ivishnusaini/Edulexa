@@ -54,6 +54,7 @@
     <string name="dummy_student_class">Class VII B</string>
     <string name="dashboard_student_today_homework">Today\'s Homework</string>
     <string name="dashboard_student_you_are_present">You are present today</string>
+    <string name="dashboard_student_no_today_homework">No Homework Today</string>
 
     <!--Homework Student Screen-->
     <string name="homework_student">Homework</string>

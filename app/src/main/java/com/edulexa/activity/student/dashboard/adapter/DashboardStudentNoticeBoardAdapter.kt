@@ -42,7 +42,7 @@ class DashboardStudentNoticeBoardAdapter(context: Activity,list : List<DatumNoti
             if (!dateStr.isEmpty()) {
                 var spf = SimpleDateFormat("yyyy-mm-dd")
                 val newDate = spf.parse(dateStr)
-                spf = SimpleDateFormat("dd MMM yyyy")
+                spf = SimpleDateFormat("dd MM yyyy")
                 val date = spf.format(newDate!!)
                 return date
             }else return dateStr

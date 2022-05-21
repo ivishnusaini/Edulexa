@@ -21,6 +21,7 @@ import com.edulexa.activity.student.dashboard.adapter.DashboardStudentAdapter
 import com.edulexa.activity.student.dashboard.adapter.DashboardStudentNoticeBoardAdapter
 import com.edulexa.activity.student.dashboard.adapter.DashboardStudentTodayHomeworkAdapter
 import com.edulexa.activity.student.dashboard.model.DatumNotification
+import com.edulexa.activity.student.dashboard.model.HomeworkStudentDashboard
 import com.edulexa.activity.student.dashboard.model.StudentDashboardResponse
 import com.edulexa.activity.student.login.StudentLoginResponse
 import com.edulexa.api.APIClientStudent
@@ -56,7 +57,6 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
         mActivity = this
         setUpclickListener()
         getDashboardData();
-        setUpTodayHomeworkData()
         setUpDashboardData()
     }
 
@@ -112,6 +112,12 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                                 binding!!.studentNoticeBoardRecycler.visibility = View.GONE
                                 binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
                             }
+                            if (modelResponse.getHomeworklist() != null && modelResponse.getHomeworklist()!!.size > 0){
+                                setUpTodayHomeworkData(modelResponse.getHomeworklist())
+                            }else{
+                                binding!!.studentTodayHomeworkRecycler.visibility = View.GONE
+                                binding!!.tvTodayHomeworkNoData.visibility = View.VISIBLE
+                            }
                         }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
                     }catch (e : Exception){
                         e.printStackTrace()
@@ -137,11 +143,13 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
             DashboardStudentNoticeBoardAdapter(mActivity!!,list)
     }
 
-    private fun setUpTodayHomeworkData() {
+    private fun setUpTodayHomeworkData(list : List<HomeworkStudentDashboard?>?) {
+        binding!!.studentTodayHomeworkRecycler.visibility = View.VISIBLE
+        binding!!.tvTodayHomeworkNoData.visibility = View.GONE
         binding!!.studentTodayHomeworkRecycler.layoutManager =
             LinearLayoutManager(mActivity, RecyclerView.VERTICAL, false)
         binding!!.studentTodayHomeworkRecycler.adapter =
-            DashboardStudentTodayHomeworkAdapter(mActivity!!)
+            DashboardStudentTodayHomeworkAdapter(mActivity!!,list)
     }
 
     private fun setUpDashboardData() {
