@@ -2,32 +2,25 @@ package com.edulexa.activity.student.dashboard.activity
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.ForgotCreatePasswordActivity
-import com.edulexa.activity.staff.dashboard.adapter.DashboardStaffAdapter
 import com.edulexa.activity.student.dashboard.adapter.DashboardStudentAdapter
 import com.edulexa.activity.student.dashboard.adapter.DashboardStudentNoticeBoardAdapter
 import com.edulexa.activity.student.dashboard.adapter.DashboardStudentTodayHomeworkAdapter
-import com.edulexa.activity.student.dashboard.model.DatumNotification
-import com.edulexa.activity.student.dashboard.model.HomeworkStudentDashboard
-import com.edulexa.activity.student.dashboard.model.StudentDashboardResponse
-import com.edulexa.activity.student.login.StudentLoginResponse
+import com.edulexa.activity.student.dashboard.model.*
 import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
-import com.edulexa.databinding.ActivityDashboardStaffBinding
 import com.edulexa.databinding.ActivityDashboardStudentBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
@@ -38,6 +31,8 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
@@ -57,7 +52,6 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
         mActivity = this
         setUpclickListener()
         getDashboardData();
-        setUpDashboardData()
     }
 
     private fun setUpclickListener() {
@@ -118,6 +112,7 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                                 binding!!.studentTodayHomeworkRecycler.visibility = View.GONE
                                 binding!!.tvTodayHomeworkNoData.visibility = View.VISIBLE
                             }
+                            setUpDashboardData(modelResponse.getModuleList())
                         }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
                     }catch (e : Exception){
                         e.printStackTrace()
@@ -152,10 +147,23 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
             DashboardStudentTodayHomeworkAdapter(mActivity!!,list)
     }
 
-    private fun setUpDashboardData() {
-        binding!!.recyclerView.layoutManager =
-            GridLayoutManager(mActivity, 3, RecyclerView.VERTICAL, false)
-        binding!!.recyclerView.adapter = DashboardStudentAdapter(mActivity!!)
+    private fun setUpDashboardData(list : List<ModuleDashboard?>?) {
+        if (list != null && list.size > 0){
+            binding!!.recyclerView.layoutManager =
+                GridLayoutManager(mActivity, 3, RecyclerView.VERTICAL, false)
+
+            val dashboardList : ArrayList<DashboardModuleModel> = ArrayList()
+            dashboardList.add(DashboardModuleModel("Homework","https://www.ireava.com/assets/icons/homework1.jpg"))
+            dashboardList.add(DashboardModuleModel("Attendance","https://www.ireava.com/assets/icons/attendance1.jpg"))
+            dashboardList.add(DashboardModuleModel("Fee Details","https://www.ireava.com/assets/icons/fees1.jpg"))
+            dashboardList.add(DashboardModuleModel("Examination","https://www.ireava.com/assets/icons/exam%20schedule1.jpg"))
+            dashboardList.add(DashboardModuleModel("Report Cards","https://www.ireava.com/assets/icons/report%20card1.jpg"))
+            dashboardList.add(DashboardModuleModel("Calendar","https://www.ireava.com/assets/icons/event1.jpg"))
+            dashboardList.add(DashboardModuleModel("Notice Board","https://www.ireava.com/assets/icons/event1.jpg"))
+            dashboardList.add(DashboardModuleModel("Multimedia","https://www.ireava.com/assets/icons/gallery1.jpg"))
+            dashboardList.add(DashboardModuleModel("Profile","https://www.ireava.com/assets/icons/timeline1.jpg"))
+            binding!!.recyclerView.adapter = DashboardStudentAdapter(mActivity!!,dashboardList)
+        }
     }
 
     fun exitAppPopup() {

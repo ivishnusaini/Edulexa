@@ -1,5 +1,6 @@
 package com.edulexa.activity.student.dashboard.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
+import com.edulexa.activity.student.dashboard.model.DashboardModuleModel
+import com.edulexa.activity.student.dashboard.model.ModuleDashboard
 import com.edulexa.activity.student.examination.activity.ExamStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
 import com.edulexa.activity.student.gallery.activity.GalleryStudentActivity
@@ -17,63 +20,36 @@ import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
 import com.edulexa.activity.student.noticeboard.activity.NoticeBoardStudentActivity
 import com.edulexa.activity.student.profile.activity.ProfileStudentActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
+import com.edulexa.databinding.ItemStudentDashboardBinding
+import com.edulexa.databinding.ItemStudentDashboardNoticeBoardBinding
+import com.edulexa.support.Utils
 
-class DashboardStudentAdapter(context: Activity) :
+class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel?>?) :
     RecyclerView.Adapter<DashboardStudentAdapter.ViewHolder>() {
     var context: Activity? = null
-
+    var list : List<DashboardModuleModel?>? = null
+    var binding : ItemStudentDashboardBinding? = null
     init {
         this.context = context
+        this.list = list
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val itemView: View =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_dashboard, parent, false)
-        return ViewHolder(itemView)
+        binding = ItemStudentDashboardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding!!)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         try {
-            when (position) {
-                0 -> {
-                    viewHolder.tvName!!.text = "Homework"
-                }
-                1 -> {
-                    viewHolder.tvName!!.text = "Attendance"
-                }
-                2 -> {
-                    viewHolder.tvName!!.text = "Fee Details"
-                }
-                3 -> {
-                    viewHolder.tvName!!.text = "Examination"
-                }
-                4 -> {
-                    viewHolder.tvName!!.text = "Report Cards"
-                }
-                5 -> {
-                    viewHolder.tvName!!.text = "Calendar"
-                }
-                6 -> {
-                    viewHolder.tvName!!.text = "Notice Board"
-                }
-                7 -> {
-                    viewHolder.tvName!!.text = "Multimedia"
-                }
-                8 -> {
-                    viewHolder.tvName!!.text = "Acadmic Year"
-                }
-                9 -> {
-                    viewHolder.tvName!!.text = "Profile"
-                }
-            }
+            Utils.setImageUsingGlide(context,list!!.get(position)!!.getIconLink(),binding!!.ivDashboardImage)
+            binding!!.tvDashboardName.text = list!!.get(position)!!.getName()
 
             viewHolder.itemView.setOnClickListener(object :View.OnClickListener{
                 override fun onClick(p0: View?) {
-                    when(viewHolder.tvName!!.text){
+                    when(list!!.get(position)!!.getName()){
                         "Homework" -> {
                             context!!.startActivity(Intent(context!!, HomeworkStudentActivity::class.java))
                         }
@@ -112,14 +88,8 @@ class DashboardStudentAdapter(context: Activity) :
     }
 
     override fun getItemCount(): Int {
-        return 10;
+        return list!!.size;
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvName: TextView? = null
-
-        init {
-            tvName = itemView.findViewById(R.id.tv_dashboard_name)
-        }
-    }
+    class ViewHolder(binding: ItemStudentDashboardBinding) : RecyclerView.ViewHolder(binding.root)
 }

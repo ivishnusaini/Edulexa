@@ -4,9 +4,6 @@ import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
-
-
-
 class ModuleDashboard {
     @SerializedName("id")
     @Expose
@@ -37,6 +34,8 @@ class ModuleDashboard {
     }
 
     fun getName(): String? {
+        if (name == null)
+            return ""
         return name
     }
 
@@ -45,6 +44,8 @@ class ModuleDashboard {
     }
 
     fun getShortCode(): String? {
+        if (shortCode == null)
+            return ""
         return shortCode
     }
 
