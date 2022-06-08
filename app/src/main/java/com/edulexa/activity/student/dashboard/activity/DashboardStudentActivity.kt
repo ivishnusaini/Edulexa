@@ -51,11 +51,22 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun init() {
         mActivity = this
         setUpclickListener()
+        setUpData()
         getDashboardData();
     }
 
     private fun setUpclickListener() {
         binding!!.menuLay.setOnClickListener(this)
+    }
+
+    private fun setUpData(){
+        try {
+            binding!!.tvStudentName.text = Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getUsername()
+            binding!!.tvStudentClass.text = getString(R.string.dashboard_student_class_section_format,"Class ",Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getClass_()," ",Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getSection())
+            Utils.setpProfileImageUsingGlide(mActivity,Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getImage(),binding!!.ivStudentImage)
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
     }
 
     private fun getDashboardData(){
@@ -153,17 +164,28 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                 GridLayoutManager(mActivity, 3, RecyclerView.VERTICAL, false)
 
             val dashboardList : ArrayList<DashboardModuleModel> = ArrayList()
-            dashboardList.add(DashboardModuleModel("Homework","https://www.ireava.com/assets/icons/homework1.jpg"))
-            dashboardList.add(DashboardModuleModel("Attendance","https://www.ireava.com/assets/icons/attendance1.jpg"))
-            dashboardList.add(DashboardModuleModel("Fee Details","https://www.ireava.com/assets/icons/fees1.jpg"))
-            dashboardList.add(DashboardModuleModel("Examination","https://www.ireava.com/assets/icons/exam%20schedule1.jpg"))
-            dashboardList.add(DashboardModuleModel("Report Cards","https://www.ireava.com/assets/icons/report%20card1.jpg"))
-            dashboardList.add(DashboardModuleModel("Calendar","https://www.ireava.com/assets/icons/event1.jpg"))
-            dashboardList.add(DashboardModuleModel("Notice Board","https://www.ireava.com/assets/icons/event1.jpg"))
-            dashboardList.add(DashboardModuleModel("Multimedia","https://www.ireava.com/assets/icons/gallery1.jpg"))
-            dashboardList.add(DashboardModuleModel("Profile","https://www.ireava.com/assets/icons/timeline1.jpg"))
+            dashboardList.add(DashboardModuleModel("Homework",getImageUrl(list,"homework")))
+            dashboardList.add(DashboardModuleModel("Attendance",getImageUrl(list,"attendance")))
+            dashboardList.add(DashboardModuleModel("Fee Details",getImageUrl(list,"fees")))
+            dashboardList.add(DashboardModuleModel("Examination",getImageUrl(list,"examinations")))
+            dashboardList.add(DashboardModuleModel("Report Cards",getImageUrl(list,"report_card")))
+            dashboardList.add(DashboardModuleModel("Calendar",getImageUrl(list,"calendar_to_do_list")))
+            dashboardList.add(DashboardModuleModel("Notice Board",getImageUrl(list,"notice_board")))
+            dashboardList.add(DashboardModuleModel("Multimedia",getImageUrl(list,"gallery")))
+            dashboardList.add(DashboardModuleModel("Profile",getImageUrl(list,"timeline")))
             binding!!.recyclerView.adapter = DashboardStudentAdapter(mActivity!!,dashboardList)
         }
+    }
+
+    private fun getImageUrl(list : List<ModuleDashboard?>?,moduleName : String) : String{
+        var imageUrl = ""
+        for (model in list!!){
+            if (moduleName.equals(model!!.getShortCode())) {
+                imageUrl = model.getIconLink()!!
+                break
+            }
+        }
+        return imageUrl
     }
 
     fun exitAppPopup() {

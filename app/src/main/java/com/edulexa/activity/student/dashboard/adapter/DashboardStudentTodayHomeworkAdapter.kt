@@ -10,6 +10,7 @@ import com.edulexa.R
 import com.edulexa.activity.student.dashboard.model.HomeworkStudentDashboard
 import com.edulexa.databinding.ItemStudentDashboardNoticeBoardBinding
 import com.edulexa.databinding.ItemStudentDashboardTodayHomeworkBinding
+import com.edulexa.support.Utils
 
 class DashboardStudentTodayHomeworkAdapter(context: Activity,list : List<HomeworkStudentDashboard?>?) :
     RecyclerView.Adapter<DashboardStudentTodayHomeworkAdapter.ViewHolder>() {
@@ -31,7 +32,8 @@ class DashboardStudentTodayHomeworkAdapter(context: Activity,list : List<Homewor
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         try {
-
+            Utils.setHtmlText(list!!.get(position)!!.getDescription()!!,binding!!.tvTodayHomeworkMessage)
+            binding!!.tvTodayHomeworkSubject.text = list!!.get(position)!!.getName()
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="@string/dummy_student_name"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16ssp" />
 
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="@string/dummy_student_class"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
 

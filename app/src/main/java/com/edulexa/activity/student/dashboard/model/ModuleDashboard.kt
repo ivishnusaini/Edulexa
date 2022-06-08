@@ -62,6 +62,8 @@ class ModuleDashboard {
     }
 
     fun getIconLink(): String? {
+        if (iconLink == null)
+            return ""
         return iconLink
     }
 

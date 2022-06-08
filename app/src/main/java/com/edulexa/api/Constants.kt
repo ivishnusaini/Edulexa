@@ -2,7 +2,7 @@ package com.edulexa.api
 
 class Constants {
     companion object {
-        val BASE_URL_SCHOOL_CODE = "https://edulexa.online/edulexa/staff_api/app/web_url"
+        val BASE_URL_SCHOOL_CODE = "https://edulexa.online/beta/staff_api/app/web_url"
 
         /*Student Base Url and Value*/
         var BASE_URL_STUDENT = ""

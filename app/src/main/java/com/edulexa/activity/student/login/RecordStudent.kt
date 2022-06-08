@@ -209,6 +209,8 @@ class RecordStudent {
     }
 
     fun getImage(): String? {
+        if (image == null)
+            return ""
         return image
     }
 
