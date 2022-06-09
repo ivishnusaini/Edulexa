@@ -57,7 +57,7 @@ class HomeworkStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun setUpData(){
         binding!!.subjectSpinn.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                if (subjectListSpinn.get(position)!!.getSubjectId() != null) {
+                if (!subjectListSpinn.get(position)!!.getSubjectId().equals("")) {
                     subjectId = subjectListSpinn.get(position)!!.getSubjectId()!!
                     setUpHomeworkData()
                 }
