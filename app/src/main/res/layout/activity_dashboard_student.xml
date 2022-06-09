@@ -205,6 +205,7 @@
             android:background="#DCFFD4">
 
             <com.agot.views.MediumTextView
+                android:id="@+id/tv_student_dashboard_present"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"

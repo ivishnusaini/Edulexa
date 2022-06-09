@@ -124,6 +124,9 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                                 binding!!.studentTodayHomeworkRecycler.visibility = View.GONE
                                 binding!!.tvTodayHomeworkNoData.visibility = View.VISIBLE
                             }
+                            if (modelResponse.getAttendance() != null){
+                                binding!!.tvStudentDashboardPresent.text = getString(R.string.dashboard_student_present_format,"You are ",modelResponse.getAttendance()!!.getType()," today")
+                            }
                             setUpDashboardData(modelResponse.getModuleList())
                         }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
                     }catch (e : Exception){

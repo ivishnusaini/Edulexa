@@ -42,21 +42,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_60sdp"
-        android:descendantFocusability="blocksDescendants"
         android:background="@drawable/header_top_right_radius">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/student_homework_recycler"
+        <RelativeLayout
+            android:id="@+id/subject_spinn_lay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.agot.views.RegularTextView
-            android:id="@+id/tv_student_homework_no_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_height="@dimen/_35sdp"
             android:visibility="gone"
-            android:text="@string/homework_student_no_homework"/>
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/edit_text_bg_25">
+
+            <Spinner
+                android:id="@+id/subject_spinn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/ic_drop_down"
+                android:contentDescription="@string/app_name" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/subject_spinn_lay"
+            android:descendantFocusability="blocksDescendants">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/student_homework_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp" />
+
+            <com.agot.views.RegularTextView
+                android:id="@+id/tv_student_homework_no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:text="@string/homework_student_no_homework"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

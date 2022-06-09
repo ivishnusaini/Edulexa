@@ -364,6 +364,14 @@ class Utils {
         fun getStudentUserId(context : Activity) : String{
             return getStudentLoginResponse(context)!!.getId()!!
         }
+        fun getStudentClassId(context : Activity) : String{
+            val preference = Preference().getInstance(context)
+            return preference!!.getString(Constants.Preference.SECTION_ID)!!
+        }
+        fun getStudentSectionId(context : Activity) : String{
+            val preference = Preference().getInstance(context)
+            return preference!!.getString(Constants.Preference.CLASS_ID)!!
+        }
         fun setHtmlText(textStr : String,textView: TextView){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                 textView.setText(Html.fromHtml(textStr, Html.FROM_HTML_MODE_COMPACT));

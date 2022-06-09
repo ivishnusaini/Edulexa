@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 class StudentDashboardResponse {
     @SerializedName("attendence")
     @Expose
-    private var attendence: String? = ""
+    private var attendence: Attendance? = null
 
     @SerializedName("module_list")
     @Expose
@@ -45,11 +45,11 @@ class StudentDashboardResponse {
     fun setHomeworklist(homeworklist: List<HomeworkStudentDashboard?>?) {
         this.homeworklist = homeworklist
     }
-    fun getAttendance(): String? {
+    fun getAttendance(): Attendance? {
         return attendence
     }
 
-    fun setAttendance(attendence: String) {
+    fun setAttendance(attendence: Attendance) {
         this.attendence = attendence
     }
 }

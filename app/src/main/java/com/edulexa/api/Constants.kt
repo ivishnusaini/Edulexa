@@ -65,6 +65,8 @@ class Constants {
         const val STUDENT_SESSION_ID = "student_session_id"
         const val CLASS_SECTION = "classSection"
         const val STUDENT_NAME = "studentName"
+        const val CLASS_ID = "class_id"
+        const val SECTION_ID = "section_id"
 
         /*Staff*/
         const val STAFF_BASE_URL = "staff_base_url"
@@ -118,6 +120,9 @@ class Constants {
         const val STUDENT_ID = "student_id"
         const val DATE_FROM = "Date_from"
         const val DATE_TO = "date_to"
+        const val SUBJECT_ID = "subject_id"
+        const val CLASSID = "classId"
+        const val SECTIONID = "sectionId"
     }
 
     object Api {

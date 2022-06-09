@@ -17,4 +17,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/getHomework")
     fun getHomeworkData(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getSubjectList")
+    fun getSubjectList(@Body requestBody : RequestBody): Call<ResponseBody>
 }

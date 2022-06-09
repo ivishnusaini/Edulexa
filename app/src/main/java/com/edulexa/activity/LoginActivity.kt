@@ -309,6 +309,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                                     preference!!.putString(Constants.Preference.STUDENT_SESSION_ID, modelResponse.getRecord()!!.getParentChildList()!!.get(0).getStudentSessionId())
                                                     preference!!.putString(Constants.Preference.CLASS_SECTION, modelResponse.getRecord()!!.getParentChildList()!!.get(0).getClass() + "-"+modelResponse.getRecord()!!.getParentChildList()!!.get(0).getSection())
                                                     preference!!.putString(Constants.Preference.STUDENT_NAME, modelResponse.getRecord()!!.getParentChildList()!!.get(0).getName())
+                                                    preference!!.putString(Constants.Preference.CLASS_ID, modelResponse.getRecord()!!.getClassId())
+                                                    preference!!.putString(Constants.Preference.SECTION_ID, modelResponse.getRecord()!!.getSectionId())
                                                     startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
                                                     finish()
                                                 }else{
@@ -323,6 +325,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                                 preference!!.putString(Constants.Preference.STUDENT_SESSION_ID, modelResponse.getRecord()!!.getStudentSessionId())
                                                 preference!!.putString(Constants.Preference.CLASS_SECTION, modelResponse.getRecord()!!.getClass_() + "-"+modelResponse.getRecord()!!.getSection())
                                                 preference!!.putString(Constants.Preference.STUDENT_NAME, modelResponse.getRecord()!!.getUsername())
+                                                preference!!.putString(Constants.Preference.CLASS_ID, modelResponse.getRecord()!!.getClassId())
+                                                preference!!.putString(Constants.Preference.SECTION_ID, modelResponse.getRecord()!!.getSectionId())
                                                 startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
                                                 finish()
                                             }

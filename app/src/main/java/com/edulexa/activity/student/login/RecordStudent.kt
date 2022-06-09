@@ -237,6 +237,8 @@ class RecordStudent {
     }
 
     fun getClassId(): String? {
+        if (classId == null)
+            return ""
         return classId
     }
 
@@ -245,6 +247,8 @@ class RecordStudent {
     }
 
     fun getSectionId(): String? {
+        if (sectionId == null)
+            return ""
         return sectionId
     }
 
