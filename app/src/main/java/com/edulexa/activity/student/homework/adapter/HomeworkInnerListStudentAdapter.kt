@@ -7,71 +7,41 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.homework.model.HomeworkData
+import com.edulexa.databinding.ItemStudentDashboardHomeworkInnerListBinding
+import com.edulexa.databinding.ItemStudentHomeworkDateBinding
+import com.edulexa.support.Utils
 
-class HomeworkInnerListStudentAdapter(context: Activity) :
+class HomeworkInnerListStudentAdapter(context: Activity,list : List<HomeworkData?>?) :
     RecyclerView.Adapter<HomeworkInnerListStudentAdapter.ViewHolder>() {
     var context: Activity? = null
-
+    var list : List<HomeworkData?>? = null
+    var binding : ItemStudentDashboardHomeworkInnerListBinding? = null
     init {
         this.context = context
+        this.list = list
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val itemView: View =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_dashboard_homework_inner_list, parent, false)
-        return ViewHolder(itemView)
+        binding = ItemStudentDashboardHomeworkInnerListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding!!)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         try {
-            when (position) {
-                0 -> {
-                    viewHolder.tvTodayHomeworkMessage!!.text = "Learn Chapter 5 with one Essay"
-                    viewHolder.tvTodayHomeworkSubject!!.text = "English"
-                }
-                1 -> {
-                    viewHolder.tvTodayHomeworkMessage!!.text = "Exercise Trigonometry 1st Topic"
-                    viewHolder.tvTodayHomeworkSubject!!.text = "Maths"
-                }
-                2 -> {
-                    viewHolder.tvTodayHomeworkMessage!!.text = "Hindi writing 3 pages"
-                    viewHolder.tvTodayHomeworkSubject!!.text = "Hindi"
-                }
-                3 -> {
-                    viewHolder.tvTodayHomeworkMessage!!.text = "Test for History first lesson"
-                    viewHolder.tvTodayHomeworkSubject!!.text = "Social Science"
-                }
-                4 -> {
-                    viewHolder.tvTodayHomeworkMessage!!.text = "Exercise Trigonometry 1st Topic"
-                    viewHolder.tvTodayHomeworkSubject!!.text = "Maths"
-                }
-                5 -> {
-                    viewHolder.tvTodayHomeworkMessage!!.text = "Hindi writing 3 pages"
-                    viewHolder.tvTodayHomeworkSubject!!.text = "Hindi"
-                }
-            }
-
-
+            Utils.setHtmlText(list!!.get(position)!!.getDescription()!!,binding!!.tvTodayHomeworkMessage)
+            binding!!.tvTodayHomeworkSubject.text = list!!.get(position)!!.getName()
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
     override fun getItemCount(): Int {
-        return 6;
+        return list!!.size;
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvTodayHomeworkMessage: TextView? = null
-        var tvTodayHomeworkSubject: TextView? = null
-
-        init {
-            tvTodayHomeworkMessage = itemView.findViewById(R.id.tv_today_homework_message)
-            tvTodayHomeworkSubject = itemView.findViewById(R.id.tv_today_homework_subject)
-        }
-    }
+    class ViewHolder(binding: ItemStudentDashboardHomeworkInnerListBinding) : RecyclerView.ViewHolder(binding.root)
 }

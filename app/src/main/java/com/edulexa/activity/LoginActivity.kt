@@ -270,6 +270,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Utils.showProgressBar(mActivity!!)
                     Utils.hideKeyboard(mActivity!!)
 
+                    Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
                     val apiInterfaceWithHeader: ApiInterfaceStudent = APIClientStudent.getRetroFitClientWithHeader(mActivity!!).create(ApiInterfaceStudent::class.java)
 
                     val jsonObject = JSONObject()

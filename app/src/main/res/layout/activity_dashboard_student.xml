@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/top_lay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="gone"
     tools:context=".activity.student.dashboard.activity.DashboardStudentActivity">
 
     <RelativeLayout
@@ -123,11 +125,11 @@
                         android:id="@+id/tv_notice_board_no_data"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp"
-                        android:text="@string/notice_board_no_data"
                         android:gravity="center"
+                        android:text="@string/notice_board_no_data"
+                        android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_14ssp"
-                        android:visibility="gone"
-                        android:textColor="@color/primaray_text_color"/>
+                        android:visibility="gone" />
 
                 </RelativeLayout>
 
@@ -158,11 +160,11 @@
                         android:id="@+id/tv_today_homework_no_data"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp"
-                        android:text="@string/dashboard_student_no_today_homework"
                         android:gravity="center"
+                        android:text="@string/dashboard_student_no_today_homework"
+                        android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_14ssp"
-                        android:visibility="gone"
-                        android:textColor="@color/primaray_text_color"/>
+                        android:visibility="gone" />
 
 
                 </RelativeLayout>

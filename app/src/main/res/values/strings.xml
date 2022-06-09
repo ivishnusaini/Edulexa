@@ -59,6 +59,7 @@
 
     <!--Homework Student Screen-->
     <string name="homework_student">Homework</string>
+    <string name="homework_student_no_homework">No Homework</string>
 
     <!--Calendar Student Screen-->
     <string name="calendar_student">Calendar</string>

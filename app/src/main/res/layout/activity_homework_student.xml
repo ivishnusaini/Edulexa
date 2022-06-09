@@ -42,12 +42,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_60sdp"
+        android:descendantFocusability="blocksDescendants"
         android:background="@drawable/header_top_right_radius">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/student_homework_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <com.agot.views.RegularTextView
+            android:id="@+id/tv_student_homework_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:text="@string/homework_student_no_homework"/>
 
     </RelativeLayout>
 

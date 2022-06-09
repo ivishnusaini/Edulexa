@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:text="Today"
+        android:text=""
         android:textColor="@color/primaray_text_color"
         android:textSize="@dimen/_16ssp" />
 
@@ -20,6 +20,19 @@
         android:id="@+id/student_homework_inner_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         android:layout_marginTop="@dimen/_5sdp"/>
+
+    <com.agot.views.RegularTextView
+        android:id="@+id/tv_homework_student_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:maxLines="1"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/homework_student_no_homework"
+        android:textColor="@color/primaray_text_color"
+        android:textSize="@dimen/_16ssp" />
+
 
 </LinearLayout>

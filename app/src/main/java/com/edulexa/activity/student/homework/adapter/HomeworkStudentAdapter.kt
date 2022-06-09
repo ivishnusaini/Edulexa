@@ -8,66 +8,49 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.dashboard.adapter.DashboardStudentAdapter
+import com.edulexa.activity.student.homework.model.Homework
+import com.edulexa.databinding.ItemStudentDashboardBinding
+import com.edulexa.databinding.ItemStudentHomeworkDateBinding
 
-class HomeworkStudentAdapter(context: Activity) :
+class HomeworkStudentAdapter(context: Activity,list : List<Homework?>?) :
     RecyclerView.Adapter<HomeworkStudentAdapter.ViewHolder>() {
     var context: Activity? = null
-
+    var list : List<Homework?>? = null
+    var binding : ItemStudentHomeworkDateBinding? = null
     init {
         this.context = context
+        this.list = list
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val itemView: View =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_homework_date, parent, false)
-        return ViewHolder(itemView)
+        binding = ItemStudentHomeworkDateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding!!)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         try {
-            when (position) {
-                0 -> {
-                    viewHolder.tvDate!!.text = "Today"
-                }
-                1 -> {
-                    viewHolder.tvDate!!.text = "Yesterday"
-                }
-                2 -> {
-                    viewHolder.tvDate!!.text = "16 March 2020"
-                }
-                3 -> {
-                    viewHolder.tvDate!!.text = "15 March 2020"
-                }
-                4 -> {
-                    viewHolder.tvDate!!.text = "10 March 2020"
-                }
+            binding!!.tvHomeworkStudentDate.text = list!!.get(position)!!.getDate()
+            if (list!!.get(position)!!.getHomeworklist() != null && list!!.get(position)!!.getHomeworklist()!!.size > 0){
+                binding!!.studentHomeworkInnerRecycler.visibility = View.VISIBLE
+                binding!!.tvHomeworkStudentNoData.visibility = View.GONE
+                binding!!.studentHomeworkInnerRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                binding!!.studentHomeworkInnerRecycler.adapter = HomeworkInnerListStudentAdapter(context!!,list!!.get(position)!!.getHomeworklist())
+            }else{
+                binding!!.studentHomeworkInnerRecycler.visibility = View.GONE
+                binding!!.tvHomeworkStudentNoData.visibility = View.VISIBLE
             }
-
-            viewHolder.recyclerView!!.layoutManager =
-                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            viewHolder.recyclerView!!.adapter =
-                HomeworkInnerListStudentAdapter(context!!)
-
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
     override fun getItemCount(): Int {
-        return 5;
+        return list!!.size;
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvDate: TextView? = null
-        var recyclerView: RecyclerView? = null
-
-        init {
-            tvDate = itemView.findViewById(R.id.tv_homework_student_date)
-            recyclerView = itemView.findViewById(R.id.student_homework_inner_recycler)
-        }
-    }
+    class ViewHolder(binding: ItemStudentHomeworkDateBinding) : RecyclerView.ViewHolder(binding.root)
 }

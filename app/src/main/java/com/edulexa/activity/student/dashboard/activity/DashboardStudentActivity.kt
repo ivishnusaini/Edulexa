@@ -63,7 +63,7 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
         try {
             binding!!.tvStudentName.text = Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getUsername()
             binding!!.tvStudentClass.text = getString(R.string.dashboard_student_class_section_format,"Class ",Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getClass_()," ",Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getSection())
-            Utils.setpProfileImageUsingGlide(mActivity,Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getImage(),binding!!.ivStudentImage)
+            Utils.setpProfileImageUsingGlide(mActivity,Constants.BASE_URL_STUDENT+Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getImage(),binding!!.ivStudentImage)
         }catch (e : Exception){
             e.printStackTrace()
         }
@@ -97,6 +97,7 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                     response: Response<ResponseBody>
                 ) {
                     Utils.hideProgressBar()
+                    binding!!.topLay.visibility = View.VISIBLE
                     try{
                         val responseStr = response.body()!!.string()
                         if (!responseStr.isNullOrEmpty()){

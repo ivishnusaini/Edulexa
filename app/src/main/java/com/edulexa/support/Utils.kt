@@ -19,6 +19,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -367,6 +368,9 @@ class Utils {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                 textView.setText(Html.fromHtml(textStr, Html.FROM_HTML_MODE_COMPACT));
              else textView.setText(Html.fromHtml(textStr));
+        }
+        fun showToast(context: Activity,message: String){
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
     }
 }
