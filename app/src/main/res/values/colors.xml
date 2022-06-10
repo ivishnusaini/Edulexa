@@ -27,5 +27,7 @@
     <color name="absent_text_color">#A30329</color>
     <color name="holiday_bg">#d4f5ff</color>
     <color name="holiday_text_color">#03058E</color>
+    <color name="default_bg">@color/colorPrimary</color>
+    <color name="default_bg_text_color">@color/white</color>
 
 </resources>

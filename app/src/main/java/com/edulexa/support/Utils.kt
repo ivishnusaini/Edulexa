@@ -196,11 +196,11 @@ class Utils {
         }
 
         fun getCurrentYear(): Int {
-            return Calendar.getInstance().get(Calendar.YEAR);
+            return Calendar.getInstance().get(Calendar.YEAR)
         }
 
         fun getCurrentMonth(): Int {
-            return Calendar.getInstance().get(Calendar.MONTH);
+            return Calendar.getInstance().get(Calendar.MONTH)
         }
 
         fun getCurrentDayNumber(): Int {
@@ -371,6 +371,10 @@ class Utils {
         fun getStudentSectionId(context : Activity) : String{
             val preference = Preference().getInstance(context)
             return preference!!.getString(Constants.Preference.CLASS_ID)!!
+        }
+        fun getStudentSessionId(context : Activity) : String{
+            val preference = Preference().getInstance(context)
+            return preference!!.getString(Constants.Preference.STUDENT_SESSION_ID)!!
         }
         fun setHtmlText(textStr : String,textView: TextView){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)

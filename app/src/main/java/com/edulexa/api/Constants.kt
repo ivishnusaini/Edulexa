@@ -123,6 +123,9 @@ class Constants {
         const val SUBJECT_ID = "subject_id"
         const val CLASSID = "classId"
         const val SECTIONID = "sectionId"
+        const val MONTH = "month"
+        const val YEAR = "year"
+        const val STUDENT_SESSION_ID = "student_session_id"
     }
 
     object Api {
