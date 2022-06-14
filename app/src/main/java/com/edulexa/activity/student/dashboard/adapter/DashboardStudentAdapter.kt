@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
+import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlanActivity
 import com.edulexa.activity.student.dashboard.model.DashboardModuleModel
 import com.edulexa.activity.student.dashboard.model.ModuleDashboard
 import com.edulexa.activity.student.examination.activity.ExamStudentActivity
@@ -73,6 +74,9 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                         }
                         "Profile" -> {
                             context!!.startActivity(Intent(context!!, ProfileStudentActivity::class.java))
+                        }
+                        "Lesson Plan" -> {
+                            context!!.startActivity(Intent(context!!, CustomLessonPlanActivity::class.java))
                         }
                         "Attendance" -> {
                             context!!.startActivity(Intent(context!!, AttendanceStudentActivity::class.java))

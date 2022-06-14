@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.activity.student.dashboard.model.DatumNotification
+import com.edulexa.api.Constants
 import com.edulexa.databinding.ItemStudentDashboardNoticeBoardBinding
+import com.edulexa.support.Utils
 import java.sql.Date
 import java.text.SimpleDateFormat
 
@@ -29,6 +31,7 @@ class DashboardStudentNoticeBoardAdapter(context: Activity,list : List<DatumNoti
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         try {
+            Utils.setImageUsingGlide(context, Constants.BASE_URL_STUDENT+list!!.get(position)!!.getDocument(),binding!!.ivStudentDashboardNoticeBoard)
             binding!!.tvNoticeMessage.text = list!!.get(position)!!.getMessage()
             binding!!.tvDate.text = getFormattedDate(list!!.get(position)!!.getPublishDate()!!)
         } catch (e: Exception) {

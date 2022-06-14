@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.student.custom_lesson_plan.activity.CustomLessonPlanActivity">
+
+    <RelativeLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/header_bg_staff">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_back_white" />
+
+        <com.agot.views.MediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_toEndOf="@+id/iv_back"
+            android:text="@string/lesson_plan_student"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:background="@drawable/header_top_right_radius">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_margin="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
+            android:elevation="@dimen/_10sdp">
+
+            <com.agot.views.RegularTextView
+                android:id="@+id/tv_student_lesson_select_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/lesson_plan_student_select_date"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/primaray_text_color"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/student_lesson_plan_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
+
+        <com.agot.views.RegularTextView
+            android:id="@+id/tv_student_lesson_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lesson_plan_student_no_data"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/primaray_text_color"
+            android:gravity="center"
+            android:visibility="gone"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

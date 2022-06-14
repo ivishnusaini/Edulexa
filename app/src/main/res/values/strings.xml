@@ -171,6 +171,11 @@
     <string name="attendance_student_absent">Absent</string>
     <string name="attendance_student_holiday">Holiday</string>
 
+    <!--Custom Lesson Plan Screen-->
+    <string name="lesson_plan_student">Lesson Plan</string>
+    <string name="lesson_plan_student_select_date">Select Date</string>
+    <string name="lesson_plan_student_no_data">No Data</string>
+
     <!--ProgressBar-->
     <string name="progress_bar_please_wait">Please wait…</string>
 

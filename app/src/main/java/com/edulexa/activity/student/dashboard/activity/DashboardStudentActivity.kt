@@ -176,6 +176,7 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
             dashboardList.add(DashboardModuleModel("Calendar",getImageUrl(list,"calendar_to_do_list")))
             dashboardList.add(DashboardModuleModel("Notice Board",getImageUrl(list,"notice_board")))
             dashboardList.add(DashboardModuleModel("Multimedia",getImageUrl(list,"gallery")))
+            dashboardList.add(DashboardModuleModel("Lesson Plan",getImageUrl(list,"lesson_plan")))
             dashboardList.add(DashboardModuleModel("Profile",getImageUrl(list,"timeline")))
             binding!!.recyclerView.adapter = DashboardStudentAdapter(mActivity!!,dashboardList)
         }
