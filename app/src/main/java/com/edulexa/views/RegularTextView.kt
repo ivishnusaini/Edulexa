@@ -1,4 +1,4 @@
-package com.agot.views
+package com.edulexa.views
 
 import android.content.Context
 import android.graphics.Typeface

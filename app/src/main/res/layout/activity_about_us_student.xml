@@ -27,7 +27,7 @@
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_back_white" />
 
-        <com.agot.views.MediumTextView
+        <com.edulexa.views.MediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -60,7 +60,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/_10sdp">
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -69,7 +69,7 @@
                     android:textColor="@color/primaray_text_color"
                     android:textSize="@dimen/_14ssp" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_school_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/primaray_text_color" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -98,7 +98,7 @@
                     android:textColor="@color/primaray_text_color"
                     android:textSize="@dimen/_14ssp" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/primaray_text_color" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -127,7 +127,7 @@
                     android:textColor="@color/primaray_text_color"
                     android:textSize="@dimen/_14ssp" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/primaray_text_color" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -156,7 +156,7 @@
                     android:textColor="@color/primaray_text_color"
                     android:textSize="@dimen/_14ssp" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/primaray_text_color" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -185,7 +185,7 @@
                     android:textColor="@color/primaray_text_color"
                     android:textSize="@dimen/_14ssp" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_school_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/primaray_text_color" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -214,7 +214,7 @@
                     android:textColor="@color/primaray_text_color"
                     android:textSize="@dimen/_14ssp" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_current_session"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -233,7 +233,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/primaray_text_color" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -243,7 +243,7 @@
                     android:textColor="@color/primaray_text_color"
                     android:textSize="@dimen/_14ssp" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_session_month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

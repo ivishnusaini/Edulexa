@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_10sdp">
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_10sdp"
@@ -35,7 +35,7 @@
                     android:textColor="@color/secondary_text_color"
                     android:textSize="@dimen/_14ssp" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_date_fee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                         android:background="@drawable/rupee_sign"
                         android:contentDescription="@string/app_name" />
 
-                    <com.agot.views.BoldTextView
+                    <com.edulexa.views.BoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -77,7 +77,7 @@
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_20ssp" />
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_gravity="center_vertical"
@@ -126,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/total_fee"
@@ -146,7 +146,7 @@
                             android:background="@drawable/rupee_sign"
                             android:contentDescription="@string/app_name" />
 
-                        <com.agot.views.RegularTextView
+                        <com.edulexa.views.RegularTextView
                             android:id="@+id/tv_total_fee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/extra_fee"
@@ -187,7 +187,7 @@
                             android:background="@drawable/rupee_sign"
                             android:contentDescription="@string/app_name" />
 
-                        <com.agot.views.RegularTextView
+                        <com.edulexa.views.RegularTextView
                             android:id="@+id/tv_extra_fee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/late_charges_fee"
@@ -228,7 +228,7 @@
                             android:background="@drawable/rupee_sign"
                             android:contentDescription="@string/app_name" />
 
-                        <com.agot.views.RegularTextView
+                        <com.edulexa.views.RegularTextView
                             android:id="@+id/tv_late_charges_fee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Discount(20%)"
@@ -269,7 +269,7 @@
                             android:background="@drawable/rupee_sign"
                             android:contentDescription="@string/app_name" />
 
-                        <com.agot.views.RegularTextView
+                        <com.edulexa.views.RegularTextView
                             android:id="@+id/tv_discount_fee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -290,7 +290,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp">
 
-                    <com.agot.views.BoldTextView
+                    <com.edulexa.views.BoldTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/paid_fee"
@@ -310,7 +310,7 @@
                             android:background="@drawable/rupee_sign"
                             android:contentDescription="@string/app_name" />
 
-                        <com.agot.views.BoldTextView
+                        <com.edulexa.views.BoldTextView
                             android:id="@+id/tv_paid_fee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

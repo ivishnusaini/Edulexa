@@ -26,7 +26,7 @@
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_back_white" />
 
-        <com.agot.views.MediumTextView
+        <com.edulexa.views.MediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -46,7 +46,7 @@
         android:background="@drawable/header_top_right_radius"
         android:orientation="vertical">
 
-        <com.agot.views.MediumTextView
+        <com.edulexa.views.MediumTextView
             android:id="@+id/tv_examination_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -48,7 +48,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:orientation="vertical">
 
-            <com.agot.views.MediumTextView
+            <com.edulexa.views.MediumTextView
                 android:id="@+id/tv_gallery_student_subject_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                 android:textColor="@color/primaray_text_color"
                 android:textSize="@dimen/_14ssp" />
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_gallery_student_image_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

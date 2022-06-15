@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:padding="@dimen/_10sdp">
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 android:textSize="@dimen/_14ssp" />
 
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

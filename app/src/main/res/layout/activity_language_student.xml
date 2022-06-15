@@ -25,7 +25,7 @@
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_back_white" />
 
-        <com.agot.views.MediumTextView
+        <com.edulexa.views.MediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -78,7 +78,7 @@
 
         </RadioGroup>
 
-        <com.agot.views.RegularButton
+        <com.edulexa.views.RegularButton
             android:id="@+id/tv_submit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"

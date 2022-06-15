@@ -25,7 +25,7 @@
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_back_white" />
 
-        <com.agot.views.MediumTextView
+        <com.edulexa.views.MediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -67,7 +67,7 @@
                     android:padding="@dimen/_5sdp"
                     android:src="@drawable/ic_previous_white" />
 
-                <com.agot.views.BoldTextView
+                <com.edulexa.views.BoldTextView
                     android:id="@+id/tv_month_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_sun"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_mon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_tue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_wed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_thu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_fri"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_sat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

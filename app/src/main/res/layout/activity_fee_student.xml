@@ -27,7 +27,7 @@
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_back_white" />
 
-        <com.agot.views.MediumTextView
+        <com.edulexa.views.MediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -63,7 +63,7 @@
             android:orientation="vertical"
             android:padding="@dimen/_5sdp">
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_qr_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 android:textSize="@dimen/_14ssp" />
 
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_upload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 android:textColor="@color/primaray_text_color"
                 android:textSize="@dimen/_14ssp" />
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_receipts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:orientation="vertical">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_school_fee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:orientation="vertical">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_exam_fee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:orientation="vertical">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_activity_fee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:orientation="vertical">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_other_fee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

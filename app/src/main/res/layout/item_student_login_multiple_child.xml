@@ -9,7 +9,7 @@
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp" />
 
-    <com.agot.views.RegularTextView
+    <com.edulexa.views.RegularTextView
         android:id="@+id/tv_student_login_multiple_child_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:paddingBottom="@dimen/_5sdp"
         android:textColor="@color/primaray_text_color" />
 
-    <com.agot.views.RegularTextView
+    <com.edulexa.views.RegularTextView
         android:id="@+id/tv_student_login_multiple_child_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

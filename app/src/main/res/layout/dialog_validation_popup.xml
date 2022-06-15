@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:padding="@dimen/_10sdp">
 
-            <com.agot.views.BoldTextView
+            <com.edulexa.views.BoldTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -28,7 +28,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 android:textSize="15sp"
                 android:textStyle="normal" />
 
-            <com.agot.views.RegularButton
+            <com.edulexa.views.RegularButton
                 android:id="@+id/btn_ok"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_30sdp"

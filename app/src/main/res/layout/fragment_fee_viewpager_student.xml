@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tv_pay_fee" />
 
-    <com.agot.views.RegularButton
+    <com.edulexa.views.RegularButton
         android:id="@+id/tv_pay_fee"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"

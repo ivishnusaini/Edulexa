@@ -33,14 +33,14 @@
             android:orientation="vertical"
             android:padding="@dimen/_15sdp">
 
-            <com.agot.views.BoldTextView
+            <com.edulexa.views.BoldTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/enter_school_code"
                 android:textColor="@color/primaray_text_color"
                 android:textSize="@dimen/_16ssp" />
 
-            <com.agot.views.RegularEditText
+            <com.edulexa.views.RegularEditText
                 android:id="@+id/et_school_code"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
@@ -55,7 +55,7 @@
                 android:textColor="@color/primaray_text_color"
                 android:textSize="@dimen/_14ssp" />
 
-            <com.agot.views.BoldButton
+            <com.edulexa.views.BoldButton
                 android:id="@+id/btn_submit"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_40sdp"

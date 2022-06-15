@@ -21,7 +21,7 @@
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_back_white" />
 
-        <com.agot.views.MediumTextView
+        <com.edulexa.views.MediumTextView
             android:id="@+id/tv_exam_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:weightSum="4">
 
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -70,7 +70,7 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@color/white" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -87,7 +87,7 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@color/white" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -103,7 +103,7 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@color/white" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -138,7 +138,7 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -146,7 +146,7 @@
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_14ssp" />
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_report_card_detail_grand_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -180,7 +180,7 @@
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_14ssp" />
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_report_card_detail_percentage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -205,7 +205,7 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -213,7 +213,7 @@
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_14ssp" />
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_report_card_detail_grade"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

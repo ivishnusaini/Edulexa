@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -49,7 +49,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:orientation="vertical">
 
-            <com.agot.views.MediumTextView
+            <com.edulexa.views.MediumTextView
                 android:id="@+id/tv_gallery_student_subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:textColor="@color/primaray_text_color"
                 android:textSize="@dimen/_14ssp" />
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_gallery_student_syllabus_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 android:textColor="@color/secondary_text_color"
                 android:textSize="@dimen/_13ssp" />
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_gallery_student_syllabus_pages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

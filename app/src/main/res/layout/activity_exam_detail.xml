@@ -27,7 +27,7 @@
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_back_white" />
 
-        <com.agot.views.MediumTextView
+        <com.edulexa.views.MediumTextView
             android:id="@+id/tv_student_exam_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
 
                 </RelativeLayout>
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_exam_detail_timer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,14 +111,14 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true">
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/student_exam_detail_exam_code"
                     android:textColor="@color/primaray_text_color"
                     android:textSize="@dimen/_14ssp" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="121"
@@ -137,7 +137,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp">
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -145,7 +145,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_16ssp" />
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_student_exam_detail_question_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_16ssp" />
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -162,7 +162,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_16ssp" />
 
-            <com.agot.views.RegularTextView
+            <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_student_exam_detail_total_question_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
                             android:background="#e8eaec"
                             android:padding="@dimen/_10sdp">
 
-                            <com.agot.views.RegularTextView
+                            <com.edulexa.views.RegularTextView
                                 android:id="@+id/tv_student_exam_detail_question"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -230,7 +230,7 @@
                             android:background="@drawable/ic_question_option_unselect"
                             android:contentDescription="@string/app_name" />
 
-                        <com.agot.views.RegularTextView
+                        <com.edulexa.views.RegularTextView
                             android:id="@+id/tv_student_option_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -256,7 +256,7 @@
                             android:background="@drawable/ic_question_option_unselect"
                             android:contentDescription="@string/app_name" />
 
-                        <com.agot.views.RegularTextView
+                        <com.edulexa.views.RegularTextView
                             android:id="@+id/tv_student_option_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -282,7 +282,7 @@
                             android:background="@drawable/ic_question_option_unselect"
                             android:contentDescription="@string/app_name" />
 
-                        <com.agot.views.RegularTextView
+                        <com.edulexa.views.RegularTextView
                             android:id="@+id/tv_student_option_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -308,7 +308,7 @@
                             android:background="@drawable/ic_question_option_unselect"
                             android:contentDescription="@string/app_name" />
 
-                        <com.agot.views.RegularTextView
+                        <com.edulexa.views.RegularTextView
                             android:id="@+id/tv_student_option_4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -333,7 +333,7 @@
                             android:background="@drawable/ripple_effect_25"
                             android:backgroundTint="@color/colorPrimary">
 
-                            <com.agot.views.RegularTextView
+                            <com.edulexa.views.RegularTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -353,7 +353,7 @@
                             android:background="@drawable/ripple_effect_25"
                             android:backgroundTint="@color/colorPrimary">
 
-                            <com.agot.views.RegularTextView
+                            <com.edulexa.views.RegularTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -371,7 +371,7 @@
 
             </ScrollView>
 
-            <com.agot.views.RegularButton
+            <com.edulexa.views.RegularButton
                 android:id="@+id/tv_student_exam_detail_submit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"

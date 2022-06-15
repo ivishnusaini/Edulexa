@@ -30,7 +30,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <com.agot.views.RegularTextView
+        <com.edulexa.views.RegularTextView
             android:id="@+id/tv_notice_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:textColor="@color/primaray_text_color"
             android:textSize="@dimen/_12ssp" />
 
-        <com.agot.views.RegularTextView
+        <com.edulexa.views.RegularTextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

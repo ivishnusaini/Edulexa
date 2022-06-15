@@ -21,7 +21,7 @@
             android:orientation="vertical"
             android:padding="@dimen/_10sdp">
 
-            <com.agot.views.MediumTextView
+            <com.edulexa.views.MediumTextView
                 android:id="@+id/tv_student_exam_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                     android:backgroundTint="@color/secondary_text_color"
                     android:contentDescription="@string/app_name" />
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_exam_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                     android:contentDescription="@string/app_name" />
 
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 android:gravity="center_horizontal"
                 android:visibility="gone">
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                     android:textSize="@dimen/_14ssp" />
 
 
-                <com.agot.views.RegularTextView
+                <com.edulexa.views.RegularTextView
                     android:id="@+id/tv_student_completed"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_22sdp"

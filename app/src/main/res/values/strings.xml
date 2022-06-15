@@ -175,6 +175,18 @@
     <string name="lesson_plan_student">Lesson Plan</string>
     <string name="lesson_plan_student_select_date">Select Date</string>
     <string name="lesson_plan_student_no_data">No Data</string>
+    <string name="lesson_plan_student_title">Title :</string>
+    <string name="lesson_plan_student_description">Description :</string>
+    <string name="lesson_plan_student_your_lesson">Your Lesson :</string>
+    <string name="lesson_plan_student_topic_name">Topic Name :</string>
+    <string name="lesson_plan_student_lesson_name">Lesson Name :</string>
+    <string name="lesson_plan_student_period">Period :</string>
+    <string name="lesson_plan_student_teaching_aids">Teaching Aids :</string>
+    <string name="lesson_plan_student_portion_actually_taught">Portion Actually Taught :</string>
+    <string name="lesson_plan_student_homework_assigned">Homework Assigned :</string>
+    <string name="lesson_plan_student_homework_not_assigned_reason">Homework Not Assigned Reason :</string>
+    <string name="lesson_plan_student_type">Type :</string>
+    <string name="lesson_plan_student_delete">Delete</string>
 
     <!--ProgressBar-->
     <string name="progress_bar_please_wait">Please wait…</string>

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".activity.LoginActivity">
 
-    <com.agot.views.RegularButton
+    <com.edulexa.views.RegularButton
         android:id="@+id/tv_back"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
@@ -39,7 +39,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:contentDescription="@string/app_name" />
 
-            <com.agot.views.MediumTextView
+            <com.edulexa.views.MediumTextView
                 android:id="@+id/tv_login_school_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:gravity="center_horizontal">
 
-                        <com.agot.views.RegularButton
+                        <com.edulexa.views.RegularButton
                             android:id="@+id/tv_staff"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_30sdp"
@@ -81,7 +81,7 @@
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_12ssp" />
 
-                        <com.agot.views.RegularButton
+                        <com.edulexa.views.RegularButton
                             android:id="@+id/tv_student"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_30sdp"
@@ -123,7 +123,7 @@
 
                     </RelativeLayout>
 
-                    <com.agot.views.RegularEditText
+                    <com.edulexa.views.RegularEditText
                         android:id="@+id/et_user_name"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
@@ -138,7 +138,7 @@
                         android:textSize="@dimen/_14ssp" />
 
 
-                    <com.agot.views.RegularEditText
+                    <com.edulexa.views.RegularEditText
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
@@ -152,7 +152,7 @@
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_14ssp" />
 
-                    <com.agot.views.RegularTextView
+                    <com.edulexa.views.RegularTextView
                         android:id="@+id/tv_forgot_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
                         android:textSize="@dimen/_14ssp" />
 
 
-                    <com.agot.views.RegularButton
+                    <com.edulexa.views.RegularButton
                         android:id="@+id/tv_submit"
                         android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_40sdp"
