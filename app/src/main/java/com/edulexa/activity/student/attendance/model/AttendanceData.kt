@@ -37,6 +37,8 @@ class AttendanceData {
     private var attendance: List<Attendance?>? = null
 
     fun getAbsent(): Int? {
+        if (absent == null)
+            return 0
         return absent
     }
 
@@ -53,6 +55,8 @@ class AttendanceData {
     }
 
     fun getPresent(): Int? {
+        if (present == null)
+            return 0
         return present
     }
 
@@ -61,6 +65,8 @@ class AttendanceData {
     }
 
     fun getHoliday(): Int? {
+        if (holiday == null)
+            return 0
         return holiday
     }
 

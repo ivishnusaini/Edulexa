@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.attendance.model.Attendance
 import com.edulexa.activity.student.attendance.model.AttendanceStudentMonthModel
+import com.edulexa.activity.student.dashboard.adapter.DashboardStudentAdapter
+import com.edulexa.databinding.ItemStudentAttedndanceMonthBinding
+import com.edulexa.databinding.ItemStudentDashboardBinding
 import java.util.*
 
 class AttendanceStudentMonthAdapter(context: Activity, list: List<AttendanceStudentMonthModel>?,attendanceList : List<Attendance?>?) :
@@ -18,6 +21,7 @@ class AttendanceStudentMonthAdapter(context: Activity, list: List<AttendanceStud
     var context: Activity? = null
     var list: List<AttendanceStudentMonthModel>? = null
     var attendanceList : List<Attendance?>? = null
+    var binding : ItemStudentAttedndanceMonthBinding? = null
     init {
         this.context = context
         this.list = list
@@ -29,10 +33,8 @@ class AttendanceStudentMonthAdapter(context: Activity, list: List<AttendanceStud
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val itemView: View =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_attedndance_month, parent, false)
-        return ViewHolder(itemView)
+        binding = ItemStudentAttedndanceMonthBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding!!)
     }
 
     override fun onBindViewHolder(
@@ -41,17 +43,17 @@ class AttendanceStudentMonthAdapter(context: Activity, list: List<AttendanceStud
     ) {
         try {
             if (list!!.get(position).getStartDateFlag()!!) {
-                viewHolder.tvDate!!.text = list!!.get(position).getDay()
+                binding!!.tvDate.text = list!!.get(position).getDay()
                 when(getAttendanceType(list!!.get(position).getDay()!!).lowercase()){
                     "present" -> {
-                        viewHolder.tvDate!!.setBackgroundResource(R.drawable.circle)
-                        viewHolder.tvDate!!.background.setTint(
+                        binding!!.tvDate.setBackgroundResource(R.drawable.circle)
+                        binding!!.tvDate.background.setTint(
                             ContextCompat.getColor(
                                 context!!,
                                 R.color.present_bg
                             )
                         )
-                        viewHolder.tvDate!!.setTextColor(
+                        binding!!.tvDate.setTextColor(
                             ContextCompat.getColor(
                                 context!!,
                                 R.color.present_text_color
@@ -59,14 +61,14 @@ class AttendanceStudentMonthAdapter(context: Activity, list: List<AttendanceStud
                         )
                     }
                     "absent" -> {
-                        viewHolder.tvDate!!.setBackgroundResource(R.drawable.circle)
-                        viewHolder.tvDate!!.background.setTint(
+                        binding!!.tvDate.setBackgroundResource(R.drawable.circle)
+                        binding!!.tvDate.background.setTint(
                             ContextCompat.getColor(
                                 context!!,
                                 R.color.absent_bg
                             )
                         )
-                        viewHolder.tvDate!!.setTextColor(
+                        binding!!.tvDate.setTextColor(
                             ContextCompat.getColor(
                                 context!!,
                                 R.color.absent_text_color
@@ -74,14 +76,14 @@ class AttendanceStudentMonthAdapter(context: Activity, list: List<AttendanceStud
                         )
                     }
                     "holiday" -> {
-                        viewHolder.tvDate!!.setBackgroundResource(R.drawable.circle)
-                        viewHolder.tvDate!!.background.setTint(
+                        binding!!.tvDate.setBackgroundResource(R.drawable.circle)
+                        binding!!.tvDate.background.setTint(
                             ContextCompat.getColor(
                                 context!!,
                                 R.color.holiday_bg
                             )
                         )
-                        viewHolder.tvDate!!.setTextColor(
+                        binding!!.tvDate.setTextColor(
                             ContextCompat.getColor(
                                 context!!,
                                 R.color.holiday_text_color
@@ -89,14 +91,14 @@ class AttendanceStudentMonthAdapter(context: Activity, list: List<AttendanceStud
                         )
                     }
                     else -> {
-                        viewHolder.tvDate!!.setBackgroundResource(R.drawable.circle)
-                        viewHolder.tvDate!!.background.setTint(
+                        binding!!.tvDate.setBackgroundResource(R.drawable.circle)
+                        binding!!.tvDate.background.setTint(
                             ContextCompat.getColor(
                                 context!!,
                                 R.color.default_bg
                             )
                         )
-                        viewHolder.tvDate!!.setTextColor(
+                        binding!!.tvDate.setTextColor(
                             ContextCompat.getColor(
                                 context!!,
                                 R.color.default_bg_text_color
@@ -104,58 +106,6 @@ class AttendanceStudentMonthAdapter(context: Activity, list: List<AttendanceStud
                         )
                     }
                 }
-
-
-                /*if (list!!.get(position).getSelectStatus()!!) {
-                    viewHolder.tvDate!!.setBackgroundResource(R.drawable.circle_with_border)
-                    viewHolder.tvDate!!.background.setTint(
-                        ContextCompat.getColor(
-                            context!!,
-                            R.color.colorPrimary
-                        )
-                    )
-                    viewHolder.tvDate!!.setTextColor(
-                        ContextCompat.getColor(
-                            context!!,
-                            R.color.primaray_text_color
-                        )
-                    )
-                } else {
-                    viewHolder.tvDate!!.setBackgroundResource(0)
-                    viewHolder.tvDate!!.setTextColor(
-                        ContextCompat.getColor(
-                            context!!,
-                            R.color.primaray_text_color
-                        )
-                    )
-                }*/
-
-                /*if (list!!.get(position).getCurrentDateFlag()!!) {
-                    viewHolder.tvDate!!.setBackgroundResource(R.drawable.circle)
-                    viewHolder.tvDate!!.background.setTint(
-                        ContextCompat.getColor(
-                            context!!,
-                            R.color.green
-                        )
-                    )
-                    viewHolder.tvDate!!.setTextColor(
-                        ContextCompat.getColor(
-                            context!!,
-                            R.color.white
-                        )
-                    )
-                }*/
-
-               /* viewHolder.itemView.setOnClickListener(object : View.OnClickListener {
-                    override fun onClick(p0: View?) {
-                        for (model in list!!) {
-                            model.setSelectStatus(false)
-                        }
-                        list!!.get(position).setSelectStatus(true)
-                        (context as AttendanceStudentActivity).updateList(list!!,list!!.get(position).getCompleteDate()!!)
-                    }
-
-                })*/
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -185,11 +135,5 @@ class AttendanceStudentMonthAdapter(context: Activity, list: List<AttendanceStud
         return list!!.size;
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvDate: TextView? = null
-
-        init {
-            tvDate = itemView.findViewById(R.id.tv_date)
-        }
-    }
+    class ViewHolder(binding: ItemStudentAttedndanceMonthBinding) : RecyclerView.ViewHolder(binding.root) 
 }

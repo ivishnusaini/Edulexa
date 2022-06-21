@@ -23,9 +23,9 @@
             app:cardPreventCornerOverlap="false">
 
             <ImageView
+                android:id="@+id/iv_student_notice_board_data"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/app_icon"
                 android:contentDescription="@string/app_name" />
 
         </androidx.cardview.widget.CardView>
@@ -34,7 +34,6 @@
             android:id="@+id/tv_notice_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="3"
             android:text=""
             android:textColor="@color/primaray_text_color"
             android:textSize="@dimen/_12ssp" />
@@ -44,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="02 March 2020"
+            android:text=""
             android:textColor="@color/secondary_text_color"
             android:textSize="@dimen/_10ssp" />
 

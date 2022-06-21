@@ -262,7 +262,7 @@
                         android:id="@+id/tv_attendance_present_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="23"
+                        android:text=""
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/present_text_color"
                         android:textSize="@dimen/_14ssp" />
@@ -299,7 +299,7 @@
                         android:id="@+id/tv_attendance_absent_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3"
+                        android:text=""
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/absent_text_color"
                         android:textSize="@dimen/_14ssp" />
@@ -336,7 +336,7 @@
                         android:id="@+id/tv_attendance_holiday_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4"
+                        android:text=""
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/holiday_text_color"
                         android:textSize="@dimen/_14ssp" />

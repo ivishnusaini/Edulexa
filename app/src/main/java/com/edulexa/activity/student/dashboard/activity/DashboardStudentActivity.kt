@@ -101,35 +101,37 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                     try{
                         val responseStr = response.body()!!.string()
                         if (!responseStr.isNullOrEmpty()){
-                            val modelResponse = Utils.getObject(responseStr, StudentDashboardResponse::class.java) as StudentDashboardResponse
-                            if (modelResponse.getNotification() != null){
-                                if (modelResponse.getNotification()!!.getSuccess() == 1){
-                                    if (modelResponse.getNotification()!!.getData() != null && modelResponse.getNotification()!!.getData()!!.size > 0)
-                                        setUpNoticeBoardData(modelResponse.getNotification()!!.getData())
-                                    else{
+                            val jsonObjectFromResponse = JSONObject(responseStr)
+                            val status = jsonObjectFromResponse.optInt("status")
+                            if (status == 200){
+                                val modelResponse = Utils.getObject(responseStr, StudentDashboardResponse::class.java) as StudentDashboardResponse
+                                if (modelResponse.getDashboardDatum() != null){
+                                    if (modelResponse.getDashboardDatum()!!.getNotification() != null){
+                                        if (modelResponse.getDashboardDatum()!!.getNotification()!!.size > 0)
+                                            setUpNoticeBoardData(modelResponse.getDashboardDatum()!!.getNotification())
+                                        else{
+                                            binding!!.studentNoticeBoardRecycler.visibility = View.GONE
+                                            binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
+                                        }
+                                    }else{
                                         binding!!.studentNoticeBoardRecycler.visibility = View.GONE
                                         binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
                                     }
-                                }else{
-                                    binding!!.studentNoticeBoardRecycler.visibility = View.GONE
-                                    binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
                                 }
-                            }else{
-                                binding!!.studentNoticeBoardRecycler.visibility = View.GONE
-                                binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
+                                if (modelResponse.getDashboardDatum() != null && modelResponse.getDashboardDatum()!!.getHomeworklist()!!.size > 0){
+                                    setUpTodayHomeworkData(modelResponse.getDashboardDatum()!!.getHomeworklist())
+                                }else{
+                                    binding!!.studentTodayHomeworkRecycler.visibility = View.GONE
+                                    binding!!.tvTodayHomeworkNoData.visibility = View.VISIBLE
+                                }
+
+                                if (jsonObjectFromResponse.optJSONObject("attendence") != null){
+                                    val attendanceType = jsonObjectFromResponse.optString("type")
+                                    binding!!.tvStudentDashboardPresent.text = getString(R.string.dashboard_student_present_format,"You are ",attendanceType," today")
+                                }
+                                if (modelResponse.getDashboardDatum() != null)
+                                    setUpDashboardData(modelResponse.getDashboardDatum()!!.getModuleList())
                             }
-                            if (modelResponse.getHomeworklist() != null && modelResponse.getHomeworklist()!!.size > 0){
-                                setUpTodayHomeworkData(modelResponse.getHomeworklist())
-                            }else{
-                                binding!!.studentTodayHomeworkRecycler.visibility = View.GONE
-                                binding!!.tvTodayHomeworkNoData.visibility = View.VISIBLE
-                            }
-                            val jsonObjectFromResponse = JSONObject(responseStr)
-                            if (jsonObjectFromResponse.optJSONObject("attendence") != null){
-                                val attendanceType = jsonObjectFromResponse.optString("type")
-                                binding!!.tvStudentDashboardPresent.text = getString(R.string.dashboard_student_present_format,"You are ",attendanceType," today")
-                            }
-                            setUpDashboardData(modelResponse.getModuleList())
                         }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
                     }catch (e : Exception){
                         e.printStackTrace()

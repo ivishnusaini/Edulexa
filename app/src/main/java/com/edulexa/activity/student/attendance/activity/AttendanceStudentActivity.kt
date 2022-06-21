@@ -101,8 +101,14 @@ class AttendanceStudentActivity : AppCompatActivity(),View.OnClickListener {
                                     if (modelResponse.getData()!!.getAttendance()!!.size > 0){
                                         setUpMonthData(modelResponse.getData()!!.getAttendance())
                                     }
+                                    binding!!.tvAttendancePresentCount.text = modelResponse.getData()!!.getPresent().toString()
+                                    binding!!.tvAttendanceAbsentCount.text = modelResponse.getData()!!.getAbsent().toString()
+                                    binding!!.tvAttendanceHolidayCount.text = modelResponse.getData()!!.getHoliday().toString()
                                 }
-                            }else Utils.showToast(mActivity!!,message)
+                            }else {
+                                Utils.showToast(mActivity!!,message)
+                                calendarGlobal.add(Calendar.MONTH, -1)
+                            }
                         }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
                     }catch (e : Exception){
                         e.printStackTrace()

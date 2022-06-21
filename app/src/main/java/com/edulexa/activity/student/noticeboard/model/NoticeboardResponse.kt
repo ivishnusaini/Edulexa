@@ -1,11 +1,13 @@
-package com.edulexa.activity.student.dashboard.model
+package com.edulexa.activity.student.noticeboard.model
 
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
 
-class StudentDashboardResponse {
+
+
+class NoticeboardResponse {
     @SerializedName("status")
     @Expose
     private var status: Int? = null
@@ -16,14 +18,13 @@ class StudentDashboardResponse {
 
     @SerializedName("data")
     @Expose
-    private var data: DashboardDatum? = null
-
+    private var data: List<NoticeboardDatum?>? = null
 
     fun getStatus(): Int? {
         return status
     }
 
-    fun setHomeworklist(status: Int) {
+    fun setStatus(status: Int?) {
         this.status = status
     }
 
@@ -31,15 +32,15 @@ class StudentDashboardResponse {
         return message
     }
 
-    fun setMessage(message: String) {
+    fun setMessage(message: String?) {
         this.message = message
     }
 
-    fun getDashboardDatum(): DashboardDatum? {
+    fun getData(): List<NoticeboardDatum?>? {
         return data
     }
 
-    fun setDashboardDatum(data: DashboardDatum) {
+    fun setData(data: List<NoticeboardDatum?>?) {
         this.data = data
     }
 }

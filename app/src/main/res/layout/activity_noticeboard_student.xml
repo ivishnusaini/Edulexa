@@ -52,6 +52,16 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_5sdp" />
 
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_notice_board_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/notice_board_no_data"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp"
+            android:visibility="gone" />
+
 
     </RelativeLayout>
 
