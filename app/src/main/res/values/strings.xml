@@ -90,6 +90,7 @@
     <string name="extra_fee">Extra Fee</string>
     <string name="late_charges_fee">Late Charges</string>
     <string name="paid_fee">Paid Fee</string>
+    <string name="fee_student_no_data">No Fee</string>
 
     <!--Examination Student Screen-->
     <string name="exam_student">Examination</string>

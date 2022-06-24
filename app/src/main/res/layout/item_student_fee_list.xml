@@ -26,22 +26,23 @@
                 android:padding="@dimen/_10sdp">
 
                 <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_student_fee_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_toStartOf="@+id/tv_date_fee"
+                    android:layout_toStartOf="@+id/tv_due_date_fee"
                     android:maxLines="2"
-                    android:text="School Fee for January"
+                    android:text=""
                     android:textColor="@color/secondary_text_color"
                     android:textSize="@dimen/_14ssp" />
 
                 <com.edulexa.views.RegularTextView
-                    android:id="@+id/tv_date_fee"
+                    android:id="@+id/tv_due_date_fee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:maxLines="2"
-                    android:text="06 May"
+                    android:text=""
                     android:textColor="@color/secondary_text_color"
                     android:textSize="@dimen/_14ssp" />
 
@@ -68,16 +69,18 @@
                         android:contentDescription="@string/app_name" />
 
                     <com.edulexa.views.BoldTextView
+                        android:id="@+id/tv_due_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_2sdp"
                         android:maxLines="1"
-                        android:text="16,600"
+                        android:text=""
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_20ssp" />
 
                     <com.edulexa.views.RegularTextView
+                        android:id="@+id/tv_fee_status"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_gravity="center_vertical"
@@ -86,7 +89,7 @@
                         android:backgroundTint="@color/green"
                         android:paddingStart="@dimen/_15sdp"
                         android:paddingEnd="@dimen/_15sdp"
-                        android:text="Paid"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp" />
 
@@ -153,7 +156,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/_2sdp"
                             android:maxLines="1"
-                            android:text="14,500"
+                            android:text=""
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_16ssp" />
 
@@ -194,7 +197,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/_2sdp"
                             android:maxLines="1"
-                            android:text="2,000"
+                            android:text="0"
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_16ssp" />
 
@@ -235,7 +238,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/_2sdp"
                             android:maxLines="1"
-                            android:text="600"
+                            android:text="0"
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_16ssp" />
 
@@ -252,7 +255,7 @@
                     <com.edulexa.views.RegularTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Discount(20%)"
+                        android:text="Discount"
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_14ssp" />
 
@@ -276,7 +279,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/_2sdp"
                             android:maxLines="1"
-                            android:text="-500"
+                            android:text=""
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_16ssp" />
 
@@ -317,7 +320,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/_2sdp"
                             android:maxLines="1"
-                            android:text="16,600"
+                            android:text=""
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_16ssp" />
 

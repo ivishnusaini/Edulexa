@@ -6,41 +6,51 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.attendance.adapter.AttendanceStudentMonthAdapter
+import com.edulexa.activity.student.fee.model.FeeDetail
+import com.edulexa.databinding.ItemStudentAttedndanceMonthBinding
+import com.edulexa.databinding.ItemStudentFeeListBinding
 
-class FeeListAdapter(context: Activity) :
+class FeeListAdapter(context: Activity,list: List<FeeDetail>) :
     RecyclerView.Adapter<FeeListAdapter.ViewHolder>() {
     var context: Activity? = null
-
+    var list: List<FeeDetail>? = null
+    var binding : ItemStudentFeeListBinding? = null
     init {
         this.context = context
+        this.list = list
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val itemView: View =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_student_fee_list, parent, false)
-        return ViewHolder(itemView)
+        binding = ItemStudentFeeListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding!!)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         try {
-            viewHolder.ivExpandLessMore!!.setOnClickListener(object :View.OnClickListener{
+            binding!!.tvStudentFeeName.text = list!!.get(position).getName()
+            binding!!.tvDueDateFee.text = list!!.get(position).getDueDate()
+            binding!!.tvDueAmount.text = list!!.get(position).getTotalAmountRemaining()
+            binding!!.tvFeeStatus.text = list!!.get(position).getStatus()
+            binding!!.tvTotalFee.text = list!!.get(position).getAmount()
+            binding!!.tvDiscountFee.text = list!!.get(position).getTotalAmountDiscount()
+            binding!!.tvPaidFee.text = list!!.get(position).getTotalAmountRemaining()
+            binding!!.ivExpandLessMoreFee.setOnClickListener(object :View.OnClickListener{
                 override fun onClick(p0: View?) {
-                    if (viewHolder.feeDescriptionLay!!.getVisibility() == View.GONE) {
-                        viewHolder.feeDescriptionLay!!.setVisibility(View.VISIBLE)
-                        viewHolder.viewExpandLessMore!!.setVisibility(View.VISIBLE)
-                        viewHolder.ivExpandLessMore!!.setImageResource(R.drawable.ic_expand_less)
+                    if (binding!!.feeDescriptionLay.getVisibility() == View.GONE) {
+                        binding!!.feeDescriptionLay.setVisibility(View.VISIBLE)
+                        binding!!.viewExpandLessMoreFee.setVisibility(View.VISIBLE)
+                        binding!!.ivExpandLessMoreFee.setImageResource(R.drawable.ic_expand_less)
                     }
                     else {
-                        viewHolder.feeDescriptionLay!!.setVisibility(View.GONE)
-                        viewHolder.viewExpandLessMore!!.setVisibility(View.GONE)
-                        viewHolder.ivExpandLessMore!!.setImageResource(R.drawable.ic_expand_more)
+                        binding!!.feeDescriptionLay.setVisibility(View.GONE)
+                        binding!!.viewExpandLessMoreFee.setVisibility(View.GONE)
+                        binding!!.ivExpandLessMoreFee.setImageResource(R.drawable.ic_expand_more)
                     }
                 }
 
@@ -51,18 +61,8 @@ class FeeListAdapter(context: Activity) :
     }
 
     override fun getItemCount(): Int {
-        return 5;
+        return list!!.size
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var ivExpandLessMore: ImageView? = null
-        var viewExpandLessMore: View? = null
-        var feeDescriptionLay: LinearLayout? = null
-
-        init {
-            ivExpandLessMore = itemView.findViewById(R.id.iv_expand_less_more_fee)
-            viewExpandLessMore = itemView.findViewById(R.id.view_expand_less_more_fee)
-            feeDescriptionLay = itemView.findViewById(R.id.fee_description_lay)
-        }
-    }
+    class ViewHolder(binding: ItemStudentFeeListBinding) : RecyclerView.ViewHolder(binding.root)
 }

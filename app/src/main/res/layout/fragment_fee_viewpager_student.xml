@@ -3,25 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_fee_list"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_pay_fee" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_pay_fee">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/fee_list_lay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_fee_no_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/fee_student_no_data"
+                android:textColor="@color/primaray_text_color"
+                android:textSize="@dimen/_14ssp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
 
     <com.edulexa.views.RegularButton
         android:id="@+id/tv_pay_fee"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/ripple_effect_25"
-        android:gravity="center"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/ripple_effect_25"
+        android:gravity="center"
         android:text=""
-        android:visibility="gone"
         android:textColor="@color/white"
-        android:layout_alignParentBottom="true"
-        android:textSize="@dimen/_16ssp" />
+        android:textSize="@dimen/_16ssp"
+        android:visibility="visible" />
 
 
 </RelativeLayout>

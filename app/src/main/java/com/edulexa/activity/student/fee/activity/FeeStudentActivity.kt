@@ -136,7 +136,7 @@ class FeeStudentActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setUpViewPager() {
         binding!!.viewPagerFee.adapter =
-            ViewpagerFeeAdapter(supportFragmentManager, 4)
+            ViewpagerFeeAdapter(supportFragmentManager, 1)
         binding!!.viewPagerFee.addOnPageChangeListener(object :
             ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
