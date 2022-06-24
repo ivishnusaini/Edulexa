@@ -43,7 +43,7 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:background="@drawable/ripple_effect_25"
         android:gravity="center"
-        android:text=""
+        android:text="@string/fee_student_pay"
         android:textColor="@color/white"
         android:textSize="@dimen/_16ssp"
         android:visibility="visible" />
