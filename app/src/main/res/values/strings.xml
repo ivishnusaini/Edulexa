@@ -189,6 +189,12 @@
     <string name="lesson_plan_student_homework_not_assigned_reason">Homework Not Assigned Reason :</string>
     <string name="lesson_plan_student_type">Type :</string>
     <string name="lesson_plan_student_delete">Delete</string>
+    <string name="lesson_plan_student_info">Info</string>
+    <string name="lesson_plan_student_comprehensive_questions">Comprehensive Questions :</string>
+    <string name="lesson_plan_student_general_objectives">General Objectives :</string>
+    <string name="lesson_plan_student_presentation">Presentation :</string>
+    <string name="lesson_plan_student_previous_knowledge">Previous Knowledge :</string>
+    <string name="lesson_plan_student_teaching_method">Teaching Method :</string>
 
     <!--ProgressBar-->
     <string name="progress_bar_please_wait">Please wait…</string>

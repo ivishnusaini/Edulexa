@@ -209,6 +209,8 @@ class DatumCustomLessonPlan {
     }
 
     fun getGeneralObjectives(): String? {
+        if (generalObjectives == null)
+            return ""
         return generalObjectives
     }
 
@@ -217,6 +219,8 @@ class DatumCustomLessonPlan {
     }
 
     fun getTeachingMethod(): String? {
+        if (teachingMethod == null)
+            return ""
         return teachingMethod
     }
 
@@ -225,6 +229,8 @@ class DatumCustomLessonPlan {
     }
 
     fun getPreviousKnowledge(): String? {
+        if (previousKnowledge == null)
+            return ""
         return previousKnowledge
     }
 
@@ -233,6 +239,8 @@ class DatumCustomLessonPlan {
     }
 
     fun getComprehensiveQuestions(): String? {
+        if (comprehensiveQuestions == null)
+            return ""
         return comprehensiveQuestions
     }
 

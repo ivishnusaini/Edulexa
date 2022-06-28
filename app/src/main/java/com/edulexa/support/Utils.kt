@@ -3,13 +3,17 @@ package com.edulexa.support
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.app.DownloadManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.text.Html
 import android.util.Log
 import android.view.View
@@ -32,6 +36,7 @@ import com.edulexa.activity.student.login.StudentLoginResponse
 import com.edulexa.api.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import java.io.File
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.YearMonth
@@ -398,6 +403,46 @@ class Utils {
         }
         fun showToast(context: Activity,message: String){
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
+        fun startDownload(context: Activity,filePath:String,downloadFileUrl : String) : Long{
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R){
+                val fileNameArray = filePath.split("/").toTypedArray()
+                var fileName = fileNameArray[fileNameArray.size - 1]
+
+                if (filePath == "") fileName = "attachment"
+                Log.e("fileName", fileName)
+
+                val path = Environment.getExternalStorageDirectory()
+                    .toString() + "/"+context.getString(R.string.app_name)
+
+                val file = File(path)
+
+                if (!file.exists()) {
+                    file.mkdir()
+                }
+
+                val downloadFile = File("$path/$fileName")
+
+                val Download_Uri = Uri.parse(downloadFileUrl)
+
+                val request = DownloadManager.Request(Download_Uri)
+                    .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
+                    .setTitle(context.applicationContext.getString(R.string.app_name))
+                    .setDescription("Downloading $fileName")
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    .setDestinationUri(Uri.fromFile(downloadFile))
+                    .setAllowedOverMetered(true)
+                    .setNotificationVisibility(View.VISIBLE)
+                    .setAllowedOverRoaming(true)
+                request.setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_DOWNLOADS,
+                    context.resources.getString(R.string.app_name) + fileName
+                )
+                val downloadManager =
+                    context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                Toast.makeText(context, "Download Successfully", Toast.LENGTH_SHORT).show()
+                return downloadManager.enqueue(request)
+            }else return 0
         }
     }
 }

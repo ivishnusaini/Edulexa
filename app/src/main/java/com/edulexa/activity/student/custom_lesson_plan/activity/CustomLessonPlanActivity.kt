@@ -3,9 +3,15 @@ package com.edulexa.activity.student.custom_lesson_plan.activity
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Html
 import android.view.View
+import android.view.Window
 import android.widget.DatePicker
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +23,7 @@ import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityCustomLessonPlanBinding
+import com.edulexa.databinding.DialogStudentCustomLessonInfoBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
@@ -141,6 +148,28 @@ class CustomLessonPlanActivity : AppCompatActivity(),View.OnClickListener {
             })
         }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
 
+    }
+
+    fun showInfoDialog(comprensiveStr : String,generalObjectiveStr : String,previousKnowledgeStr : String,teachingMethodStr : String){
+        try {
+            val dialog = Dialog(mActivity!!)
+            var dialogBinding : DialogStudentCustomLessonInfoBinding? = null
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogBinding = DialogStudentCustomLessonInfoBinding.inflate(layoutInflater)
+            dialog.setContentView(dialogBinding.root)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCanceledOnTouchOutside(false)
+            dialogBinding.presentationLay.visibility = View.GONE
+            dialogBinding.tvComprehensiveQuestion.text = Html.fromHtml(comprensiveStr)
+            dialogBinding.tvGeneralObjective.text = Html.fromHtml(generalObjectiveStr)
+            dialogBinding.tvPreviousKnowledge.text = Html.fromHtml(previousKnowledgeStr)
+            dialogBinding.tvTeachingMethod.text = Html.fromHtml(teachingMethodStr)
+            dialogBinding.cvOk.setOnClickListener { v: View? -> dialog.dismiss() }
+            if (dialog.isShowing) dialog.dismiss()
+            dialog.show()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onClick(view: View?) {

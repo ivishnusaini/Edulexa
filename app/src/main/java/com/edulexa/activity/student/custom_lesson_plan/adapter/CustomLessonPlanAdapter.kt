@@ -2,12 +2,15 @@ package com.edulexa.activity.student.custom_lesson_plan.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DownloadManager
+import android.content.IntentFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlanActivity
 import com.edulexa.activity.student.custom_lesson_plan.model.DatumCustomLessonPlan
 import com.edulexa.databinding.ItemStudentCustomLessonPlanBinding
 import com.edulexa.support.Utils
@@ -21,6 +24,7 @@ class CustomLessonPlanAdapter(context: Activity, list : List<DatumCustomLessonPl
     var context: Activity? = null
     var list : List<DatumCustomLessonPlan?>? = null
     var binding : ItemStudentCustomLessonPlanBinding? = null
+    var downloadID : Long? = null
     init {
         this.context = context
         this.list = list
@@ -36,6 +40,10 @@ class CustomLessonPlanAdapter(context: Activity, list : List<DatumCustomLessonPl
 
     override fun onBindViewHolder(viewHolder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         try {
+            /*context!!.registerReceiver(
+                onDownloadComplete,
+                IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+            )*/
             if (!list!!.get(position)!!.getFile().equals("")){
                 binding!!.imageDetailLay.visibility = View.VISIBLE
                 binding!!.tvTypeImage.text = "Image"
@@ -105,6 +113,29 @@ class CustomLessonPlanAdapter(context: Activity, list : List<DatumCustomLessonPl
                     binding!!.ivDownload.backgroundTintList = ContextCompat.getColorStateList(context!!,R.color.circular_1)
                 }
             }
+
+            binding!!.ivInfoImage.setOnClickListener(object : View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    (context as CustomLessonPlanActivity).showInfoDialog(list!!.get(position)!!.getComprehensiveQuestions()!!,
+                        list!!.get(position)!!.getGeneralObjectives()!!,list!!.get(position)!!.getPreviousKnowledge()!!,
+                        list!!.get(position)!!.getTeachingMethod()!!)
+                }
+            })
+
+            binding!!.ivInfoVideo.setOnClickListener(object : View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    (context as CustomLessonPlanActivity).showInfoDialog(list!!.get(position)!!.getComprehensiveQuestions()!!,
+                        list!!.get(position)!!.getGeneralObjectives()!!,list!!.get(position)!!.getPreviousKnowledge()!!,
+                        list!!.get(position)!!.getTeachingMethod()!!)
+                }
+            })
+
+            binding!!.ivDownload.setOnClickListener(object : View.OnClickListener{
+                override fun onClick(p0: View?) {
+
+                }
+
+            })
 
         } catch (e: Exception) {
             e.printStackTrace()
