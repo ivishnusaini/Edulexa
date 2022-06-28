@@ -73,6 +73,21 @@ class Utils {
                 .into(imageView!!)
         }
 
+        fun setImageUsingGlideImagePlaceholder(context: Activity?, url: String?, imageView: ImageView?) {
+            val options: RequestOptions = RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.app_icon)
+                .error(R.drawable.app_icon)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH)
+                .dontAnimate()
+                .dontTransform()
+            Glide.with(context!!)
+                .load(url)
+                .apply(options)
+                .into(imageView!!)
+        }
+
         fun setpProfileImageUsingGlide(context: Activity?, url: String?, imageView: ImageView?) {
             val options: RequestOptions = RequestOptions()
                 .centerCrop()

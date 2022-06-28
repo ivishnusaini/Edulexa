@@ -29,4 +29,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/fees")
     fun getFeesData(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getCustomLession")
+    fun getCustomLessonPlan(@Body requestBody : RequestBody): Call<ResponseBody>
 }

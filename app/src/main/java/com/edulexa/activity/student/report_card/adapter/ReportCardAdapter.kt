@@ -12,8 +12,7 @@ import com.edulexa.R
 import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
 import com.edulexa.api.Constants
 
-class ReportCardAdapter(context: Activity) :
-    RecyclerView.Adapter<ReportCardAdapter.ViewHolder>() {
+class ReportCardAdapter(context: Activity) : RecyclerView.Adapter<ReportCardAdapter.ViewHolder>() {
     var context: Activity? = null
 
     init {

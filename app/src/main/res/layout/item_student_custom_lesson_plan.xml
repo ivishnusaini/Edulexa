@@ -41,9 +41,11 @@
 
         </LinearLayout>
 
-        <RelativeLayout
+        <com.pierfrancescosoffritti.youtubeplayer.player.YouTubePlayerView
+            android:id="@+id/youtube_player_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"/>
+            android:layout_height="@dimen/_150sdp"
+            android:layout_marginTop="@dimen/_10sdp" />
 
         <LinearLayout
             android:id="@+id/description_lay"
@@ -91,7 +93,7 @@
                 android:maxLines="2"
                 android:text="dummy lesson"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -116,7 +118,7 @@
                 android:maxLines="2"
                 android:text="dummy topic name"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -140,7 +142,7 @@
                 android:maxLines="2"
                 android:text="dummy lesson name"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -164,7 +166,7 @@
                 android:maxLines="2"
                 android:text="test"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -188,7 +190,7 @@
                 android:maxLines="2"
                 android:text="test"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -212,7 +214,7 @@
                 android:maxLines="2"
                 android:text="test"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -236,7 +238,7 @@
                 android:maxLines="2"
                 android:text="test"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -260,7 +262,7 @@
                 android:maxLines="2"
                 android:text="test"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -289,7 +291,7 @@
                     android:maxLines="1"
                     android:text="Theory"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_12ssp" />
 
             </LinearLayout>
 
@@ -320,7 +322,7 @@
         android:background="@drawable/bg_border_5"
         android:orientation="vertical"
         android:padding="@dimen/_10sdp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -350,7 +352,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/colorPrimary"
+            android:scaleType="fitXY"
             android:contentDescription="@string/app_name" />
 
         <LinearLayout
@@ -374,7 +376,7 @@
                 android:maxLines="2"
                 android:text="description"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -398,7 +400,7 @@
                 android:maxLines="2"
                 android:text="dummy name"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -422,7 +424,7 @@
                 android:maxLines="2"
                 android:text="dummy topic name"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -446,7 +448,7 @@
                 android:maxLines="2"
                 android:text="dummy lesson name"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -470,7 +472,7 @@
                 android:maxLines="2"
                 android:text="test"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -494,7 +496,7 @@
                 android:maxLines="2"
                 android:text="test"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -518,7 +520,7 @@
                 android:maxLines="2"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -542,7 +544,7 @@
                 android:maxLines="2"
                 android:text="test"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -566,7 +568,7 @@
                 android:maxLines="2"
                 android:text="test"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 
@@ -596,7 +598,7 @@
                     android:maxLines="1"
                     android:text="Theory"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_12ssp" />
 
             </LinearLayout>
 
