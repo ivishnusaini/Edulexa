@@ -75,4 +75,5 @@ dependencies {
     /*Retrofit*/
 
     implementation 'com.github.PierfrancescoSoffritti:AndroidYouTubePlayer:7.0.1' // youtubeplayerview
+    implementation 'com.nabinbhandari.android:permissions:3.8' // runtime permission.
 }
