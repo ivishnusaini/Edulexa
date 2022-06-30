@@ -32,4 +32,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/getCustomLession")
     fun getCustomLessonPlan(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getPublicEvents")
+    fun getCalendarList(@Body requestBody : RequestBody): Call<ResponseBody>
 }

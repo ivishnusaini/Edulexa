@@ -36,23 +36,23 @@
                         android:layout_centerInParent="true">
 
                         <com.edulexa.views.RegularTextView
-                            android:id="@+id/tv_attendance_date"
+                            android:id="@+id/tv_calendar_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:maxLines="2"
-                            android:text="01"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="@dimen/_14ssp" />
 
                         <com.edulexa.views.RegularTextView
-                            android:id="@+id/tv_attendance_month"
+                            android:id="@+id/tv_calendar_month"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_attendance_date"
+                            android:layout_below="@+id/tv_calendar_date"
                             android:layout_centerHorizontal="true"
                             android:maxLines="2"
-                            android:text="Mar"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="@dimen/_12ssp" />
 
@@ -73,18 +73,19 @@
 
 
                     <com.edulexa.views.RegularTextView
+                        android:id="@+id/tv_calendar_event_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="National Day"
+                        android:text=""
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_12ssp" />
 
                     <com.edulexa.views.RegularTextView
-                        android:id="@+id/tv_today_homework_subject"
+                        android:id="@+id/tv_calendar_event_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="Hodilay"
+                        android:text=""
                         android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/_10ssp" />
 
@@ -102,6 +103,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:maxLines="2"
                 android:text="Present"
+                android:visibility="gone"
                 android:textColor="@color/teal_700"
                 android:textSize="@dimen/_14ssp" />
 

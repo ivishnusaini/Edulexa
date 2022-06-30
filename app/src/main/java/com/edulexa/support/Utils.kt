@@ -294,6 +294,49 @@ class Utils {
                 }
             }
         }
+        fun getShortMonthNameFromMonthNo(monthNo: Int): String {
+            when (monthNo) {
+                1 -> {
+                    return "Jan"
+                }
+                2 -> {
+                    return "Feb"
+                }
+                3 -> {
+                    return "Mar"
+                }
+                4 -> {
+                    return "Apr"
+                }
+                5 -> {
+                    return "May"
+                }
+                6 -> {
+                    return "Jun"
+                }
+                7 -> {
+                    return "Jul"
+                }
+                8 -> {
+                    return "Aug"
+                }
+                9 -> {
+                    return "Sep"
+                }
+                10 -> {
+                    return "Oct"
+                }
+                11 -> {
+                    return "Nov"
+                }
+                12 -> {
+                    return "Dec"
+                }
+                else -> {
+                    return ""
+                }
+            }
+        }
 
         fun showProgressBar(activity: Activity) {
             try {

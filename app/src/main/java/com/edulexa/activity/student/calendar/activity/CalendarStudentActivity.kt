@@ -12,9 +12,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.calendar.adapter.CalendarListAdapter
 import com.edulexa.activity.student.calendar.adapter.MonthAdapter
+import com.edulexa.activity.student.calendar.model.CalendarListResponse
 import com.edulexa.activity.student.calendar.model.MonthModel
+import com.edulexa.activity.student.custom_lesson_plan.adapter.CustomLessonPlanAdapter
+import com.edulexa.activity.student.custom_lesson_plan.model.CustomLessonPlanResponse
+import com.edulexa.api.APIClientStudent
+import com.edulexa.api.ApiInterfaceStudent
+import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityCalendarStudentBinding
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,6 +39,8 @@ class CalendarStudentActivity : AppCompatActivity(), View.OnClickListener {
     var currentDateGlobal = 0
     var currentMonthGlobal = 0
     private var monthList: List<MonthModel>? = ArrayList()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCalendarStudentBinding.inflate(layoutInflater)
@@ -424,19 +440,96 @@ class CalendarStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun getNextMonth() {
         calendarGlobal.add(Calendar.MONTH, 1)
         setUpMonthData()
+        setUpAttendanceList()
     }
 
     private fun getPreviousMonth() {
         calendarGlobal.add(Calendar.MONTH, -1)
         setUpMonthData()
+        setUpAttendanceList()
+    }
+
+    private fun getMonthNo() : Int{
+        return calendarGlobal.get(Calendar.MONTH) + 1
+    }
+    private fun getYear() : Int{
+        return calendarGlobal.get(Calendar.YEAR)
     }
 
     private fun setUpAttendanceList() {
-        binding!!.recyclerViewAttendance.layoutManager = LinearLayoutManager(
-            mActivity!!,
-            RecyclerView.VERTICAL, false
-        )
-        binding!!.recyclerViewAttendance.adapter = CalendarListAdapter(mActivity!!)
+        if (Utils.isNetworkAvailable(mActivity!!)){
+            Utils.showProgressBar(mActivity!!)
+            Utils.hideKeyboard(mActivity!!)
+
+            val branchId = Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
+            val accessToken = Utils.getStudentLoginResponse(mActivity)!!.getToken()!!
+            val userId = Utils.getStudentUserId(mActivity!!)
+
+            val apiInterfaceWithHeader: ApiInterfaceStudent = APIClientStudent.getRetroFitClientWithNewKeyHeader(mActivity!!, accessToken,branchId,userId).create(
+                ApiInterfaceStudent::class.java)
+
+            val jsonObject = JSONObject()
+            jsonObject.put(Constants.ParamsStudent.STUDENT_ID, Utils.getStudentId(mActivity!!))
+            jsonObject.put(Constants.ParamsStudent.MONTH,getMonthNo())
+            jsonObject.put(Constants.ParamsStudent.YEAR,getYear())
+
+            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+
+            Utils.printLog("Url", Constants.DOMAIN_STUDENT+"/Webservice/getPublicEvents")
+
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.getCalendarList(requestBody)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    Utils.hideProgressBar()
+                    try{
+                        val responseStr = response.body()!!.string()
+                        if (!responseStr.isNullOrEmpty()){
+                            val jsonObjectResponse = JSONObject(responseStr)
+                            val statusCode = jsonObjectResponse.optInt("status")
+                            val message = jsonObjectResponse.optString("message")
+                            if (statusCode == 200){
+                                val modelResponse = Utils.getObject(responseStr, CalendarListResponse::class.java) as CalendarListResponse
+                                if (modelResponse.getData() != null && modelResponse.getData()!!.size > 0){
+                                    binding!!.recyclerViewAttendance.visibility = View.VISIBLE
+                                    binding!!.tvStudentCalendarNoEvent.visibility = View.GONE
+                                    binding!!.recyclerViewAttendance.layoutManager = LinearLayoutManager(
+                                        mActivity!!,
+                                        RecyclerView.VERTICAL, false
+                                    )
+                                    binding!!.recyclerViewAttendance.adapter = CalendarListAdapter(mActivity!!,modelResponse.getData())
+                                }else{
+                                    binding!!.recyclerViewAttendance.visibility = View.GONE
+                                    binding!!.tvStudentCalendarNoEvent.visibility = View.VISIBLE
+                                }
+                            }else {
+                                Utils.showToast(mActivity!!,message)
+                                binding!!.recyclerViewAttendance.visibility = View.GONE
+                                binding!!.tvStudentCalendarNoEvent.visibility = View.VISIBLE
+                            }
+                        }else {
+                            Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                            binding!!.recyclerViewAttendance.visibility = View.GONE
+                            binding!!.tvStudentCalendarNoEvent.visibility = View.VISIBLE
+                        }
+                    }catch (e : Exception){
+                        e.printStackTrace()
+                        Utils.showToast(mActivity!!, e.localizedMessage!!)
+                        binding!!.recyclerViewAttendance.visibility = View.GONE
+                        binding!!.tvStudentCalendarNoEvent.visibility = View.VISIBLE
+                    }
+                }
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Utils.hideProgressBar()
+                    Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                    binding!!.recyclerViewAttendance.visibility = View.GONE
+                    binding!!.tvStudentCalendarNoEvent.visibility = View.VISIBLE
+                }
+            })
+        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+
     }
 
     override fun onClick(view: View?) {

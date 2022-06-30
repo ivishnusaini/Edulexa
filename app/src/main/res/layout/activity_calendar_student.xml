@@ -244,6 +244,18 @@
             android:layout_marginTop="@dimen/_10sdp" />
 
 
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_student_calendar_no_event"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/calendar_student_no_event"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_12ssp" />
+
+
+
     </LinearLayout>
 
 
