@@ -54,6 +54,8 @@ class ModuleDashboard {
     }
 
     fun getIsActive(): String? {
+        if (isActive == null)
+            return ""
         return isActive
     }
 

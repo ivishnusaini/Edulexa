@@ -50,35 +50,35 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
 
             viewHolder.itemView.setOnClickListener(object :View.OnClickListener{
                 override fun onClick(p0: View?) {
-                    when(list!!.get(position)!!.getName()){
-                        "Homework" -> {
+                    when(list!!.get(position)!!.getShortCode()){
+                        "homework" -> {
                             context!!.startActivity(Intent(context!!, HomeworkStudentActivity::class.java))
                         }
-                        "Calendar" -> {
+                        "calendar_to_do_list" -> {
                             context!!.startActivity(Intent(context!!, CalendarStudentActivity::class.java))
                         }
-                        "Fee Details" -> {
+                        "fees" -> {
                             context!!.startActivity(Intent(context!!, FeeStudentActivity::class.java))
                         }
-                        "Examination" -> {
+                        "examinations" -> {
                             context!!.startActivity(Intent(context!!, ExamStudentActivity::class.java))
                         }
-                        "Report Cards" -> {
+                        "report_card" -> {
                             context!!.startActivity(Intent(context!!, ReportCardStudentActivity::class.java))
                         }
-                        "Notice Board" -> {
+                        "notice_board" -> {
                             context!!.startActivity(Intent(context!!, NoticeBoardStudentActivity::class.java))
                         }
-                        "Multimedia" -> {
+                        "gallery" -> {
                             context!!.startActivity(Intent(context!!, GalleryStudentActivity::class.java))
                         }
-                        "Profile" -> {
+                        "timeline" -> {
                             context!!.startActivity(Intent(context!!, ProfileStudentActivity::class.java))
                         }
-                        "Lesson Plan" -> {
+                        "lesson_plan" -> {
                             context!!.startActivity(Intent(context!!, CustomLessonPlanActivity::class.java))
                         }
-                        "Attendance" -> {
+                        "attendance" -> {
                             context!!.startActivity(Intent(context!!, AttendanceStudentActivity::class.java))
                         }
                     }

@@ -59,36 +59,59 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.menuLay.setOnClickListener(this)
     }
 
-    private fun setUpData(){
+    private fun setUpData() {
         try {
-            binding!!.tvStudentName.text = Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getUsername()
-            binding!!.tvStudentClass.text = getString(R.string.dashboard_student_class_section_format,"Class ",Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getClass_()," ",Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getSection())
-            Utils.setpProfileImageUsingGlide(mActivity,Constants.BASE_URL_STUDENT+Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getImage(),binding!!.ivStudentImage)
-        }catch (e : Exception){
+            binding!!.tvStudentName.text =
+                Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getUsername()
+            binding!!.tvStudentClass.text = getString(
+                R.string.dashboard_student_class_section_format,
+                "Class ",
+                Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getClass_(),
+                " ",
+                Utils.getStudentLoginResponse(mActivity)!!.getRecord()!!.getSection()
+            )
+            Utils.setpProfileImageUsingGlide(
+                mActivity,
+                Constants.BASE_URL_STUDENT + Utils.getStudentLoginResponse(mActivity)!!
+                    .getRecord()!!.getImage(),
+                binding!!.ivStudentImage
+            )
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun getDashboardData(){
-        if (Utils.isNetworkAvailable(mActivity!!)){
+    private fun getDashboardData() {
+        if (Utils.isNetworkAvailable(mActivity!!)) {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
-            val branchId = Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
+            val branchId =
+                Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
             val accessToken = Utils.getStudentLoginResponse(mActivity)!!.getToken()!!
             val userId = Utils.getStudentUserId(mActivity!!)
 
-            val apiInterfaceWithHeader: ApiInterfaceStudent = APIClientStudent.getRetroFitClientWithNewKeyHeader(mActivity!!, accessToken,branchId,userId).create(
-                ApiInterfaceStudent::class.java)
+            val apiInterfaceWithHeader: ApiInterfaceStudent =
+                APIClientStudent.getRetroFitClientWithNewKeyHeader(
+                    mActivity!!,
+                    accessToken,
+                    branchId,
+                    userId
+                ).create(
+                    ApiInterfaceStudent::class.java
+                )
 
             val jsonObject = JSONObject()
-            jsonObject.put(Constants.ParamsStudent.STUDENT_ID,Utils.getStudentId(mActivity!!))
+            jsonObject.put(Constants.ParamsStudent.STUDENT_ID, Utils.getStudentId(mActivity!!))
             jsonObject.put(Constants.ParamsStudent.DATE_FROM, Utils.getFirstDateOfWeek())
             jsonObject.put(Constants.ParamsStudent.DATE_TO, Utils.getLastDateOfWeek())
 
-            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+            val requestBody: RequestBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                jsonObject.toString()
+            )
 
-            Utils.printLog("Url", Constants.DOMAIN_STUDENT+"/Webservice/Dashboard")
+            Utils.printLog("Url", Constants.DOMAIN_STUDENT + "/Webservice/Dashboard")
 
             val call: Call<ResponseBody> = apiInterfaceWithHeader.getDashboardData(requestBody)
             call.enqueue(object : Callback<ResponseBody> {
@@ -98,97 +121,137 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                 ) {
                     Utils.hideProgressBar()
                     binding!!.topLay.visibility = View.VISIBLE
-                    try{
+                    try {
                         val responseStr = response.body()!!.string()
-                        if (!responseStr.isNullOrEmpty()){
+                        if (!responseStr.isNullOrEmpty()) {
                             val jsonObjectFromResponse = JSONObject(responseStr)
                             val status = jsonObjectFromResponse.optInt("status")
-                            if (status == 200){
-                                val modelResponse = Utils.getObject(responseStr, StudentDashboardResponse::class.java) as StudentDashboardResponse
-                                if (modelResponse.getDashboardDatum() != null){
-                                    if (modelResponse.getDashboardDatum()!!.getNotification() != null){
-                                        if (modelResponse.getDashboardDatum()!!.getNotification()!!.size > 0)
-                                            setUpNoticeBoardData(modelResponse.getDashboardDatum()!!.getNotification())
-                                        else{
-                                            binding!!.studentNoticeBoardRecycler.visibility = View.GONE
+                            if (status == 200) {
+                                val modelResponse = Utils.getObject(
+                                    responseStr,
+                                    StudentDashboardResponse::class.java
+                                ) as StudentDashboardResponse
+                                if (modelResponse.getDashboardDatum() != null) {
+                                    if (modelResponse.getDashboardDatum()!!
+                                            .getNotification() != null
+                                    ) {
+                                        if (modelResponse.getDashboardDatum()!!
+                                                .getNotification()!!.size > 0
+                                        )
+                                            setUpNoticeBoardData(
+                                                modelResponse.getDashboardDatum()!!
+                                                    .getNotification()
+                                            )
+                                        else {
+                                            binding!!.studentNoticeBoardRecycler.visibility =
+                                                View.GONE
                                             binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
                                         }
-                                    }else{
+                                    } else {
                                         binding!!.studentNoticeBoardRecycler.visibility = View.GONE
                                         binding!!.tvNoticeBoardNoData.visibility = View.VISIBLE
                                     }
                                 }
-                                if (modelResponse.getDashboardDatum() != null && modelResponse.getDashboardDatum()!!.getHomeworklist()!!.size > 0){
-                                    setUpTodayHomeworkData(modelResponse.getDashboardDatum()!!.getHomeworklist())
-                                }else{
+                                if (modelResponse.getDashboardDatum() != null && modelResponse.getDashboardDatum()!!
+                                        .getHomeworklist()!!.size > 0
+                                ) {
+                                    setUpTodayHomeworkData(
+                                        modelResponse.getDashboardDatum()!!.getHomeworklist()
+                                    )
+                                } else {
                                     binding!!.studentTodayHomeworkRecycler.visibility = View.GONE
                                     binding!!.tvTodayHomeworkNoData.visibility = View.VISIBLE
                                 }
 
-                                if (jsonObjectFromResponse.optJSONObject("attendence") != null){
+                                if (jsonObjectFromResponse.optJSONObject("attendence") != null) {
                                     val attendanceType = jsonObjectFromResponse.optString("type")
-                                    binding!!.tvStudentDashboardPresent.text = getString(R.string.dashboard_student_present_format,"You are ",attendanceType," today")
+                                    binding!!.tvStudentDashboardPresent.text = getString(
+                                        R.string.dashboard_student_present_format,
+                                        "You are ",
+                                        attendanceType,
+                                        " today"
+                                    )
                                 }
                                 if (modelResponse.getDashboardDatum() != null)
-                                    setUpDashboardData(modelResponse.getDashboardDatum()!!.getModuleList())
+                                    setUpDashboardData(
+                                        modelResponse.getDashboardDatum()!!.getModuleList()
+                                    )
                             }
-                        }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
-                    }catch (e : Exception){
+                        } else Utils.showToastPopup(
+                            mActivity!!,
+                            getString(R.string.response_null_or_empty_validation)
+                        )
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
 
                 }
+
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     Utils.hideProgressBar()
                     Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
                 }
 
             })
-        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+        } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
 
     }
 
-    private fun setUpNoticeBoardData(list : List<DatumNotification?>?) {
+    private fun setUpNoticeBoardData(list: List<DatumNotification?>?) {
         binding!!.studentNoticeBoardRecycler.visibility = View.VISIBLE
         binding!!.tvNoticeBoardNoData.visibility = View.GONE
         binding!!.studentNoticeBoardRecycler.layoutManager =
             LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL, false)
         binding!!.studentNoticeBoardRecycler.adapter =
-            DashboardStudentNoticeBoardAdapter(mActivity!!,list)
+            DashboardStudentNoticeBoardAdapter(mActivity!!, list)
     }
 
-    private fun setUpTodayHomeworkData(list : List<HomeworkStudentDashboard?>?) {
+    private fun setUpTodayHomeworkData(list: List<HomeworkStudentDashboard?>?) {
         binding!!.studentTodayHomeworkRecycler.visibility = View.VISIBLE
         binding!!.tvTodayHomeworkNoData.visibility = View.GONE
         binding!!.studentTodayHomeworkRecycler.layoutManager =
             LinearLayoutManager(mActivity, RecyclerView.VERTICAL, false)
         binding!!.studentTodayHomeworkRecycler.adapter =
-            DashboardStudentTodayHomeworkAdapter(mActivity!!,list)
+            DashboardStudentTodayHomeworkAdapter(mActivity!!, list)
     }
 
-    private fun setUpDashboardData(list : List<ModuleDashboard?>?) {
-        if (list != null && list.size > 0){
+    private fun setUpDashboardData(list: List<ModuleDashboard?>?) {
+        try{
+        if (list != null && list.size > 0) {
             binding!!.recyclerView.layoutManager =
                 GridLayoutManager(mActivity, 3, RecyclerView.VERTICAL, false)
+            val dashboardList: ArrayList<DashboardModuleModel> = ArrayList()
+            for (model in list) {
+                if (model!!.getIsActive().equals("1"))
+                    dashboardList.add(
+                        DashboardModuleModel(
+                            model.getName()!!,
+                            model.getIconLink()!!,
+                            model.getShortCode()!!
+                        )
+                    )
+            }
+            /*dashboardList.add(DashboardModuleModel("Homework", getImageUrl(list, "homework")))
+            dashboardList.add(DashboardModuleModel("Attendance", getImageUrl(list, "attendance")))
+            dashboardList.add(DashboardModuleModel("Fee Details", getImageUrl(list, "fees")))
+            dashboardList.add(DashboardModuleModel("Examination", getImageUrl(list, "examinations")))
+            dashboardList.add(DashboardModuleModel("Report Cards", getImageUrl(list, "report_card")))
+            dashboardList.add(DashboardModuleModel("Calendar", getImageUrl(list, "calendar_to_do_list")))
+            dashboardList.add(DashboardModuleModel("Notice Board", getImageUrl(list, "notice_board")))
+            dashboardList.add(DashboardModuleModel("Multimedia", getImageUrl(list, "gallery")))
+            dashboardList.add(DashboardModuleModel("Lesson Plan", getImageUrl(list, "lesson_plan")))
+            dashboardList.add(DashboardModuleModel("Profile", getImageUrl(list, "timeline")))*/
 
-            val dashboardList : ArrayList<DashboardModuleModel> = ArrayList()
-            dashboardList.add(DashboardModuleModel("Homework",getImageUrl(list,"homework")))
-            dashboardList.add(DashboardModuleModel("Attendance",getImageUrl(list,"attendance")))
-            dashboardList.add(DashboardModuleModel("Fee Details",getImageUrl(list,"fees")))
-            dashboardList.add(DashboardModuleModel("Examination",getImageUrl(list,"examinations")))
-            dashboardList.add(DashboardModuleModel("Report Cards",getImageUrl(list,"report_card")))
-            dashboardList.add(DashboardModuleModel("Calendar",getImageUrl(list,"calendar_to_do_list")))
-            dashboardList.add(DashboardModuleModel("Notice Board",getImageUrl(list,"notice_board")))
-            dashboardList.add(DashboardModuleModel("Multimedia",getImageUrl(list,"gallery")))
-            dashboardList.add(DashboardModuleModel("Lesson Plan",getImageUrl(list,"lesson_plan")))
-            dashboardList.add(DashboardModuleModel("Profile",getImageUrl(list,"timeline")))
-            binding!!.recyclerView.adapter = DashboardStudentAdapter(mActivity!!,dashboardList)
+            binding!!.recyclerView.adapter = DashboardStudentAdapter(mActivity!!, dashboardList)
+        }
+        }catch (e : Exception){
+            e.printStackTrace()
         }
     }
 
-    private fun getImageUrl(list : List<ModuleDashboard?>?,moduleName : String) : String{
+    private fun getImageUrl(list: List<ModuleDashboard?>?, moduleName: String): String {
         var imageUrl = ""
-        for (model in list!!){
+        for (model in list!!) {
             if (moduleName.equals(model!!.getShortCode())) {
                 imageUrl = model.getIconLink()!!
                 break
@@ -220,8 +283,9 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun scrollAtBottom(){
-        binding!!.recyclerView.getParent().requestChildFocus(binding!!.recyclerView,binding!!.recyclerView)
+    private fun scrollAtBottom() {
+        binding!!.recyclerView.getParent()
+            .requestChildFocus(binding!!.recyclerView, binding!!.recyclerView)
     }
 
     override fun onClick(view: View?) {
