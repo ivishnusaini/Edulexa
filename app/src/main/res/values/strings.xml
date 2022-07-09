@@ -200,4 +200,7 @@
     <!--ProgressBar-->
     <string name="progress_bar_please_wait">Please wait…</string>
 
+    <!--Class Timetable-->
+    <string name="class_timetable_student">Class Timetable</string>
+
 </resources>

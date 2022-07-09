@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
+import com.edulexa.activity.student.class_timetable.activity.ClassTimetableActivity
 import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlanActivity
 import com.edulexa.activity.student.dashboard.model.DashboardModuleModel
 import com.edulexa.activity.student.dashboard.model.ModuleDashboard
@@ -51,6 +52,9 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
             viewHolder.itemView.setOnClickListener(object :View.OnClickListener{
                 override fun onClick(p0: View?) {
                     when(list!!.get(position)!!.getShortCode()){
+                        "class_timetable" -> {
+                            context!!.startActivity(Intent(context!!, ClassTimetableActivity::class.java))
+                        }
                         "homework" -> {
                             context!!.startActivity(Intent(context!!, HomeworkStudentActivity::class.java))
                         }
