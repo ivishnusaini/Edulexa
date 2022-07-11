@@ -15,6 +15,7 @@ import com.edulexa.activity.student.class_timetable.activity.ClassTimetableActiv
 import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlanActivity
 import com.edulexa.activity.student.dashboard.model.DashboardModuleModel
 import com.edulexa.activity.student.dashboard.model.ModuleDashboard
+import com.edulexa.activity.student.download_center.activity.DownloadCenterActivity
 import com.edulexa.activity.student.examination.activity.ExamStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
 import com.edulexa.activity.student.gallery.activity.GalleryStudentActivity
@@ -57,6 +58,9 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                         }
                         "homework" -> {
                             context!!.startActivity(Intent(context!!, HomeworkStudentActivity::class.java))
+                        }
+                        "download_center" -> {
+                            context!!.startActivity(Intent(context!!, DownloadCenterActivity::class.java))
                         }
                         "calendar_to_do_list" -> {
                             context!!.startActivity(Intent(context!!, CalendarStudentActivity::class.java))

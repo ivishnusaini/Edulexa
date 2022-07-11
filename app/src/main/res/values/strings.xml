@@ -203,4 +203,13 @@
     <!--Class Timetable-->
     <string name="class_timetable_student">Class Timetable</string>
 
+    <!--Download Center-->
+    <string name="download_center_student">Download Center</string>
+    <string name="download_center_student_images">Images</string>
+    <string name="download_center_student_audio">Audio</string>
+    <string name="download_center_student_document">Document</string>
+    <string name="download_center_student_video">Video</string>
+    <string name="download_center_student_other">Other</string>
+    <string name="download_center_student_no_data">No Data</string>
+
 </resources>
