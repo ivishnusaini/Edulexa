@@ -11,12 +11,13 @@ import com.edulexa.R
 import com.edulexa.activity.student.class_timetable.model.ClassTimetableModel
 import com.edulexa.activity.student.download_center.model.DownloadCenterModel
 import com.edulexa.databinding.ItemStudentClassTimetableBinding
+import com.edulexa.databinding.ItemStudentDownloadCenterTypeBinding
 
 class DownloadCenterTypeAdapter(context: Activity, list: List<DownloadCenterModel>?) :
     RecyclerView.Adapter<DownloadCenterTypeAdapter.ViewHolder>() {
     var context: Activity? = null
     var list: List<DownloadCenterModel>? = null
-    var binding: ItemStudentClassTimetableBinding? = null
+    var binding: ItemStudentDownloadCenterTypeBinding? = null
 
     init {
         this.context = context
@@ -28,7 +29,7 @@ class DownloadCenterTypeAdapter(context: Activity, list: List<DownloadCenterMode
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        binding = ItemStudentClassTimetableBinding.inflate(
+        binding = ItemStudentDownloadCenterTypeBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -42,8 +43,8 @@ class DownloadCenterTypeAdapter(context: Activity, list: List<DownloadCenterMode
     ) {
         try {
             if (list!!.get(position).getSelectedFlag()) {
-                binding!!.tvStudentClassTimetable.setBackgroundResource(R.drawable.bg_button_5)
-                binding!!.tvStudentClassTimetable.setTextColor(
+                binding!!.tvStudentDownloadCenter.setBackgroundResource(R.drawable.bg_button_5)
+                binding!!.tvStudentDownloadCenter.setTextColor(
                     ContextCompat.getColor(
                         context!!,
                         R.color.white
@@ -51,8 +52,8 @@ class DownloadCenterTypeAdapter(context: Activity, list: List<DownloadCenterMode
                 )
             }
             else {
-                binding!!.tvStudentClassTimetable.setBackgroundResource(0)
-                binding!!.tvStudentClassTimetable.setTextColor(
+                binding!!.tvStudentDownloadCenter.setBackgroundResource(0)
+                binding!!.tvStudentDownloadCenter.setTextColor(
                     ContextCompat.getColor(
                         context!!,
                         R.color.primaray_text_color
@@ -60,7 +61,7 @@ class DownloadCenterTypeAdapter(context: Activity, list: List<DownloadCenterMode
                 )
             }
 
-            binding!!.tvStudentClassTimetable.text = list!!.get(position).getType()
+            binding!!.tvStudentDownloadCenter.text = list!!.get(position).getType()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -70,6 +71,6 @@ class DownloadCenterTypeAdapter(context: Activity, list: List<DownloadCenterMode
         return list!!.size;
     }
 
-    class ViewHolder(binding: ItemStudentClassTimetableBinding) :
+    class ViewHolder(binding: ItemStudentDownloadCenterTypeBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

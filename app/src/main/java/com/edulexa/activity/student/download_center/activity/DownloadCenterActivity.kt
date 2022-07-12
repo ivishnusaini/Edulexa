@@ -1,18 +1,13 @@
 package com.edulexa.activity.student.download_center.activity
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.edulexa.R
-import com.edulexa.activity.student.class_timetable.adapter.ClassTimeTableAdapter
-import com.edulexa.activity.student.class_timetable.adapter.ViewpagerClassTimetableAdapter
-import com.edulexa.activity.student.class_timetable.model.ClassTimetableModel
-import com.edulexa.activity.student.class_timetable.model.DayWiseListModel
 import com.edulexa.activity.student.download_center.adapter.DownloadCenterTypeAdapter
 import com.edulexa.activity.student.download_center.adapter.ViewpagerDownloadCenterAdapter
 import com.edulexa.activity.student.download_center.model.DownloadCenterModel

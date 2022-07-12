@@ -69,7 +69,8 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager_download_center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"/>
 
 
     </LinearLayout>

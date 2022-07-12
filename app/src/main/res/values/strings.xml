@@ -213,5 +213,6 @@
     <string name="download_center_student_video">Video</string>
     <string name="download_center_student_other">Other</string>
     <string name="download_center_student_no_data">No Data</string>
+    <string name="download_center_student_no_file_url">File url is empty</string>
 
 </resources>
