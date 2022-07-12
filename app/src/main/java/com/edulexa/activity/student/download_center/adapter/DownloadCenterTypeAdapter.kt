@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.class_timetable.model.ClassTimetableModel
+import com.edulexa.activity.student.download_center.activity.DownloadCenterActivity
 import com.edulexa.activity.student.download_center.model.DownloadCenterModel
 import com.edulexa.databinding.ItemStudentClassTimetableBinding
 import com.edulexa.databinding.ItemStudentDownloadCenterTypeBinding
