@@ -10,6 +10,7 @@
     <string name="login_enter_user_name">Please enter username</string>
     <string name="login_enter_password">Please enter password</string>
     <string name="login_select_branch">Please select branch</string>
+    <string name="permission_denied">Permission denied</string>
 
     <!--dialog validation popup-->
     <string name="ok">OK</string>
@@ -202,6 +203,7 @@
 
     <!--Class Timetable-->
     <string name="class_timetable_student">Class Timetable</string>
+    <string name="class_timetable_student_no_class_schedule">No class schedule</string>
 
     <!--Download Center-->
     <string name="download_center_student">Download Center</string>

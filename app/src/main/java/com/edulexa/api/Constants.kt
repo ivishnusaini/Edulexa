@@ -127,6 +127,8 @@ class Constants {
         const val YEAR = "year"
         const val STUDENT_SESSION_ID = "student_session_id"
         const val DATE = "date"
+        const val TAG = "tag"
+        const val SEARCH = "search"
     }
 
     object Api {

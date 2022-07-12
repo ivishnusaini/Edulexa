@@ -1,18 +1,12 @@
 package com.edulexa.activity.student.custom_lesson_plan.adapter
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DownloadManager
-import android.app.NotificationManager
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
 import android.content.IntentFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
@@ -20,8 +14,6 @@ import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlan
 import com.edulexa.activity.student.custom_lesson_plan.model.DatumCustomLessonPlan
 import com.edulexa.databinding.ItemStudentCustomLessonPlanBinding
 import com.edulexa.support.Utils
-import com.nabinbhandari.android.permissions.PermissionHandler
-import com.nabinbhandari.android.permissions.Permissions
 import com.pierfrancescosoffritti.youtubeplayer.player.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.youtubeplayer.player.YouTubePlayer
 import com.pierfrancescosoffritti.youtubeplayer.player.YouTubePlayerFullScreenListener
@@ -48,10 +40,10 @@ class CustomLessonPlanAdapter(context: Activity, list : List<DatumCustomLessonPl
 
     override fun onBindViewHolder(viewHolder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         try {
-            context!!.registerReceiver(
+            /*context!!.registerReceiver(
                 onDownloadComplete,
                 IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-            )
+            )*/
             if (!list!!.get(position)!!.getFile().equals("")){
                 binding!!.imageDetailLay.visibility = View.VISIBLE
                 binding!!.tvTypeImage.text = "Image"
@@ -140,16 +132,9 @@ class CustomLessonPlanAdapter(context: Activity, list : List<DatumCustomLessonPl
 
             binding!!.ivDownload.setOnClickListener(object : View.OnClickListener{
                 override fun onClick(p0: View?) {
-                    val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    Permissions.check(context, permissions, null, null, object : PermissionHandler() {
-                        override fun onGranted() {
-                            downloadID = Utils.startDownload(context!!,"",list!!.get(position)!!.getFile()!!)
-                        }
-                        override fun onDenied(context: Context, deniedPermissions: ArrayList<String>) {
-                            super.onDenied(context, deniedPermissions)
-                        }
-                    })
+
                 }
+
             })
 
         } catch (e: Exception) {
@@ -170,20 +155,6 @@ class CustomLessonPlanAdapter(context: Activity, list : List<DatumCustomLessonPl
 
     override fun getItemCount(): Int {
         return list!!.size;
-    }
-    var onDownloadComplete: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-            if (downloadID == id) {
-                val mBuilder: NotificationCompat.Builder = NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.app_icon)
-                    .setContentTitle(context.applicationContext.getString(R.string.app_name))
-                    .setContentText("All Download completed")
-                val notificationManager =
-                    context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.notify(455, mBuilder.build())
-            }
-        }
     }
 
     class ViewHolder(binding: ItemStudentCustomLessonPlanBinding) : RecyclerView.ViewHolder(binding.root)

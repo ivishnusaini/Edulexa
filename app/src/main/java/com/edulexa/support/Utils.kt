@@ -1,5 +1,6 @@
 package com.edulexa.support
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
@@ -36,6 +37,8 @@ import com.edulexa.activity.student.login.StudentLoginResponse
 import com.edulexa.api.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import com.nabinbhandari.android.permissions.PermissionHandler
+import com.nabinbhandari.android.permissions.Permissions
 import java.io.File
 import java.text.DateFormat
 import java.text.SimpleDateFormat

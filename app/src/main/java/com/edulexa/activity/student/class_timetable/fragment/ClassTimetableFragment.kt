@@ -61,7 +61,15 @@ class ClassTimetableFragment : Fragment(){
         setUpDayWiseData()
     }
     private fun setUpDayWiseData(){
-        binding!!.classTimeTableStudentRecyclerView.layoutManager = LinearLayoutManager(mActivity!!,RecyclerView.VERTICAL,false)
-        binding!!.classTimeTableStudentRecyclerView.adapter = ClassTimeTableDayWiseAdapter(mActivity!!,dayWiseList)
+        if (dayWiseList!!.size > 0){
+            binding!!.classTimeTableStudentRecyclerView.visibility = View.VISIBLE
+            binding!!.tvClassTimetableNoData.visibility = View.GONE
+            binding!!.classTimeTableStudentRecyclerView.layoutManager = LinearLayoutManager(mActivity!!,RecyclerView.VERTICAL,false)
+            binding!!.classTimeTableStudentRecyclerView.adapter = ClassTimeTableDayWiseAdapter(mActivity!!,dayWiseList)
+        }else{
+            binding!!.classTimeTableStudentRecyclerView.visibility = View.GONE
+            binding!!.tvClassTimetableNoData.visibility = View.VISIBLE
+        }
+
     }
 }

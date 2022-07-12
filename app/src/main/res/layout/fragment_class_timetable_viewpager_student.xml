@@ -9,4 +9,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"/>
 
+    <com.edulexa.views.RegularTextView
+        android:id="@+id/tv_class_timetable_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/_12ssp"
+        android:textColor="@color/primaray_text_color"
+        android:visibility="gone"
+        android:text="@string/class_timetable_student_no_class_schedule"/>
+
 </RelativeLayout>
