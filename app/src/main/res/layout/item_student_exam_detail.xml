@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:elevation="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_5sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d4ffea"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <com.edulexa.views.MediumTextView
+                android:id="@+id/tv_student_exam_detail_subject_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/primaray_text_color"
+                android:textSize="@dimen/_12ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_watch"
+                    android:backgroundTint="@color/secondary_text_color"
+                    android:contentDescription="@string/app_name" />
+
+                <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_student_exam_detail_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:maxLines="2"
+                    android:text=""
+                    android:textColor="@color/secondary_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_student_exam_detail_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:maxLines="2"
+                    android:text=""
+                    android:textColor="@color/secondary_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+
+                <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_student_exam_detail_room_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:maxLines="2"
+                    android:text=""
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/secondary_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
