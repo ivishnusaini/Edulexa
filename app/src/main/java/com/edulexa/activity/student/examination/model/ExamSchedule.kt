@@ -50,6 +50,8 @@ class ExamSchedule {
     }
 
     fun getExamGroupClassBatchExamId(): String? {
+        if (examGroupClassBatchExamId == null)
+            return ""
         return examGroupClassBatchExamId
     }
 

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.student.library.activity.LibraryActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.student.download_center.activity.DownloadCenterActivity"
             android:exported="false" />
         <activity

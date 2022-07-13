@@ -73,10 +73,11 @@
 
             <com.edulexa.views.RegularTextView
                 android:id="@+id/tv_examination_no_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:gravity="center"
                 android:text="@string/examination_student_no_data"
+                android:layout_below="@+id/tv_examination_list"
                 android:textColor="@color/primaray_text_color"
                 android:textSize="@dimen/_12ssp"
                 android:visibility="gone" />

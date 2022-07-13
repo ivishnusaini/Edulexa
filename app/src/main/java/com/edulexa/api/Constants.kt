@@ -40,6 +40,7 @@ class Constants {
 
     object StudentExamDetail {
         val TITLE = "title"
+        val EXAM_ID = "exam_id"
     }
 
     object AppSaveData {
@@ -129,6 +130,7 @@ class Constants {
         const val DATE = "date"
         const val TAG = "tag"
         const val SEARCH = "search"
+        const val EXAMID = "examId"
     }
 
     object Api {

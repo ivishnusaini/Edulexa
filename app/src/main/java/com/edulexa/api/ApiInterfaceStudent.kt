@@ -41,4 +41,13 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/getDownloadsLinks")
     fun getDownloadLinks(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/examSchedule")
+    fun getExamSchedule(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getExamSchedule")
+    fun getExamScheduleDetail(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getLibraryBookIssued")
+    fun getLibraryBookIssued(@Body requestBody : RequestBody): Call<ResponseBody>
 }

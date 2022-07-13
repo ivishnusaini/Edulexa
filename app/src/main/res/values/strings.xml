@@ -216,4 +216,12 @@
     <string name="download_center_student_no_data">No Data</string>
     <string name="download_center_student_no_file_url">File url is empty</string>
 
+    <!--Library-->
+    <string name="library_student">Library</string>
+    <string name="library_student_no_data">No Data</string>
+    <string name="library_student_books_in_library">Books in Library</string>
+    <string name="library_student_books_issued">Books Issued</string>
+    <string name="library_student_books_returned">Books Returned</string>
+    <string name="library_student_see">See</string>
+
 </resources>

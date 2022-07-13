@@ -20,6 +20,7 @@ import com.edulexa.activity.student.examination.activity.ExamStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
 import com.edulexa.activity.student.gallery.activity.GalleryStudentActivity
 import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
+import com.edulexa.activity.student.library.activity.LibraryActivity
 import com.edulexa.activity.student.noticeboard.activity.NoticeBoardStudentActivity
 import com.edulexa.activity.student.profile.activity.ProfileStudentActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
@@ -71,11 +72,14 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                         "examinations" -> {
                             context!!.startActivity(Intent(context!!, ExamStudentActivity::class.java))
                         }
-                        "report_card" -> {
-                            context!!.startActivity(Intent(context!!, ReportCardStudentActivity::class.java))
-                        }
                         "notice_board" -> {
                             context!!.startActivity(Intent(context!!, NoticeBoardStudentActivity::class.java))
+                        }
+                        "library" -> {
+                            context!!.startActivity(Intent(context!!, LibraryActivity::class.java))
+                        }
+                        "report_card" -> {
+                            context!!.startActivity(Intent(context!!, ReportCardStudentActivity::class.java))
                         }
                         "gallery" -> {
                             context!!.startActivity(Intent(context!!, GalleryStudentActivity::class.java))
