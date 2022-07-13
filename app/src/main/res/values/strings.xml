@@ -98,8 +98,9 @@
     <!--Examination Student Screen-->
     <string name="exam_student">Examination</string>
     <string name="examination_list">Examination List</string>
-    <string name="examination_student_start_test">Start Test</string>
+    <string name="examination_student_start">Start</string>
     <string name="examination_student_completed">Completed</string>
+    <string name="examination_student_no_data">No Data</string>
 
     <!--Examination Detail Student Screen-->
     <string name="exam_student_detail">Exam Detail</string>

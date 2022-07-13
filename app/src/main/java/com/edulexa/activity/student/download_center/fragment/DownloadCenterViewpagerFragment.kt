@@ -137,7 +137,7 @@ class DownloadCenterViewpagerFragment : Fragment() {
                     tvDownloadCenterTitle2.text = typeWiseList!!.get(secondItemPosition).getTitle()
                     if (typeWiseList!!.get(secondItemPosition).getType().equals("5")) {
                         ivDownload2.visibility = View.GONE
-                        ivDownloadCenter1.setOnClickListener {
+                        ivDownloadCenter2.setOnClickListener {
                             if (!typeWiseList!!.get(secondItemPosition).getVideoUrl().equals("")) {
                                 val id1: List<String> = typeWiseList!!.get(secondItemPosition).getVideoUrl().split("=")
                                 val a = id1.get(0)

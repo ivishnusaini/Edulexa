@@ -9,23 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.student.attendance.model.StudentAttendanceResponse
-import com.edulexa.activity.student.fee.adapter.FeeListAdapter
-import com.edulexa.activity.student.fee.adapter.FeeTypeAdapter
 import com.edulexa.activity.student.fee.model.FeeDetail
 import com.edulexa.activity.student.fee.model.FeeModel
 import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
 import com.edulexa.databinding.FragmentFeeViewpagerStudentBinding
-import com.edulexa.databinding.FragmentHomeworkViewpagerStudentBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
@@ -35,7 +27,6 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 import kotlin.collections.ArrayList
 
 class FeeViewpagerFragment : Fragment() {

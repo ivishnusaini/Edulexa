@@ -9,14 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.edulexa.activity.student.fee.adapter.FeeListAdapter
-import com.edulexa.activity.student.fee.adapter.FeeTypeAdapter
 import com.edulexa.activity.student.gallery.adapter.GalleryAlbumAdapter
 import com.edulexa.activity.student.gallery.model.GalleryTypeModel
-import com.edulexa.api.Constants
-import com.edulexa.databinding.FragmentFeeViewpagerStudentBinding
 import com.edulexa.databinding.FragmentGalleryViewpagerStudentBinding
-import com.edulexa.databinding.FragmentHomeworkViewpagerStudentBinding
 
 class GalleryViewpagerLinkFragment : Fragment() {
     var binding: FragmentGalleryViewpagerStudentBinding? = null

@@ -38,32 +38,51 @@
 
     </RelativeLayout>
 
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_60sdp"
-        android:background="@drawable/header_top_right_radius"
-        android:orientation="vertical">
+        android:background="@drawable/header_top_right_radius">
 
-        <com.edulexa.views.MediumTextView
-            android:id="@+id/tv_examination_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="@string/examination_list"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/_16ssp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_exam"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_examination_list" />
+            android:orientation="vertical">
+
+            <com.edulexa.views.MediumTextView
+                android:id="@+id/tv_examination_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="@string/examination_list"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_16ssp" />
 
 
-    </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/exam_list_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_below="@+id/tv_examination_list"
+                android:orientation="vertical" />
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_examination_no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/examination_student_no_data"
+                android:textColor="@color/primaray_text_color"
+                android:textSize="@dimen/_12ssp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
