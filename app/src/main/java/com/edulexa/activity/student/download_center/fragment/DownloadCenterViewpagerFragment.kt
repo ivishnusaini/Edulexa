@@ -109,22 +109,7 @@ class DownloadCenterViewpagerFragment : Fragment() {
                     tvDownloadCenterTitle1.text = typeWiseList!!.get(position).getTitle()
                     if (typeWiseList!!.get(position).getType().equals("5")) {
                         ivDownload1.visibility = View.GONE
-                        ivDownloadCenter1.setOnClickListener {
-                            if (!typeWiseList!!.get(position).getVideoUrl().equals("")) {
-                                val id1: List<String> = typeWiseList!!.get(position).getVideoUrl().split("=")
-                                val a = id1.get(0)
-                                val b = id1.get(1)
-                                val webIntent = Intent(
-                                    Intent.ACTION_VIEW,
-                                    Uri.parse("http://www.youtube.com/watch?v=$b")
-                                )
-                                try {
-                                    startActivity(webIntent)
-                                } catch (e: ActivityNotFoundException) {
-                                    e.printStackTrace()
-                                }
-                            }else Utils.showToast(mActivity!!,getString(R.string.download_center_student_no_file_url))
-                        }
+                        ivDownloadCenter1.tag = 20000 + position
                     }
                     else{
                         ivDownload1.visibility = View.VISIBLE
@@ -137,23 +122,7 @@ class DownloadCenterViewpagerFragment : Fragment() {
                     tvDownloadCenterTitle2.text = typeWiseList!!.get(secondItemPosition).getTitle()
                     if (typeWiseList!!.get(secondItemPosition).getType().equals("5")) {
                         ivDownload2.visibility = View.GONE
-                        ivDownloadCenter2.setOnClickListener {
-                            if (!typeWiseList!!.get(secondItemPosition).getVideoUrl().equals("")) {
-                                val id1: List<String> = typeWiseList!!.get(secondItemPosition).getVideoUrl().split("=")
-                                val a = id1.get(0)
-                                val b = id1.get(1)
-                                val webIntent = Intent(
-                                    Intent.ACTION_VIEW,
-                                    Uri.parse("http://www.youtube.com/watch?v=$b")
-                                )
-                                try {
-                                    startActivity(webIntent)
-                                } catch (e: ActivityNotFoundException) {
-                                    e.printStackTrace()
-                                }
-                            }else Utils.showToast(mActivity!!,getString(R.string.download_center_student_no_file_url))
-                        }
-
+                        ivDownloadCenter2.tag = 30000 + position
                     }
                     else{
                         ivDownload2.visibility = View.VISIBLE
@@ -222,6 +191,42 @@ class DownloadCenterViewpagerFragment : Fragment() {
                                     .show()
                             }
                         })
+                }
+
+                ivDownloadCenter1.setOnClickListener {
+                    val tag = ivDownloadCenter1.tag as Int - 20000
+                    if (!typeWiseList!!.get(tag).getVideoUrl().equals("")) {
+                        val id1: List<String> = typeWiseList!!.get(tag).getVideoUrl().split("=")
+                        val a = id1.get(0)
+                        val b = id1.get(1)
+                        val webIntent = Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("http://www.youtube.com/watch?v=$b")
+                        )
+                        try {
+                            startActivity(webIntent)
+                        } catch (e: ActivityNotFoundException) {
+                            e.printStackTrace()
+                        }
+                    }else Utils.showToast(mActivity!!,getString(R.string.download_center_student_no_file_url))
+                }
+
+                ivDownloadCenter2.setOnClickListener {
+                    val tag = ivDownloadCenter2.tag as Int - 30000
+                    if (!typeWiseList!!.get(tag).getVideoUrl().equals("")) {
+                        val id1: List<String> = typeWiseList!!.get(tag).getVideoUrl().split("=")
+                        val a = id1.get(0)
+                        val b = id1.get(1)
+                        val webIntent = Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("http://www.youtube.com/watch?v=$b")
+                        )
+                        try {
+                            startActivity(webIntent)
+                        } catch (e: ActivityNotFoundException) {
+                            e.printStackTrace()
+                        }
+                    }else Utils.showToast(mActivity!!,getString(R.string.download_center_student_no_file_url))
                 }
 
                 binding!!.downloadCenterListLay.addView(itemView)
