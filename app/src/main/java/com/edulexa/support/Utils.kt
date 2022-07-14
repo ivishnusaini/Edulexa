@@ -467,7 +467,7 @@ class Utils {
                     file.mkdir()
                 }
 
-                val downloadFile = File("$path/$fileName")
+                val downloadFile = File(path,fileName)
 
                 val Download_Uri = Uri.parse(downloadFileUrl)
 
