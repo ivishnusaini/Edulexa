@@ -218,10 +218,14 @@
 
     <!--Library-->
     <string name="library_student">Library</string>
+    <string name="library_student_all_books">All Books</string>
     <string name="library_student_no_data">No Data</string>
     <string name="library_student_books_in_library">Books in Library</string>
     <string name="library_student_books_issued">Books Issued</string>
     <string name="library_student_books_returned">Books Returned</string>
     <string name="library_student_see">See</string>
+    <string name="library_student_string_format">%s%s</string>
+    <string name="library_student_no_book_issued">No book issued</string>
+    <string name="library_student_search_here">Search here</string>
 
 </resources>

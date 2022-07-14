@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.student.homework.activity.HomeworkStudentActivity">
+
+    <RelativeLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/header_bg_staff">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_back_white" />
+
+        <com.edulexa.views.MediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_toEndOf="@+id/iv_back"
+            android:text="@string/library_student_all_books"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:background="@drawable/header_top_right_radius"
+        android:orientation="vertical">
+
+        <com.edulexa.views.RegularEditText
+            android:id="@+id/et_library_all_book_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/bg_border_5"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:textColor="@color/primaray_text_color"
+            android:hint="@string/library_student_search_here"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/library_all_book_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp" />
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_library_all_book_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:gravity="center"
+            android:text="@string/library_student_no_data"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</RelativeLayout>

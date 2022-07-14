@@ -5,6 +5,7 @@ import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 
@@ -50,4 +51,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/getLibraryBookIssued")
     fun getLibraryBookIssued(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @GET("Webservice/getLibraryBooks")
+    fun getLibraryAllBooks(): Call<ResponseBody>
 }
