@@ -24,6 +24,7 @@ import com.edulexa.activity.student.library.activity.LibraryActivity
 import com.edulexa.activity.student.noticeboard.activity.NoticeBoardStudentActivity
 import com.edulexa.activity.student.profile.activity.ProfileStudentActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
+import com.edulexa.activity.student.transport.activity.TransportActivity
 import com.edulexa.databinding.ItemStudentDashboardBinding
 import com.edulexa.databinding.ItemStudentDashboardNoticeBoardBinding
 import com.edulexa.support.Utils
@@ -77,6 +78,9 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                         }
                         "library" -> {
                             context!!.startActivity(Intent(context!!, LibraryActivity::class.java))
+                        }
+                        "transport_routes" -> {
+                            context!!.startActivity(Intent(context!!, TransportActivity::class.java))
                         }
                         "report_card" -> {
                             context!!.startActivity(Intent(context!!, ReportCardStudentActivity::class.java))

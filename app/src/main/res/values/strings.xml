@@ -228,4 +228,8 @@
     <string name="library_student_no_book_issued">No book issued</string>
     <string name="library_student_search_here">Search here</string>
 
+    <!--Transport-->
+    <string name="transport_student">Transport</string>
+    <string name="transport_student_no_data">No Data</string>
+
 </resources>

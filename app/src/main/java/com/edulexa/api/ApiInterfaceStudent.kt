@@ -54,4 +54,7 @@ interface ApiInterfaceStudent {
 
     @GET("Webservice/getLibraryBooks")
     fun getLibraryAllBooks(): Call<ResponseBody>
+
+    @POST("Webservice/getTransportroute")
+    fun getTransportRoute(@Body requestBody : RequestBody): Call<ResponseBody>
 }
