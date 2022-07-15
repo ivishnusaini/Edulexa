@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.student.online_exam.activity.OnlineExamActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.student.hostel.activity.HostelDetailActivity"
             android:exported="false" />
         <activity

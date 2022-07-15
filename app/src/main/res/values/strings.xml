@@ -243,4 +243,11 @@
     <string name="hostel_student">Hostel</string>
     <string name="hostel_student_no_data">No Data</string>
 
+    <!--Online Exam-->
+    <string name="online_exam_student">Online Exam</string>
+    <string name="online_exam_student_active">Active</string>
+    <string name="online_exam_student_submitted">Submitted</string>
+    <string name="online_exam_student_result">Result</string>
+    <string name="online_exam_student_expire">Expire</string>
+
 </resources>

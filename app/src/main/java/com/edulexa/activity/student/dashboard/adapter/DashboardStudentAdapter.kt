@@ -23,6 +23,7 @@ import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
 import com.edulexa.activity.student.hostel.activity.HostelActivity
 import com.edulexa.activity.student.library.activity.LibraryActivity
 import com.edulexa.activity.student.noticeboard.activity.NoticeBoardStudentActivity
+import com.edulexa.activity.student.online_exam.activity.OnlineExamActivity
 import com.edulexa.activity.student.profile.activity.ProfileStudentActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
 import com.edulexa.activity.student.transport.activity.TransportActivity
@@ -85,6 +86,9 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                         }
                         "hostel_rooms" -> {
                             context!!.startActivity(Intent(context!!, HostelActivity::class.java))
+                        }
+                        "online_examination" -> {
+                            context!!.startActivity(Intent(context!!, OnlineExamActivity::class.java))
                         }
                         "report_card" -> {
                             context!!.startActivity(Intent(context!!, ReportCardStudentActivity::class.java))
