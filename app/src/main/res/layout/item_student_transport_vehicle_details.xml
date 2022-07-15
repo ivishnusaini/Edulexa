@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp">
+
+        <com.edulexa.views.MediumTextView
+            android:id="@+id/tv_transport_vehicle_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+
+        <ImageView
+            android:id="@+id/iv_transport_cross"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_close" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="2">
+
+        <com.edulexa.views.RegularTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/transport_student_vehicle_no"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_transport_vehicle_no"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="2">
+
+        <com.edulexa.views.RegularTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/transport_student_vehicle_model"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_transport_vehicle_model"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="2">
+
+        <com.edulexa.views.RegularTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/transport_student_made"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_transport_vehicle_made"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="2">
+
+        <com.edulexa.views.RegularTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/transport_student_driver_name"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_transport_driver_name"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="2">
+
+        <com.edulexa.views.RegularTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/transport_student_driver_license"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_transport_driver_license"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="2">
+
+        <com.edulexa.views.RegularTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/transport_student_driver_contact"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_transport_driver_contact"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+
+</LinearLayout>

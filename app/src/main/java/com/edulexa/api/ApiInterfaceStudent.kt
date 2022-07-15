@@ -57,4 +57,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/getTransportroute")
     fun getTransportRoute(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getTransportVehicleDetails")
+    fun getTransportVehicleDetails(@Body requestBody : RequestBody): Call<ResponseBody>
 }

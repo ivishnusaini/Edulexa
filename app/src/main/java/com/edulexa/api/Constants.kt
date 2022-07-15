@@ -131,6 +131,7 @@ class Constants {
         const val TAG = "tag"
         const val SEARCH = "search"
         const val EXAMID = "examId"
+        const val VEHICLEID = "vehicleId"
     }
 
     object Api {

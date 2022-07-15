@@ -232,5 +232,11 @@
     <string name="transport_student">Transport</string>
     <string name="transport_student_no_data">No Data</string>
     <string name="transport_student_available_vehicle">Available Vehicle List</string>
+    <string name="transport_student_vehicle_no">Vehicle No.</string>
+    <string name="transport_student_vehicle_model">Vehicle Model</string>
+    <string name="transport_student_made">Made</string>
+    <string name="transport_student_driver_name">Driver Name</string>
+    <string name="transport_student_driver_license">Driver Licence</string>
+    <string name="transport_student_driver_contact">Driver Contact</string>
 
 </resources>
