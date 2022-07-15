@@ -231,5 +231,6 @@
     <!--Transport-->
     <string name="transport_student">Transport</string>
     <string name="transport_student_no_data">No Data</string>
+    <string name="transport_student_available_vehicle">Available Vehicle List</string>
 
 </resources>

@@ -2,13 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_10sdp">
+    android:layout_marginTop="@dimen/_10sdp"
+    android:paddingTop="@dimen/_2sdp"
+    android:paddingBottom="@dimen/_2sdp">
 
     <com.edulexa.views.RegularTextView
         android:id="@+id/tv_transport_vehicle_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_12ssp"
-        android:textColor="@color/primaray_text_color"/>
+        android:layout_centerVertical="true"
+        android:textColor="@color/primaray_text_color"
+        android:textSize="@dimen/_12ssp" />
+
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:background="@drawable/ic_next"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:backgroundTint="@color/primaray_text_color"
+        android:contentDescription="@string/app_name" />
 
 </RelativeLayout>
