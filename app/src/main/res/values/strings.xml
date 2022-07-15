@@ -239,4 +239,8 @@
     <string name="transport_student_driver_license">Driver Licence</string>
     <string name="transport_student_driver_contact">Driver Contact</string>
 
+    <!--Hostel-->
+    <string name="hostel_student">Hostel</string>
+    <string name="hostel_student_no_data">No Data</string>
+
 </resources>

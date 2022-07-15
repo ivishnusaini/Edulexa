@@ -43,6 +43,11 @@ class Constants {
         val EXAM_ID = "exam_id"
     }
 
+    object StudentHostel {
+        val TITLE = "title"
+        val HOSTELID = "hostelId"
+    }
+
     object AppSaveData {
         var gallerystudenttype = "all";
     }
@@ -132,6 +137,7 @@ class Constants {
         const val SEARCH = "search"
         const val EXAMID = "examId"
         const val VEHICLEID = "vehicleId"
+        const val HOSTELID = "hostelId"
     }
 
     object Api {
