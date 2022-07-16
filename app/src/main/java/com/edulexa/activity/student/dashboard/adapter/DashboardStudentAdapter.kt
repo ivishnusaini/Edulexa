@@ -6,15 +6,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.edulexa.R
 import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
 import com.edulexa.activity.student.class_timetable.activity.ClassTimetableActivity
 import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlanActivity
 import com.edulexa.activity.student.dashboard.model.DashboardModuleModel
-import com.edulexa.activity.student.dashboard.model.ModuleDashboard
 import com.edulexa.activity.student.download_center.activity.DownloadCenterActivity
 import com.edulexa.activity.student.examination.activity.ExamStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
@@ -23,12 +20,11 @@ import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
 import com.edulexa.activity.student.hostel.activity.HostelActivity
 import com.edulexa.activity.student.library.activity.LibraryActivity
 import com.edulexa.activity.student.noticeboard.activity.NoticeBoardStudentActivity
-import com.edulexa.activity.student.online_exam.activity.OnlineExamActivity
+import com.edulexa.activity.student.online_exam.activity.OnlineExamListActivity
 import com.edulexa.activity.student.profile.activity.ProfileStudentActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
 import com.edulexa.activity.student.transport.activity.TransportActivity
 import com.edulexa.databinding.ItemStudentDashboardBinding
-import com.edulexa.databinding.ItemStudentDashboardNoticeBoardBinding
 import com.edulexa.support.Utils
 
 class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel?>?) :
@@ -88,7 +84,7 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                             context!!.startActivity(Intent(context!!, HostelActivity::class.java))
                         }
                         "online_examination" -> {
-                            context!!.startActivity(Intent(context!!, OnlineExamActivity::class.java))
+                            context!!.startActivity(Intent(context!!, OnlineExamListActivity::class.java))
                         }
                         "report_card" -> {
                             context!!.startActivity(Intent(context!!, ReportCardStudentActivity::class.java))

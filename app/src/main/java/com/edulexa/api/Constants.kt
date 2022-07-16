@@ -48,6 +48,17 @@ class Constants {
         val HOSTELID = "hostelId"
     }
 
+    object StudentOnlineExam {
+        val EXAM_NAME = "name"
+        val EXAMID = "examId"
+        val DURATION = "duration"
+        val TOTAL_QUESTION = "total_question"
+        val DESCRIPTION = "description"
+        val ONLINEEXAMNATIVE = "onlineExamNative"
+        val WEBVIEWURL = "webviewUrl"
+        val EXAM_FROM = "exam_from"
+    }
+
     object AppSaveData {
         var gallerystudenttype = "all";
     }
@@ -138,6 +149,7 @@ class Constants {
         const val EXAMID = "examId"
         const val VEHICLEID = "vehicleId"
         const val HOSTELID = "hostelId"
+        const val EXAM_ID = "exam_id"
     }
 
     object Api {

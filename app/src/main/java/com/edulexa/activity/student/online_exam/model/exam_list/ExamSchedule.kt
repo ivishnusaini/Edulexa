@@ -109,6 +109,8 @@ class ExamSchedule {
     private var examEndDate: String? = null
 
     fun getId(): String? {
+        if (id == null)
+            return ""
         return id
     }
 
@@ -135,6 +137,8 @@ class ExamSchedule {
     }
 
     fun getExamFrom(): String? {
+        if (examFrom == null)
+            return ""
         return examFrom
     }
 
@@ -167,6 +171,8 @@ class ExamSchedule {
     }
 
     fun getDuration(): String? {
+        if (duration == null)
+            return "0"
         return duration
     }
 
@@ -191,6 +197,8 @@ class ExamSchedule {
     }
 
     fun getDescription(): String? {
+        if (description == null)
+            return ""
         return description
     }
 
@@ -289,6 +297,8 @@ class ExamSchedule {
     }
 
     fun getTotalQuestions(): String? {
+        if (totalQuestions == null)
+            return "0"
         return totalQuestions
     }
 

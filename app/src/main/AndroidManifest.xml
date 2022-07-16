@@ -16,7 +16,13 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.student.online_exam.activity.OnlineExamActivity"
+            android:name=".activity.student.online_exam.activity.OnlineExamQuestionAnsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.student.online_exam.activity.OnlineExamDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.student.online_exam.activity.OnlineExamListActivity"
             android:exported="false" />
         <activity
             android:name=".activity.student.hostel.activity.HostelDetailActivity"

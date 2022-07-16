@@ -1,6 +1,5 @@
 package com.edulexa.support
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
@@ -37,8 +36,6 @@ import com.edulexa.activity.student.login.StudentLoginResponse
 import com.edulexa.api.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
-import com.nabinbhandari.android.permissions.PermissionHandler
-import com.nabinbhandari.android.permissions.Permissions
 import java.io.File
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -214,6 +211,13 @@ class Utils {
         fun getCurrentDate(): String? {
             @SuppressLint("SimpleDateFormat") val dateFormat: DateFormat =
                 SimpleDateFormat("yyyy-MM-dd")
+            val date = Date()
+            return dateFormat.format(date)
+        }
+
+        fun getCurrentDateTime(): String? {
+            @SuppressLint("SimpleDateFormat") val dateFormat: DateFormat =
+                SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
             val date = Date()
             return dateFormat.format(date)
         }

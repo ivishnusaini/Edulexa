@@ -27,7 +27,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OnlineExamActivity : AppCompatActivity(),View.OnClickListener {
+class OnlineExamListActivity : AppCompatActivity(),View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityOnlineExamStudentBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +82,8 @@ class OnlineExamActivity : AppCompatActivity(),View.OnClickListener {
                                     binding!!.studentOnlineExamRecycler.visibility = View.VISIBLE
                                     binding!!.tvStudentOnlineExamNoData.visibility = View.GONE
                                     binding!!.studentOnlineExamRecycler.layoutManager = LinearLayoutManager(mActivity!!,RecyclerView.VERTICAL,false)
-                                    binding!!.studentOnlineExamRecycler.adapter = OnlineExamListAdapter(mActivity!!,modelResponse.getExamSchedule(),)
+                                    binding!!.studentOnlineExamRecycler.adapter = OnlineExamListAdapter(mActivity!!,modelResponse.getExamSchedule()
+                                        ,modelResponse.getOnlineExamNative()!!,modelResponse.getWebviewUrl()!!)
                                 }else{
                                     binding!!.studentOnlineExamRecycler.visibility = View.GONE
                                     binding!!.tvStudentOnlineExamNoData.visibility = View.VISIBLE

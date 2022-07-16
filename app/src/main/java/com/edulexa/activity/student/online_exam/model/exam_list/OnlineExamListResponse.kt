@@ -33,6 +33,8 @@ class OnlineExamListResponse {
     }
 
     fun getOnlineExamNative(): String? {
+        if (onlineExamNative == null)
+            return ""
         return onlineExamNative
     }
 
@@ -41,6 +43,8 @@ class OnlineExamListResponse {
     }
 
     fun getWebviewUrl(): String? {
+        if (webviewUrl == null)
+            return ""
         return webviewUrl
     }
 

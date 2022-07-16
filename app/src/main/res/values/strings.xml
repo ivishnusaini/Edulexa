@@ -250,4 +250,20 @@
     <string name="online_exam_student_result">Result</string>
     <string name="online_exam_student_expire">Expire</string>
 
+    <!--Online Exam Detail-->
+    <string name="online_exam_detail_student_exam_name">Exam Name :</string>
+    <string name="online_exam_detail_student_exam_duration">Exam Duration :</string>
+    <string name="online_exam_detail_student_exam_total_question">Total Question :</string>
+    <string name="online_exam_detail_student_exam_description">Description :</string>
+    <string name="online_exam_detail_student_exam_start">Exam Start</string>
+    <string name="online_exam_detail_student_exam_will_start">Exam will start</string>
+
+
+    <!--Online exam question ans-->
+    <string name="online_exam_student_question_ans_time_format">00:00:00</string>
+    <string name="online_exam_student_question_ans_submit">Submit</string>
+    <string name="online_exam_student_question_ans_skip">Skip</string>
+    <string name="online_exam_student_question_ans_previous">Previous</string>
+    <string name="online_exam_student_question_ans_next">Next</string>
+
 </resources>

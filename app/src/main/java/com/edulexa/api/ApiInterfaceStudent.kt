@@ -69,4 +69,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/getOnlineExam")
     fun getOnlineExamList(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/startOnlineExam")
+    fun getOnlineExamQuestionAnsList(@Body requestBody : RequestBody): Call<ResponseBody>
 }
