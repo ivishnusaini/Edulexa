@@ -265,5 +265,10 @@
     <string name="online_exam_student_question_ans_skip">Skip</string>
     <string name="online_exam_student_question_ans_previous">Previous</string>
     <string name="online_exam_student_question_ans_next">Next</string>
+    <string name="online_exam_student_question_ans_enter_answer">Enter answer</string>
+    <string name="online_exam_student_question_ans_timeout_submit">You time out please submit your exam</string>
+    <string name="online_exam_student_question_ans_timeout">timeout</string>
+    <string name="online_exam_student_question_ans_question_type">Question Type :</string>
+    <string name="online_exam_student_question_ans_mark">Mark :</string>
 
 </resources>

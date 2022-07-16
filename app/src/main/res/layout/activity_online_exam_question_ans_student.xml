@@ -46,110 +46,335 @@
         android:background="@drawable/header_top_right_radius">
 
         <RelativeLayout
-            android:id="@+id/online_exam_timer_lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp">
-
-            <com.edulexa.views.MediumTextView
-                android:id="@+id/tv_online_exam_q_ans_timer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/online_exam_student_question_ans_time_format"
-                android:textColor="@color/primaray_text_color"
-                android:textSize="@dimen/_16ssp" />
-
-            <com.edulexa.views.MediumTextView
-                android:id="@+id/tv_online_exam_q_ans_submit"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/ripple_effect_5"
-                android:backgroundTint="@color/green"
-                android:gravity="center"
-                android:text="@string/online_exam_student_question_ans_submit"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_16ssp" />
-
-
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/online_exam_q_ans_view"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_below="@+id/online_exam_timer_lay"
-            android:background="@color/gray"/>
-
-        <ScrollView
+            android:id="@+id/online_exam_q_ans_data_lay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/online_exam_q_ans_view"
-            android:layout_above="@+id/online_exam_q_ans_bottom_lay">
+            android:visibility="visible">
 
-
-        </ScrollView>
-
-        <LinearLayout
-            android:id="@+id/online_exam_q_ans_bottom_lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignParentBottom="true">
-
-            <com.edulexa.views.RegularTextView
-                android:id="@+id/tv_online_exam_q_ans_skip"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/online_exam_timer_lay"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_gravity="end"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:text="@string/online_exam_student_question_ans_skip"
-                android:textAllCaps="true"
-                android:textColor="@color/primaray_text_color"
-                android:textSize="@dimen/_12ssp"/>
+                android:padding="@dimen/_10sdp">
+
+                <com.edulexa.views.MediumTextView
+                    android:id="@+id/tv_online_exam_q_ans_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text=""
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_16ssp" />
+
+                <com.edulexa.views.MediumTextView
+                    android:id="@+id/tv_online_exam_q_ans_submit"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/ripple_effect_5"
+                    android:backgroundTint="@color/green"
+                    android:gravity="center"
+                    android:text="@string/online_exam_student_question_ans_submit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/online_exam_q_ans_view"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/online_exam_timer_lay"
+                android:background="@color/gray" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/online_exam_q_ans_bottom_lay"
+                android:layout_below="@+id/online_exam_q_ans_view">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.edulexa.views.RegularTextView
+                            android:id="@+id/tv_online_exam_q_ans_question_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true">
+
+                            <com.edulexa.views.RegularTextView
+                                android:id="@+id/tv_online_exam_q_ans_question_mark"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/primaray_text_color"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <com.edulexa.views.RegularTextView
+                                android:id="@+id/tv_online_exam_q_ans_question_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_toEndOf="@+id/tv_online_exam_q_ans_question_mark"
+                                android:text=""
+                                android:textColor="@color/red"
+                                android:textSize="@dimen/_14ssp" />
+
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <WebView
+                        android:id="@+id/web_view_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        tools:ignore="WebViewLayout" />
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_q_ans"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <RadioButton
+                            android:id="@+id/radio_q_ans_option1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color" />
+
+                        <RadioButton
+                            android:id="@+id/radio_q_ans_option2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color" />
+
+                        <RadioButton
+                            android:id="@+id/radio_q_ans_option3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color" />
+
+                        <RadioButton
+                            android:id="@+id/radio_q_ans_option4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color" />
+
+                        <RadioButton
+                            android:id="@+id/radio_q_ans_option5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color" />
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:id="@+id/multiple_choice_q_ans_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <CheckBox
+                            android:id="@+id/check_box_q_ans_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=""
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <CheckBox
+                            android:id="@+id/check_box_q_ans_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <CheckBox
+                            android:id="@+id/check_box_q_ans_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <CheckBox
+                            android:id="@+id/check_box_q_ans_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <CheckBox
+                            android:id="@+id/check_box_q_ans_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/primaray_text_color"
+                            android:textColorHint="@color/primaray_text_color"
+                            android:textSize="@dimen/_12sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/subjective_q_ans_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+
+                        <com.edulexa.views.RegularEditText
+                            android:id="@+id/et_q_ans_subjective"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:background="@drawable/bg_border_5"
+                            android:gravity="start"
+                            android:hint="@string/online_exam_student_question_ans_enter_answer"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/_10sdp"
+                            android:text=""
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/online_exam_q_ans_subjctive_image_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:nestedScrollingEnabled="false" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/q_ans_integer_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <com.edulexa.views.RegularEditText
+                            android:id="@+id/et_q_ans_integer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:background="@drawable/bg_border_5"
+                            android:gravity="start"
+                            android:hint="@string/online_exam_student_question_ans_enter_answer"
+                            android:padding="@dimen/_10sdp"
+                            android:textColor="@color/primaray_text_color"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </ScrollView>
 
             <LinearLayout
+                android:id="@+id/online_exam_q_ans_bottom_lay"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:weightSum="2">
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
 
-                <com.edulexa.views.RegularButton
-                    android:id="@+id/tv_online_exam_q_ans_previous"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ripple_effect_5"
-                    android:gravity="center"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="@string/online_exam_student_question_ans_previous"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp" />
+                <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_online_exam_q_ans_skip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="@string/online_exam_student_question_ans_skip"
+                    android:textAllCaps="true"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp" />
 
-                <com.edulexa.views.RegularButton
-                    android:id="@+id/tv_online_exam_q_ans_next"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ripple_effect_5"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:gravity="center"
-                    android:text="@string/online_exam_student_question_ans_next"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp" />
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:weightSum="2">
 
+                    <com.edulexa.views.RegularButton
+                        android:id="@+id/tv_online_exam_q_ans_previous"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ripple_effect_5"
+                        android:gravity="center"
+                        android:text="@string/online_exam_student_question_ans_previous"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.edulexa.views.RegularButton
+                        android:id="@+id/tv_online_exam_q_ans_next"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ripple_effect_5"
+                        android:gravity="center"
+                        android:text="@string/online_exam_student_question_ans_next"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14ssp" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
