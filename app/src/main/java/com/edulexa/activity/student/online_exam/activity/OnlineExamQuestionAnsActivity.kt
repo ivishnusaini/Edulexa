@@ -8,9 +8,13 @@ import android.os.CountDownTimer
 import android.text.Html
 import android.view.View
 import android.webkit.WebSettings
+import android.widget.GridLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.online_exam.adapter.OnlineExamSubjectiveImageAdapter
 import com.edulexa.activity.student.online_exam.model.question_ans.Exam
 import com.edulexa.activity.student.online_exam.model.question_ans.Question
 import com.edulexa.activity.student.online_exam.model.question_ans.QuestionAnsResponse
@@ -209,12 +213,39 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                     binding!!.multipleChoiceQAnsLay.visibility = View.VISIBLE
                     binding!!.subjectiveQAnsLay.visibility = View.GONE
                     binding!!.qAnsIntegerLay.visibility = View.GONE
+                    if (!questionModel.getOptA()!!.equals(""))
+                        binding!!.checkBoxQAns1.visibility = View.VISIBLE
+                    else binding!!.checkBoxQAns1.visibility = View.GONE
+
+                    if (!questionModel.getOptB()!!.equals(""))
+                        binding!!.checkBoxQAns2.visibility = View.VISIBLE
+                    else binding!!.checkBoxQAns2.visibility = View.GONE
+
+                    if (!questionModel.getOptC()!!.equals(""))
+                        binding!!.checkBoxQAns3.visibility = View.VISIBLE
+                    else binding!!.checkBoxQAns3.visibility = View.GONE
+
+                    if (!questionModel.getOptD()!!.equals(""))
+                        binding!!.checkBoxQAns4.visibility = View.VISIBLE
+                    else binding!!.checkBoxQAns4.visibility = View.GONE
+
+                    if (!questionModel.getOptE()!!.equals(""))
+                        binding!!.checkBoxQAns5.visibility = View.VISIBLE
+                    else binding!!.checkBoxQAns5.visibility = View.GONE
+
+                    binding!!.checkBoxQAns1.text = HtmlCompat.fromHtml(questionModel.getOptA()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    binding!!.checkBoxQAns2.text = HtmlCompat.fromHtml(questionModel.getOptB()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    binding!!.checkBoxQAns3.text = HtmlCompat.fromHtml(questionModel.getOptC()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    binding!!.checkBoxQAns4.text = HtmlCompat.fromHtml(questionModel.getOptD()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    binding!!.checkBoxQAns5.text = HtmlCompat.fromHtml(questionModel.getOptE()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
                 }
                 "Subjective" -> {
                     binding!!.radioGroupQAns.visibility = View.GONE
                     binding!!.multipleChoiceQAnsLay.visibility = View.GONE
                     binding!!.subjectiveQAnsLay.visibility = View.VISIBLE
                     binding!!.qAnsIntegerLay.visibility = View.GONE
+                    binding!!.onlineExamQAnsSubjctiveImageRecycler.layoutManager = GridLayoutManager(mActivity,3,RecyclerView.VERTICAL,false)
+                    binding!!.onlineExamQAnsSubjctiveImageRecycler.adapter = OnlineExamSubjectiveImageAdapter(mActivity!!,questionModel.getImageList()!!)
                 }
                 "Integer" -> {
                     binding!!.radioGroupQAns.visibility = View.GONE

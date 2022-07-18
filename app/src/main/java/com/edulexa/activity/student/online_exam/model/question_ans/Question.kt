@@ -1,13 +1,19 @@
 package com.edulexa.activity.student.online_exam.model.question_ans
 
+import android.net.Uri
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
 
-
-
 class Question {
+
+    var ansSubmit = false
+    var subjectiveImageUpload = false
+    var imageList : List<Uri?>? = null
+    var documentFile : List<UploadFileModel?>? = null
+    var submittedImageId : List<Int?>? = null
+
     @SerializedName("id")
     @Expose
     private var id: String? = null
@@ -83,6 +89,54 @@ class Question {
     @SerializedName("q_type_name")
     @Expose
     private var qTypeName: String? = null
+
+    fun isAnsSubmit(): Boolean {
+        return ansSubmit
+    }
+
+    @JvmName("setAnsSubmit1")
+    fun setAnsSubmit(ansSubmit: Boolean) {
+        this.ansSubmit = ansSubmit
+    }
+
+    fun isSubjectiveImageUpload(): Boolean {
+        return subjectiveImageUpload
+    }
+
+    @JvmName("setSubjectiveImageUpload1")
+    fun setSubjectiveImageUpload(subjectiveImageUpload: Boolean) {
+        this.subjectiveImageUpload = subjectiveImageUpload
+    }
+
+    @JvmName("getImageList1")
+    fun getImageList(): List<Uri?>? {
+        return imageList
+    }
+
+    @JvmName("setImageList1")
+    fun setImageList(imageList: List<Uri?>?) {
+        this.imageList = imageList
+    }
+
+    @JvmName("getDocumentFile1")
+    fun getDocumentFile(): List<UploadFileModel?>? {
+        return documentFile
+    }
+
+    @JvmName("setDocumentFile1")
+    fun setDocumentFile(documentFile: List<UploadFileModel?>?) {
+        this.documentFile = documentFile
+    }
+
+    @JvmName("getSubmittedImageId1")
+    fun getSubmittedImageId(): List<Int?>? {
+        return submittedImageId
+    }
+
+    @JvmName("setSubmittedImageId1")
+    fun setSubmittedImageId(submittedImageId: List<Int?>?) {
+        this.submittedImageId = submittedImageId
+    }
 
     fun getId(): String? {
         return id

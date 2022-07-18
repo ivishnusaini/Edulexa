@@ -160,6 +160,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
+                            android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color" />
 
@@ -168,6 +171,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color" />
 
@@ -176,6 +181,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color" />
 
@@ -184,6 +191,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color" />
 
@@ -192,6 +201,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color" />
                     </RadioGroup>
