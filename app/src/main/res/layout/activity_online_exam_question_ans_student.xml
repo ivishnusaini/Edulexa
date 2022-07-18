@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:orientation="vertical"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <RadioButton
                             android:id="@+id/radio_q_ans_option1"
@@ -219,8 +219,10 @@
                             android:id="@+id/check_box_q_ans_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
                             android:text=""
+                            android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color"
                             android:textSize="@dimen/_12sdp" />
@@ -230,6 +232,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
+                            android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color"
                             android:textSize="@dimen/_12sdp" />
@@ -239,6 +244,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
+                            android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color"
                             android:textSize="@dimen/_12sdp" />
@@ -248,6 +256,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
+                            android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color"
                             android:textSize="@dimen/_12sdp" />
@@ -257,6 +268,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
+                            android:gravity="top"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
                             android:textColor="@color/primaray_text_color"
                             android:textColorHint="@color/primaray_text_color"
                             android:textSize="@dimen/_12sdp" />
@@ -276,7 +290,7 @@
                             android:id="@+id/et_q_ans_subjective"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:background="@drawable/bg_border_5"
                             android:gravity="start"
@@ -308,7 +322,7 @@
                             android:id="@+id/et_q_ans_integer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:background="@drawable/bg_border_5"
                             android:gravity="start"

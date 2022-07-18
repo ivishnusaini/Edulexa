@@ -2,6 +2,7 @@ package com.edulexa.activity.student.online_exam.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -18,6 +19,7 @@ import com.edulexa.activity.student.online_exam.adapter.OnlineExamSubjectiveImag
 import com.edulexa.activity.student.online_exam.model.question_ans.Exam
 import com.edulexa.activity.student.online_exam.model.question_ans.Question
 import com.edulexa.activity.student.online_exam.model.question_ans.QuestionAnsResponse
+import com.edulexa.activity.student.online_exam.model.question_ans.UploadFileModel
 import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
@@ -42,6 +44,8 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
     var listQuestions: List<Question?>? = null
     var examModel: Exam? = null
     var questionNoIndex = 0
+    var imageList : List<Uri>? = null
+    var documentFile : List<UploadFileModel>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnlineExamQuestionAnsStudentBinding.inflate(layoutInflater)
@@ -58,6 +62,8 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
 
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
+        binding!!.tvOnlineExamQAnsNext.setOnClickListener(this)
+        binding!!.tvOnlineExamQAnsPrevious.setOnClickListener(this)
     }
 
     private fun getBundleData() {
@@ -130,6 +136,16 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                                 if (modelResponse.getQuestionList()!!.size > 0)
                                     listQuestions = modelResponse.getQuestionList()
                                 if (examModel != null && listQuestions!!.size > 0) {
+                                    for (question in listQuestions!!){
+                                        if (question!!.getqTypeName().equals("Subjective")){
+                                            imageList = ArrayList()
+                                            documentFile = ArrayList()
+                                            (imageList as ArrayList<Uri>).add(Uri.parse("null"))
+                                            (documentFile as ArrayList<UploadFileModel>).add(UploadFileModel(null,false))
+                                            question.setImageList(imageList)
+                                            question.setDocumentFile(documentFile)
+                                        }
+                                    }
                                     setUpTimer()
                                     loadQuestion()
                                 }
@@ -315,5 +331,17 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
+        else if (id == R.id.tv_online_exam_q_ans_next){
+            questionNoIndex++
+            if (questionNoIndex < listQuestions!!.size)
+                loadQuestion()
+            else questionNoIndex = listQuestions!!.size - 1
+        }
+        else if (id == R.id.tv_online_exam_q_ans_previous){
+            questionNoIndex--
+            if (questionNoIndex >= 0)
+                loadQuestion()
+            else questionNoIndex = 0
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.edulexa.activity.student.online_exam.model.question_ans
 
 import java.io.File
 
-class UploadFileModel(file: File,upload : Boolean) {
+class UploadFileModel(file: File?,upload : Boolean) {
     var file: File? = null
     var upload = false
     init {
