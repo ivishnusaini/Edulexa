@@ -154,7 +154,7 @@ class DownloadCenterViewpagerFragment : Fragment() {
                                 context: Context,
                                 deniedPermissions: java.util.ArrayList<String>
                             ) {
-                                Toast.makeText(mActivity, "Permission denied", Toast.LENGTH_SHORT)
+                                Toast.makeText(mActivity, getString(R.string.permission_denied), Toast.LENGTH_SHORT)
                                     .show()
                             }
                         })

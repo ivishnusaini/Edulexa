@@ -49,7 +49,7 @@
             android:id="@+id/online_exam_q_ans_data_lay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <RelativeLayout
                 android:id="@+id/online_exam_timer_lay"
@@ -301,12 +301,19 @@
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_12ssp" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/online_exam_q_ans_subjctive_image_recycler"
+                        <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/_10sdp"
-                            android:nestedScrollingEnabled="false" />
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:id="@+id/online_exam_q_ans_subjctive_image_lay"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginBottom="@dimen/_10sdp"/>
+
+
+                        </ScrollView>
 
                     </LinearLayout>
 

@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
@@ -14,6 +15,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import android.text.Html
 import android.util.Log
 import android.view.View
@@ -36,6 +38,7 @@ import com.edulexa.activity.student.login.StudentLoginResponse
 import com.edulexa.api.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -493,6 +496,14 @@ class Utils {
                 Toast.makeText(context, "Download Successfully", Toast.LENGTH_SHORT).show()
                 return downloadManager.enqueue(request)
             }else return 0
+        }
+
+        fun getImageUri(context: Activity, inImage: Bitmap): Uri {
+            val bytes = ByteArrayOutputStream()
+            inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+            val path =
+                MediaStore.Images.Media.insertImage(context.contentResolver, inImage, "Title", null)
+            return Uri.parse(path)
         }
     }
 }

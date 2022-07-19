@@ -1,21 +1,33 @@
 package com.edulexa.activity.student.online_exam.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.CountDownTimer
+import android.os.*
+import android.provider.MediaStore
 import android.text.Html
+import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import android.webkit.WebSettings
-import android.widget.GridLayout
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.documentfile.provider.DocumentFile
 import com.edulexa.R
-import com.edulexa.activity.student.online_exam.adapter.OnlineExamSubjectiveImageAdapter
 import com.edulexa.activity.student.online_exam.model.question_ans.Exam
 import com.edulexa.activity.student.online_exam.model.question_ans.Question
 import com.edulexa.activity.student.online_exam.model.question_ans.QuestionAnsResponse
@@ -24,8 +36,12 @@ import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityOnlineExamQuestionAnsStudentBinding
+import com.edulexa.databinding.DialogSelectImageBinding
+import com.edulexa.support.FileUtils
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
+import com.nabinbhandari.android.permissions.PermissionHandler
+import com.nabinbhandari.android.permissions.Permissions
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -33,9 +49,12 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.time.LocalTime
+import java.util.*
+import kotlin.collections.ArrayList
 
 class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
@@ -44,8 +63,13 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
     var listQuestions: List<Question?>? = null
     var examModel: Exam? = null
     var questionNoIndex = 0
-    var imageList : List<Uri>? = null
-    var documentFile : List<UploadFileModel>? = null
+    var imageList: List<Uri?>? = null
+    var documentFile: List<UploadFileModel?>? = null
+
+    var cameraOnActivityLaunch: ActivityResultLauncher<Intent>? = null
+    var galleryOnActivityLaunch: ActivityResultLauncher<Intent>? = null
+    var uploadImageFile: File? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnlineExamQuestionAnsStudentBinding.inflate(layoutInflater)
@@ -58,6 +82,8 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
         setUpClickListener()
         getBundleData()
         getQuestionAnsList()
+        onActivityCamera()
+        onActivityGallery()
     }
 
     private fun setUpClickListener() {
@@ -119,7 +145,6 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
-                    Utils.hideProgressBar()
                     try {
                         val responseStr = response.body()!!.string()
                         if (!responseStr.isNullOrEmpty()) {
@@ -136,12 +161,14 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                                 if (modelResponse.getQuestionList()!!.size > 0)
                                     listQuestions = modelResponse.getQuestionList()
                                 if (examModel != null && listQuestions!!.size > 0) {
-                                    for (question in listQuestions!!){
-                                        if (question!!.getqTypeName().equals("Subjective")){
+                                    for (question in listQuestions!!) {
+                                        if (question!!.getqTypeName().equals("Subjective")) {
                                             imageList = ArrayList()
                                             documentFile = ArrayList()
-                                            (imageList as ArrayList<Uri>).add(Uri.parse("null"))
-                                            (documentFile as ArrayList<UploadFileModel>).add(UploadFileModel(null,false))
+                                            (imageList as ArrayList<Uri?>).add(Uri.parse("null"))
+                                            (documentFile as ArrayList<UploadFileModel?>).add(
+                                                UploadFileModel(null, false)
+                                            )
                                             question.setImageList(imageList)
                                             question.setDocumentFile(documentFile)
                                         }
@@ -151,6 +178,10 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                                 }
                             }
                         }
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            Utils.hideProgressBar()
+                            binding!!.onlineExamQAnsDataLay.visibility = View.VISIBLE
+                        }, 1500)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -182,17 +213,30 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                     Html.fromHtml(questionModel!!.getMark(), 0)
                 )
             val questionNo = questionNoIndex + 1
-            binding!!.tvOnlineExamQAnsQuestionNo.text = getString(R.string.concat_string_with_text_format,questionNo.toString()," / ",listQuestions!!.size.toString())
+            binding!!.tvOnlineExamQAnsQuestionNo.text = getString(
+                R.string.concat_string_with_text_format,
+                questionNo.toString(),
+                " / ",
+                listQuestions!!.size.toString()
+            )
 
             binding!!.webViewQuestion.getSettings().setJavaScriptEnabled(true)
-            binding!!.webViewQuestion.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN)
+            binding!!.webViewQuestion.getSettings()
+                .setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN)
             binding!!.webViewQuestion.getSettings().setDomStorageEnabled(true)
             binding!!.webViewQuestion.getSettings().setBuiltInZoomControls(true)
             binding!!.webViewQuestion.getSettings().setDisplayZoomControls(false)
-            binding!!.webViewQuestion.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING)
-            binding!!.webViewQuestion.loadDataWithBaseURL(null, getHtmlData(questionModel!!.getQuestion()!!), "text/html", "utf-8", null)
+            binding!!.webViewQuestion.getSettings()
+                .setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING)
+            binding!!.webViewQuestion.loadDataWithBaseURL(
+                null,
+                getHtmlData(questionModel!!.getQuestion()!!),
+                "text/html",
+                "utf-8",
+                null
+            )
 
-            when(questionModel.getqTypeName()){
+            when (questionModel.getqTypeName()) {
                 "MCQ" -> {
                     binding!!.radioGroupQAns.visibility = View.VISIBLE
                     binding!!.multipleChoiceQAnsLay.visibility = View.GONE
@@ -218,11 +262,26 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                         binding!!.radioQAnsOption5.visibility = View.VISIBLE
                     else binding!!.radioQAnsOption5.visibility = View.GONE
 
-                    binding!!.radioQAnsOption1.text = HtmlCompat.fromHtml(questionModel.getOptA()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                    binding!!.radioQAnsOption2.text = HtmlCompat.fromHtml(questionModel.getOptB()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                    binding!!.radioQAnsOption3.text = HtmlCompat.fromHtml(questionModel.getOptC()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                    binding!!.radioQAnsOption4.text = HtmlCompat.fromHtml(questionModel.getOptD()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                    binding!!.radioQAnsOption5.text = HtmlCompat.fromHtml(questionModel.getOptE()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    binding!!.radioQAnsOption1.text = HtmlCompat.fromHtml(
+                        questionModel.getOptA()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                    binding!!.radioQAnsOption2.text = HtmlCompat.fromHtml(
+                        questionModel.getOptB()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                    binding!!.radioQAnsOption3.text = HtmlCompat.fromHtml(
+                        questionModel.getOptC()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                    binding!!.radioQAnsOption4.text = HtmlCompat.fromHtml(
+                        questionModel.getOptD()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                    binding!!.radioQAnsOption5.text = HtmlCompat.fromHtml(
+                        questionModel.getOptE()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
                 }
                 "Multiple Option" -> {
                     binding!!.radioGroupQAns.visibility = View.GONE
@@ -249,19 +308,33 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                         binding!!.checkBoxQAns5.visibility = View.VISIBLE
                     else binding!!.checkBoxQAns5.visibility = View.GONE
 
-                    binding!!.checkBoxQAns1.text = HtmlCompat.fromHtml(questionModel.getOptA()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                    binding!!.checkBoxQAns2.text = HtmlCompat.fromHtml(questionModel.getOptB()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                    binding!!.checkBoxQAns3.text = HtmlCompat.fromHtml(questionModel.getOptC()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                    binding!!.checkBoxQAns4.text = HtmlCompat.fromHtml(questionModel.getOptD()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                    binding!!.checkBoxQAns5.text = HtmlCompat.fromHtml(questionModel.getOptE()!!.replace("\\<.*?\\>", ""), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    binding!!.checkBoxQAns1.text = HtmlCompat.fromHtml(
+                        questionModel.getOptA()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                    binding!!.checkBoxQAns2.text = HtmlCompat.fromHtml(
+                        questionModel.getOptB()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                    binding!!.checkBoxQAns3.text = HtmlCompat.fromHtml(
+                        questionModel.getOptC()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                    binding!!.checkBoxQAns4.text = HtmlCompat.fromHtml(
+                        questionModel.getOptD()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                    binding!!.checkBoxQAns5.text = HtmlCompat.fromHtml(
+                        questionModel.getOptE()!!.replace("\\<.*?\\>", ""),
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
                 }
                 "Subjective" -> {
                     binding!!.radioGroupQAns.visibility = View.GONE
                     binding!!.multipleChoiceQAnsLay.visibility = View.GONE
                     binding!!.subjectiveQAnsLay.visibility = View.VISIBLE
                     binding!!.qAnsIntegerLay.visibility = View.GONE
-                    binding!!.onlineExamQAnsSubjctiveImageRecycler.layoutManager = GridLayoutManager(mActivity,3,RecyclerView.VERTICAL,false)
-                    binding!!.onlineExamQAnsSubjctiveImageRecycler.adapter = OnlineExamSubjectiveImageAdapter(mActivity!!,questionModel.getImageList()!!)
+                    setSubjectiveImageListData()
                 }
                 "Integer" -> {
                     binding!!.radioGroupQAns.visibility = View.GONE
@@ -287,7 +360,7 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
         }
     }
 
-    private fun getHtmlData(bodyHTML : String) : String{
+    private fun getHtmlData(bodyHTML: String): String {
         val head = "<head><style>img{max-width: 100%; width:auto; height: auto;}</style></head>"
         return "<html>$head<body>$bodyHTML</body></html>"
     }
@@ -327,17 +400,299 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
 
     }
 
+    @SuppressLint("InflateParams")
+    private fun setSubjectiveImageListData(){
+        try{
+            val questionModel = listQuestions!!.get(questionNoIndex)
+            if (questionModel!!.getImageList() != null && questionModel.getImageList()!!.size > 0){
+                binding!!.onlineExamQAnsSubjctiveImageLay.removeAllViews()
+                var position = 0
+                while (position < questionModel.getImageList()!!.size) {
+                    val inflater = mActivity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
+                    val itemView: View = inflater!!.inflate(R.layout.item_student_online_q_ans_subjective_image, null, true)
+
+
+                    val imageLay1 = itemView.findViewById<RelativeLayout>(R.id.image_lay_1)
+                    val ivOnlineQAnsImage1 = itemView.findViewById<ImageView>(R.id.iv_online_q_ans_image_1)
+                    val ivCross1 = itemView.findViewById<ImageView>(R.id.iv_cross_1)
+
+                    val imageLay2 = itemView.findViewById<RelativeLayout>(R.id.image_lay_2)
+                    val ivOnlineQAnsImage2 = itemView.findViewById<ImageView>(R.id.iv_online_q_ans_image_2)
+                    val ivCross2 = itemView.findViewById<ImageView>(R.id.iv_cross_2)
+
+                    val imageLay3 = itemView.findViewById<RelativeLayout>(R.id.image_lay_3)
+                    val ivOnlineQAnsImage3 = itemView.findViewById<ImageView>(R.id.iv_online_q_ans_image_3)
+                    val ivCross3 = itemView.findViewById<ImageView>(R.id.iv_cross_3)
+
+                    if (position < questionModel.getImageList()!!.size){
+                        imageLay1.visibility = View.VISIBLE
+                        if (position == 0){
+                            ivOnlineQAnsImage1.setImageURI(null)
+                            ivOnlineQAnsImage1.setBackgroundResource(R.drawable.ic_add_image)
+                            ivCross1.visibility = View.GONE
+                        }else{
+                            ivOnlineQAnsImage1.setBackgroundResource(0)
+                            ivOnlineQAnsImage1.setImageURI(questionModel.getImageList()!!.get(position))
+                            ivCross1.visibility = View.VISIBLE
+                        }
+                        ivOnlineQAnsImage1.tag = 1000 + position
+                        ivCross1.tag = 2000 + position
+                    }
+                    val secondItemPosition = position + 1
+                    if (secondItemPosition < questionModel.getImageList()!!.size){
+                        imageLay2.visibility = View.VISIBLE
+                        ivOnlineQAnsImage2.setBackgroundResource(0)
+                        ivOnlineQAnsImage2.setImageURI(questionModel.getImageList()!!.get(secondItemPosition))
+                        ivCross2.visibility = View.VISIBLE
+
+                        ivOnlineQAnsImage2.tag = 10000 + secondItemPosition
+                        ivCross2.tag = 20000 + secondItemPosition
+                    }
+
+                    val thirdItemPosition = position + 2
+                    if (thirdItemPosition < questionModel.getImageList()!!.size){
+                        imageLay3.visibility = View.VISIBLE
+                        ivOnlineQAnsImage3.setBackgroundResource(0)
+                        ivOnlineQAnsImage3.setImageURI(questionModel.getImageList()!!.get(thirdItemPosition))
+                        ivCross3.visibility = View.VISIBLE
+
+                        ivOnlineQAnsImage3.tag = 100000 + thirdItemPosition
+                        ivCross3.tag = 200000 + thirdItemPosition
+                    }
+
+                    ivOnlineQAnsImage1.setOnClickListener {
+                        val tag = ivOnlineQAnsImage1.tag as Int - 1000
+                        if (tag == 0)
+                            addImage()
+                    }
+
+                    ivCross1.setOnClickListener {
+                        val tag = ivCross1.tag as Int - 2000
+                        removeImage(tag)
+                    }
+                    ivCross2.setOnClickListener {
+                        val tag = ivCross2.tag as Int - 20000
+                        removeImage(tag)
+                    }
+
+                    ivCross3.setOnClickListener {
+                        val tag = ivCross3.tag as Int - 200000
+                        removeImage(tag)
+                    }
+
+
+                    binding!!.onlineExamQAnsSubjctiveImageLay.addView(itemView)
+                    position += 3
+                }
+            }
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+    }
+
+    private fun addImage() {
+        val permissions = arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+        )
+        val rationale = "Please provide permission so that you can ..."
+        val options = Permissions.Options()
+            .setRationaleDialogTitle("Info")
+            .setSettingsDialogTitle("Warning")
+        Permissions.check(
+            mActivity,
+            permissions,
+            rationale,
+            options,
+            object : PermissionHandler() {
+                override fun onGranted() {
+                    try {
+                        var dialogBinding: DialogSelectImageBinding? = null
+                        val dialog = Dialog(mActivity!!)
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                        dialogBinding = DialogSelectImageBinding.inflate(layoutInflater)
+                        dialog.setContentView(dialogBinding.root)
+                        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                        dialog.setCanceledOnTouchOutside(false)
+
+                        dialogBinding.tvDialogCamera.setOnClickListener(object :
+                            View.OnClickListener {
+                            override fun onClick(p0: View?) {
+                                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                                cameraOnActivityLaunch!!.launch(intent)
+                                dialog.dismiss()
+                            }
+                        })
+
+                        dialogBinding.tvDialogGallery.setOnClickListener(object :
+                            View.OnClickListener {
+                            override fun onClick(p0: View?) {
+                                val pickPhoto = Intent(
+                                    Intent.ACTION_PICK,
+                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                                )
+                                galleryOnActivityLaunch!!.launch(pickPhoto)
+                                dialog.dismiss()
+                            }
+                        })
+                        dialog.show()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onDenied(
+                    context: Context,
+                    deniedPermissions: java.util.ArrayList<String>
+                ) {
+                    Toast.makeText(
+                        mActivity,
+                        getString(R.string.permission_denied),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            })
+    }
+
+    private fun removeImage(position : Int){
+        try{
+            val questionModel = listQuestions!!.get(questionNoIndex)
+            documentFile = questionModel!!.getDocumentFile()
+            imageList = questionModel.getImageList()
+            if (!documentFile!!.get(position)!!.isUpload()){
+                (documentFile as ArrayList<UploadFileModel?>).removeAt(position)
+                (imageList as ArrayList<Uri?>).removeAt(position)
+                questionModel.setDocumentFile(documentFile)
+                questionModel.setImageList(imageList)
+                setSubjectiveImageListData()
+            }else{
+                val index = position - 1
+                deleteSubjectiveImage()
+            }
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+    }
+
+    private fun deleteSubjectiveImage(){
+
+    }
+
+    private fun onActivityCamera() {
+        cameraOnActivityLaunch = registerForActivityResult(
+            StartActivityForResult(), @SuppressLint("NotifyDataSetChanged")
+            fun(result: ActivityResult) {
+                if (result.resultCode === RESULT_OK) {
+                    try {
+                        val data = result.data
+                        val bitmap = data!!.extras!!["data"] as Bitmap?
+                        val resultUri: Uri = Utils.getImageUri(mActivity!!, bitmap!!)
+                        val filePath: String? = FileUtils.getPath(mActivity!!, resultUri)
+                        if (filePath != null) {
+                            val questionModel = listQuestions!!.get(questionNoIndex)
+                            uploadImageFile = File(filePath)
+                            documentFile = questionModel!!.getDocumentFile()
+                            (documentFile as ArrayList<UploadFileModel?>).add(
+                                UploadFileModel(
+                                    uploadImageFile,
+                                    false
+                                )
+                            )
+                            imageList = questionModel.getImageList()
+                            (imageList as ArrayList<Uri?>).add(resultUri)
+                            if (imageList!!.size > 1) {
+                                questionModel.setImageList(imageList)
+                                questionModel.setDocumentFile(documentFile)
+                                setSkipEnableSubjectiveImages()
+                                setSubjectiveImageListData()
+                            }
+                        }
+                    } catch (e: java.lang.Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        )
+
+    }
+
+    private fun onActivityGallery() {
+        galleryOnActivityLaunch = registerForActivityResult(
+            StartActivityForResult()
+        ) { result ->
+            if (result.resultCode === RESULT_OK) {
+                try {
+                    val data = result.data
+                    val resultUri =
+                        Objects.requireNonNull(data)!!.data
+                    val filePath = FileUtils.getPath(mActivity!!, resultUri!!)
+                    if (filePath != null) {
+                        val questionModel = listQuestions!!.get(questionNoIndex)
+                        uploadImageFile = File(filePath)
+                        documentFile = questionModel!!.getDocumentFile()
+                        (documentFile as ArrayList<UploadFileModel?>).add(
+                            UploadFileModel(
+                                uploadImageFile,
+                                false
+                            )
+                        )
+                        imageList = questionModel.getImageList()
+                        (imageList as ArrayList<Uri?>).add(resultUri)
+                        if (imageList!!.size > 1) {
+                            questionModel.setImageList(imageList)
+                            questionModel.setDocumentFile(documentFile)
+                            setSkipEnableSubjectiveImages()
+                            setSubjectiveImageListData()
+                        }
+                    }
+                } catch (e: java.lang.Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    private fun setSkipEnableSubjectiveImages() {
+        val questionModel = listQuestions!!.get(questionNoIndex)
+        if (questionModel!!.getImageList()!!.size == 1) {
+            binding!!.tvOnlineExamQAnsSkip.setTextColor(
+                ContextCompat.getColor(
+                    mActivity!!,
+                    R.color.primaray_text_color
+                )
+            )
+            binding!!.tvOnlineExamQAnsSkip.isEnabled = true
+        } else {
+            binding!!.tvOnlineExamQAnsSkip.setTextColor(
+                ContextCompat.getColor(
+                    mActivity!!,
+                    R.color.gray
+                )
+            )
+            binding!!.tvOnlineExamQAnsSkip.isEnabled = false
+        }
+        if (questionNoIndex == listQuestions!!.size - 1) {
+            binding!!.tvOnlineExamQAnsSkip.setTextColor(
+                ContextCompat.getColor(
+                    mActivity!!,
+                    R.color.gray
+                )
+            )
+            binding!!.tvOnlineExamQAnsSkip.isEnabled = false
+        }
+    }
+
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
-        else if (id == R.id.tv_online_exam_q_ans_next){
+        else if (id == R.id.tv_online_exam_q_ans_next) {
             questionNoIndex++
             if (questionNoIndex < listQuestions!!.size)
                 loadQuestion()
             else questionNoIndex = listQuestions!!.size - 1
-        }
-        else if (id == R.id.tv_online_exam_q_ans_previous){
+        } else if (id == R.id.tv_online_exam_q_ans_previous) {
             questionNoIndex--
             if (questionNoIndex >= 0)
                 loadQuestion()
