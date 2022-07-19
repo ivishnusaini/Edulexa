@@ -396,10 +396,6 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
 
     }
 
-    private fun submitDialog(message: String, type: String) {
-
-    }
-
     @SuppressLint("InflateParams")
     private fun setSubjectiveImageListData(){
         try{
@@ -578,7 +574,6 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
     private fun deleteSubjectiveImage(){
 
     }
-
     private fun onActivityCamera() {
         cameraOnActivityLaunch = registerForActivityResult(
             StartActivityForResult(), @SuppressLint("NotifyDataSetChanged")
@@ -681,6 +676,10 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
             )
             binding!!.tvOnlineExamQAnsSkip.isEnabled = false
         }
+    }
+
+    private fun submitDialog(message: String, type: String) {
+
     }
 
     override fun onClick(view: View?) {
