@@ -273,5 +273,7 @@
     <string name="online_exam_student_question_ans_camera">Camera</string>
     <string name="online_exam_student_question_ans_gallery">Gallery</string>
     <string name="online_exam_student_question_ans_file_manager">File Manager</string>
+    <string name="online_exam_student_question_ans_attemp_question_first">Please attempt question first</string>
+    <string name="online_exam_student_question_ans_write_or_upload_one_image">Please write answer or upload at least one image</string>
 
 </resources>

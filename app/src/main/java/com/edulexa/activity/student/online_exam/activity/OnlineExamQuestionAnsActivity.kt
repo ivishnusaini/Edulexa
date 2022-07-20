@@ -43,6 +43,7 @@ import com.edulexa.support.Utils
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -59,7 +60,6 @@ import kotlin.collections.ArrayList
 class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityOnlineExamQuestionAnsStudentBinding? = null
-    var examId = ""
     var listQuestions: List<Question?>? = null
     var examModel: Exam? = null
     var questionNoIndex = 0
@@ -69,6 +69,9 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
     var cameraOnActivityLaunch: ActivityResultLauncher<Intent>? = null
     var galleryOnActivityLaunch: ActivityResultLauncher<Intent>? = null
     var uploadImageFile: File? = null
+
+    var onlineexamStudentId = ""
+    var examId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -173,6 +176,7 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                                             question.setDocumentFile(documentFile)
                                         }
                                     }
+                                    onlineexamStudentId = examModel!!.getOnlineexamStudentId()!!
                                     setUpTimer()
                                     loadQuestion()
                                 }
@@ -397,48 +401,60 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
     }
 
     @SuppressLint("InflateParams")
-    private fun setSubjectiveImageListData(){
-        try{
+    private fun setSubjectiveImageListData() {
+        try {
             val questionModel = listQuestions!!.get(questionNoIndex)
-            if (questionModel!!.getImageList() != null && questionModel.getImageList()!!.size > 0){
+            if (questionModel!!.getImageList() != null && questionModel.getImageList()!!.size > 0) {
                 binding!!.onlineExamQAnsSubjctiveImageLay.removeAllViews()
                 var position = 0
                 while (position < questionModel.getImageList()!!.size) {
-                    val inflater = mActivity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
-                    val itemView: View = inflater!!.inflate(R.layout.item_student_online_q_ans_subjective_image, null, true)
+                    val inflater =
+                        mActivity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
+                    val itemView: View = inflater!!.inflate(
+                        R.layout.item_student_online_q_ans_subjective_image,
+                        null,
+                        true
+                    )
 
 
                     val imageLay1 = itemView.findViewById<RelativeLayout>(R.id.image_lay_1)
-                    val ivOnlineQAnsImage1 = itemView.findViewById<ImageView>(R.id.iv_online_q_ans_image_1)
+                    val ivOnlineQAnsImage1 =
+                        itemView.findViewById<ImageView>(R.id.iv_online_q_ans_image_1)
                     val ivCross1 = itemView.findViewById<ImageView>(R.id.iv_cross_1)
 
                     val imageLay2 = itemView.findViewById<RelativeLayout>(R.id.image_lay_2)
-                    val ivOnlineQAnsImage2 = itemView.findViewById<ImageView>(R.id.iv_online_q_ans_image_2)
+                    val ivOnlineQAnsImage2 =
+                        itemView.findViewById<ImageView>(R.id.iv_online_q_ans_image_2)
                     val ivCross2 = itemView.findViewById<ImageView>(R.id.iv_cross_2)
 
                     val imageLay3 = itemView.findViewById<RelativeLayout>(R.id.image_lay_3)
-                    val ivOnlineQAnsImage3 = itemView.findViewById<ImageView>(R.id.iv_online_q_ans_image_3)
+                    val ivOnlineQAnsImage3 =
+                        itemView.findViewById<ImageView>(R.id.iv_online_q_ans_image_3)
                     val ivCross3 = itemView.findViewById<ImageView>(R.id.iv_cross_3)
 
-                    if (position < questionModel.getImageList()!!.size){
+                    if (position < questionModel.getImageList()!!.size) {
                         imageLay1.visibility = View.VISIBLE
-                        if (position == 0){
+                        if (position == 0) {
                             ivOnlineQAnsImage1.setImageURI(null)
                             ivOnlineQAnsImage1.setBackgroundResource(R.drawable.ic_add_image)
                             ivCross1.visibility = View.GONE
-                        }else{
+                        } else {
                             ivOnlineQAnsImage1.setBackgroundResource(0)
-                            ivOnlineQAnsImage1.setImageURI(questionModel.getImageList()!!.get(position))
+                            ivOnlineQAnsImage1.setImageURI(
+                                questionModel.getImageList()!!.get(position)
+                            )
                             ivCross1.visibility = View.VISIBLE
                         }
                         ivOnlineQAnsImage1.tag = 1000 + position
                         ivCross1.tag = 2000 + position
                     }
                     val secondItemPosition = position + 1
-                    if (secondItemPosition < questionModel.getImageList()!!.size){
+                    if (secondItemPosition < questionModel.getImageList()!!.size) {
                         imageLay2.visibility = View.VISIBLE
                         ivOnlineQAnsImage2.setBackgroundResource(0)
-                        ivOnlineQAnsImage2.setImageURI(questionModel.getImageList()!!.get(secondItemPosition))
+                        ivOnlineQAnsImage2.setImageURI(
+                            questionModel.getImageList()!!.get(secondItemPosition)
+                        )
                         ivCross2.visibility = View.VISIBLE
 
                         ivOnlineQAnsImage2.tag = 10000 + secondItemPosition
@@ -446,10 +462,12 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                     }
 
                     val thirdItemPosition = position + 2
-                    if (thirdItemPosition < questionModel.getImageList()!!.size){
+                    if (thirdItemPosition < questionModel.getImageList()!!.size) {
                         imageLay3.visibility = View.VISIBLE
                         ivOnlineQAnsImage3.setBackgroundResource(0)
-                        ivOnlineQAnsImage3.setImageURI(questionModel.getImageList()!!.get(thirdItemPosition))
+                        ivOnlineQAnsImage3.setImageURI(
+                            questionModel.getImageList()!!.get(thirdItemPosition)
+                        )
                         ivCross3.visibility = View.VISIBLE
 
                         ivOnlineQAnsImage3.tag = 100000 + thirdItemPosition
@@ -481,7 +499,7 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                     position += 3
                 }
             }
-        }catch (e : Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
@@ -551,29 +569,30 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
             })
     }
 
-    private fun removeImage(position : Int){
-        try{
+    private fun removeImage(position: Int) {
+        try {
             val questionModel = listQuestions!!.get(questionNoIndex)
             documentFile = questionModel!!.getDocumentFile()
             imageList = questionModel.getImageList()
-            if (!documentFile!!.get(position)!!.isUpload()){
+            if (!documentFile!!.get(position)!!.isUpload()) {
                 (documentFile as ArrayList<UploadFileModel?>).removeAt(position)
                 (imageList as ArrayList<Uri?>).removeAt(position)
                 questionModel.setDocumentFile(documentFile)
                 questionModel.setImageList(imageList)
                 setSubjectiveImageListData()
-            }else{
+            } else {
                 val index = position - 1
                 deleteSubjectiveImage()
             }
-        }catch (e : Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun deleteSubjectiveImage(){
+    private fun deleteSubjectiveImage() {
 
     }
+
     private fun onActivityCamera() {
         cameraOnActivityLaunch = registerForActivityResult(
             StartActivityForResult(), @SuppressLint("NotifyDataSetChanged")
@@ -678,6 +697,119 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
         }
     }
 
+    private fun setSkipEnable(){
+        try{
+            val questionModel = listQuestions!!.get(questionNoIndex)
+            if (questionModel!!.isAnsSubmit() || questionNoIndex == listQuestions!!.size - 1){
+                binding!!.tvOnlineExamQAnsSkip.isEnabled = false
+                binding!!.tvOnlineExamQAnsSkip.setTextColor(
+                    ContextCompat.getColor(
+                        mActivity!!,
+                        R.color.gray
+                    )
+                )
+            }else{
+                binding!!.tvOnlineExamQAnsSkip.isEnabled = true
+                binding!!.tvOnlineExamQAnsSkip.setTextColor(
+                    ContextCompat.getColor(
+                        mActivity!!,
+                        R.color.primaray_text_color
+                    )
+                )
+            }
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+    }
+
+    private fun uploadSubjectiveImages(type: String){
+        val questionModel = listQuestions!!.get(questionNoIndex)
+        if (Utils.isNetworkAvailable(mActivity!!)) {
+            Utils.showProgressBar(mActivity!!)
+            Utils.hideKeyboard(mActivity!!)
+
+            val branchId =
+                Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
+            val accessToken = Utils.getStudentLoginResponse(mActivity)!!.getToken()!!
+            val userId = Utils.getStudentUserId(mActivity!!)
+
+            val apiInterfaceWithHeader: ApiInterfaceStudent =
+                APIClientStudent.getRetroFitClientWithNewKeyHeader(
+                    mActivity!!,
+                    accessToken,
+                    branchId,
+                    userId
+                ).create(
+                    ApiInterfaceStudent::class.java
+                )
+
+            val finalUploadImageList: List<File> = ArrayList()
+            for (model in questionModel!!.getDocumentFile()!!) {
+                if (model!!.getFile() != null && !model.isUpload())
+                    (finalUploadImageList as ArrayList<File>).add(model.getFile()!!)
+            }
+
+
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart(Constants.ParamsStudent.ONLINEEXAM_STUDENT_ID, onlineexamStudentId);
+            builder.addFormDataPart(Constants.ParamsStudent.ONLINEEXAM_QUESTION_ID, questionModel.getOnlineexamQuestionsId()!!);
+            builder.addFormDataPart(Constants.ParamsStudent.EXAM_ID, examId);
+            for (model in finalUploadImageList) {
+                builder.addFormDataPart(
+                    Constants.ParamsStudent.FILE,
+                    model.name,
+                    RequestBody.create(MediaType.parse("multipart/form-data"), model)
+                )
+            }
+            val requestBody = builder.build()
+
+            Utils.printLog("Url", Constants.DOMAIN_STUDENT + "/Webservice/submitSubjectiveQuestion")
+
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.submitSubjectiveQuestion(requestBody)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    Utils.hideProgressBar()
+                    try {
+                        val responseStr = response.body()!!.string()
+                        if (!responseStr.isNullOrEmpty()) {
+                            val jsonObjectResponse = JSONObject(responseStr)
+                            val status = jsonObjectResponse.optInt("status")
+                            val messaage = jsonObjectResponse.optInt("message")
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Utils.hideProgressBar()
+                    Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                }
+            })
+        } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+
+    }
+
+    private fun needToUpload() : Boolean{
+        var flag = false
+        val questionModel = listQuestions!!.get(questionNoIndex)
+        documentFile = questionModel!!.getDocumentFile()
+        if (documentFile != null){
+            for (uploadFileModel in documentFile!!){
+                if (uploadFileModel!!.getFile() != null)
+                    if (!uploadFileModel.isUpload()){
+                        flag = true
+                        break
+                    }
+            }
+        }
+        return flag
+    }
+
     private fun submitDialog(message: String, type: String) {
 
     }
@@ -686,16 +818,56 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
-        else if (id == R.id.tv_online_exam_q_ans_next) {
-            questionNoIndex++
-            if (questionNoIndex < listQuestions!!.size)
-                loadQuestion()
-            else questionNoIndex = listQuestions!!.size - 1
-        } else if (id == R.id.tv_online_exam_q_ans_previous) {
+        else if (id == R.id.tv_online_exam_q_ans_previous) {
             questionNoIndex--
             if (questionNoIndex >= 0)
                 loadQuestion()
             else questionNoIndex = 0
+        } else if (id == R.id.tv_online_exam_q_ans_next) {
+            val questionTypeModel = listQuestions!!.get(questionNoIndex)
+            if (questionTypeModel!!.getqTypeName().equals("Subjective")){
+                if (questionTypeModel.isAnsSubmit() || questionTypeModel.getImageList()!!.size > 1){
+                    if (questionTypeModel.isAnsSubmit()){
+                        if (needToUpload())
+                            uploadSubjectiveImages("next")
+                        else{
+                            questionNoIndex++
+                            if (questionNoIndex < listQuestions!!.size)
+                                loadQuestion()
+                            else questionNoIndex = listQuestions!!.size - 1
+                            setSkipEnable()
+                        }
+                    }else if (questionTypeModel.getImageList()!!.size > 1){
+                        if (!questionTypeModel.isSubjectiveImageUpload())
+                            uploadSubjectiveImages("next")
+                        else{
+                            if (needToUpload())
+                                uploadSubjectiveImages("next")
+                            else{
+                                questionNoIndex++
+                                if (questionNoIndex < listQuestions!!.size)
+                                    loadQuestion()
+                                else questionNoIndex = listQuestions!!.size - 1
+                            }
+                        }
+                    }
+                }else{
+                    Utils.showToast(mActivity!!,getString(R.string.online_exam_student_question_ans_write_or_upload_one_image))
+                    setSkipEnable()
+                }
+            }else{
+                if (questionTypeModel.isAnsSubmit()){
+                    questionNoIndex++
+                    if (questionNoIndex < listQuestions!!.size)
+                        loadQuestion()
+                    else questionNoIndex = listQuestions!!.size - 1
+                }else Utils.showToast(mActivity!!,getString(R.string.online_exam_student_question_ans_attemp_question_first))
+                setSkipEnable()
+            }
+            if (questionNoIndex > 0)
+                binding!!.tvOnlineExamQAnsPrevious.visibility = View.VISIBLE
+            if (questionNoIndex == listQuestions!!.size - 1)
+                binding!!.tvOnlineExamQAnsNext.visibility = View.GONE
         }
     }
 }

@@ -291,6 +291,8 @@ class Question {
     }
 
     fun getOnlineexamQuestionsId(): String? {
+        if (onlineexamQuestionsId == null)
+            return ""
         return onlineexamQuestionsId
     }
 

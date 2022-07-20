@@ -259,6 +259,8 @@ class Exam {
     }
 
     fun getOnlineexamStudentId(): String? {
+        if (onlineexamStudentId == null)
+            return ""
         return onlineexamStudentId
     }
 
