@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 class Question {
 
+    var answer = -1
     var ansSubmit = false
     var subjectiveImageUpload = false
     var imageList : List<Uri?>? = null
@@ -308,5 +309,14 @@ class Question {
 
     fun setqTypeName(qTypeName: String?) {
         this.qTypeName = qTypeName
+    }
+    @JvmName("getAnswer1")
+    fun getAnswer(): Int {
+        return answer
+    }
+
+    @JvmName("setAnswer1")
+    fun setAnswer(answer: Int) {
+        this.answer = answer
     }
 }

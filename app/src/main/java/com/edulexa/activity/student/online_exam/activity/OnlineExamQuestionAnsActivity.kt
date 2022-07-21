@@ -12,7 +12,9 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.*
 import android.provider.MediaStore
+import android.text.Editable
 import android.text.Html
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
@@ -26,17 +28,15 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
-import androidx.documentfile.provider.DocumentFile
 import com.edulexa.R
-import com.edulexa.activity.student.online_exam.model.question_ans.Exam
-import com.edulexa.activity.student.online_exam.model.question_ans.Question
-import com.edulexa.activity.student.online_exam.model.question_ans.QuestionAnsResponse
-import com.edulexa.activity.student.online_exam.model.question_ans.UploadFileModel
+import com.edulexa.activity.student.online_exam.model.question_ans.*
+import com.edulexa.activity.student.online_exam.model.question_ans.subjective_image.SubjectiveQuestionResponse
 import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityOnlineExamQuestionAnsStudentBinding
 import com.edulexa.databinding.DialogSelectImageBinding
+import com.edulexa.databinding.DialogSubmitOnlineExamBinding
 import com.edulexa.support.FileUtils
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
@@ -46,6 +46,7 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
+import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -70,8 +71,15 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
     var galleryOnActivityLaunch: ActivityResultLauncher<Intent>? = null
     var uploadImageFile: File? = null
 
+    var isBackPressed = false
+
     var onlineexamStudentId = ""
     var examId = ""
+    var subjectiveRepeteCall = ""
+    var integerRepeteCall = ""
+    var ansSubjectiveStr = ""
+    val userAnsList : List<UserAnsModel> = ArrayList()
+    val multipleOptionList : List<MultipleOptionM> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,6 +101,8 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
         binding!!.ivBack.setOnClickListener(this)
         binding!!.tvOnlineExamQAnsNext.setOnClickListener(this)
         binding!!.tvOnlineExamQAnsPrevious.setOnClickListener(this)
+        binding!!.tvOnlineExamQAnsSkip.setOnClickListener(this)
+        binding!!.tvOnlineExamQAnsSubmit.setOnClickListener(this)
     }
 
     private fun getBundleData() {
@@ -179,13 +189,18 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                                     onlineexamStudentId = examModel!!.getOnlineexamStudentId()!!
                                     setUpTimer()
                                     loadQuestion()
+
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        Utils.hideProgressBar()
+                                        binding!!.onlineExamQAnsDataLay.visibility = View.VISIBLE
+                                    }, 1500)
+
+                                }else{
+                                    isBackPressed = true
+                                    binding!!.onlineExamQAnsDataLay.visibility = View.GONE
                                 }
                             }
                         }
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            Utils.hideProgressBar()
-                            binding!!.onlineExamQAnsDataLay.visibility = View.VISIBLE
-                        }, 1500)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -286,6 +301,45 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                         questionModel.getOptE()!!.replace("\\<.*?\\>", ""),
                         HtmlCompat.FROM_HTML_MODE_LEGACY
                     )
+                    binding!!.radioGroupQAns.setOnCheckedChangeListener { radioGroup, i ->
+                        if (radioGroup.checkedRadioButtonId != -1){
+                            val id = radioGroup.checkedRadioButtonId
+                            val radioButton = radioGroup.findViewById<View>(id)
+                            val radioId = radioGroup.indexOfChild(radioButton)
+                            when(radioId){
+                                0 -> {
+                                    setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,"opt_a",false)
+                                    questionModel.setAnswer(radioId)
+                                    questionModel.setAnsSubmit(true)
+                                    setSkipEnable()
+                                }
+                                1 -> {
+                                    setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,"opt_b",false)
+                                    questionModel.setAnswer(radioId)
+                                    questionModel.setAnsSubmit(true)
+                                    setSkipEnable()
+                                }
+                                2 -> {
+                                    setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,"opt_c",false)
+                                    questionModel.setAnswer(radioId)
+                                    questionModel.setAnsSubmit(true)
+                                    setSkipEnable()
+                                }
+                                3 -> {
+                                    setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,"opt_d",false)
+                                    questionModel.setAnswer(radioId)
+                                    questionModel.setAnsSubmit(true)
+                                    setSkipEnable()
+                                }
+                                4 -> {
+                                    setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,"opt_e",false)
+                                    questionModel.setAnswer(radioId)
+                                    questionModel.setAnsSubmit(true)
+                                    setSkipEnable()
+                                }
+                            }
+                        }
+                    }
                 }
                 "Multiple Option" -> {
                     binding!!.radioGroupQAns.visibility = View.GONE
@@ -332,6 +386,72 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                         questionModel.getOptE()!!.replace("\\<.*?\\>", ""),
                         HtmlCompat.FROM_HTML_MODE_LEGACY
                     )
+
+                    binding!!.checkBoxQAns1.setOnCheckedChangeListener { compoundButton, isChecked ->
+                        if (isChecked){
+                            addMultipleOption("opt_a",true,questionNoIndex)
+                            questionModel.setAnsSubmit(true)
+                        }else{
+                            addMultipleOption("opt_a",false,questionNoIndex)
+                            if (getCommaSepratedOption(questionNoIndex).equals(""))
+                                questionModel.setAnsSubmit(false)
+                        }
+                        setSkipEnable()
+                        setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,getCommaSepratedOption(questionNoIndex),false)
+                    }
+
+                    binding!!.checkBoxQAns2.setOnCheckedChangeListener { compoundButton, isChecked ->
+                        if (isChecked){
+                            addMultipleOption("opt_b",true,questionNoIndex)
+                            questionModel.setAnsSubmit(true)
+                        }else{
+                            addMultipleOption("opt_b",false,questionNoIndex)
+                            if (getCommaSepratedOption(questionNoIndex).equals(""))
+                                questionModel.setAnsSubmit(false)
+                        }
+                        setSkipEnable()
+                        setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,getCommaSepratedOption(questionNoIndex),false)
+                    }
+
+                    binding!!.checkBoxQAns3.setOnCheckedChangeListener { compoundButton, isChecked ->
+                        if (isChecked){
+                            addMultipleOption("opt_c",true,questionNoIndex)
+                            questionModel.setAnsSubmit(true)
+                        }else{
+                            addMultipleOption("opt_c",false,questionNoIndex)
+                            if (getCommaSepratedOption(questionNoIndex).equals(""))
+                                questionModel.setAnsSubmit(false)
+                        }
+                        setSkipEnable()
+                        setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,getCommaSepratedOption(questionNoIndex),false)
+                    }
+
+                    binding!!.checkBoxQAns4.setOnCheckedChangeListener { compoundButton, isChecked ->
+                        if (isChecked){
+                            addMultipleOption("opt_d",true,questionNoIndex)
+                            questionModel.setAnsSubmit(true)
+                        }else{
+                            addMultipleOption("opt_d",false,questionNoIndex)
+                            if (getCommaSepratedOption(questionNoIndex).equals(""))
+                                questionModel.setAnsSubmit(false)
+                        }
+                        setSkipEnable()
+                        setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,getCommaSepratedOption(questionNoIndex),false)
+                    }
+
+                    binding!!.checkBoxQAns5.setOnCheckedChangeListener { compoundButton, isChecked ->
+                        if (isChecked){
+                            addMultipleOption("opt_e",true,questionNoIndex)
+                            questionModel.setAnsSubmit(true)
+                        }else{
+                            addMultipleOption("opt_e",false,questionNoIndex)
+                            if (getCommaSepratedOption(questionNoIndex).equals(""))
+                                questionModel.setAnsSubmit(false)
+                        }
+                        setSkipEnable()
+                        setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,getCommaSepratedOption(questionNoIndex),false)
+                    }
+
                 }
                 "Subjective" -> {
                     binding!!.radioGroupQAns.visibility = View.GONE
@@ -339,12 +459,68 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                     binding!!.subjectiveQAnsLay.visibility = View.VISIBLE
                     binding!!.qAnsIntegerLay.visibility = View.GONE
                     setSubjectiveImageListData()
+                    binding!!.etQAnsSubjective.addTextChangedListener(object :TextWatcher{
+                        override fun beforeTextChanged(
+                            p0: CharSequence?,
+                            p1: Int,
+                            p2: Int,
+                            p3: Int
+                        ) {
+
+                        }
+
+                        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                            subjectiveRepeteCall = ""
+                        }
+
+                        override fun afterTextChanged(editable: Editable?) {
+                            questionModel.setAnsSubmit(!binding!!.etQAnsSubjective.text.toString().trim().isEmpty())
+                            setSkipEnable()
+                            ansSubjectiveStr = binding!!.etQAnsSubjective.text.toString().trim()
+                            if (!ansSubjectiveStr.equals("")){
+                                if (subjectiveRepeteCall.equals(""))
+                                    setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,ansSubjectiveStr,false)
+                            }else{
+                                if (subjectiveRepeteCall.equals(""))
+                                    setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,ansSubjectiveStr,true)
+                            }
+                        }
+
+                    })
                 }
                 "Integer" -> {
                     binding!!.radioGroupQAns.visibility = View.GONE
                     binding!!.multipleChoiceQAnsLay.visibility = View.GONE
                     binding!!.subjectiveQAnsLay.visibility = View.GONE
                     binding!!.qAnsIntegerLay.visibility = View.VISIBLE
+                    binding!!.etQAnsInteger.addTextChangedListener(object :TextWatcher{
+                        override fun beforeTextChanged(
+                            p0: CharSequence?,
+                            p1: Int,
+                            p2: Int,
+                            p3: Int
+                        ) {
+
+                        }
+
+                        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                            integerRepeteCall = ""
+                        }
+
+                        override fun afterTextChanged(editable: Editable?) {
+                            questionModel.setAnsSubmit(!binding!!.etQAnsInteger.text.toString().trim().isEmpty())
+                            setSkipEnable()
+                            val ansInteger = binding!!.etQAnsSubjective.text.toString().trim()
+                            if (!ansInteger.equals("")){
+                                if (integerRepeteCall.equals(""))
+                                    setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,ansInteger,false)
+                            }else{
+                                if (integerRepeteCall.equals(""))
+                                    setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,ansInteger,true)
+                            }
+                        }
+
+                    })
                 }
                 "Match Box" -> {
                     binding!!.radioGroupQAns.visibility = View.GONE
@@ -398,6 +574,45 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
             }.start()
         }
 
+    }
+
+    private fun addMultipleOption(option : String,status : Boolean,position : Int){
+        try{
+            if (multipleOptionList.size > 0){
+                var index = -1
+                for (i in 0..multipleOptionList.size-1){
+                    if (option.equals(multipleOptionList.get(i).getOption())){
+                        if (multipleOptionList.get(i).getPosition() == position){
+                            index = i
+                            break
+                        }
+                    }
+                }
+                if (index != -1){
+                    if (!status)
+                        (multipleOptionList as ArrayList<MultipleOptionM>).removeAt(index)
+                }else (multipleOptionList as ArrayList<MultipleOptionM>).add(MultipleOptionM(option,status,position))
+            }else (multipleOptionList as ArrayList<MultipleOptionM>).add(MultipleOptionM(option,status,position))
+        }catch (e : Exception){
+           e.printStackTrace()
+        }
+    }
+
+    private fun getCommaSepratedOption(position: Int) : String{
+        val list : List<String> = ArrayList()
+        var commaSepratedStr = StringBuilder()
+        for (multipleOptionModel in multipleOptionList){
+            if (multipleOptionModel.getPosition() == position)
+                (list as ArrayList<String>).add(multipleOptionModel.getOption()!!)
+        }
+        if (list.size > 0){
+            for (listModel in list){
+                if (commaSepratedStr.toString().equals(""))
+                    commaSepratedStr = StringBuilder(listModel)
+                else commaSepratedStr.append(",").append(listModel)
+            }
+        }
+        return commaSepratedStr.toString().trim()
     }
 
     @SuppressLint("InflateParams")
@@ -505,68 +720,71 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
     }
 
     private fun addImage() {
-        val permissions = arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-        )
-        val rationale = "Please provide permission so that you can ..."
-        val options = Permissions.Options()
-            .setRationaleDialogTitle("Info")
-            .setSettingsDialogTitle("Warning")
-        Permissions.check(
-            mActivity,
-            permissions,
-            rationale,
-            options,
-            object : PermissionHandler() {
-                override fun onGranted() {
-                    try {
-                        var dialogBinding: DialogSelectImageBinding? = null
-                        val dialog = Dialog(mActivity!!)
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                        dialogBinding = DialogSelectImageBinding.inflate(layoutInflater)
-                        dialog.setContentView(dialogBinding.root)
-                        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                        dialog.setCanceledOnTouchOutside(false)
+        val questionModel = listQuestions!!.get(questionNoIndex)
+        if (questionModel!!.getImageList()!!.size < 9){
+            val permissions = arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+            )
+            val rationale = "Please provide permission so that you can ..."
+            val options = Permissions.Options()
+                .setRationaleDialogTitle("Info")
+                .setSettingsDialogTitle("Warning")
+            Permissions.check(
+                mActivity,
+                permissions,
+                rationale,
+                options,
+                object : PermissionHandler() {
+                    override fun onGranted() {
+                        try {
+                            var dialogBinding: DialogSelectImageBinding? = null
+                            val dialog = Dialog(mActivity!!)
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                            dialogBinding = DialogSelectImageBinding.inflate(layoutInflater)
+                            dialog.setContentView(dialogBinding.root)
+                            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                            dialog.setCanceledOnTouchOutside(false)
 
-                        dialogBinding.tvDialogCamera.setOnClickListener(object :
-                            View.OnClickListener {
-                            override fun onClick(p0: View?) {
-                                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                                cameraOnActivityLaunch!!.launch(intent)
-                                dialog.dismiss()
-                            }
-                        })
+                            dialogBinding.tvDialogCamera.setOnClickListener(object :
+                                View.OnClickListener {
+                                override fun onClick(p0: View?) {
+                                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                                    cameraOnActivityLaunch!!.launch(intent)
+                                    dialog.dismiss()
+                                }
+                            })
 
-                        dialogBinding.tvDialogGallery.setOnClickListener(object :
-                            View.OnClickListener {
-                            override fun onClick(p0: View?) {
-                                val pickPhoto = Intent(
-                                    Intent.ACTION_PICK,
-                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                                )
-                                galleryOnActivityLaunch!!.launch(pickPhoto)
-                                dialog.dismiss()
-                            }
-                        })
-                        dialog.show()
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+                            dialogBinding.tvDialogGallery.setOnClickListener(object :
+                                View.OnClickListener {
+                                override fun onClick(p0: View?) {
+                                    val pickPhoto = Intent(
+                                        Intent.ACTION_PICK,
+                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                                    )
+                                    galleryOnActivityLaunch!!.launch(pickPhoto)
+                                    dialog.dismiss()
+                                }
+                            })
+                            dialog.show()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
-                }
 
-                override fun onDenied(
-                    context: Context,
-                    deniedPermissions: java.util.ArrayList<String>
-                ) {
-                    Toast.makeText(
-                        mActivity,
-                        getString(R.string.permission_denied),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
-            })
+                    override fun onDenied(
+                        context: Context,
+                        deniedPermissions: java.util.ArrayList<String>
+                    ) {
+                        Toast.makeText(
+                            mActivity,
+                            getString(R.string.permission_denied),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                })
+        }else Utils.showToast(mActivity!!,getString(R.string.online_exam_student_question_ans_upload_max_8_images))
     }
 
     private fun removeImage(position: Int) {
@@ -582,14 +800,89 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                 setSubjectiveImageListData()
             } else {
                 val index = position - 1
-                deleteSubjectiveImage()
+                deleteSubjectiveImage(index)
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun deleteSubjectiveImage() {
+    private fun deleteSubjectiveImage(position : Int) {
+        val questionModel = listQuestions!!.get(questionNoIndex)
+        if (Utils.isNetworkAvailable(mActivity!!)) {
+            Utils.showProgressBar(mActivity!!)
+            Utils.hideKeyboard(mActivity!!)
+
+            val branchId =
+                Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
+            val accessToken = Utils.getStudentLoginResponse(mActivity)!!.getToken()!!
+            val userId = Utils.getStudentUserId(mActivity!!)
+
+            val apiInterfaceWithHeader: ApiInterfaceStudent =
+                APIClientStudent.getRetroFitClientWithNewKeyHeader(
+                    mActivity!!,
+                    accessToken,
+                    branchId,
+                    userId
+                ).create(
+                    ApiInterfaceStudent::class.java
+                )
+
+            val jsonObject = JSONObject()
+            jsonObject.put(Constants.ParamsStudent.IMG_ID, questionModel!!.getSubmittedImageId()!!.get(position))
+            jsonObject.put(
+                Constants.ParamsStudent.STUDENT_SESSION_ID,
+                Utils.getStudentSessionId(mActivity!!)
+            )
+            jsonObject.put(Constants.ParamsStudent.EXAM_ID, examId)
+
+            val requestBody: RequestBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                jsonObject.toString()
+            )
+
+            Utils.printLog("Url", Constants.DOMAIN_STUDENT + "/Webservice/deleteSubjectiveimages")
+
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.deleteSubjectiveimages(requestBody)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    Utils.hideProgressBar()
+                    try {
+                        val responseStr = response.body()!!.string()
+                        if (!responseStr.isNullOrEmpty()) {
+                            val jsonObjectResponse = JSONObject(responseStr)
+                            val status = jsonObjectResponse.optInt("status")
+                            val message = jsonObjectResponse.optString("message")
+                            if (status == 1) {
+                                Utils.showToast(mActivity!!,message)
+                                imageList = questionModel.getImageList()
+                                documentFile = questionModel.getDocumentFile()
+                                (imageList as ArrayList<Uri?>).removeAt(position)
+                                (documentFile as ArrayList<UploadFileModel?>).removeAt(position)
+                                if (imageList!!.size == 1){
+                                    questionModel.setSubjectiveImageUpload(false)
+                                    if (!questionModel.isAnsSubmit())
+                                        setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,"",true)
+                                }
+                                questionModel.setImageList(imageList)
+                                questionModel.setDocumentFile(documentFile)
+                                setSubjectiveImageListData()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Utils.hideProgressBar()
+                    Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                }
+            })
+        } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
 
     }
 
@@ -778,7 +1071,39 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
                         if (!responseStr.isNullOrEmpty()) {
                             val jsonObjectResponse = JSONObject(responseStr)
                             val status = jsonObjectResponse.optInt("status")
-                            val messaage = jsonObjectResponse.optInt("message")
+                            val messaage = jsonObjectResponse.optString("message")
+                            if (status == 1){
+                                val modelResponse = Utils.getObject(responseStr, SubjectiveQuestionResponse::class.java) as SubjectiveQuestionResponse
+                                Utils.showToast(mActivity!!,messaage)
+                                questionModel.setSubmittedImageId(modelResponse.getIds())
+                                questionModel.setSubjectiveImageUpload(true)
+                                setUserAnsOption(questionModel.getOnlineexamQuestionsId()!!,ansSubjectiveStr,false)
+                                documentFile = questionModel.getDocumentFile()
+                                for (uploadFileModel in documentFile!!){
+                                    if (uploadFileModel!!.getFile() != null)
+                                        uploadFileModel.setUpload(true)
+                                }
+                                ansSubjectiveStr = ""
+                                if (type.equals("next")){
+                                    questionNoIndex++
+                                    if (questionNoIndex < listQuestions!!.size)
+                                        loadQuestion()
+                                    else questionNoIndex = listQuestions!!.size - 1
+                                }else if (type.equals("previous")){
+                                    questionNoIndex--
+                                    if (questionNoIndex >= 0)
+                                        loadQuestion()
+                                    else questionNoIndex = 0
+                                    if (questionModel.getqTypeName().equals("Subjective"))
+                                        setSkipEnableSubjectiveImages()
+                                    else setSkipEnable()
+                                    if (questionNoIndex == 0)
+                                        binding!!.tvOnlineExamQAnsPrevious.visibility = View.INVISIBLE
+                                    if (questionNoIndex > 0 || listQuestions!!.size-1 > 0)
+                                        binding!!.tvOnlineExamQAnsNext.visibility = View.VISIBLE
+                                }else submitDialog(getString(R.string.online_exam_student_question_ans_submit_dialog),"submit")
+                                setSkipEnableSubjectiveImages()
+                            }else Utils.showToast(mActivity!!,messaage)
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -792,6 +1117,32 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
             })
         } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
 
+    }
+
+    private fun setUserAnsOption(questionId : String,ans : String,removeIndexStatus : Boolean){
+        subjectiveRepeteCall = "subjective"
+        integerRepeteCall = "integer"
+        if (userAnsList.size == 0)
+            (userAnsList as ArrayList<UserAnsModel>).add(UserAnsModel(questionId,ans))
+        else{
+            var previousIdFlag = false
+            var index = -1
+            for (i in 0..userAnsList.size-1){
+                if (questionId.equals(userAnsList.get(i).getQuestionId())){
+                    index = i
+                    previousIdFlag = true
+                    break
+                }
+            }
+            if (!previousIdFlag)
+                (userAnsList as ArrayList<UserAnsModel>).add(UserAnsModel(questionId,ans))
+            if (previousIdFlag){
+                val userAnsModel = UserAnsModel(questionId,ans)
+                (userAnsList as ArrayList<UserAnsModel>).set(index,userAnsModel)
+            }
+            if (removeIndexStatus && previousIdFlag)
+                (userAnsList as ArrayList<UserAnsModel>).removeAt(index)
+        }
     }
 
     private fun needToUpload() : Boolean{
@@ -811,7 +1162,65 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
     }
 
     private fun submitDialog(message: String, type: String) {
+        try{
+            var dialogBinding: DialogSubmitOnlineExamBinding? = null
+            val dialog = Dialog(mActivity!!)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogBinding = DialogSubmitOnlineExamBinding.inflate(layoutInflater)
+            dialog.setContentView(dialogBinding.root)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCanceledOnTouchOutside(false)
 
+            dialogBinding.tvMsg.text = message
+            dialogBinding.tvTotalQuestion.text = listQuestions!!.size.toString()
+            dialogBinding.tvAttemptedQuestion.text = getAttemptedQuestion().toString()
+            dialogBinding.tvSkipQuestion.text = (listQuestions!!.size - getAttemptedQuestion()).toString()
+
+            if (type.equals("timeout"))
+                dialogBinding.tvCancel.visibility = View.GONE
+
+            dialogBinding.tvOk.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(p0: View?) {
+                    var objAnsUsr: JSONObject?
+                    val jsonArray = JSONArray()
+                    for (userAnsModel in userAnsList){
+                        objAnsUsr = JSONObject()
+                        objAnsUsr.put(userAnsModel.getQuestionId(),userAnsModel.getQuestionAns())
+                        jsonArray.put(objAnsUsr)
+                    }
+                    dialog.dismiss()
+                }
+            })
+
+
+            dialogBinding.tvCancel.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(p0: View?) {
+                    dialog.dismiss()
+                }
+            })
+
+            dialog.show()
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+    }
+
+    private fun getAttemptedQuestion() : Int{
+        var size = 0
+        try{
+            for (questionModel in listQuestions!!){
+                if (questionModel!!.getqTypeName().equals("Subjective")) {
+                    if (questionModel.isAnsSubmit() || questionModel.isSubjectiveImageUpload())
+                        size = size + 1
+                }else{
+                    if (questionModel.isAnsSubmit())
+                        size = size + 1
+                }
+            }
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+        return size
     }
 
     override fun onClick(view: View?) {
@@ -819,10 +1228,23 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
         if (id == R.id.iv_back)
             onBackPressed()
         else if (id == R.id.tv_online_exam_q_ans_previous) {
-            questionNoIndex--
-            if (questionNoIndex >= 0)
-                loadQuestion()
-            else questionNoIndex = 0
+            val questionTypeModel = listQuestions!!.get(questionNoIndex)
+            if (needToUpload())
+                uploadSubjectiveImages("previous")
+            else{
+                questionNoIndex--
+                if (questionNoIndex >= 0)
+                    loadQuestion()
+                else questionNoIndex = 0
+                if (questionTypeModel!!.getqTypeName().equals("Subjective"))
+                    setSkipEnableSubjectiveImages()
+                else setSkipEnable()
+                if (questionNoIndex == 0)
+                    binding!!.tvOnlineExamQAnsPrevious.visibility = View.INVISIBLE
+                if (questionNoIndex == 0 || listQuestions!!.size - 1 > 0)
+                    binding!!.tvOnlineExamQAnsNext.visibility = View.VISIBLE
+            }
+
         } else if (id == R.id.tv_online_exam_q_ans_next) {
             val questionTypeModel = listQuestions!!.get(questionNoIndex)
             if (questionTypeModel!!.getqTypeName().equals("Subjective")){
@@ -867,7 +1289,30 @@ class OnlineExamQuestionAnsActivity : AppCompatActivity(), View.OnClickListener 
             if (questionNoIndex > 0)
                 binding!!.tvOnlineExamQAnsPrevious.visibility = View.VISIBLE
             if (questionNoIndex == listQuestions!!.size - 1)
-                binding!!.tvOnlineExamQAnsNext.visibility = View.GONE
+                binding!!.tvOnlineExamQAnsNext.visibility = View.INVISIBLE
         }
+        else if (id == R.id.tv_online_exam_q_ans_skip){
+            questionNoIndex++
+            if (questionNoIndex < listQuestions!!.size)
+                loadQuestion()
+            else questionNoIndex = listQuestions!!.size - 1
+            setSkipEnable()
+            if (questionNoIndex > 0)
+                binding!!.tvOnlineExamQAnsPrevious.visibility = View.VISIBLE
+            if (questionNoIndex == listQuestions!!.size - 1)
+                binding!!.tvOnlineExamQAnsNext.visibility = View.INVISIBLE
+        }
+        else if (id == R.id.tv_online_exam_q_ans_submit){
+            if (needToUpload())
+                uploadSubjectiveImages("submit")
+            else submitDialog(getString(R.string.online_exam_student_question_ans_submit_dialog),"submit")
+        }
+    }
+
+    override fun onBackPressed() {
+        if (isBackPressed){
+            super.onBackPressed()
+            finish()
+        }else Utils.showToast(mActivity!!,getString(R.string.online_exam_student_question_ans_submit_your_exam_first))
     }
 }

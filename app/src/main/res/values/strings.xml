@@ -275,5 +275,12 @@
     <string name="online_exam_student_question_ans_file_manager">File Manager</string>
     <string name="online_exam_student_question_ans_attemp_question_first">Please attempt question first</string>
     <string name="online_exam_student_question_ans_write_or_upload_one_image">Please write answer or upload at least one image</string>
+    <string name="online_exam_student_question_ans_submit_dialog">Are you sure you want to submit your exam</string>
+    <string name="online_exam_student_question_ans_upload_max_8_images">You can upload max 8 images</string>
+    <string name="online_exam_student_question_ans_required_confirmation">Required Confirmation</string>
+    <string name="online_exam_student_question_ans_total_question">Total Question :</string>
+    <string name="online_exam_student_question_ans_attempted_question">Attempted Question :</string>
+    <string name="online_exam_student_question_ans_skipped_question">Skipped Question :</string>
+    <string name="online_exam_student_question_ans_submit_your_exam_first">Please submit your exam first</string>
 
 </resources>

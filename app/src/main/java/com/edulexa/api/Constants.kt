@@ -153,6 +153,7 @@ class Constants {
         const val ONLINEEXAM_STUDENT_ID = "onlineexam_student_id"
         const val ONLINEEXAM_QUESTION_ID = "onlineexam_question_id"
         const val FILE = "File"
+        const val IMG_ID = "img_id"
     }
 
     object Api {

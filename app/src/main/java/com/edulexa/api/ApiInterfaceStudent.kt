@@ -75,4 +75,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/submitSubjectiveQuestion")
     fun submitSubjectiveQuestion(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/deleteSubjectiveimages")
+    fun deleteSubjectiveimages(@Body requestBody : RequestBody): Call<ResponseBody>
 }
