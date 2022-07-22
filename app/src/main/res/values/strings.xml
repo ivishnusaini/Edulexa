@@ -282,5 +282,7 @@
     <string name="online_exam_student_question_ans_attempted_question">Attempted Question :</string>
     <string name="online_exam_student_question_ans_skipped_question">Skipped Question :</string>
     <string name="online_exam_student_question_ans_submit_your_exam_first">Please submit your exam first</string>
+    <string name="online_exam_student_question_ans_attention">Attention !</string>
+    <string name="online_exam_student_question_ans_alreay_submitted">You have already submitted your exam please wait till publish your result.</string>
 
 </resources>

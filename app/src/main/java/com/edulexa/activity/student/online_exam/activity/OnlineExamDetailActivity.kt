@@ -12,6 +12,7 @@ import androidx.core.text.HtmlCompat
 import com.edulexa.R
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityOnlineExamDetailStudentBinding
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import java.text.DateFormat
 import java.text.ParseException
@@ -24,6 +25,7 @@ class OnlineExamDetailActivity : AppCompatActivity(),View.OnClickListener {
     var onlineExamNative = ""
     var examId = ""
     var examName = ""
+    var preference : Preference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnlineExamDetailStudentBinding.inflate(layoutInflater)
@@ -32,6 +34,7 @@ class OnlineExamDetailActivity : AppCompatActivity(),View.OnClickListener {
     }
     private fun init() {
         mActivity = this
+        preference = Preference().getInstance(mActivity!!)
         setUpClickListener()
         setUpData()
     }
@@ -102,6 +105,9 @@ class OnlineExamDetailActivity : AppCompatActivity(),View.OnClickListener {
                 bundle.putString(Constants.StudentOnlineExam.EXAM_NAME,examName)
                 bundle.putString(Constants.StudentOnlineExam.EXAMID,examId)
                 startActivity(Intent(mActivity, OnlineExamQuestionAnsActivity::class.java).putExtras(bundle))
+            }else{
+                val email = preference!!.getString(Constants.Preference.STUDENT_EMAIL)
+                val password = preference!!.getString(Constants.Preference.STUDENT_PASSWORD)
             }
         }
     }

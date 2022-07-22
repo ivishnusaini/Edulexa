@@ -104,6 +104,8 @@ class Constants {
         const val BRANCH_ID = "branch_id"
         const val STAFF_LOGIN = "staff_login"
         const val STUDENT_LOGIN = "student_login"
+        const val STUDENT_EMAIL = "email"
+        const val STUDENT_PASSWORD = "password"
 
 
     }
@@ -152,8 +154,9 @@ class Constants {
         const val EXAM_ID = "exam_id"
         const val ONLINEEXAM_STUDENT_ID = "onlineexam_student_id"
         const val ONLINEEXAM_QUESTION_ID = "onlineexam_question_id"
-        const val FILE = "File"
+        const val FILE = "files[]"
         const val IMG_ID = "img_id"
+        const val TOTAL_ROWS = "total_rows"
     }
 
     object Api {

@@ -299,6 +299,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                         if (recordJsonObject != null){
                                             val modelResponse = Utils.getObject(responseStr, StudentLoginResponse::class.java) as StudentLoginResponse
                                             Utils.saveStudentLoginResponse(mActivity,modelResponse)
+                                            preference!!.putString(Constants.Preference.STUDENT_EMAIL,binding!!.etUserName.text.toString().trim())
+                                            preference!!.putString(Constants.Preference.STUDENT_PASSWORD,binding!!.etPassword.text.toString().trim())
                                             if (modelResponse.getRole().equals("parent")){
                                                 if (modelResponse.getRecord()!!.getParentChildList() != null
                                                     && modelResponse.getRecord()!!.getParentChildList()!!.size == 1){

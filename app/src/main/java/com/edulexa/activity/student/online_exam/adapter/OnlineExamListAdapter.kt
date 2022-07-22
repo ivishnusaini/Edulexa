@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.online_exam.activity.OnlineExamDetailActivity
+import com.edulexa.activity.student.online_exam.activity.OnlineExamListActivity
 import com.edulexa.activity.student.online_exam.model.exam_list.ExamSchedule
 import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
 import com.edulexa.api.Constants
@@ -72,16 +73,6 @@ class OnlineExamListAdapter(context: Activity, list : List<ExamSchedule?>?,onlin
                     val typeStr = binding!!.tvOnlineExamStatus.text.toString()
                     when(typeStr){
                         "Active" -> {
-
-                        }
-                        "Result" -> {
-
-                        }
-                        "Submitted" -> {
-
-                        }
-                        "Expire" -> {
-                            // for testing oterwise no click handle when exam is expire
                             val bundle = Bundle()
                             bundle.putString(Constants.StudentOnlineExam.EXAM_NAME,list!!.get(position)!!.getExam())
                             bundle.putString(Constants.StudentOnlineExam.EXAMID,list!!.get(position)!!.getId())
@@ -92,6 +83,15 @@ class OnlineExamListAdapter(context: Activity, list : List<ExamSchedule?>?,onlin
                             bundle.putString(Constants.StudentOnlineExam.WEBVIEWURL,webviewUrl)
                             bundle.putString(Constants.StudentOnlineExam.EXAM_FROM,list!!.get(position)!!.getExamFrom())
                             context!!.startActivity(Intent(context, OnlineExamDetailActivity::class.java).putExtras(bundle))
+                        }
+                        "Result" -> {
+
+                        }
+                        "Submitted" -> {
+                            (context as OnlineExamListActivity).submitDialog()
+                        }
+                        "Expire" -> {
+
                         }
                     }
                 }

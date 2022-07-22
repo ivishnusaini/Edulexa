@@ -1,9 +1,13 @@
 package com.edulexa.activity.student.online_exam.activity
 
 import android.app.Activity
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
@@ -17,6 +21,7 @@ import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityHostelStudentBinding
 import com.edulexa.databinding.ActivityOnlineExamStudentBinding
+import com.edulexa.databinding.DialogSubmitOnlineExamBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
@@ -113,6 +118,42 @@ class OnlineExamListActivity : AppCompatActivity(),View.OnClickListener {
         }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
 
     }
+
+    fun submitDialog() {
+        try {
+            var dialogBinding: DialogSubmitOnlineExamBinding? = null
+            val dialog = Dialog(mActivity!!)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogBinding = DialogSubmitOnlineExamBinding.inflate(layoutInflater)
+            dialog.setContentView(dialogBinding.root)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCanceledOnTouchOutside(false)
+
+            dialogBinding.title.text = getString(R.string.online_exam_student_question_ans_attention)
+            dialogBinding.tvMsg.text = getString(R.string.online_exam_student_question_ans_alreay_submitted)
+            dialogBinding.totalQuestionLay.visibility = View.GONE
+            dialogBinding.attemptedQuestionLay.visibility = View.GONE
+            dialogBinding.skippedQuestionLay.visibility = View.GONE
+
+            dialogBinding.tvOk.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(p0: View?) {
+                    dialog.dismiss()
+                }
+            })
+
+
+            dialogBinding.tvCancel.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(p0: View?) {
+                    dialog.dismiss()
+                }
+            })
+
+            dialog.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
 
     override fun onClick(view: View?) {
         val id = view!!.id
