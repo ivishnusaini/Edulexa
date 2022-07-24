@@ -285,4 +285,12 @@
     <string name="online_exam_student_question_ans_attention">Attention !</string>
     <string name="online_exam_student_question_ans_alreay_submitted">You have already submitted your exam please wait till publish your result.</string>
 
+
+    <!--Live Classes-->
+    <string name="live_class_student">Live Classes</string>
+    <string name="live_class_student_upcoming">Upcoming</string>
+    <string name="live_class_student_ongoing">Ongoing</string>
+    <string name="live_class_student_completed">Completed</string>
+    <string name="live_class_student_no_data">No Data</string>
+
 </resources>

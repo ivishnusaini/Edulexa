@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.student.live_classes.activity.LiveClassesActivity"
+            android:exported="false" />
+        <activity
             android:name=".OnlineExamWebviewActivity"
             android:exported="false" />
         <activity

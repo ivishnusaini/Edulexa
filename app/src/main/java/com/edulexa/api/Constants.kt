@@ -75,6 +75,7 @@ class Constants {
         const val HAS_MULTIPLE_CHILD_YES = "yes"
         const val HAS_MULTIPLE_CHILD_NO = "no"
         const val STUDENT_IS_LOGIN_YES = "yes"
+        const val STUDENT_IS_LOGIN_NO = "no"
         const val APIURL_STUDENT = "apiUrl"
         const val IMAGESURL_STUDENT = "imagesUrl"
         const val STUDENT_ID = "studentId"

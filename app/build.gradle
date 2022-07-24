@@ -76,4 +76,12 @@ dependencies {
 
     implementation 'com.github.PierfrancescoSoffritti:AndroidYouTubePlayer:7.0.1' // youtubeplayerview
     implementation 'com.nabinbhandari.android:permissions:3.8' // runtime permission.
+
+    /*Zoom setup*/
+    implementation files('libs/commonlib.aar')
+    implementation files('libs/mobilertc.aar')
+    implementation 'com.google.android.material:material:1.5.0-alpha01'
+    implementation 'com.google.android:flexbox:2.0.1'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    /*Zoom setup*/
 }

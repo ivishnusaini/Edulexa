@@ -52,8 +52,8 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:gravity="center"
-                android:textColor="@color/primaray_text_color"
                 android:text="@string/exit_message"
+                android:textColor="@color/primaray_text_color"
                 android:textSize="@dimen/_16ssp" />
 
             <LinearLayout

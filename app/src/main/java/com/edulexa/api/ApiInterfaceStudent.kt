@@ -81,4 +81,7 @@ interface ApiInterfaceStudent {
 
     @POST("webservice/submitOnlineExam")
     fun submitOnlineExam(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/logout")
+    fun logout(): Call<ResponseBody>
 }
