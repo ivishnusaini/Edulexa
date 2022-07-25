@@ -164,6 +164,9 @@ class Constants {
         const val MESSAGE = "message"
         const val LEAVE_ID = "leave_id"
         const val USERFILE = "userfile"
+        const val CLASS_ID = "class_id"
+        const val SECTION_ID = "section_id"
+        const val TYPE = "type"
     }
 
     object Api {

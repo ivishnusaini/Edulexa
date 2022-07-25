@@ -1,10 +1,16 @@
 package com.edulexa.activity.student.apply_leave.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
@@ -17,6 +23,7 @@ import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityLeaveListStudentBinding
 import com.edulexa.databinding.ActivityOnlineExamStudentBinding
+import com.edulexa.support.FileUtils
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
@@ -26,10 +33,12 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class LeaveListActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityLeaveListStudentBinding? = null
+    var onActivityResult: ActivityResultLauncher<Intent>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLeaveListStudentBinding.inflate(layoutInflater)
@@ -40,6 +49,7 @@ class LeaveListActivity : AppCompatActivity(), View.OnClickListener {
         mActivity = this
         setUpClickListener()
         getLeaveList()
+        onActivityResult()
     }
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
@@ -121,11 +131,28 @@ class LeaveListActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    private fun onActivityResult(){
+        onActivityResult = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(), @SuppressLint("NotifyDataSetChanged")
+            fun(result: ActivityResult) {
+                if (result.resultCode === RESULT_OK) {
+                    try {
+                        getLeaveList()
+                    } catch (e: java.lang.Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        )
+
+    }
+
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
-        else if (id == R.id.iv_add_leave)
-            startActivity(Intent(mActivity,ApplyForLeaveActivity::class.java))
+        else if (id == R.id.iv_add_leave) {
+            onActivityResult!!.launch(Intent(mActivity,ApplyForLeaveActivity::class.java))
+        }
     }
 }

@@ -90,4 +90,7 @@ interface ApiInterfaceStudent {
 
     @POST("webservice/logout")
     fun logout(): Call<ResponseBody>
+
+    @POST("Webservice/getyoutube_live")
+    fun getLiveClasses(@Body requestBody : RequestBody): Call<ResponseBody>
 }

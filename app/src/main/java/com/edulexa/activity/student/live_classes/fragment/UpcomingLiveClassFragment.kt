@@ -57,9 +57,13 @@ class UpcomingLiveClassFragment : Fragment() {
     }
     private fun init(){
         mActivity = activity
-        setUpFeeList()
     }
-    private fun setUpFeeList(){
+
+    override fun onResume() {
+        super.onResume()
+        getLiveClassesList()
+    }
+    private fun getLiveClassesList(){
         if (Utils.isNetworkAvailable(mActivity!!)){
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
@@ -72,14 +76,16 @@ class UpcomingLiveClassFragment : Fragment() {
                 ApiInterfaceStudent::class.java)
 
             val jsonObject = JSONObject()
-            jsonObject.put(Constants.ParamsStudent.STUDENT_ID, Utils.getStudentId(mActivity!!))
             jsonObject.put(Constants.ParamsStudent.STUDENT_SESSION_ID, Utils.getStudentSessionId(mActivity!!))
+            jsonObject.put(Constants.ParamsStudent.CLASS_ID, Utils.getStudentClassId(mActivity!!))
+            jsonObject.put(Constants.ParamsStudent.SECTION_ID, Utils.getStudentSectionId(mActivity!!))
+            jsonObject.put(Constants.ParamsStudent.TYPE, "zoom")
 
             val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
 
-            Utils.printLog("Url", Constants.DOMAIN_STUDENT+"/Webservice/fees")
+            Utils.printLog("Url", Constants.DOMAIN_STUDENT+"/Webservice/getyoutube_live")
 
-            val call: Call<ResponseBody> = apiInterfaceWithHeader.getFeesData(requestBody)
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.getLiveClasses(requestBody)
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
@@ -93,55 +99,7 @@ class UpcomingLiveClassFragment : Fragment() {
                             val statusCode = jsonObjectResponse.optInt("status")
                             val message = jsonObjectResponse.optString("message")
                             if (statusCode == 200){
-                                val dataJsonObj = jsonObjectResponse.optJSONObject("data")
-                                if (dataJsonObj != null){
-                                    val studentJsonArr = dataJsonObj.optJSONArray("student_due_fee")
-                                    if (studentJsonArr != null && studentJsonArr.length() > 0){
-                                        val listFee : List<FeeModel> = ArrayList()
-                                        val listFeeDetail : List<FeeDetail> = ArrayList()
-                                        for (i in 0..studentJsonArr.length()-1){
-                                            val studentJsonObj = studentJsonArr.optJSONObject(i)
-                                            val feeModel = FeeModel()
-                                            feeModel.setAmount(studentJsonObj.optString("amount"))
-                                            feeModel.setCreatedAt(studentJsonObj.optString("created_at"))
-                                            feeModel.setFeeSessionGroupId(studentJsonObj.optString("fee_session_group_id"))
-                                            feeModel.setId(studentJsonObj.optString("id"))
-                                            feeModel.setIsActive(studentJsonObj.optString("is_active"))
-                                            feeModel.setIsSystem(studentJsonObj.optString("is_system"))
-                                            feeModel.setName(studentJsonObj.optString("name"))
-                                            feeModel.setStudentSessionId(studentJsonObj.optString("student_session_id"))
 
-                                            val studentFeeArr = studentJsonObj.optJSONArray("fees")
-                                            if (studentFeeArr != null && studentFeeArr.length() > 0){
-                                                for (j in 0..studentFeeArr.length()-1){
-                                                    val innerFeeDetail = studentFeeArr.optJSONObject(j)
-                                                    val feeDetail = FeeDetail()
-                                                    feeDetail.setAmount(innerFeeDetail.optString("amount"))
-                                                    feeDetail.setDueDate(innerFeeDetail.optString("due_date"))
-                                                    feeDetail.setFeeTypeId(innerFeeDetail.optString("feetype_id"))
-                                                    feeDetail.setFeeGroupdFeeTypeId(innerFeeDetail.optString("fee_groups_feetype_id"))
-                                                    feeDetail.setFeeGroupsId(innerFeeDetail.optString("fee_groups_id"))
-                                                    feeDetail.setFeeSessionGroupId(innerFeeDetail.optString("fee_session_group_id"))
-                                                    feeDetail.setId(innerFeeDetail.optString("id"))
-                                                    feeDetail.setIsActive(innerFeeDetail.optString("is_active"))
-                                                    feeDetail.setName(innerFeeDetail.optString("name"))
-                                                    feeDetail.setStatus(innerFeeDetail.optString("status"))
-                                                    feeDetail.setStudentFeesDepositeId(innerFeeDetail.optString("student_fees_deposite_id"))
-                                                    feeDetail.setStudentSessionId(innerFeeDetail.optString("student_session_id"))
-                                                    feeDetail.setTotalAmountDiscount(innerFeeDetail.optString("total_amount_discount"))
-                                                    feeDetail.setTotalAmountDisplay(innerFeeDetail.optString("total_amount_display"))
-                                                    feeDetail.setTotalAmountFine(innerFeeDetail.optString("total_amount_fine"))
-                                                    feeDetail.setTotalAmountPaid(innerFeeDetail.optString("total_amount_paid"))
-                                                    feeDetail.setTotalAmountRemaining(innerFeeDetail.optString("total_amount_remaining"))
-                                                    feeDetail.setType(innerFeeDetail.optString("type"))
-                                                    (listFeeDetail as ArrayList<FeeDetail>).add(feeDetail)
-                                                }
-                                            }
-                                            feeModel.setFeeDetail(listFeeDetail)
-                                            (listFee as ArrayList<FeeModel>).add(feeModel)
-                                        }
-                                    }
-                                }else Utils.showToast(mActivity!!,message)
                             }else
                                 Utils.showToast(mActivity!!,message)
                         }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))

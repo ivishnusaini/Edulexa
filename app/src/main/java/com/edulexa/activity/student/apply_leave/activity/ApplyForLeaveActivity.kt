@@ -279,6 +279,7 @@ class ApplyForLeaveActivity : AppCompatActivity(), View.OnClickListener {
                                 val message = jsonObjectResponse.optString("message")
                                 if (status == 1){
                                     Utils.showToast(mActivity!!,message)
+                                    setResult(RESULT_OK)
                                     onBackPressed()
                                 }else Utils.showToast(mActivity!!,message)
                             }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
