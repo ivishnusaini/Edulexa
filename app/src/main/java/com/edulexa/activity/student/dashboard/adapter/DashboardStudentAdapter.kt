@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.edulexa.activity.student.apply_leave.activity.LeaveListActivity
 import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
 import com.edulexa.activity.student.class_timetable.activity.ClassTimetableActivity
@@ -89,6 +90,9 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                         }
                         "live_classes" -> {
                             context!!.startActivity(Intent(context!!, LiveClassesActivity::class.java))
+                        }
+                        "apply_leave" -> {
+                            context!!.startActivity(Intent(context!!, LeaveListActivity::class.java))
                         }
                         "report_card" -> {
                             context!!.startActivity(Intent(context!!, ReportCardStudentActivity::class.java))

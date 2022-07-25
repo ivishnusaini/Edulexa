@@ -293,4 +293,16 @@
     <string name="live_class_student_completed">Completed</string>
     <string name="live_class_student_no_data">No Data</string>
 
+    <!--Apply Leave-->
+    <string name="apply_leave_student">Apply Leave</string>
+    <string name="apply_leave_student_no_data">No Data</string>
+    <string name="apply_leave_student_status">Status :</string>
+    <string name="apply_leave_student_from_date">From Date :</string>
+    <string name="apply_leave_student_to_date">To Date :</string>
+    <string name="apply_leave_student_applied_date">Applied Date :</string>
+    <string name="apply_leave_student_reason">Reason :</string>
+    <string name="apply_leave_student_pending">Pending</string>
+    <string name="apply_leave_student_approved">Approved</string>
+    <string name="apply_leave_student_cancel">Cancel</string>
+
 </resources>

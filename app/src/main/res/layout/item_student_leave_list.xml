@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/leave_item_cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_5sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+        <RelativeLayout
+            android:id="@+id/leave_status_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_apply_leave_status_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apply_leave_student_status"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_apply_leave_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toEndOf="@+id/tv_apply_leave_status_label"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+
+            <ImageView
+                android:id="@+id/leave_edit_IV"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_edit"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/leave_from_date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/leave_status_layout"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <com.edulexa.views.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apply_leave_student_from_date"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_apply_leave_from_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/leave_to_date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/leave_from_date_layout"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <com.edulexa.views.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apply_leave_student_to_date"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_apply_leave_to_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/leave_applied_date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/leave_to_date_layout"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <com.edulexa.views.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apply_leave_student_applied_date"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_apply_leave_applied_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/leave_reason_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/leave_applied_date_layout"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <com.edulexa.views.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apply_leave_student_reason"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_apply_leave_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_leave_document"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/app_name"
+            android:layout_below="@+id/leave_status_layout"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/no_img_found" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

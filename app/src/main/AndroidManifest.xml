@@ -22,7 +22,10 @@
             android:name=".activity.student.live_classes.activity.LiveClassesActivity"
             android:exported="false" />
         <activity
-            android:name=".OnlineExamWebviewActivity"
+            android:name=".activity.student.apply_leave.activity.LeaveListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.student.online_exam.activity.OnlineExamWebviewActivity"
             android:exported="false" />
         <activity
             android:name=".activity.student.online_exam.activity.OnlineExamQuestionAnsActivity"
