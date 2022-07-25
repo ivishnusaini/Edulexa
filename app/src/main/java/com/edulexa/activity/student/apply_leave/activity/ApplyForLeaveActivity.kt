@@ -39,6 +39,7 @@ import com.edulexa.support.Utils
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -249,16 +250,17 @@ class ApplyForLeaveActivity : AppCompatActivity(), View.OnClickListener {
                 val apiInterfaceWithHeader: ApiInterfaceStudent = APIClientStudent.getRetroFitClientWithNewKeyHeader(mActivity!!, accessToken,branchId,userId).create(
                     ApiInterfaceStudent::class.java)
 
-                val jsonObject = JSONObject()
-                jsonObject.put(Constants.ParamsStudent.STUDENT_SESSION_ID, Utils.getStudentSessionId(mActivity!!))
-                jsonObject.put(Constants.ParamsStudent.APPLY_DATE, Utils.getCurrentDate())
-                jsonObject.put(Constants.ParamsStudent.FROM_DATE, binding!!.tvFormDate.text.toString())
-                jsonObject.put(Constants.ParamsStudent.TO_DATE, binding!!.tvToDate.text.toString())
-                jsonObject.put(Constants.ParamsStudent.MESSAGE, binding!!.etReasonForLeave.text.toString())
-                jsonObject.put(Constants.ParamsStudent.LEAVE_ID, leaveIdStr)
-                jsonObject.put(Constants.ParamsStudent.USERFILE, uploadImageFile)
+                val builder = MultipartBody.Builder()
+                builder.setType(MultipartBody.FORM)
+                builder.addFormDataPart(Constants.ParamsStudent.STUDENT_SESSION_ID, Utils.getStudentSessionId(mActivity!!));
+                builder.addFormDataPart(Constants.ParamsStudent.APPLY_DATE, Utils.getCurrentDate()!!);
+                builder.addFormDataPart(Constants.ParamsStudent.FROM_DATE, binding!!.tvFormDate.text.toString());
+                builder.addFormDataPart(Constants.ParamsStudent.TO_DATE, binding!!.tvToDate.text.toString());
+                builder.addFormDataPart(Constants.ParamsStudent.MESSAGE, binding!!.etReasonForLeave.text.toString());
+                builder.addFormDataPart(Constants.ParamsStudent.LEAVE_ID, leaveIdStr);
+                builder.addFormDataPart(Constants.ParamsStudent.USERFILE, uploadImageFile!!.name, RequestBody.create(MediaType.parse("multipart/form-data"), uploadImageFile))
+                val requestBody = builder.build()
 
-                val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
 
                 Utils.printLog("Url", Constants.DOMAIN_STUDENT+"/Webservice/addLeave")
 
