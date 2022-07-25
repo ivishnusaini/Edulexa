@@ -1,6 +1,7 @@
 package com.edulexa.activity.student.apply_leave.activity
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -42,6 +43,7 @@ class LeaveListActivity : AppCompatActivity(), View.OnClickListener {
     }
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
+        binding!!.ivAddLeave.setOnClickListener(this)
     }
 
     private fun getLeaveList(){
@@ -118,9 +120,12 @@ class LeaveListActivity : AppCompatActivity(), View.OnClickListener {
         }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
 
     }
+
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
+        else if (id == R.id.iv_add_leave)
+            startActivity(Intent(mActivity,ApplyForLeaveActivity::class.java))
     }
 }

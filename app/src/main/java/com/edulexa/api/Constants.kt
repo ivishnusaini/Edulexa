@@ -158,6 +158,12 @@ class Constants {
         const val FILE = "files[]"
         const val IMG_ID = "img_id"
         const val TOTAL_ROWS = "total_rows"
+        const val APPLY_DATE = "apply_date"
+        const val FROM_DATE = "from_date"
+        const val TO_DATE = "to_date"
+        const val MESSAGE = "message"
+        const val LEAVE_ID = "leave_id"
+        const val USERFILE = "userfile"
     }
 
     object Api {
