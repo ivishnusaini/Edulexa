@@ -11,9 +11,16 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.dashboard.model.StudentDashboardResponse
 import com.edulexa.activity.student.fee.model.FeeDetail
 import com.edulexa.activity.student.fee.model.FeeModel
+import com.edulexa.activity.student.live_classes.adapter.CompletedLiveClassAdapter
+import com.edulexa.activity.student.live_classes.adapter.UpcomingLiveClassAdapter
+import com.edulexa.activity.student.live_classes.model.DatumLiveClass
+import com.edulexa.activity.student.live_classes.model.LiveClassResponse
 import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
@@ -57,63 +64,25 @@ class UpcomingLiveClassFragment : Fragment() {
     }
     private fun init(){
         mActivity = activity
+        setUpData()
     }
 
-    override fun onResume() {
-        super.onResume()
-        getLiveClassesList()
-    }
-    private fun getLiveClassesList(){
-        if (Utils.isNetworkAvailable(mActivity!!)){
-            Utils.showProgressBar(mActivity!!)
-            Utils.hideKeyboard(mActivity!!)
-
-            val branchId = Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
-            val accessToken = Utils.getStudentLoginResponse(mActivity)!!.getToken()!!
-            val userId = Utils.getStudentUserId(mActivity!!)
-
-            val apiInterfaceWithHeader: ApiInterfaceStudent = APIClientStudent.getRetroFitClientWithNewKeyHeader(mActivity!!, accessToken,branchId,userId).create(
-                ApiInterfaceStudent::class.java)
-
-            val jsonObject = JSONObject()
-            jsonObject.put(Constants.ParamsStudent.STUDENT_SESSION_ID, Utils.getStudentSessionId(mActivity!!))
-            jsonObject.put(Constants.ParamsStudent.CLASS_ID, Utils.getStudentClassId(mActivity!!))
-            jsonObject.put(Constants.ParamsStudent.SECTION_ID, Utils.getStudentSectionId(mActivity!!))
-            jsonObject.put(Constants.ParamsStudent.TYPE, "zoom")
-
-            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
-
-            Utils.printLog("Url", Constants.DOMAIN_STUDENT+"/Webservice/getyoutube_live")
-
-            val call: Call<ResponseBody> = apiInterfaceWithHeader.getLiveClasses(requestBody)
-            call.enqueue(object : Callback<ResponseBody> {
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                    Utils.hideProgressBar()
-                    try{
-                        val responseStr = response.body()!!.string()
-                        if (!responseStr.isNullOrEmpty()){
-                            val jsonObjectResponse = JSONObject(responseStr)
-                            val statusCode = jsonObjectResponse.optInt("status")
-                            val message = jsonObjectResponse.optString("message")
-                            if (statusCode == 200){
-
-                            }else
-                                Utils.showToast(mActivity!!,message)
-                        }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
-                    }catch (e : Exception){
-                        e.printStackTrace()
-                    }
-                }
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Utils.hideProgressBar()
-                    Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
-                }
-            })
-        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
-
+    private fun setUpData(){
+        if (Constants.AppSaveData.listUpcoming != null){
+            if (Constants.AppSaveData.listUpcoming!!.size > 0){
+                binding!!.liveClassesRecycler.visibility = View.VISIBLE
+                binding!!.tvLiveClassNoData.visibility = View.GONE
+                binding!!.liveClassesRecycler.layoutManager = LinearLayoutManager(mActivity!!,
+                    RecyclerView.VERTICAL,false)
+                binding!!.liveClassesRecycler.adapter = UpcomingLiveClassAdapter(mActivity!!,Constants.AppSaveData.listUpcoming)
+            }else{
+                binding!!.liveClassesRecycler.visibility = View.GONE
+                binding!!.tvLiveClassNoData.visibility = View.VISIBLE
+            }
+        }else{
+            binding!!.liveClassesRecycler.visibility = View.GONE
+            binding!!.tvLiveClassNoData.visibility = View.VISIBLE
+        }
     }
 
 }

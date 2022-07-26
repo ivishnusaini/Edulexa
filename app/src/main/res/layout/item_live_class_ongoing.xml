@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/adapter_student_homework_viewContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_10sdp"
+    app:cardCornerRadius="@dimen/_5sdp"
+    android:elevation="@dimen/_5sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_live_class_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp"
+            android:text=""/>
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_live_class_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp"
+            android:maxLines="2"
+            android:text=""/>
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_live_class_from_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp"
+            android:text=""/>
+
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_live_class_to_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_14ssp"
+            android:text=""/>
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_join_live_class"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:paddingStart="@dimen/_30sdp"
+            android:paddingEnd="@dimen/_30sdp"
+            android:textSize="@dimen/_14ssp"
+            android:text="Join"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:background="@drawable/ripple_effect_5"/>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
+

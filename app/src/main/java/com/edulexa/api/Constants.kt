@@ -1,5 +1,7 @@
 package com.edulexa.api
 
+import com.edulexa.activity.student.live_classes.model.DatumLiveClass
+
 class Constants {
     companion object {
         val BASE_URL_SCHOOL_CODE = "https://edulexa.online/beta/staff_api/app/web_url"
@@ -48,6 +50,10 @@ class Constants {
         val HOSTELID = "hostelId"
     }
 
+    object StudentLiveClass {
+        val VIDEO_URL = "video_url"
+    }
+
     object StudentOnlineExam {
         val EXAM_NAME = "name"
         val EXAMID = "examId"
@@ -60,7 +66,10 @@ class Constants {
     }
 
     object AppSaveData {
-        var gallerystudenttype = "all";
+        var gallerystudenttype = "all"
+        var listUpcoming : List<DatumLiveClass>? = null
+        var listOnGoing : List<DatumLiveClass>? = null
+        var listCompleted : List<DatumLiveClass>? = null
     }
 
     object Preference {
@@ -85,6 +94,8 @@ class Constants {
         const val STUDENT_NAME = "studentName"
         const val CLASS_ID = "class_id"
         const val SECTION_ID = "section_id"
+        const val ZOOM_SDK_KEY = "zoom_sdk_key"
+        const val ZOOM_SDK_SECRAT = "zoom_sdk_secrat"
 
         /*Staff*/
         const val STAFF_BASE_URL = "staff_base_url"
@@ -167,6 +178,9 @@ class Constants {
         const val CLASS_ID = "class_id"
         const val SECTION_ID = "section_id"
         const val TYPE = "type"
+        const val LIVE_CLASS_ID = "live_class_id"
+        const val IN_TIME = "in_time"
+        const val OUT_TIME = "out_time"
     }
 
     object Api {

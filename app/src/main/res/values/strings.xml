@@ -292,6 +292,10 @@
     <string name="live_class_student_ongoing">Ongoing</string>
     <string name="live_class_student_completed">Completed</string>
     <string name="live_class_student_no_data">No Data</string>
+    <string name="live_class_student_video_url_validation">Video url is not valid</string>
+    <string name="live_class_student_invalid_zoom_key">Invalid zoom api key and secret key</string>
+    <string name="live_class_student_please_wait">Please wait..</string>
+    <string name="live_class_student_meeting_id_blank">Meeting id is blank</string>
 
     <!--Apply Leave-->
     <string name="apply_leave_student">Apply Leave</string>
@@ -318,5 +322,7 @@
     <string name="add_leave_student_to_date_validation">Please select to date</string>
     <string name="add_leave_student_reason_validation">Please enter reason</string>
     <string name="add_leave_student_document_select_validation">Please select document</string>
+
+
 
 </resources>

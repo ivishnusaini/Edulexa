@@ -93,4 +93,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/getyoutube_live")
     fun getLiveClasses(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("webservice/updateLiveClassStudent")
+    fun updateLiveClassStudent(@Body requestBody : RequestBody): Call<ResponseBody>
 }
