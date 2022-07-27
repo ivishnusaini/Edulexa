@@ -13,6 +13,7 @@ import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
 import com.edulexa.activity.student.class_timetable.activity.ClassTimetableActivity
 import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlanActivity
 import com.edulexa.activity.student.dashboard.model.DashboardModuleModel
+import com.edulexa.activity.student.documents.activity.DocumentListActivity
 import com.edulexa.activity.student.download_center.activity.DownloadCenterActivity
 import com.edulexa.activity.student.examination.activity.ExamStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
@@ -100,6 +101,9 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                         }
                         "report_card" -> {
                             context!!.startActivity(Intent(context!!, ReportCardStudentActivity::class.java))
+                        }
+                        "documents" -> {
+                            context!!.startActivity(Intent(context!!, DocumentListActivity::class.java))
                         }
                         "gallery" -> {
                             context!!.startActivity(Intent(context!!, GalleryStudentActivity::class.java))

@@ -327,4 +327,7 @@
     <string name="teacher_rating_student">Teachers List</string>
     <string name="teacher_rating_student_no_data">No Data</string>
 
+    <!--Document-->
+    <string name="document_student">Document</string>
+
 </resources>
