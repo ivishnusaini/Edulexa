@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.student.teacher_rating.activity.TeacherListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.student.live_classes.activity.LiveYoutubeActivity"
             android:exported="false" />
         <activity

@@ -96,4 +96,7 @@ interface ApiInterfaceStudent {
 
     @POST("webservice/updateLiveClassStudent")
     fun updateLiveClassStudent(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getTeachersList")
+    fun getTeachersList(@Body requestBody : RequestBody): Call<ResponseBody>
 }

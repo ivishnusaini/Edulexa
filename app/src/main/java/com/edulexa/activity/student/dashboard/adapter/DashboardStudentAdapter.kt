@@ -25,6 +25,7 @@ import com.edulexa.activity.student.noticeboard.activity.NoticeBoardStudentActiv
 import com.edulexa.activity.student.online_exam.activity.OnlineExamListActivity
 import com.edulexa.activity.student.profile.activity.ProfileStudentActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
+import com.edulexa.activity.student.teacher_rating.activity.TeacherListActivity
 import com.edulexa.activity.student.transport.activity.TransportActivity
 import com.edulexa.databinding.ItemStudentDashboardBinding
 import com.edulexa.support.Utils
@@ -87,6 +88,9 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                         }
                         "online_examination" -> {
                             context!!.startActivity(Intent(context!!, OnlineExamListActivity::class.java))
+                        }
+                        "teachers_rating" -> {
+                            context!!.startActivity(Intent(context!!, TeacherListActivity::class.java))
                         }
                         "live_classes" -> {
                             context!!.startActivity(Intent(context!!, LiveClassesActivity::class.java))

@@ -323,6 +323,8 @@
     <string name="add_leave_student_reason_validation">Please enter reason</string>
     <string name="add_leave_student_document_select_validation">Please select document</string>
 
-
+    <!--Teacher Rating-->
+    <string name="teacher_rating_student">Teachers List</string>
+    <string name="teacher_rating_student_no_data">No Data</string>
 
 </resources>
