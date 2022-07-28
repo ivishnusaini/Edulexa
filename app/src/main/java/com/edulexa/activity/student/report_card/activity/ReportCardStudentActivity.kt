@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.student.documents.adapter.DocumentDetailAdapter
 import com.edulexa.activity.student.documents.model.document_folder_detail.DocumentFolderDetailResponse
 import com.edulexa.activity.student.report_card.adapter.ReportCardAdapter
+import com.edulexa.activity.student.report_card.model.ReportCardListResponse
 import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
@@ -42,10 +44,6 @@ class ReportCardStudentActivity : AppCompatActivity(),View.OnClickListener {
         binding!!.ivBack.setOnClickListener(this)
     }
     private fun setUpExamList(){
-        binding!!.reportCardRecycler.layoutManager = GridLayoutManager(mActivity!!,2,
-            RecyclerView.VERTICAL,false)
-        binding!!.reportCardRecycler.adapter = ReportCardAdapter(mActivity!!)
-
         if (Utils.isNetworkAvailable(mActivity!!)) {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
@@ -88,27 +86,17 @@ class ReportCardStudentActivity : AppCompatActivity(),View.OnClickListener {
                         if (!responseStr.isNullOrEmpty()) {
                             val jsonObjectResponse = JSONObject(responseStr)
                             val statusCode = jsonObjectResponse.optInt("status")
-                            if (statusCode == 1) {
+                            if (statusCode == 200) {
                                 val modelResponse = Utils.getObject(
                                     responseStr,
-                                    DocumentFolderDetailResponse::class.java
-                                ) as DocumentFolderDetailResponse
+                                    ReportCardListResponse::class.java
+                                ) as ReportCardListResponse
                                 if (modelResponse.getData() != null) {
                                     if (modelResponse.getData()!!.size > 0) {
                                         binding!!.reportCardRecycler.visibility = View.VISIBLE
                                         binding!!.tvReportCardNoData.visibility = View.GONE
-                                        binding!!.reportCardRecycler.layoutManager =
-                                            GridLayoutManager(
-                                                mActivity,
-                                                2,
-                                                RecyclerView.VERTICAL,
-                                                false
-                                            )
-                                        binding!!.reportCardRecycler.adapter =
-                                            DocumentDetailAdapter(
-                                                mActivity!!,
-                                                modelResponse.getData()
-                                            )
+                                        binding!!.reportCardRecycler.layoutManager = LinearLayoutManager(mActivity, RecyclerView.VERTICAL, false)
+                                        binding!!.reportCardRecycler.adapter = ReportCardAdapter(mActivity!!,modelResponse.getData())
                                     } else {
                                         binding!!.reportCardRecycler.visibility = View.GONE
                                         binding!!.tvReportCardNoData.visibility = View.VISIBLE

@@ -111,4 +111,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/getExamResultList")
     fun getReportCardList(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getExamResultDetails")
+    fun getExamResultDetails(@Body requestBody : RequestBody): Call<ResponseBody>
 }

@@ -38,6 +38,9 @@ class Constants {
 
     object ReportCardDetail {
         val TITLE = "title"
+        val EXAM_GROUP_CLASS_BATCH_EXAM_ID = "exam_group_class_batch_exam_id"
+        val RESULT_ID = "result_id"
+        val DOWNLOAD_MARK_SHEET = "downloadMarksheet"
     }
 
     object StudentExamDetail {
@@ -187,6 +190,8 @@ class Constants {
         const val OUT_TIME = "out_time"
         const val FOLDER_ID = "folder_id"
         const val FIRST_DOC = "first_doc"
+        const val EXAM_GROUP_CLASS_BATCH_EXAM_ID = "exam_group_class_batch_exam_id"
+        const val RESULT_ID = "result_id"
     }
 
     object Api {
