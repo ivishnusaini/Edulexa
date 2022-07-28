@@ -116,6 +116,7 @@
 
     <!--Report Card Student Screen-->
     <string name="report_card_student">Report Card</string>
+    <string name="report_card_student_no_data">No Data</string>
 
     <!--Report Card Student Screen-->
     <string name="report_card_detail_subjects">Subjects</string>

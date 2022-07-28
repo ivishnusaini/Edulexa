@@ -16,6 +16,10 @@ class DashboardDatum {
     @Expose
     private var homeworklist: List<HomeworkStudentDashboard?>? = null
 
+    @SerializedName("liveclassconfig")
+    @Expose
+    private var liveClassConfig: List<LiveClassConfig?>? = null
+
     fun getModuleList(): List<ModuleDashboard?>? {
         return moduleList
     }
@@ -38,5 +42,13 @@ class DashboardDatum {
 
     fun setHomeworklist(homeworklist: List<HomeworkStudentDashboard?>?) {
         this.homeworklist = homeworklist
+    }
+
+    fun getLiveClassConfig(): List<LiveClassConfig?>? {
+        return liveClassConfig
+    }
+
+    fun setLiveClassConfig(liveClassConfig: List<LiveClassConfig?>?) {
+        this.liveClassConfig = liveClassConfig
     }
 }

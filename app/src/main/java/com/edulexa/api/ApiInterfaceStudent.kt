@@ -108,4 +108,7 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/create_doc")
     fun uploadDocument(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getExamResultList")
+    fun getReportCardList(@Body requestBody : RequestBody): Call<ResponseBody>
 }

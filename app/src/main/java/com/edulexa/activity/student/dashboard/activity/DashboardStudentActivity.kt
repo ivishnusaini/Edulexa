@@ -181,9 +181,13 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                                     )
                                 }
                                 if (modelResponse.getDashboardDatum() != null)
-                                    setUpDashboardData(
-                                        modelResponse.getDashboardDatum()!!.getModuleList()
-                                    )
+                                    setUpDashboardData(modelResponse.getDashboardDatum()!!.getModuleList())
+                                if (modelResponse.getDashboardDatum()!!.getLiveClassConfig() != null){
+                                    if (modelResponse.getDashboardDatum()!!.getLiveClassConfig()!!.size > 0){
+                                        preference!!.putString(Constants.Preference.ZOOM_SDK_KEY,modelResponse.getDashboardDatum()!!.getLiveClassConfig()!!.get(0)!!.getApiKey())
+                                        preference!!.putString(Constants.Preference.ZOOM_SDK_SECRAT,modelResponse.getDashboardDatum()!!.getLiveClassConfig()!!.get(0)!!.getApiSecret())
+                                    }
+                                }
                             }
                         } else Utils.showToastPopup(
                             mActivity!!,
