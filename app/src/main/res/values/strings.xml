@@ -329,5 +329,7 @@
 
     <!--Document-->
     <string name="document_student">Document</string>
+    <string name="document_student_no_data">No Document</string>
+    <string name="document_student_upload">Upload</string>
 
 </resources>

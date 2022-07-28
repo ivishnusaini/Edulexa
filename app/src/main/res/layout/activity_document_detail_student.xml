@@ -27,12 +27,13 @@
             android:src="@drawable/ic_back_white" />
 
         <com.edulexa.views.MediumTextView
+            android:id="@+id/tv_document_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/document_student"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 
@@ -46,12 +47,13 @@
         android:background="@drawable/header_top_right_radius">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/document_recycler"
+            android:id="@+id/document_detail_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tv_document_detail_upload_button"/>
 
         <com.edulexa.views.RegularTextView
-            android:id="@+id/tv_document__no_data"
+            android:id="@+id/tv_document_detail__no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/document_student_no_data"
@@ -59,6 +61,23 @@
             android:textColor="@color/primaray_text_color"
             android:layout_centerInParent="true"
             android:visibility="gone"/>
+
+        <com.edulexa.views.RegularButton
+            android:id="@+id/tv_document_detail_upload_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/ripple_effect_25"
+            android:gravity="center"
+            android:text="@string/document_student_upload"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
 
     </RelativeLayout>
 

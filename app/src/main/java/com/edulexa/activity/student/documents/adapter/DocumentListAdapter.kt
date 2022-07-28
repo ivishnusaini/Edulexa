@@ -1,14 +1,19 @@
 package com.edulexa.activity.student.documents.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.student.documents.activity.DocumentDetailActivity
 import com.edulexa.activity.student.documents.model.DocumentListModel
 import com.edulexa.activity.student.homework.model.HomeworkData
+import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
 import com.edulexa.activity.student.teacher_rating.model.DatumTeacherList
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ItemStudentDashboardHomeworkInnerListBinding
@@ -35,9 +40,19 @@ class DocumentListAdapter(context: Activity, list : List<DocumentListModel?>?) :
         return ViewHolder(binding!!)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         try {
             binding!!.tvDocumentName.text = list!!.get(position)!!.getFolderName()
+
+            viewHolder.itemView.setOnClickListener(object :View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    val bundle = Bundle()
+                    bundle.putString(Constants.StudentDocument.TITLE,list!!.get(position)!!.getFolderName())
+                    bundle.putString(Constants.StudentDocument.FOLDER_ID,list!!.get(position)!!.getId())
+                    context!!.startActivity(Intent(context, DocumentDetailActivity::class.java).putExtras(bundle))
+                }
+            })
+
         } catch (e: Exception) {
             e.printStackTrace()
         }

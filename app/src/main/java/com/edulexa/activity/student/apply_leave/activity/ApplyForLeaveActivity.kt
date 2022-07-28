@@ -258,7 +258,7 @@ class ApplyForLeaveActivity : AppCompatActivity(), View.OnClickListener {
                 builder.addFormDataPart(Constants.ParamsStudent.TO_DATE, binding!!.tvToDate.text.toString());
                 builder.addFormDataPart(Constants.ParamsStudent.MESSAGE, binding!!.etReasonForLeave.text.toString());
                 builder.addFormDataPart(Constants.ParamsStudent.LEAVE_ID, leaveIdStr);
-                builder.addFormDataPart(Constants.ParamsStudent.USERFILE, uploadImageFile!!.name, RequestBody.create(MediaType.parse("multipart/form-data"), uploadImageFile))
+                builder.addFormDataPart(Constants.ParamsStudent.USERFILE, uploadImageFile!!.name, RequestBody.create(MediaType.parse("multipart/form-data"), uploadImageFile!!))
                 val requestBody = builder.build()
 
 

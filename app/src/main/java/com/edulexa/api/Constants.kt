@@ -53,6 +53,10 @@ class Constants {
     object StudentLiveClass {
         val VIDEO_URL = "video_url"
     }
+    object StudentDocument {
+        val TITLE = "title"
+        val FOLDER_ID = "folder_id"
+    }
 
     object StudentOnlineExam {
         val EXAM_NAME = "name"
@@ -181,6 +185,8 @@ class Constants {
         const val LIVE_CLASS_ID = "live_class_id"
         const val IN_TIME = "in_time"
         const val OUT_TIME = "out_time"
+        const val FOLDER_ID = "folder_id"
+        const val FIRST_DOC = "first_doc"
     }
 
     object Api {
