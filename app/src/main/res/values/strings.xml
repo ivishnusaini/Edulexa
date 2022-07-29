@@ -120,7 +120,6 @@
     <string name="report_card_student_no_marks_data">No Marks Data</string>
 
 
-
     <!--NoticeBoard Student Screen-->
     <string name="notice_board_student">Notice Board</string>
     <string name="notice_board_no_data">No Notice Board Data</string>
@@ -133,6 +132,7 @@
     <string name="gallery_student_image">Images</string>
     <string name="gallery_student_documents">Documents</string>
     <string name="gallery_student_links">Links</string>
+    <string name="gallery_student_no_data">No Data</string>
 
     <!--Profile Student Screen-->
     <string name="profile_student">Profile</string>
@@ -336,5 +336,11 @@
     <string name="report_card_detail_percentage">Percentage</string>
     <string name="report_card_detail_grade">Grade</string>
     <string name="report_card_detail_download_url_null">Download url is null</string>
+
+    <!--Chat List-->
+    <string name="chat_student">Chats</string>
+    <string name="chat_student_groups">Groups</string>
+    <string name="chat_student_enter_name">Enter Name</string>
+    <string name="chat_student_no_data">No Data</string>
 
 </resources>

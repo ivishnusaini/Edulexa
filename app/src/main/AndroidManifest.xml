@@ -19,6 +19,12 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.student.chat.activity.ChatListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.student.gallery.activity.GalleryOldActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.student.documents.activity.DocumentDetailActivity"
             android:exported="false" />
         <activity

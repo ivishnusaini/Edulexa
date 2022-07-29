@@ -39,6 +39,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/app_icon"
         android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
         android:transitionName="@string/gallery_student_transition_name" />
 
 </LinearLayout>

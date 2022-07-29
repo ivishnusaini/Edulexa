@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.activity.student.apply_leave.activity.LeaveListActivity
 import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
 import com.edulexa.activity.student.calendar.activity.CalendarStudentActivity
+import com.edulexa.activity.student.chat.activity.ChatListActivity
 import com.edulexa.activity.student.class_timetable.activity.ClassTimetableActivity
 import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlanActivity
 import com.edulexa.activity.student.dashboard.model.DashboardModuleModel
@@ -17,6 +18,7 @@ import com.edulexa.activity.student.documents.activity.DocumentListActivity
 import com.edulexa.activity.student.download_center.activity.DownloadCenterActivity
 import com.edulexa.activity.student.examination.activity.ExamStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
+import com.edulexa.activity.student.gallery.activity.GalleryOldActivity
 import com.edulexa.activity.student.gallery.activity.GalleryStudentActivity
 import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
 import com.edulexa.activity.student.hostel.activity.HostelActivity
@@ -106,7 +108,10 @@ class DashboardStudentAdapter(context: Activity,list : List<DashboardModuleModel
                             context!!.startActivity(Intent(context!!, DocumentListActivity::class.java))
                         }
                         "gallery" -> {
-                            context!!.startActivity(Intent(context!!, GalleryStudentActivity::class.java))
+                            context!!.startActivity(Intent(context!!, GalleryOldActivity::class.java))
+                        }
+                        "chat" -> {
+                            context!!.startActivity(Intent(context!!, ChatListActivity::class.java))
                         }
                         "timeline" -> {
                             context!!.startActivity(Intent(context!!, ProfileStudentActivity::class.java))
