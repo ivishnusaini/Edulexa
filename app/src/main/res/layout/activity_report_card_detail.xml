@@ -34,7 +34,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/report_card_student_no_data"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 
@@ -131,12 +131,22 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_report_card_detail_marks"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"/>
+
+                <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_report_detail_marks_no_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/primaray_text_color"
+                    android:text="@string/report_card_student_no_marks_data"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:background="@color/primaray_text_color" />
 
                 <LinearLayout
@@ -165,7 +175,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:maxLines="1"
-                            android:text="100"
+                            android:text=""
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_14ssp" />
 
@@ -199,7 +209,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:maxLines="1"
-                            android:text="83.00%"
+                            android:text=""
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_14ssp" />
 
@@ -232,7 +242,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:maxLines="1"
-                            android:text="A"
+                            android:text=""
                             android:textColor="@color/primaray_text_color"
                             android:textSize="@dimen/_14ssp" />
 
@@ -246,6 +256,7 @@
         </androidx.cardview.widget.CardView>
 
         <RelativeLayout
+            android:id="@+id/download_report_card_lay"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
             android:layout_alignParentBottom="true"

@@ -1,22 +1,28 @@
 package com.edulexa.activity.student.report_card.activity
 
+import android.Manifest
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.student.documents.adapter.DocumentDetailAdapter
-import com.edulexa.activity.student.documents.model.document_folder_detail.DocumentFolderDetailResponse
+import com.edulexa.activity.student.report_card.adapter.ReportCardDetailMarksAdapter
 import com.edulexa.activity.student.report_card.model.detail.ReportCardDetailsResponse
 import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityReportCardDetailBinding
-import com.edulexa.databinding.ActivityReportCardStudentBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
+import com.nabinbhandari.android.permissions.PermissionHandler
+import com.nabinbhandari.android.permissions.Permissions
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -31,6 +37,7 @@ class ReportCardDetailActivity : AppCompatActivity(), View.OnClickListener {
     var titleStr: String? = null
     var examGroupClassBatchExamId: String? = null
     var resultId: String? = null
+    var downloadMarkSheetUrl: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReportCardDetailBinding.inflate(layoutInflater)
@@ -48,6 +55,7 @@ class ReportCardDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
+        binding!!.downloadReportCardLay.setOnClickListener(this)
     }
 
     private fun getBundleData() {
@@ -56,6 +64,7 @@ class ReportCardDetailActivity : AppCompatActivity(), View.OnClickListener {
             titleStr = bundle!!.getString(Constants.ReportCardDetail.TITLE)
             examGroupClassBatchExamId = bundle.getString(Constants.ReportCardDetail.EXAM_GROUP_CLASS_BATCH_EXAM_ID)
             resultId = bundle.getString(Constants.ReportCardDetail.RESULT_ID)
+            downloadMarkSheetUrl = bundle.getString(Constants.ReportCardDetail.DOWNLOAD_MARK_SHEET)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -114,7 +123,18 @@ class ReportCardDetailActivity : AppCompatActivity(), View.OnClickListener {
                                     responseStr,
                                     ReportCardDetailsResponse::class.java
                                 ) as ReportCardDetailsResponse
-
+                                binding!!.tvReportCardDetailGrandTotal.text = getString(R.string.concat_string_with_text_format,modelResponse.getGetMarks().toString(),"/",modelResponse.getTotalMarks().toString())
+                                binding!!.tvReportCardDetailPercentage.text = modelResponse.getPercentage()
+                                binding!!.tvReportCardDetailGrade.text = modelResponse.getGrade()
+                                if (modelResponse.getExamResult() != null && modelResponse.getExamResult()!!.size > 0){
+                                    binding!!.recyclerViewReportCardDetailMarks.visibility = View.VISIBLE
+                                    binding!!.tvReportDetailMarksNoData.visibility = View.GONE
+                                    binding!!.recyclerViewReportCardDetailMarks.layoutManager = LinearLayoutManager(mActivity,RecyclerView.VERTICAL,false)
+                                    binding!!.recyclerViewReportCardDetailMarks.adapter = ReportCardDetailMarksAdapter(mActivity!!,modelResponse.getExamResult())
+                                }else{
+                                    binding!!.recyclerViewReportCardDetailMarks.visibility = View.GONE
+                                    binding!!.tvReportDetailMarksNoData.visibility = View.VISIBLE
+                                }
                             }
                         } else {
                             Utils.showToastPopup(
@@ -141,5 +161,33 @@ class ReportCardDetailActivity : AppCompatActivity(), View.OnClickListener {
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
+        else if (id == R.id.download_report_card_lay){
+            if (downloadMarkSheetUrl != null){
+                val permissions = arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                val rationale = "Please provide permission so that you can ..."
+                val options = Permissions.Options()
+                    .setRationaleDialogTitle("Info")
+                    .setSettingsDialogTitle("Warning")
+                Permissions.check(
+                    mActivity,
+                    permissions,
+                    rationale,
+                    options,
+                    object : PermissionHandler() {
+                        override fun onGranted() {
+                            Utils.startDownload(mActivity!!,downloadMarkSheetUrl!!,downloadMarkSheetUrl!!)
+                        }
+                        override fun onDenied(
+                            context: Context,
+                            deniedPermissions: java.util.ArrayList<String>
+                        ) {
+                            Toast.makeText(mActivity, getString(R.string.permission_denied), Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    })
+            }else Utils.showToast(mActivity!!,getString(R.string.dashboard_student_present_format))
+        }
     }
 }

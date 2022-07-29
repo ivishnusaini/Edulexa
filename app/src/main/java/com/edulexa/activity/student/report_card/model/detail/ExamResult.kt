@@ -57,6 +57,8 @@ class ExamResult {
     }
 
     fun getFullMarks(): String? {
+        if (fullMarks == null)
+            return "0"
         return fullMarks
     }
 
@@ -65,6 +67,8 @@ class ExamResult {
     }
 
     fun getPassingMarks(): String? {
+        if (passingMarks == null)
+            return "0"
         return passingMarks
     }
 
@@ -73,6 +77,8 @@ class ExamResult {
     }
 
     fun getExamName(): String? {
+        if (examName == null)
+            return ""
         return examName
     }
 
@@ -89,6 +95,8 @@ class ExamResult {
     }
 
     fun getGetMarks(): String? {
+        if (getMarks == null)
+            return "0"
         return getMarks
     }
 
@@ -97,6 +105,8 @@ class ExamResult {
     }
 
     fun getStatus(): String? {
+        if (status == null || status.equals("no record found"))
+            return "NA"
         return status
     }
 

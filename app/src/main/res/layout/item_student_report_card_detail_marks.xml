@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:weightSum="4">
+
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_report_card_detail_subject"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_12ssp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/primaray_text_color" />
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_report_card_detail_passing_marks"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_12ssp" />
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/primaray_text_color" />
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_report_card_detail_obtained_marks"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_12ssp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/primaray_text_color" />
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_report_card_detail_result_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/primaray_text_color"
+            android:textSize="@dimen/_12ssp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_report_card_detail"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/primaray_text_color" />
+
+
+</LinearLayout>

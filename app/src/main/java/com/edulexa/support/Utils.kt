@@ -429,21 +429,23 @@ class Utils {
                 return getCurrentDate()!!
             }
         }
+
         fun getStudentId(context : Activity) : String{
             val preference = Preference().getInstance(context)
             val studentId = preference!!.getString(Constants.Preference.STUDENT_ID)
             return studentId!!
         }
+
         fun getStudentUserId(context : Activity) : String{
             return getStudentLoginResponse(context)!!.getId()!!
         }
         fun getStudentClassId(context : Activity) : String{
             val preference = Preference().getInstance(context)
-            return preference!!.getString(Constants.Preference.SECTION_ID)!!
+            return preference!!.getString(Constants.Preference.CLASS_ID)!!
         }
         fun getStudentSectionId(context : Activity) : String{
             val preference = Preference().getInstance(context)
-            return preference!!.getString(Constants.Preference.CLASS_ID)!!
+            return preference!!.getString(Constants.Preference.SECTION_ID)!!
         }
         fun getStudentSessionId(context : Activity) : String{
             val preference = Preference().getInstance(context)

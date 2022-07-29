@@ -32,7 +32,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/report_card_student_no_data"
+            android:text="@string/report_card_student"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 

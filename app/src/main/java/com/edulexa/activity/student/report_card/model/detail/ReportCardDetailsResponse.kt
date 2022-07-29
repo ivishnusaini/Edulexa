@@ -45,6 +45,8 @@ class ReportCardDetailsResponse {
     }
 
     fun getTotalMarks(): Int? {
+        if (totalMarks == null)
+            return 0
         return totalMarks
     }
 
@@ -53,6 +55,8 @@ class ReportCardDetailsResponse {
     }
 
     fun getGetMarks(): Int? {
+        if (getMarks == null)
+            return 0
         return getMarks
     }
 
@@ -61,6 +65,8 @@ class ReportCardDetailsResponse {
     }
 
     fun getPercentage(): String? {
+        if (percentage == null)
+            return "0%"
         return percentage
     }
 
@@ -69,6 +75,8 @@ class ReportCardDetailsResponse {
     }
 
     fun getGrade(): String? {
+        if (grade == null || grade.equals("no record found") || grade.equals("empty list"))
+            return "NA"
         return grade
     }
 
