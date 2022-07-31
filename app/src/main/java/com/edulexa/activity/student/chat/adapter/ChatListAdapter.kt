@@ -25,6 +25,7 @@ class ChatListAdapter(context: Activity, list : List<ChatUserListData?>?,chatUse
         this.chatUserId = chatUserId
     }
 
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

@@ -5,17 +5,19 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.edulexa.activity.student.chat.model.user_list.Group
 import com.edulexa.activity.student.report_card.model.DatumReportCardList
 import com.edulexa.databinding.ItemStudentChatListBinding
 
-class ChatListGroupAdapter(context: Activity, list : List<DatumReportCardList?>?) : RecyclerView.Adapter<ChatListGroupAdapter.ViewHolder>() {
+class ChatListGroupAdapter(context: Activity, list : List<Group?>?) : RecyclerView.Adapter<ChatListGroupAdapter.ViewHolder>() {
     var context: Activity? = null
-    var list : List<DatumReportCardList?>?= null
+    var list : List<Group?>?= null
     var binding : ItemStudentChatListBinding? = null
     init {
         this.context = context
         this.list = list
     }
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

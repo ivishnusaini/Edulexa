@@ -1,9 +1,13 @@
 package com.edulexa.activity.student.chat.activity
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
@@ -12,13 +16,10 @@ import com.edulexa.activity.student.chat.adapter.ChatListGroupAdapter
 import com.edulexa.activity.student.chat.model.user_list.ChatUserListData
 import com.edulexa.activity.student.chat.model.user_list.ChatUserListResponse
 import com.edulexa.activity.student.chat.model.user_list.Group
-import com.edulexa.activity.student.report_card.adapter.ReportCardAdapter
-import com.edulexa.activity.student.report_card.model.ReportCardListResponse
 import com.edulexa.api.APIClientStudent
 import com.edulexa.api.ApiInterfaceStudent
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityChatListStudentBinding
-import com.edulexa.databinding.ActivityReportCardStudentBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
@@ -50,10 +51,13 @@ class ChatListActivity : AppCompatActivity(), View.OnClickListener {
         mActivity = this
         setUpClickListener()
         getChatUserList("start")
+        filterList()
     }
 
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
+        binding!!.tvChats.setOnClickListener(this)
+        binding!!.tvGroup.setOnClickListener(this)
     }
 
     private fun getChatUserList(type: String) {
@@ -165,13 +169,127 @@ class ChatListActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun resetAll(){
+    private fun filterList(){
+        try {
+            binding!!.etSearch.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+                override fun afterTextChanged(s: Editable) {
+                    if (chatType == "Chat") {
+                        if (!s.toString().isEmpty()) {
+                            if (listChats != null && listChats!!.size > 0) {
+                                val listFilter : List<ChatUserListData?> = ArrayList()
+                                for (model in listChats!!) {
+                                    if (model!!.getUserDetails()!!.getName()!!.lowercase().contains(s.toString().lowercase()))
+                                        (listFilter as ArrayList<ChatUserListData?>).add(model)
+                                }
+                                if (listFilter.size > 0) {
+                                    binding!!.chatStudentRecycler.visibility = View.VISIBLE
+                                    binding!!.searchLay.visibility = View.VISIBLE
+                                    binding!!.tvChatNoData.visibility = View.GONE
+                                    chatListAdapter = ChatListAdapter(mActivity!!,listFilter,chatUserId)
+                                    binding!!.chatStudentRecycler.adapter = chatListAdapter
+                                } else {
+                                    binding!!.chatStudentRecycler.visibility = View.GONE
+                                    binding!!.searchLay.visibility = View.GONE
+                                    binding!!.tvChatNoData.visibility = View.VISIBLE
+                                }
+                            }
+                        } else {
+                            binding!!.chatStudentRecycler.visibility = View.VISIBLE
+                            binding!!.searchLay.visibility = View.VISIBLE
+                            binding!!.tvChatNoData.visibility = View.GONE
+                            chatListAdapter = ChatListAdapter(mActivity!!,listChats,chatUserId)
+                            binding!!.chatStudentRecycler.adapter = chatListAdapter
+                        }
+                    } else {
+                        if (!s.toString().isEmpty()) {
+                            if (listGroup != null && listGroup!!.size > 0) {
+                                val listFilter : List<Group?> = ArrayList()
+                                for (model in listGroup!!) {
+                                    if (model!!.getTitle()!!.lowercase().contains(s.toString().lowercase()))
+                                        (listFilter as ArrayList<Group?>).add(model)
+                                }
+                                if (listFilter.size > 0) {
+                                    binding!!.chatStudentRecycler.visibility = View.VISIBLE
+                                    binding!!.searchLay.visibility = View.VISIBLE
+                                    binding!!.tvChatNoData.visibility = View.GONE
+                                    chatListGroupAdapter = ChatListGroupAdapter(mActivity!!,listFilter)
+                                    binding!!.chatStudentRecycler.adapter = chatListGroupAdapter
+                                } else {
+                                    binding!!.chatStudentRecycler.visibility = View.GONE
+                                    binding!!.searchLay.visibility = View.GONE
+                                    binding!!.tvChatNoData.visibility = View.VISIBLE
+                                }
+                            }
+                        } else {
+                            binding!!.chatStudentRecycler.visibility = View.VISIBLE
+                            binding!!.searchLay.visibility = View.VISIBLE
+                            binding!!.tvChatNoData.visibility = View.GONE
+                            chatListGroupAdapter = ChatListGroupAdapter(mActivity!!,listGroup)
+                            binding!!.chatStudentRecycler.adapter = chatListGroupAdapter
+                        }
+                    }
+                }
+            })
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun resetAll(){
+        binding!!.tvChats.backgroundTintList = ContextCompat.getColorStateList(mActivity!!,R.color.gray)
+        binding!!.tvGroup.backgroundTintList = ContextCompat.getColorStateList(mActivity!!,R.color.gray)
+        binding!!.tvChats.setTextColor(ContextCompat.getColor(mActivity!!,R.color.primaray_text_color))
+        binding!!.tvGroup.setTextColor(ContextCompat.getColor(mActivity!!,R.color.primaray_text_color))
+        if (chatType.equals("Chat")){
+            binding!!.tvChats.backgroundTintList = ContextCompat.getColorStateList(mActivity!!,R.color.green)
+            binding!!.tvChats.setTextColor(ContextCompat.getColor(mActivity!!,R.color.white))
+            if (listChats != null && listChats!!.size > 0){
+                binding!!.chatStudentRecycler.visibility = View.VISIBLE
+                binding!!.searchLay.visibility = View.VISIBLE
+                binding!!.tvChatNoData.visibility = View.GONE
+                chatListAdapter = ChatListAdapter(mActivity!!,listChats,chatUserId)
+                binding!!.chatStudentRecycler.adapter = chatListAdapter
+            }else{
+                binding!!.chatStudentRecycler.visibility = View.GONE
+                binding!!.searchLay.visibility = View.GONE
+                binding!!.tvChatNoData.visibility = View.VISIBLE
+            }
+        }else{
+            binding!!.tvGroup.backgroundTintList = ContextCompat.getColorStateList(mActivity!!,R.color.green)
+            binding!!.tvGroup.setTextColor(ContextCompat.getColor(mActivity!!,R.color.white))
+            if (listGroup != null && listGroup!!.size > 0){
+                binding!!.chatStudentRecycler.visibility = View.VISIBLE
+                binding!!.searchLay.visibility = View.VISIBLE
+                binding!!.tvChatNoData.visibility = View.GONE
+                chatListGroupAdapter = ChatListGroupAdapter(mActivity!!,listGroup)
+                binding!!.chatStudentRecycler.adapter = chatListGroupAdapter
+            }else{
+                binding!!.chatStudentRecycler.visibility = View.GONE
+                binding!!.searchLay.visibility = View.GONE
+                binding!!.tvChatNoData.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onClick(view: View?) {
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
+        else if (id == R.id.tv_chats){
+            chatType = "Chat"
+            resetAll()
+        }else if (id == R.id.tv_group){
+            chatType = "Group"
+            resetAll()
+        }
     }
 }
