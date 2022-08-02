@@ -1,4 +1,4 @@
-package com.edulexa.activity.student.chat.model.user_list
+package com.edulexa.activity.student.chat.model.send_message
 
 import com.google.gson.annotations.Expose
 
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 
 
-class Messages {
+class UserLastChat {
     @SerializedName("id")
     @Expose
     private var id: String? = null
@@ -65,8 +65,6 @@ class Messages {
     }
 
     fun getMessage(): String? {
-        if (message == null)
-            return ""
         return message
     }
 
@@ -115,8 +113,6 @@ class Messages {
     }
 
     fun getChatConnectionId(): String? {
-        if (chatConnectionId == null)
-            return ""
         return chatConnectionId
     }
 

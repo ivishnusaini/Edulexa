@@ -72,6 +72,13 @@ class Constants {
         val EXAM_FROM = "exam_from"
     }
 
+    object StudentChat {
+        val CHAT_NAME = "chatName"
+        val CHAT_ID_UPDATE = "chat_id_update"
+        val CHAT_ID_NEW_MESSAGE = "chat_id_new_message"
+        val CHAT_CONNECTION_ID = "chat_connection_id"
+    }
+
     object AppSaveData {
         var gallerystudenttype = "all"
         var listUpcoming : List<DatumLiveClass>? = null
@@ -192,6 +199,11 @@ class Constants {
         const val FIRST_DOC = "first_doc"
         const val EXAM_GROUP_CLASS_BATCH_EXAM_ID = "exam_group_class_batch_exam_id"
         const val RESULT_ID = "result_id"
+        const val CHAT_CONNECTION_ID = "chat_connection_id"
+        const val PAGENO = "pageno"
+        const val CHAT_TO_USER = "chat_to_user"
+        const val LAST_CHAT_ID = "last_chat_id"
+        const val TIME = "time"
     }
 
     object Api {

@@ -49,6 +49,8 @@ class UserDetails {
     private var staffRole: String? = null
 
     fun getChatUserId(): String? {
+        if (chatUserId == null)
+            return ""
         return chatUserId
     }
 

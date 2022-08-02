@@ -2,11 +2,15 @@ package com.edulexa.activity.student.chat.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.edulexa.activity.student.chat.activity.ChatMessageActivity
 import com.edulexa.activity.student.chat.model.user_list.ChatUserListData
+import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
 import com.edulexa.activity.student.report_card.model.DatumReportCardList
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ItemStudentChatListBinding
@@ -49,6 +53,19 @@ class ChatListAdapter(context: Activity, list : List<ChatUserListData?>?,chatUse
             if (!baseUrlForImage!!.endsWith("/"))
                 baseUrlForImage = baseUrlForImage + "/"
             Utils.setpProfileImageUsingGlide(context,baseUrlForImage+list!!.get(position)!!.getUserDetails()!!.getImage(),binding!!.ivImage)
+
+            viewHolder.itemView.setOnClickListener(object :View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    val bundle = Bundle()
+                    bundle.putString(Constants.StudentChat.CHAT_NAME,list!!.get(position)!!.getUserDetails()!!.getName())
+                    bundle.putString(Constants.StudentChat.CHAT_ID_UPDATE,chatUserId)
+                    bundle.putString(Constants.StudentChat.CHAT_ID_NEW_MESSAGE,list!!.get(position)!!.getUserDetails()!!.getChatUserId())
+                    bundle.putString(Constants.StudentChat.CHAT_CONNECTION_ID,list!!.get(position)!!.getMessages()!!.getChatConnectionId())
+                    context!!.startActivity(Intent(context, ChatMessageActivity::class.java).putExtras(bundle))
+                }
+
+            })
+
         } catch (e: Exception) {
             e.printStackTrace()
         }

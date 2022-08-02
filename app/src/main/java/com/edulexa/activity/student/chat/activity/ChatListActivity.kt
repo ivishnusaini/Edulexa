@@ -47,10 +47,15 @@ class ChatListActivity : AppCompatActivity(), View.OnClickListener {
         init()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getChatUserList()
+    }
+
     private fun init() {
         mActivity = this
         setUpClickListener()
-        getChatUserList("start")
+        Utils.showProgressBar(mActivity!!)
         filterList()
     }
 
@@ -60,12 +65,9 @@ class ChatListActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.tvGroup.setOnClickListener(this)
     }
 
-    private fun getChatUserList(type: String) {
+    private fun getChatUserList() {
         if (Utils.isNetworkAvailable(mActivity!!)) {
-            if (type.equals("start"))
-                Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
-
             val branchId =
                 Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
             val accessToken = Utils.getStudentLoginResponse(mActivity)!!.getToken()!!
@@ -192,19 +194,16 @@ class ChatListActivity : AppCompatActivity(), View.OnClickListener {
                                 }
                                 if (listFilter.size > 0) {
                                     binding!!.chatStudentRecycler.visibility = View.VISIBLE
-                                    binding!!.searchLay.visibility = View.VISIBLE
                                     binding!!.tvChatNoData.visibility = View.GONE
                                     chatListAdapter = ChatListAdapter(mActivity!!,listFilter,chatUserId)
                                     binding!!.chatStudentRecycler.adapter = chatListAdapter
                                 } else {
                                     binding!!.chatStudentRecycler.visibility = View.GONE
-                                    binding!!.searchLay.visibility = View.GONE
                                     binding!!.tvChatNoData.visibility = View.VISIBLE
                                 }
                             }
                         } else {
                             binding!!.chatStudentRecycler.visibility = View.VISIBLE
-                            binding!!.searchLay.visibility = View.VISIBLE
                             binding!!.tvChatNoData.visibility = View.GONE
                             chatListAdapter = ChatListAdapter(mActivity!!,listChats,chatUserId)
                             binding!!.chatStudentRecycler.adapter = chatListAdapter
@@ -219,19 +218,16 @@ class ChatListActivity : AppCompatActivity(), View.OnClickListener {
                                 }
                                 if (listFilter.size > 0) {
                                     binding!!.chatStudentRecycler.visibility = View.VISIBLE
-                                    binding!!.searchLay.visibility = View.VISIBLE
                                     binding!!.tvChatNoData.visibility = View.GONE
                                     chatListGroupAdapter = ChatListGroupAdapter(mActivity!!,listFilter)
                                     binding!!.chatStudentRecycler.adapter = chatListGroupAdapter
                                 } else {
                                     binding!!.chatStudentRecycler.visibility = View.GONE
-                                    binding!!.searchLay.visibility = View.GONE
                                     binding!!.tvChatNoData.visibility = View.VISIBLE
                                 }
                             }
                         } else {
                             binding!!.chatStudentRecycler.visibility = View.VISIBLE
-                            binding!!.searchLay.visibility = View.VISIBLE
                             binding!!.tvChatNoData.visibility = View.GONE
                             chatListGroupAdapter = ChatListGroupAdapter(mActivity!!,listGroup)
                             binding!!.chatStudentRecycler.adapter = chatListGroupAdapter

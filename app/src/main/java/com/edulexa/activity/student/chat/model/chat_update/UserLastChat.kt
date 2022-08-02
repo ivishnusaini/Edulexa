@@ -1,4 +1,4 @@
-package com.edulexa.activity.student.chat.model.user_list
+package com.edulexa.activity.student.chat.model.chat_update
 
 import com.google.gson.annotations.Expose
 
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 
 
-class Messages {
+class UserLastChat {
     @SerializedName("id")
     @Expose
     private var id: String? = null
@@ -57,6 +57,8 @@ class Messages {
     private var createdAt: String? = null
 
     fun getId(): String? {
+        if (id == null)
+            return ""
         return id
     }
 
@@ -75,6 +77,8 @@ class Messages {
     }
 
     fun getChatUserId(): String? {
+        if (chatUserId == null)
+            return ""
         return chatUserId
     }
 
@@ -91,6 +95,8 @@ class Messages {
     }
 
     fun getTime(): String? {
+        if (time == null)
+            return ""
         return time
     }
 
@@ -99,6 +105,8 @@ class Messages {
     }
 
     fun getIsFirst(): String? {
+        if (isFirst == null)
+            return ""
         return isFirst
     }
 
@@ -115,8 +123,6 @@ class Messages {
     }
 
     fun getChatConnectionId(): String? {
-        if (chatConnectionId == null)
-            return ""
         return chatConnectionId
     }
 
@@ -148,11 +154,15 @@ class Messages {
         this.isFile = isFile
     }
 
+
     fun getCreatedAt(): String? {
+        if (createdAt == null)
+            return ""
         return createdAt
     }
 
     fun setCreatedAt(createdAt: String?) {
         this.createdAt = createdAt
     }
+
 }

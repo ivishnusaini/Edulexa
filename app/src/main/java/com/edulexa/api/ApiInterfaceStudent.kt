@@ -120,4 +120,13 @@ interface ApiInterfaceStudent {
 
     @POST("Webservice/myuserlist")
     fun getChatUserList(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/getChatRecord")
+    fun getChatRecord(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/chatUpdate")
+    fun getChatUpdate(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("Webservice/newMessage")
+    fun sendNewMessage(@Body requestBody : RequestBody): Call<ResponseBody>
 }
