@@ -12,6 +12,10 @@ class UpdatedChat {
     @Expose
     private var id: String? = null
 
+    @SerializedName("chat_member_id")
+    @Expose
+    private var chatMemberId: String? = null
+
     @SerializedName("message")
     @Expose
     private var message: String? = null
@@ -27,6 +31,10 @@ class UpdatedChat {
     @SerializedName("time")
     @Expose
     private var time: String? = null
+
+    @SerializedName("name")
+    @Expose
+    private var name: String? = null
 
     @SerializedName("is_first")
     @Expose
@@ -64,6 +72,16 @@ class UpdatedChat {
         this.id = id
     }
 
+    fun getChatMemberId(): String? {
+        if (chatMemberId == null)
+            return ""
+        return chatMemberId
+    }
+
+    fun setChatMemberId(chatMemberId: String?) {
+        this.chatMemberId = chatMemberId
+    }
+
     fun getMessage(): String? {
         return message
     }
@@ -94,6 +112,14 @@ class UpdatedChat {
 
     fun setTime(time: String?) {
         this.time = time
+    }
+
+    fun getName(): String? {
+        return name
+    }
+
+    fun setName(name: String?) {
+        this.name = name
     }
 
     fun getIsFirst(): String? {

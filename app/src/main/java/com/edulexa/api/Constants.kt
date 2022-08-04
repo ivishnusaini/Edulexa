@@ -77,6 +77,7 @@ class Constants {
         val CHAT_ID_UPDATE = "chat_id_update"
         val CHAT_ID_NEW_MESSAGE = "chat_id_new_message"
         val CHAT_CONNECTION_ID = "chat_connection_id"
+        val GROUP_ID = "group_id"
     }
 
     object AppSaveData {
@@ -204,6 +205,8 @@ class Constants {
         const val CHAT_TO_USER = "chat_to_user"
         const val LAST_CHAT_ID = "last_chat_id"
         const val TIME = "time"
+        const val GROUP_ID = "group_id"
+        const val GROUP_MEMBER_ID = "group_member_id"
     }
 
     object Api {
