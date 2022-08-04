@@ -347,5 +347,6 @@
     <!--Chat Message-->
     <string name="chat_student_you_connected_on_chat">You are now connected on chat</string>
     <string name="chat_student_type_a_message">Type a message</string>
+    <string name="chat_student_group_info">Info</string>
 
 </resources>

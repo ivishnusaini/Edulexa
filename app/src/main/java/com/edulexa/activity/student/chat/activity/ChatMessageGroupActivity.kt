@@ -1,6 +1,7 @@
 package com.edulexa.activity.student.chat.activity
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -41,6 +42,7 @@ class ChatMessageGroupActivity : AppCompatActivity(),View.OnClickListener{
     var mActivity: Activity? = null
     var binding: ActivityChatMessageGroupStudentBinding? = null
     private var groupId : String = ""
+    private var titleStr : String = ""
     private lateinit var layoutManager : LinearLayoutManager
 
     val messageList: List<ChatMessageModel> = ArrayList()
@@ -69,12 +71,13 @@ class ChatMessageGroupActivity : AppCompatActivity(),View.OnClickListener{
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
         binding!!.ivSendMessage.setOnClickListener(this)
+        binding!!.tvGroupInfo.setOnClickListener(this)
     }
 
     private fun getBundleData() {
         try {
             val bundle = intent.extras
-            val titleStr = bundle!!.getString(Constants.StudentChat.CHAT_NAME)
+            titleStr = bundle!!.getString(Constants.StudentChat.CHAT_NAME)!!
             groupId = bundle.getString(Constants.StudentChat.GROUP_ID)!!
 
             binding!!.tvTitle.text = titleStr
@@ -182,6 +185,10 @@ class ChatMessageGroupActivity : AppCompatActivity(),View.OnClickListener{
                                         binding!!.chatMessageRecycler.visibility = View.GONE
                                         binding!!.tvChatNoData.visibility = View.VISIBLE
                                     }
+                                    if (modelResponse.getData()!!.getGroupUsers() != null && modelResponse.getData()!!.getGroupUsers()!!.isNotEmpty()) {
+                                        Constants.AppSaveData.listGroupUsers = modelResponse.getData()!!.getGroupUsers()
+                                        binding!!.tvGroupInfo.visibility = View.VISIBLE
+                                    }else binding!!.tvGroupInfo.visibility = View.GONE
                                 } else {
                                     binding!!.chatMessageRecycler.visibility = View.GONE
                                     binding!!.tvChatNoData.visibility = View.VISIBLE
@@ -650,6 +657,11 @@ class ChatMessageGroupActivity : AppCompatActivity(),View.OnClickListener{
             onBackPressed()
         else if (id == R.id.iv_send_message)
             sendMessage()
+        else if (id == R.id.tv_group_info){
+            val bundle = Bundle()
+            bundle.putString(Constants.StudentChat.CHAT_NAME,titleStr)
+            startActivity(Intent(mActivity, GroupInfoActivity::class.java).putExtras(bundle))
+        }
     }
 
 }

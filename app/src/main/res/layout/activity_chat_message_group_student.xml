@@ -37,6 +37,20 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 
+        <com.edulexa.views.MediumTextView
+            android:id="@+id/tv_group_info"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/_20sdp"
+            android:paddingStart="@dimen/_5sdp"
+            android:text="@string/chat_student_group_info"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="@dimen/_16ssp" />
+
+
 
     </RelativeLayout>
 

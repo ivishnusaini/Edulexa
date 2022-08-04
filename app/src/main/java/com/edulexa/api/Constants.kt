@@ -1,5 +1,6 @@
 package com.edulexa.api
 
+import com.edulexa.activity.student.chat.model.group.GroupUser
 import com.edulexa.activity.student.live_classes.model.DatumLiveClass
 
 class Constants {
@@ -85,6 +86,7 @@ class Constants {
         var listUpcoming : List<DatumLiveClass>? = null
         var listOnGoing : List<DatumLiveClass>? = null
         var listCompleted : List<DatumLiveClass>? = null
+        var listGroupUsers : List<GroupUser?>? = null
     }
 
     object Preference {
