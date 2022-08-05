@@ -42,7 +42,6 @@ class ChatMessageAdapter(context: Activity, list : List<Any?>?, chatId : String)
         return MyViewHolderDate(chatDateBinding!!)
     }
 
-
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         try {
             preference = Preference().getInstance(context!!)
@@ -50,7 +49,7 @@ class ChatMessageAdapter(context: Activity, list : List<Any?>?, chatId : String)
                 1 -> {
                     val model = list!![position] as ChatMessageModel
                     if (!model.getIsFirst().equals("1")){
-                        if (chatId.equals(model.getChatUserId())){
+                        if (!chatId.equals(model.getChatUserId())){
                             chatMessageBinding!!.messageOtherLay.visibility = View.VISIBLE
                             chatMessageBinding!!.messageMeLay.visibility = View.GONE
                         }else{

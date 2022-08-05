@@ -138,4 +138,10 @@ interface ApiInterfaceStudent {
 
     @POST("webservice/newGroupMessage")
     fun sendNewGroupMessage(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("webservice/searchNewUser")
+    fun getStaffListForChat(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("webservice/addNewChatUser")
+    fun addNewChatUser(@Body requestBody : RequestBody): Call<ResponseBody>
 }

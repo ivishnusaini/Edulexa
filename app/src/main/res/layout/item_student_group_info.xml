@@ -11,6 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/_10sdp" />
 
+
     <com.edulexa.views.RegularTextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"

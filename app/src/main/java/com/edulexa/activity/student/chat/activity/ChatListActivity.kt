@@ -1,6 +1,7 @@
 package com.edulexa.activity.student.chat.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -63,6 +64,7 @@ class ChatListActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.ivBack.setOnClickListener(this)
         binding!!.tvChats.setOnClickListener(this)
         binding!!.tvGroup.setOnClickListener(this)
+        binding!!.ivAdd.setOnClickListener(this)
     }
 
     private fun getChatUserList() {
@@ -286,6 +288,7 @@ class ChatListActivity : AppCompatActivity(), View.OnClickListener {
         }else if (id == R.id.tv_group){
             chatType = "Group"
             resetAll()
-        }
+        }else if (id == R.id.iv_add)
+            startActivity(Intent(mActivity!!,StaffListForStudentActivity::class.java))
     }
 }

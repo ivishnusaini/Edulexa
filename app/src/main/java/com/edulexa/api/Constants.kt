@@ -209,6 +209,8 @@ class Constants {
         const val TIME = "time"
         const val GROUP_ID = "group_id"
         const val GROUP_MEMBER_ID = "group_member_id"
+        const val USER_TYPE = "user_type"
+        const val USER_ID = "user_id"
     }
 
     object Api {

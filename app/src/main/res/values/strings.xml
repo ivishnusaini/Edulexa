@@ -349,4 +349,8 @@
     <string name="chat_student_type_a_message">Type a message</string>
     <string name="chat_student_group_info">Info</string>
 
+    <!--Chat Staff List-->
+    <string name="chat_staff_list_student">Staff List</string>
+    <string name="chat_staff_list_student_no_data">No Data</string>
+
 </resources>

@@ -37,6 +37,17 @@
             android:textSize="@dimen/_16ssp" />
 
 
+        <ImageView
+            android:id="@+id/iv_add"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_8sdp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_add" />
+
+
     </RelativeLayout>
 
     <LinearLayout
