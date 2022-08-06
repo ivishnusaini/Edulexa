@@ -39,4 +39,13 @@ interface ApiInterfaceStaff {
 
     @POST("getcustomlessonplan")
     fun getcustomlessonplan(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("deleteCustomLessonPlan")
+    fun deleteCustomLessonPlan(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getLessonSubjectList")
+    fun getLessonSubjectList(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("addcustomlessonplan")
+    fun addCustomLessonPlan(@Body requestBody : RequestBody): Call<ResponseBody>
 }

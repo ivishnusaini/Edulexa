@@ -106,7 +106,7 @@ class AddTimelineActivity : AppCompatActivity(), View.OnClickListener {
         cameraOnActivityLaunch = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(), @SuppressLint("NotifyDataSetChanged")
             fun(result: ActivityResult) {
-                if (result.resultCode === RESULT_OK) {
+                if (result.resultCode == RESULT_OK) {
                     try {
                         val data = result.data
                         val bitmap = data!!.extras!!["data"] as Bitmap?
@@ -129,7 +129,7 @@ class AddTimelineActivity : AppCompatActivity(), View.OnClickListener {
         galleryOnActivityLaunch = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
-            if (result.resultCode === RESULT_OK) {
+            if (result.resultCode == RESULT_OK) {
                 try {
                     val data = result.data
                     val resultUri =

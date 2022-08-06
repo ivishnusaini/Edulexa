@@ -209,6 +209,10 @@ class CustomLessonPlanStaffAdapter(context: Activity, list : List<DatumCustomLes
                 }
             })
 
+            binding!!.tvDelete.setOnClickListener {
+                (context as CustomLessonPlanActivity).deleteLesson(list!![position]!!.getId()!!,position)
+            }
+
             binding!!.ivDownload.setOnClickListener(object : View.OnClickListener{
                 override fun onClick(p0: View?) {
 

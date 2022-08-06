@@ -52,7 +52,7 @@ class K12TimelineAdapter(context: Activity, list: List<Timeline?>?) :
         try {
             Utils.setpProfileImageUsingGlide(
                 context,
-                Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF +"uploads/student_timeline/"+ list!![position]!!.getDocument(),
+                Constants.BASE_URL_WEBVIEW_DOMAIN_STAFF /*+"uploads/student_timeline/"*/+ list!![position]!!.getDocument(),
                 binding!!.ivImage
             )
             binding!!.tvTitle.text = list!![position]!!.getTitle()

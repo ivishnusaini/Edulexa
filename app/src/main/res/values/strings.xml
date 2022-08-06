@@ -479,5 +479,13 @@
     <string name="add_custom_lesson_plan_staff_enter_description">Enter description</string>
     <string name="add_custom_lesson_plan_staff_attach_document">Attach Document</string>
     <string name="add_custom_lesson_plan_staff_add">Add</string>
+    <string name="add_custom_lesson_plan_staff_select">Select</string>
+    <string name="add_custom_lesson_plan_staff_select_class_validation">Please select class</string>
+    <string name="add_custom_lesson_plan_staff_select_section_validation">Please select section</string>
+    <string name="add_custom_lesson_plan_staff_select_subject_validation">Please select subject</string>
+    <string name="add_custom_lesson_plan_staff_enter_title_validation">Please enter title</string>
+    <string name="add_custom_lesson_plan_staff_enter_description_validation">Please enter descriptionStr</string>
+    <string name="add_custom_lesson_plan_staff_file_validation">Please enter youtube url or upload file</string>
+    <string name="add_custom_lesson_plan_staff_delete_consent">Are you sure ?</string>
 
 </resources>

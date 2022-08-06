@@ -12,6 +12,8 @@ import android.text.Html
 import android.view.View
 import android.view.Window
 import android.widget.DatePicker
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -66,6 +68,11 @@ class CustomLessonPlanActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding!!.root)
         init()
     }
+
+    override fun onResume() {
+        super.onResume()
+        getLessonList()
+    }
     private fun init() {
         mActivity = this
         preference = Preference().getInstance(mActivity!!)
@@ -73,8 +80,7 @@ class CustomLessonPlanActivity : AppCompatActivity(), View.OnClickListener {
         getBundleData()
         setUpFromDate()
         setUpData()
-        getLessonList()
-
+        Utils.showProgressBar(mActivity!!)
     }
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
@@ -119,8 +125,8 @@ class CustomLessonPlanActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun getLessonList(){
+        (lessonPlanList as ArrayList<DatumCustomLesson?>).clear()
         if (Utils.isNetworkAvailable(mActivity!!)){
-            Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
             val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
@@ -158,7 +164,6 @@ class CustomLessonPlanActivity : AppCompatActivity(), View.OnClickListener {
                                 if (modelResponse!!.getData()!!.isNotEmpty()){
                                     binding!!.recyclerView.visibility = View.VISIBLE
                                     binding!!.tvNoData.visibility = View.GONE
-                                    (lessonPlanList as ArrayList<DatumCustomLesson?>).clear()
                                     lessonPlanList.addAll(modelResponse!!.getData()!!)
                                     binding!!.recyclerView.layoutManager = LinearLayoutManager(mActivity, RecyclerView.VERTICAL,false)
                                     binding!!.recyclerView.adapter = CustomLessonPlanStaffAdapter(mActivity!!,lessonPlanList)
@@ -200,25 +205,106 @@ class CustomLessonPlanActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun showInfoDialog(comprensiveStr : String,generalObjectiveStr : String,previousKnowledgeStr : String,teachingMethodStr : String){
+            try {
+                val dialog = Dialog(mActivity!!)
+                var dialogBinding : DialogStudentCustomLessonInfoBinding? = null
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialogBinding = DialogStudentCustomLessonInfoBinding.inflate(layoutInflater)
+                dialog.setContentView(dialogBinding.root)
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.setCanceledOnTouchOutside(false)
+                dialogBinding.presentationLay.visibility = View.GONE
+                dialogBinding.tvComprehensiveQuestion.text = Html.fromHtml(comprensiveStr)
+                dialogBinding.tvGeneralObjective.text = Html.fromHtml(generalObjectiveStr)
+                dialogBinding.tvPreviousKnowledge.text = Html.fromHtml(previousKnowledgeStr)
+                dialogBinding.tvTeachingMethod.text = Html.fromHtml(teachingMethodStr)
+                dialogBinding.cvOk.setOnClickListener { v: View? -> dialog.dismiss() }
+                if (dialog.isShowing) dialog.dismiss()
+                dialog.show()
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+    }
+
+    fun deleteLesson(lessonId : String,position : Int){
         try {
             val dialog = Dialog(mActivity!!)
-            var dialogBinding : DialogStudentCustomLessonInfoBinding? = null
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialogBinding = DialogStudentCustomLessonInfoBinding.inflate(layoutInflater)
-            dialog.setContentView(dialogBinding.root)
+            dialog.setContentView(R.layout.dialog_exit)
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCanceledOnTouchOutside(false)
-            dialogBinding.presentationLay.visibility = View.GONE
-            dialogBinding.tvComprehensiveQuestion.text = Html.fromHtml(comprensiveStr)
-            dialogBinding.tvGeneralObjective.text = Html.fromHtml(generalObjectiveStr)
-            dialogBinding.tvPreviousKnowledge.text = Html.fromHtml(previousKnowledgeStr)
-            dialogBinding.tvTeachingMethod.text = Html.fromHtml(teachingMethodStr)
-            dialogBinding.cvOk.setOnClickListener { v: View? -> dialog.dismiss() }
-            if (dialog.isShowing) dialog.dismiss()
+            val tvMessage = dialog.findViewById<TextView>(R.id.tv_message)
+            tvMessage.text = getString(R.string.add_custom_lesson_plan_staff_delete_consent)
+            val cvCancel: CardView = dialog.findViewById(R.id.cv_cancel)
+            val cvOk: CardView = dialog.findViewById(R.id.cv_ok)
+            cvCancel.setOnClickListener { v: View? -> dialog.dismiss() }
+            cvOk.setOnClickListener { v: View? ->
+                if (Utils.isNetworkAvailable(mActivity!!)){
+                    Utils.hideKeyboard(mActivity!!)
+
+                    val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
+                    val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithNewKeyHeader(mActivity!!,
+                        Utils.getStaffToken(mActivity!!),
+                        Utils.getStaffId(mActivity!!),dbId!!).create(ApiInterfaceStaff::class.java)
+
+                    val builder = MultipartBody.Builder()
+                    builder.setType(MultipartBody.FORM)
+                    builder.addFormDataPart(Constants.ParamsStaff.LESSON_ID, lessonId)
+                    val requestBody = builder.build()
+
+                    Utils.printLog("Url", Constants.BASE_URL_STAFF+"deleteCustomLessonPlan")
+
+                    val call: Call<ResponseBody> = apiInterfaceWithHeader.deleteCustomLessonPlan(requestBody)
+                    call.enqueue(object : Callback<ResponseBody> {
+                        override fun onResponse(
+                            call: Call<ResponseBody>,
+                            response: Response<ResponseBody>
+                        ) {
+                            Utils.hideProgressBar()
+                            try{
+                                val responseStr = response.body()!!.string()
+                                if (!responseStr.isNullOrEmpty()){
+                                    (lessonPlanList as ArrayList<DatumCustomLesson?>).removeAt(position)
+                                    if (lessonPlanList.isNotEmpty()){
+                                        binding!!.recyclerView.visibility = View.VISIBLE
+                                        binding!!.tvNoData.visibility = View.GONE
+                                        binding!!.recyclerView.adapter = CustomLessonPlanStaffAdapter(mActivity!!,lessonPlanList)
+                                    }else{
+                                        binding!!.recyclerView.visibility = View.GONE
+                                        binding!!.tvNoData.visibility = View.VISIBLE
+                                    }
+
+                                }else {
+                                    Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                                    binding!!.recyclerView.visibility = View.GONE
+                                    binding!!.tvNoData.visibility = View.VISIBLE
+                                }
+                            }catch (e : Exception){
+                                e.printStackTrace()
+                                binding!!.recyclerView.visibility = View.GONE
+                                binding!!.tvNoData.visibility = View.VISIBLE
+                            }
+
+                        }
+
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            Utils.hideProgressBar()
+                            Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                            binding!!.recyclerView.visibility = View.GONE
+                            binding!!.tvNoData.visibility = View.VISIBLE
+                        }
+
+                    })
+                }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+
+                dialog.dismiss()
+            }
             dialog.show()
-        } catch (e: java.lang.Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
+
     }
 
 
