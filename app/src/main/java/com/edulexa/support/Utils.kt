@@ -388,6 +388,94 @@ class Utils {
             else return null
         }
 
+        fun getStaffId(context: Activity) : String{
+            var staffId = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                staffId = staffLoginResponse.getRecord()!!.getId()!!
+            return staffId
+        }
+
+        fun getStaffToken(context: Activity) : String{
+            var token = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                token = staffLoginResponse.getToken()!!
+            return token
+        }
+
+        fun getStaffRoleId(context: Activity) : String{
+            var roleId = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                roleId = staffLoginResponse.getRoleId()!!
+            return roleId
+        }
+
+        fun getStaffMeetingId(context: Activity) : String{
+            var meetingId = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                meetingId = staffLoginResponse.getRecord()!!.getMeetingId()!!
+            return meetingId
+        }
+
+        fun getStaffMeetingPassword(context: Activity) : String{
+            var meetingPassword = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                meetingPassword = staffLoginResponse.getRecord()!!.getPasscodeId()!!
+            return meetingPassword
+        }
+
+        fun getStaffZoomUrl(context: Activity) : String{
+            var zoomUrl = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                zoomUrl = staffLoginResponse.getRecord()!!.getZoomUrl()!!
+            return zoomUrl
+        }
+
+        fun getStaffZoomApiKey(context: Activity) : String{
+            var zoomApiKey = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                zoomApiKey = staffLoginResponse.getRecord()!!.getZoomApiKey()!!
+            return zoomApiKey
+        }
+
+        fun getStaffZoomSecretKey(context: Activity) : String{
+            var zoomSecretKey = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                zoomSecretKey = staffLoginResponse.getRecord()!!.getZoomSecretKey()!!
+            return zoomSecretKey
+        }
+
+        fun getStaffZoomId(context: Activity) : String{
+            var zoomId = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                zoomId = staffLoginResponse.getRecord()!!.getZoomId()!!
+            return zoomId
+        }
+
+        fun getStaffZoomPassword(context: Activity) : String{
+            var zoomPassword = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                zoomPassword = staffLoginResponse.getRecord()!!.getZoomPassword()!!
+            return zoomPassword
+        }
+
+        fun getStaffName(context: Activity) : String{
+            var name = ""
+            val staffLoginResponse = getStaffLoginResponse(context)
+            if (staffLoginResponse != null)
+                name = staffLoginResponse.getRecord()!!.getName()!! + " "+staffLoginResponse.getRecord()!!.getSurname()!!
+            return name
+        }
+
         fun saveStudentLoginResponse(context: Activity?, loginResponse: StudentLoginResponse?) {
             val gson = Gson()
             val preference = Preference().getInstance(context!!)

@@ -121,6 +121,8 @@ class Constants {
         const val STAFF_IS_LOGIN_YES = "yes"
         const val BASE_URL_GET_OR_NOT = "base_url_get_or_not"
         const val BASE_URL_GET_OR_NOT_YES = "yes"
+        const val EMAIL = "email"
+        const val PASSWORD = "password"
 
 
         /*App Used*/

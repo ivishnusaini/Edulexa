@@ -59,6 +59,8 @@ class StaffLoginResponse {
     }
 
     fun getToken(): String? {
+        if (token == null)
+            return ""
         return token
     }
 
@@ -75,6 +77,8 @@ class StaffLoginResponse {
     }
 
     fun getRoleId(): String? {
+        if (roleId == null)
+            return ""
         return roleId
     }
 

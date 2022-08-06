@@ -242,6 +242,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                             Utils.saveStaffLoginResponse(mActivity,modelResponse)
                                             preference!!.putString(Constants.Preference.APP_TYPE,Constants.Preference.APP_TYPE_STAFF)
                                             preference!!.putString(Constants.Preference.STAFF_IS_LOGIN,Constants.Preference.STAFF_IS_LOGIN_YES)
+                                            preference!!.putString(Constants.Preference.EMAIL,binding!!.etUserName.text.toString().trim())
+                                            preference!!.putString(Constants.Preference.PASSWORD,binding!!.etPassword.text.toString().trim())
                                             startActivity(Intent(mActivity!!, DashboardStaffActivity::class.java))
                                             finish()
                                         }

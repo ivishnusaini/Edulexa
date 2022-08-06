@@ -243,23 +243,23 @@ class RecordStaff {
 
     @SerializedName("meeting_id")
     @Expose
-    private var meetingId: Any? = null
+    private var meetingId: String? = null
 
     @SerializedName("passcode_id")
     @Expose
-    private var passcodeId: Any? = null
+    private var passcodeId: String? = null
 
     @SerializedName("zoom_url")
     @Expose
-    private var zoomUrl: Any? = null
+    private var zoomUrl: String? = null
 
     @SerializedName("zoom_api_key")
     @Expose
-    private var zoomApiKey: Any? = null
+    private var zoomApiKey: String? = null
 
     @SerializedName("zoom_secret_key")
     @Expose
-    private var zoomSecretKey: Any? = null
+    private var zoomSecretKey: String? = null
 
     @SerializedName("zoom_id")
     @Expose
@@ -282,6 +282,8 @@ class RecordStaff {
     private var roles: RolesStaff? = null
 
     fun getId(): String? {
+        if (id == null)
+            return ""
         return id
     }
 
@@ -338,6 +340,8 @@ class RecordStaff {
     }
 
     fun getName(): String? {
+        if (name == null)
+            return ""
         return name
     }
 
@@ -346,6 +350,8 @@ class RecordStaff {
     }
 
     fun getSurname(): String? {
+        if (surname == null)
+            return ""
         return surname
     }
 
@@ -753,47 +759,57 @@ class RecordStaff {
         this.appKey = appKey
     }
 
-    fun getMeetingId(): Any? {
+    fun getMeetingId(): String? {
+        if (meetingId == null)
+            return ""
         return meetingId
     }
 
-    fun setMeetingId(meetingId: Any?) {
+    fun setMeetingId(meetingId: String?) {
         this.meetingId = meetingId
     }
 
-    fun getPasscodeId(): Any? {
+    fun getPasscodeId(): String? {
         return passcodeId
     }
 
-    fun setPasscodeId(passcodeId: Any?) {
+    fun setPasscodeId(passcodeId: String?) {
         this.passcodeId = passcodeId
     }
 
-    fun getZoomUrl(): Any? {
+    fun getZoomUrl(): String? {
+        if (zoomUrl == null)
+            return ""
         return zoomUrl
     }
 
-    fun setZoomUrl(zoomUrl: Any?) {
+    fun setZoomUrl(zoomUrl: String?) {
         this.zoomUrl = zoomUrl
     }
 
-    fun getZoomApiKey(): Any? {
+    fun getZoomApiKey(): String? {
+        if (zoomApiKey == null)
+            return ""
         return zoomApiKey
     }
 
-    fun setZoomApiKey(zoomApiKey: Any?) {
+    fun setZoomApiKey(zoomApiKey: String?) {
         this.zoomApiKey = zoomApiKey
     }
 
-    fun getZoomSecretKey(): Any? {
+    fun getZoomSecretKey(): String? {
+        if (zoomSecretKey == null)
+            return ""
         return zoomSecretKey
     }
 
-    fun setZoomSecretKey(zoomSecretKey: Any?) {
+    fun setZoomSecretKey(zoomSecretKey: String?) {
         this.zoomSecretKey = zoomSecretKey
     }
 
     fun getZoomId(): String? {
+        if (zoomId == null)
+            return ""
         return zoomId
     }
 
@@ -802,6 +818,8 @@ class RecordStaff {
     }
 
     fun getZoomPassword(): String? {
+        if (zoomPassword == null)
+            return ""
         return zoomPassword
     }
 
