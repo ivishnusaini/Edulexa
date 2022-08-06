@@ -353,4 +353,33 @@
     <string name="chat_staff_list_student">Staff List</string>
     <string name="chat_staff_list_student_no_data">No Data</string>
 
+
+
+
+
+    <!--Staff-->
+
+    <!--Dashboard-->
+    <string name="dashboard_staff_notice_board">Notice Board</string>
+    <string name="dashboard_staff_student_profile">Student Profile</string>
+    <string name="dashboard_staff_custom_lesson_plan">Custom Lesson Plan</string>
+    <string name="dashboard_staff_online_exam">Online Exam</string>
+    <string name="dashboard_staff_homework">Homework</string>
+    <string name="dashboard_staff_lesson_plan">Lesson Plan</string>
+    <string name="dashboard_staff_circular">Circular</string>
+    <string name="dashboard_staff_events">Events</string>
+    <string name="dashboard_staff_gallery">Gallery</string>
+    <string name="dashboard_staff_school_family">School Family</string>
+    <string name="dashboard_staff_syllabus_status">Syllabus Status</string>
+    <string name="dashboard_staff_create_exam">Create Exam</string>
+    <string name="dashboard_staff_student_admission">Student Admission</string>
+    <string name="dashboard_staff_attendance">Attendance</string>
+    <string name="dashboard_staff_add_lesson">Add Lesson</string>
+    <string name="dashboard_staff_add_topic">Add Topic</string>
+    <string name="dashboard_staff_approve_leave">Approve Leave</string>
+    <string name="dashboard_staff_apply_leave">Apply Leave</string>
+    <string name="dashboard_staff_view_all">View All</string>
+    <string name="dashboard_staff_staff_meeting">Staff Meeting</string>
+    <string name="dashboard_staff_live_classes">Live Classes</string>
+
 </resources>

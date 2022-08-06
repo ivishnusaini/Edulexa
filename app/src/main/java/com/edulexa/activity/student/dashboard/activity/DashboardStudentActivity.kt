@@ -335,6 +335,7 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                                         preference!!.clearPreference()
                                         preference!!.putString(Constants.Preference.STUDENT_IS_LOGIN,Constants.Preference.STUDENT_IS_LOGIN_NO)
                                         preference!!.putString(Constants.Preference.APP_TYPE,Constants.Preference.APP_TYPE_STUDENT)
+                                        preference!!.putString(Constants.Preference.LOGOUTSTATUS,Constants.Preference.LOGOUTSTATUS_VALUE)
                                         startActivity(Intent(mActivity,LoginActivity::class.java))
                                         finishAffinity()
                                     }else Utils.showToast(mActivity!!,message)

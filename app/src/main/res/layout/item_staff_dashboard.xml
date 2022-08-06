@@ -4,37 +4,43 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginStart="@dimen/_5sdp"
-    android:layout_marginEnd="@dimen/_5sdp"
     android:layout_marginTop="@dimen/_10sdp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
-        app:cardCornerRadius="@dimen/_30sdp"
-        app:cardElevation="@dimen/_10sdp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/_2sdp">
-
-        <ImageView
-            android:id="@+id/iv_dashboard_image"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/app_name"
-            android:background="@drawable/app_icon_without_bg"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <com.edulexa.views.RegularTextView
-        android:id="@+id/tv_dashboard_name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
         android:gravity="center"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:textColor="@color/primaray_text_color"
-        android:textSize="@dimen/_14ssp"
-        android:layout_gravity="center_horizontal"/>
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_dashboard_staff"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            app:cardCornerRadius="@dimen/_30sdp"
+            android:elevation="@dimen/_5sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/iv_dashboard_staff"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_dashboard_staff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/primaray_text_color"/>
+
+    </LinearLayout>
 
 </LinearLayout>
