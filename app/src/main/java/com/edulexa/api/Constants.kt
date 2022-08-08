@@ -177,6 +177,8 @@ class Constants {
         const val STAFF_ID = "staff_id"
         const val CLASS_ID = "class_id"
         const val SECTION_ID = "section_id"
+        const val STUDENT_ID = "student_id"
+        const val ROLE_ID = "role_id"
     }
 
     object ParamsStudent {

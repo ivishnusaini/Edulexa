@@ -22,4 +22,7 @@ interface ApiInterfaceStaff {
 
     @POST("getStudentsByClass")
     fun getStudentsByClass(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("view_student_profile")
+    fun getStudentProfile(@Body requestBody : RequestBody): Call<ResponseBody>
 }
