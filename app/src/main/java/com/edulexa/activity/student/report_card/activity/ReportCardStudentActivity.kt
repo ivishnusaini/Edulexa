@@ -38,12 +38,12 @@ class ReportCardStudentActivity : AppCompatActivity(),View.OnClickListener {
     private fun init() {
         mActivity = this
         setUpClickListener()
-        setUpExamList()
+        getReportCardList()
     }
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
     }
-    private fun setUpExamList(){
+    private fun getReportCardList(){
         if (Utils.isNetworkAvailable(mActivity!!)) {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)

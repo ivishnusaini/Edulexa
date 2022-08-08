@@ -81,6 +81,19 @@ class Constants {
         val GROUP_ID = "group_id"
     }
 
+    object StaffStudentProfile{
+        val CLASS_ID = "class_id"
+        val SECTION_ID = "section_id"
+        val TOKEN = "token"
+        val STUDENT_ID = "student_id"
+        val STUDENT_SESSION_ID = "student_session_id"
+        val IMAGE = "image"
+        val NAME = "name"
+        val ROLL_NO = "roll_no"
+        val CLASS = "class"
+        val SECTION = "section"
+    }
+
     object AppSaveData {
         var gallerystudenttype = "all"
         var listUpcoming : List<DatumLiveClass>? = null
@@ -161,6 +174,9 @@ class Constants {
         const val USERNAME = "username"
         const val PASSWORD = "password"
         const val DEVICETOKEN = "deviceToken"
+        const val STAFF_ID = "staff_id"
+        const val CLASS_ID = "class_id"
+        const val SECTION_ID = "section_id"
     }
 
     object ParamsStudent {

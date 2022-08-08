@@ -354,9 +354,6 @@
     <string name="chat_staff_list_student_no_data">No Data</string>
 
 
-
-
-
     <!--Staff-->
 
     <!--Dashboard-->
@@ -381,5 +378,29 @@
     <string name="dashboard_staff_view_all">View All</string>
     <string name="dashboard_staff_staff_meeting">Staff Meeting</string>
     <string name="dashboard_staff_live_classes">Live Classes</string>
+
+
+    <!--Student Profile-->
+    <string name="student_profile_staff_classes">Classes</string>
+    <string name="student_profile_staff_class">Class</string>
+    <string name="student_profile_staff_no_class">No Class</string>
+    <string name="student_profile_staff_section">Section</string>
+    <string name="student_profile_staff_no_section">No Section</string>
+
+    <!--Student List-->
+    <string name="student_list_staff">Student List</string>
+    <string name="student_list_staff_no_data">No Data</string>
+
+    <!--Student Profile Detail-->
+    <string name="student_profile_detail_staff">Student Info</string>
+    <string name="student_profile_detail_timeline">Timeline</string>
+    <string name="student_profile_detail_homework">Homework</string>
+    <string name="student_profile_detail_school_fee">School Fee</string>
+    <string name="student_profile_detail_class_attendance">Class \n Attendance</string>
+    <string name="student_profile_detail_online_exam">Online Exam</string>
+    <string name="student_profile_detail_report_card">Report Card</string>
+    <string name="student_profile_detail_shared_lesson">Shared Lessons</string>
+    <string name="student_profile_detail_profile">Profile</string>
+    <string name="student_profile_detail_login_as_student">Login as Student</string>
 
 </resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_70sdp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_1sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_image"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/tv_roll_no"
+            android:layout_toEndOf="@+id/iv_image">
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_admission_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+
+
+        </RelativeLayout>
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_roll_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

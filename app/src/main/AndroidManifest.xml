@@ -19,6 +19,19 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.staff.student_profile.activity.StudentProfileDetailACtivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.student_profile.activity.StudentListActivity"
+            android:exported="false" /> <!-- Staff Section -->
+        <activity
+            android:name=".activity.staff.student_profile.activity.StudentProfileClassListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.dashboard.activity.DashboardStaffActivity"
+            android:exported="false" /> <!-- Staff Section -->
+        <!-- Student Section -->
+        <activity
             android:name=".activity.student.chat.activity.StaffListForStudentActivity"
             android:exported="false" />
         <activity
@@ -144,9 +157,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.student.homework.activity.HomeworkStudentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.staff.dashboard.activity.DashboardStaffActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ForgotPasswordActivity"
