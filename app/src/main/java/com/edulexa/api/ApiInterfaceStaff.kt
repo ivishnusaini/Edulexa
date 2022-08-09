@@ -14,6 +14,9 @@ interface ApiInterfaceStaff {
                     @Part(Constants.ParamsStaff.PASSWORD) password: RequestBody?,
                     @Part(Constants.ParamsStaff.DEVICETOKEN) deviceToken: RequestBody?): Call<ResponseBody>
 
+    @POST("getNotifications")
+    fun getNotifications(@Body requestBody : RequestBody): Call<ResponseBody>
+
     @POST("getClasses")
     fun getClasses(@Body requestBody : RequestBody): Call<ResponseBody>
 

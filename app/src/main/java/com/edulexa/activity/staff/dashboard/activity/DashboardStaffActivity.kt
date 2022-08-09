@@ -11,12 +11,25 @@ import android.view.Window
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.staff.dashboard.adapter.DashboardStaffAdapter
 import com.edulexa.activity.staff.dashboard.model.DashboardModel
+import com.edulexa.activity.staff.student_profile.adapter.StudentListAdapter
+import com.edulexa.activity.staff.student_profile.model.student_list.StudentListResponse
+import com.edulexa.api.APIClientStaff
+import com.edulexa.api.ApiInterfaceStaff
+import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityDashboardStaffBinding
 import com.edulexa.support.Utils
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
@@ -35,11 +48,86 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
     private fun init() {
         mActivity = this
         setUpclickListener()
+        getNotificationData()
         setUpDashboardData()
     }
 
     private fun setUpclickListener() {
         binding!!.tvLogout.setOnClickListener(this)
+    }
+
+    private fun getNotificationData(){
+        if (Utils.isNetworkAvailable(mActivity!!)){
+            Utils.showProgressBar(mActivity!!)
+            Utils.hideKeyboard(mActivity!!)
+
+            val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithNewKeyHeader(mActivity!!,
+                Utils.getStaffToken(mActivity!!),
+                Utils.getStaffId(mActivity!!)).create(ApiInterfaceStaff::class.java)
+
+            val jsonObject = JSONObject()
+            jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+            jsonObject.put(Constants.ParamsStaff.MODULE_ID, Constants.MODULE_ID)
+            jsonObject.put(Constants.ParamsStaff.ROLE_ID, Utils.getStaffRoleId(mActivity!!))
+
+            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+
+            Utils.printLog("Url", Constants.BASE_URL_STAFF+"getNotifications")
+
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.getNotifications(requestBody)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    Utils.hideProgressBar()
+                    try{
+                        val responseStr = response.body()!!.string()
+                        if (!responseStr.isNullOrEmpty()){
+                            val responseJsonObject = JSONObject(responseStr)
+                            val status = responseJsonObject.optInt("status")
+                            if (status == 200){
+                                val modelResponse = Utils.getObject(responseStr, StudentListResponse::class.java) as StudentListResponse
+                                if (modelResponse.getStudentList()!!.isNotEmpty()){
+                                    binding!!.recyclerViewNoticeBoard.visibility = View.VISIBLE
+                                    binding!!.tvNoData.visibility = View.GONE
+                                    binding!!.recyclerView.layoutManager = LinearLayoutManager(mActivity, RecyclerView.VERTICAL,false)
+                                    binding!!.recyclerView.adapter = StudentListAdapter(mActivity!!,modelResponse.getStudentList())
+                                }else{
+                                    binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                                    binding!!.tvNoData.visibility = View.VISIBLE
+                                }
+                            }else {
+                                val message = responseJsonObject.optString("message")
+                                if (!message.isEmpty())
+                                    Utils.showToastPopup(mActivity!!,message)
+                                else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
+                                binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                                binding!!.tvNoData.visibility = View.VISIBLE
+                            }
+                        }else {
+                            Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                            binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                            binding!!.tvNoData.visibility = View.VISIBLE
+                        }
+                    }catch (e : Exception){
+                        e.printStackTrace()
+                        binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                        binding!!.tvNoData.visibility = View.VISIBLE
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Utils.hideProgressBar()
+                    Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                    binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                    binding!!.tvNoData.visibility = View.VISIBLE
+                }
+
+            })
+        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+
     }
 
     private fun setUpDashboardData() {

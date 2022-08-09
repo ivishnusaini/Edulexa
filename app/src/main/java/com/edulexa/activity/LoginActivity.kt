@@ -212,11 +212,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         else{
             preference!!.putString(Constants.Preference.BRANCH_ID,branchId)
             if (staffStudentType.equals("staff")) {
-                preference!!.putString(Constants.Preference.APP_TYPE,Constants.Preference.APP_TYPE_STAFF)
-                preference!!.putString(Constants.Preference.STAFF_IS_LOGIN,Constants.Preference.STAFF_IS_LOGIN_YES)
-                startActivity(Intent(mActivity!!, DashboardStaffActivity::class.java))
-                finish()
-/*
                 if (Utils.isNetworkAvailable(mActivity!!)){
                     Utils.showProgressBar(mActivity!!)
                     Utils.hideKeyboard(mActivity!!)
@@ -274,7 +269,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
                     })
                 }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
-*/
             } else {
                 if (Utils.isNetworkAvailable(mActivity!!)){
                     Utils.showProgressBar(mActivity!!)

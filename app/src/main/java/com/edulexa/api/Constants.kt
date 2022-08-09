@@ -34,6 +34,7 @@ class Constants {
 
         val STAFF_API_WEBSERVICE = "staff_api/webservice/"
         val SITE_WEBVIEWLOGIN_USERNAME = "site/webviewLogin?username="
+        val MODULE_ID = "13"
         /*Staff Base Url and Value*/
     }
 
@@ -179,6 +180,7 @@ class Constants {
         const val PASSWORD = "password"
         const val DEVICETOKEN = "deviceToken"
         const val STAFF_ID = "staff_id"
+        const val MODULE_ID = "module_id"
         const val CLASS_ID = "class_id"
         const val SECTION_ID = "section_id"
         const val STUDENT_ID = "student_id"
