@@ -1,6 +1,7 @@
 package com.edulexa.activity.staff.dashboard.adapter
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.staff.dashboard.model.DashboardModel
+import com.edulexa.activity.staff.student_profile.activity.StudentProfileClassListActivity
 import com.edulexa.activity.student.attendance.adapter.AttendanceStudentMonthAdapter
 import com.edulexa.databinding.ItemStaffDashboardBinding
 import com.edulexa.databinding.ItemStudentAttedndanceMonthBinding
@@ -34,6 +36,15 @@ class DashboardStaffAdapter(context: Activity,list : List<DashboardModel>) :
         try {
             binding!!.ivDashboardStaff.setBackgroundResource(list!![position].getModuleImage())
             binding!!.tvDashboardStaff.text = list!![position].getModuleName()
+
+            viewHolder.itemView.setOnClickListener {
+                val moduleName = binding!!.tvDashboardStaff.text.toString()
+                when(moduleName){
+                    context!!.getString(R.string.dashboard_staff_student_profile) -> {
+                        context!!.startActivity(Intent(context,StudentProfileClassListActivity::class.java))
+                    }
+                }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }

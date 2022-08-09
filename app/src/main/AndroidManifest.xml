@@ -19,6 +19,12 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.staff.k12_diary.activity.AddTimelineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.k12_diary.activity.K12DiaryActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.staff.student_profile.activity.StudentProfileDetailACtivity"
             android:exported="false" />
         <activity

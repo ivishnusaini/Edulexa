@@ -1,15 +1,18 @@
 package com.edulexa.activity.staff.student_profile.activity
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.staff.k12_diary.activity.K12DiaryActivity
 import com.edulexa.activity.staff.student_profile.adapter.StudentListAdapter
 import com.edulexa.activity.staff.student_profile.model.student_list.StudentListResponse
 import com.edulexa.activity.staff.student_profile.model.student_profile_detail.StudentViewResponse
+import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
 import com.edulexa.api.APIClientStaff
 import com.edulexa.api.ApiInterfaceStaff
 import com.edulexa.api.Constants
@@ -42,12 +45,14 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding!!.root)
         init()
     }
+
     private fun init() {
         mActivity = this
         setUpClickListener()
         getBundleData()
         setUpStudentProfileData()
     }
+
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
         binding!!.cvK12.setOnClickListener(this)
@@ -60,6 +65,7 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
         binding!!.cvProfile.setOnClickListener(this)
         binding!!.cvLoginAsStudent.setOnClickListener(this)
     }
+
     private fun getBundleData() {
         try {
             val bundle = intent.extras
@@ -70,32 +76,48 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
             val studentClass = bundle.getString(Constants.StaffStudentProfile.CLASS)!!
             val studentSection = bundle.getString(Constants.StaffStudentProfile.SECTION)!!
 
-            Utils.setpProfileImageUsingGlide(mActivity!!,Constants.BASE_URL_STAFF+studentImage,binding!!.ivImage)
+            Utils.setpProfileImageUsingGlide(
+                mActivity!!,
+                Constants.BASE_URL_STAFF + studentImage,
+                binding!!.ivImage
+            )
             binding!!.tvName.text = studentName
-            binding!!.tvClassSection.text = getString(R.string.concat_string_with_text_format,studentClass,"-",studentSection)
-            binding!!.tvRollNo.text = getString(R.string.library_student_string_format,"Roll No : ",studentRollNo)
+            binding!!.tvClassSection.text = getString(
+                R.string.concat_string_with_text_format,
+                studentClass,
+                "-",
+                studentSection
+            )
+            binding!!.tvRollNo.text =
+                getString(R.string.library_student_string_format, "Roll No : ", studentRollNo)
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun setUpStudentProfileData(){
-        if (Utils.isNetworkAvailable(mActivity!!)){
+    private fun setUpStudentProfileData() {
+        if (Utils.isNetworkAvailable(mActivity!!)) {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
-            val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithNewKeyHeader(mActivity!!,
-                Utils.getStaffToken(mActivity!!),
-                Utils.getStaffId(mActivity!!)).create(ApiInterfaceStaff::class.java)
+            val apiInterfaceWithHeader: ApiInterfaceStaff =
+                APIClientStaff.getRetroFitClientWithNewKeyHeader(
+                    mActivity!!,
+                    Utils.getStaffToken(mActivity!!),
+                    Utils.getStaffId(mActivity!!)
+                ).create(ApiInterfaceStaff::class.java)
 
             val jsonObject = JSONObject()
             jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
             jsonObject.put(Constants.ParamsStaff.STUDENT_ID, studentId)
             jsonObject.put(Constants.ParamsStaff.ROLE_ID, Utils.getStaffRoleId(mActivity!!))
 
-            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+            val requestBody: RequestBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                jsonObject.toString()
+            )
 
-            Utils.printLog("Url", Constants.BASE_URL_STAFF+"view_student_profile")
+            Utils.printLog("Url", Constants.BASE_URL_STAFF + "view_student_profile")
 
             val call: Call<ResponseBody> = apiInterfaceWithHeader.getStudentProfile(requestBody)
             call.enqueue(object : Callback<ResponseBody> {
@@ -104,34 +126,52 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
                     response: Response<ResponseBody>
                 ) {
                     Utils.hideProgressBar()
-                    try{
+                    try {
                         val responseStr = response.body()!!.string()
-                        if (!responseStr.isNullOrEmpty()){
+                        if (!responseStr.isNullOrEmpty()) {
                             val responseJsonObject = JSONObject(responseStr)
                             val status = responseJsonObject.optInt("status")
-                            if (status == 1){
-                                val modelResponse = Utils.getObject(responseStr, StudentViewResponse::class.java) as StudentViewResponse
-                                if (modelResponse.getData() != null){
-                                    tokenStr = modelResponse.getData()!!.getTokenData()!!.getToken()!!
-                                    userIdStr = modelResponse.getData()!!.getTokenData()!!.getUsersId()!!
+                            if (status == 1) {
+                                val modelResponse = Utils.getObject(
+                                    responseStr,
+                                    StudentViewResponse::class.java
+                                ) as StudentViewResponse
+                                if (modelResponse.getData() != null) {
+                                    tokenStr =
+                                        modelResponse.getData()!!.getTokenData()!!.getToken()!!
+                                    userIdStr =
+                                        modelResponse.getData()!!.getTokenData()!!.getUsersId()!!
                                     studentId = modelResponse.getData()!!.getStudent()!!.getId()!!
-                                    classIdStr = modelResponse.getData()!!.getStudent()!!.getClassId()!!
-                                    sectionIdStr = modelResponse.getData()!!.getStudent()!!.getSectionId()!!
-                                    studentSessionIdStr = modelResponse.getData()!!.getStudent()!!.getStudentSessionId()!!
-                                    studentNameStr = modelResponse.getData()!!.getStudent()!!.getFirstname()!!+modelResponse.getData()!!.getStudent()!!.getLastname()
-                                    classNameStr = modelResponse.getData()!!.getStudent()!!.getClass_()!!
-                                    sectionNameStr = modelResponse.getData()!!.getStudent()!!.getSection()!!
+                                    classIdStr =
+                                        modelResponse.getData()!!.getStudent()!!.getClassId()!!
+                                    sectionIdStr =
+                                        modelResponse.getData()!!.getStudent()!!.getSectionId()!!
+                                    studentSessionIdStr = modelResponse.getData()!!.getStudent()!!
+                                        .getStudentSessionId()!!
+                                    studentNameStr = modelResponse.getData()!!.getStudent()!!
+                                        .getFirstname()!! + modelResponse.getData()!!.getStudent()!!
+                                        .getLastname()
+                                    classNameStr =
+                                        modelResponse.getData()!!.getStudent()!!.getClass_()!!
+                                    sectionNameStr =
+                                        modelResponse.getData()!!.getStudent()!!.getSection()!!
                                 }
-                            }else {
+                            } else {
                                 val message = responseJsonObject.optString("message")
                                 if (!message.isEmpty())
-                                    Utils.showToastPopup(mActivity!!,message)
-                                else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
+                                    Utils.showToastPopup(mActivity!!, message)
+                                else Utils.showToastPopup(
+                                    mActivity!!,
+                                    getString(R.string.did_not_fetch_data)
+                                )
                             }
-                        }else {
-                            Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                        } else {
+                            Utils.showToastPopup(
+                                mActivity!!,
+                                getString(R.string.response_null_or_empty_validation)
+                            )
                         }
-                    }catch (e : Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
 
@@ -143,7 +183,7 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
                 }
 
             })
-        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+        } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
 
     }
 
@@ -151,23 +191,25 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
-        else if (id == R.id.cv_k12){
+        else if (id == R.id.cv_k12) {
+            val bundle = Bundle()
+            bundle.putString(Constants.StaffK12Timeline.STUDENT_ID, studentId)
+            startActivity(Intent(mActivity, K12DiaryActivity::class.java).putExtras(bundle))
+        } else if (id == R.id.cv_homework) {
 
-        }else if (id == R.id.cv_homework){
+        } else if (id == R.id.cv_school_fee) {
 
-        }else if (id == R.id.cv_school_fee){
+        } else if (id == R.id.cv_live_class_attendance) {
 
-        }else if (id == R.id.cv_live_class_attendance){
+        } else if (id == R.id.cv_online_exam) {
 
-        }else if (id == R.id.cv_online_exam){
+        } else if (id == R.id.cv_report_card) {
 
-        }else if (id == R.id.cv_report_card){
+        } else if (id == R.id.cv_shared_lesson) {
 
-        }else if (id == R.id.cv_shared_lesson){
+        } else if (id == R.id.cv_profile) {
 
-        }else if (id == R.id.cv_profile){
-
-        }else if (id == R.id.cv_login_as_student){
+        } else if (id == R.id.cv_login_as_student) {
 
         }
     }

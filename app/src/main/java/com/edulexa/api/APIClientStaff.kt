@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 class APIClientStaff {
     companion object{
 
-        fun getRetroFitClientWithHeader(context : Activity): Retrofit {
+        fun getRetroFitClientWithHeader(context : Activity, dbId : String): Retrofit {
             val httpClient = OkHttpClient.Builder()
             httpClient.readTimeout(240, TimeUnit.SECONDS)
             httpClient.connectTimeout(240, TimeUnit.SECONDS)
@@ -20,7 +20,7 @@ class APIClientStaff {
                     .addHeader(Constants.HeaderParams.CLIENT_SERVICE,Constants.HeaderParams.CLIENT_SERVICE_VALUE)
                     .addHeader(Constants.HeaderParams.AUTH_KEY,Constants.HeaderParams.AUTH_KEY_VALUE)
                     .addHeader(Constants.HeaderParams.CONTENT_TYPE,Constants.HeaderParams.CONTENT_TYPE_VALUE)
-                    .addHeader(Constants.HeaderParams.DB_ID, Preference().getInstance(context)!!.getString(Constants.Preference.BRANCH_ID)!!)
+                    .addHeader(Constants.HeaderParams.DB_ID, dbId)
                     .method(original.method(), original.body())
                     .build()
                 chain.proceed(request)

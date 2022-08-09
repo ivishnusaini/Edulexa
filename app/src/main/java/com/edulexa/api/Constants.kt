@@ -94,6 +94,10 @@ class Constants {
         val SECTION = "section"
     }
 
+    object StaffK12Timeline{
+        val STUDENT_ID = "student_id"
+    }
+
     object AppSaveData {
         var gallerystudenttype = "all"
         var listUpcoming : List<DatumLiveClass>? = null
@@ -179,6 +183,12 @@ class Constants {
         const val SECTION_ID = "section_id"
         const val STUDENT_ID = "student_id"
         const val ROLE_ID = "role_id"
+        const val TIMELINE_ID = "timeline_id"
+        const val VISIBLE_CHECK = "visible_check"
+        const val TIMELINE_DATE = "timeline_date"
+        const val TIMELINE_TITLE = "timeline_title"
+        const val TIMELINE_DESC = "timeline_desc"
+        const val TIMELINE_DOC = "timeline_doc"
     }
 
     object ParamsStudent {

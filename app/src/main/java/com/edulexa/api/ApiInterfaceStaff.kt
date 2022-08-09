@@ -25,4 +25,13 @@ interface ApiInterfaceStaff {
 
     @POST("view_student_profile")
     fun getStudentProfile(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("view_student_timeline")
+    fun getK12Timeline(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("delete_student_timeline")
+    fun deleteStudentTimeline(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("add_student_timeline")
+    fun addStudentTimeline(@Body requestBody : RequestBody): Call<ResponseBody>
 }

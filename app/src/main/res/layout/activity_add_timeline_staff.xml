@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.student.homework.activity.HomeworkStudentActivity">
+
+    <RelativeLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/header_bg_staff">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_back_white" />
+
+        <com.edulexa.views.MediumTextView
+            android:id="@+id/tv_online_exam_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_toEndOf="@+id/iv_back"
+            android:text="@string/add_timeline_staff"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:background="@drawable/header_top_right_radius">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.edulexa.views.RegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/add_timeline_staff_title"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_border_5"
+                    android:backgroundTint="@color/card_view_bg">
+
+                    <com.edulexa.views.RegularEditText
+                        android:id="@+id/et_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/add_timeline_staff_enter_title"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapWords"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_12ssp" />
+
+
+                </RelativeLayout>
+
+                <com.edulexa.views.RegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/add_timeline_staff_date"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RelativeLayout
+                    android:id="@+id/date_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_border_5"
+                    android:backgroundTint="@color/card_view_bg">
+
+                    <com.edulexa.views.RegularTextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/add_timeline_staff_select_date"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_12ssp" />
+
+
+                </RelativeLayout>
+
+                <com.edulexa.views.RegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/add_timeline_staff_description"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_border_5"
+                    android:backgroundTint="@color/card_view_bg">
+
+                    <com.edulexa.views.RegularEditText
+                        android:id="@+id/et_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/add_timeline_staff_enter_description"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_12ssp" />
+
+
+                </RelativeLayout>
+
+                <com.edulexa.views.RegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/add_timeline_staff_attach_document"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RelativeLayout
+                    android:id="@+id/attach_document_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_border_5"
+                    android:backgroundTint="@color/card_view_bg">
+
+                    <com.edulexa.views.RegularTextView
+                        android:id="@+id/tv_document"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/add_timeline_staff_upload_document"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp">
+
+                    <com.edulexa.views.RegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/add_timeline_staff_visible_to_person"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <CheckBox
+                        android:id="@+id/check_box"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="center_vertical" />
+
+                </LinearLayout>
+
+                <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/bg_button_5"
+                    android:gravity="center"
+                    android:text="@string/add_timeline_staff_save"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -221,7 +221,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Utils.showProgressBar(mActivity!!)
                     Utils.hideKeyboard(mActivity!!)
 
-                    val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithHeader(mActivity!!).create(ApiInterfaceStaff::class.java)
+                    val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
+                    val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithHeader(mActivity!!,dbId!!).create(ApiInterfaceStaff::class.java)
                     val userNameRequestBody = RequestBody.create(MediaType.parse("text/plain"), binding!!.etUserName.text.toString().trim())
                     val passwordRequestBody = RequestBody.create(MediaType.parse("text/plain"), binding!!.etPassword.text.toString().trim())
                     val tokenRequestBody = RequestBody.create(MediaType.parse("text/plain"), firebaseToken!!)

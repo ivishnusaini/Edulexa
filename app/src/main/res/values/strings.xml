@@ -403,4 +403,27 @@
     <string name="student_profile_detail_profile">Profile</string>
     <string name="student_profile_detail_login_as_student">Login as Student</string>
 
+
+    <!--K12Timeline-->
+    <string name="timeline_staff">Timeline</string>
+    <string name="timeline_staff_no_data">No Data</string>
+
+    <!--Add Timeline-->
+    <string name="add_timeline_staff">Add Timeline</string>
+    <string name="add_timeline_staff_title">Title</string>
+    <string name="add_timeline_staff_enter_title">Enter title</string>
+    <string name="add_timeline_staff_date">Date</string>
+    <string name="add_timeline_staff_select_date">Select Date</string>
+    <string name="add_timeline_staff_description">Description</string>
+    <string name="add_timeline_staff_enter_description">Enter description</string>
+    <string name="add_timeline_staff_attach_document">Attach Document</string>
+    <string name="add_timeline_staff_upload_document">Upload document</string>
+    <string name="add_timeline_staff_visible_to_person">Visible to this person</string>
+    <string name="add_timeline_staff_save">Save</string>
+    <string name="add_timeline_staff_enter_title_validation">Please enter title</string>
+    <string name="add_timeline_staff_select_date_validation">Please select date</string>
+    <string name="add_timeline_staff_enter_description_validation">Please enter description</string>
+    <string name="add_timeline_staff_upload_document_validation">Please upload document</string>
+    <string name="add_timeline_staff_successfully_add_timeline">Successfully add timeline</string>
+
 </resources>
