@@ -96,7 +96,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:descendantFocusability="blocksDescendants">
 
                 <com.edulexa.views.MediumTextView
                     android:layout_width="wrap_content"
@@ -131,6 +132,19 @@
                         android:visibility="gone" />
 
                 </RelativeLayout>
+
+                <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_view_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/view_all_notification_view_all"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp"
+                    android:layout_gravity="end"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"

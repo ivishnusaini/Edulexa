@@ -541,8 +541,8 @@ class Utils {
         }
         fun setHtmlText(textStr : String,textView: TextView){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                textView.setText(Html.fromHtml(textStr, Html.FROM_HTML_MODE_COMPACT));
-             else textView.setText(Html.fromHtml(textStr));
+                textView.text = Html.fromHtml(textStr, Html.FROM_HTML_MODE_COMPACT);
+             else textView.text = Html.fromHtml(textStr);
         }
         fun showToast(context: Activity,message: String){
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -595,5 +595,6 @@ class Utils {
                 MediaStore.Images.Media.insertImage(context.contentResolver, inImage, "Title", null)
             return Uri.parse(path)
         }
+
     }
 }

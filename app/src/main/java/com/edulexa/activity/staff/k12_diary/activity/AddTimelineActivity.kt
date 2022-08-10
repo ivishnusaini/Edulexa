@@ -28,6 +28,7 @@ import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityAddTimelineStaffBinding
 import com.edulexa.databinding.DialogSelectImageBinding
 import com.edulexa.support.FileUtils
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
@@ -220,11 +221,15 @@ class AddTimelineActivity : AppCompatActivity(), View.OnClickListener {
                 Utils.showProgressBar(mActivity!!)
                 Utils.hideKeyboard(mActivity!!)
 
+                val preference = Preference().getInstance(mActivity!!)
+                val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
                 val apiInterfaceWithHeader: ApiInterfaceStaff =
                     APIClientStaff.getRetroFitClientWithNewKeyHeader(
                         mActivity!!,
                         Utils.getStaffToken(mActivity!!),
-                        Utils.getStaffId(mActivity!!)
+                        Utils.getStaffId(mActivity!!),
+                        dbId!!
                     ).create(ApiInterfaceStaff::class.java)
 
                 var visibleCheck = "0"

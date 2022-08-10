@@ -426,4 +426,9 @@
     <string name="add_timeline_staff_upload_document_validation">Please upload document</string>
     <string name="add_timeline_staff_successfully_add_timeline">Successfully add timeline</string>
 
+    <!--View All Notification-->
+    <string name="view_all_notification">Notification Detail</string>
+    <string name="view_all_notification_no_data">No Data</string>
+    <string name="view_all_notification_view_all">View All</string>
+
 </resources>

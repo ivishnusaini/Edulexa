@@ -16,6 +16,7 @@ import com.edulexa.activity.staff.student_profile.model.section.Section
 import com.edulexa.activity.staff.student_profile.model.section.SectionResponse
 import com.edulexa.api.*
 import com.edulexa.databinding.ActivityStudentProfileClassListStaffBinding
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -28,77 +29,109 @@ import retrofit2.Response
 class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityStudentProfileClassListStaffBinding? = null
-    var classListSpinn : List<ClassData?>? = ArrayList()
-    var sectionListSpinn : List<Section?>? = ArrayList()
-    var classId : String = ""
+    var classListSpinn: List<ClassData?>? = ArrayList()
+    var sectionListSpinn: List<Section?>? = ArrayList()
+    var classId: String = ""
+    var preference: Preference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStudentProfileClassListStaffBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         init()
     }
+
     private fun init() {
         mActivity = this
+        preference = Preference().getInstance(mActivity!!)
         setUpClickListener()
         getClassList()
     }
+
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
     }
 
-    private fun getClassList(){
-        if (Utils.isNetworkAvailable(mActivity!!)){
+    private fun getClassList() {
+        if (Utils.isNetworkAvailable(mActivity!!)) {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
-            val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithNewKeyHeader(mActivity!!,Utils.getStaffToken(mActivity!!),Utils.getStaffId(mActivity!!)).create(ApiInterfaceStaff::class.java)
+            val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
+            val apiInterfaceWithHeader: ApiInterfaceStaff =
+                APIClientStaff.getRetroFitClientWithNewKeyHeader(
+                    mActivity!!,
+                    Utils.getStaffToken(mActivity!!),
+                    Utils.getStaffId(mActivity!!),
+                    dbId!!
+                ).create(ApiInterfaceStaff::class.java)
 
             val jsonObject = JSONObject()
             jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
 
-            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+            val requestBody: RequestBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                jsonObject.toString()
+            )
 
-            Utils.printLog("Url",Constants.BASE_URL_STAFF+"getClasses")
+            Utils.printLog("Url", Constants.BASE_URL_STAFF + "getClasses")
 
             val call: Call<ResponseBody> = apiInterfaceWithHeader.getClasses(requestBody)
-            call.enqueue(object :Callback<ResponseBody>{
+            call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
                     Utils.hideProgressBar()
-                    try{
+                    try {
                         val responseStr = response.body()!!.string()
-                        if (!responseStr.isNullOrEmpty()){
+                        if (!responseStr.isNullOrEmpty()) {
                             val responseJsonObject = JSONObject(responseStr)
                             val status = responseJsonObject.optInt("status")
-                            if (status == 200){
-                                val modelResponse = Utils.getObject(responseStr, ClassResponse::class.java) as ClassResponse
-                                if (modelResponse.getClasses() != null && modelResponse.getClasses()!!.isNotEmpty()){
+                            if (status == 200) {
+                                val modelResponse = Utils.getObject(
+                                    responseStr,
+                                    ClassResponse::class.java
+                                ) as ClassResponse
+                                if (modelResponse.getClasses() != null && modelResponse.getClasses()!!
+                                        .isNotEmpty()
+                                ) {
                                     (classListSpinn as ArrayList<ClassData?>).clear()
                                     binding!!.recyclerViewClass.visibility = View.VISIBLE
                                     binding!!.tvNoClass.visibility = View.GONE
                                     classListSpinn = modelResponse.getClasses()
-                                    binding!!.recyclerViewClass.layoutManager = GridLayoutManager(mActivity,3,RecyclerView.VERTICAL,false)
-                                    binding!!.recyclerViewClass.adapter = ClassListAdapter(mActivity!!,classListSpinn)
-                                }else{
+                                    binding!!.recyclerViewClass.layoutManager = GridLayoutManager(
+                                        mActivity,
+                                        3,
+                                        RecyclerView.VERTICAL,
+                                        false
+                                    )
+                                    binding!!.recyclerViewClass.adapter =
+                                        ClassListAdapter(mActivity!!, classListSpinn)
+                                } else {
                                     binding!!.recyclerViewClass.visibility = View.GONE
                                     binding!!.tvNoClass.visibility = View.VISIBLE
                                 }
-                            }else {
+                            } else {
                                 val message = responseJsonObject.optString("message")
                                 if (!message.isEmpty())
-                                    Utils.showToastPopup(mActivity!!,message)
-                                else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
+                                    Utils.showToastPopup(mActivity!!, message)
+                                else Utils.showToastPopup(
+                                    mActivity!!,
+                                    getString(R.string.did_not_fetch_data)
+                                )
                                 binding!!.recyclerViewClass.visibility = View.GONE
                                 binding!!.tvNoClass.visibility = View.VISIBLE
                             }
-                        }else {
-                            Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                        } else {
+                            Utils.showToastPopup(
+                                mActivity!!,
+                                getString(R.string.response_null_or_empty_validation)
+                            )
                             binding!!.recyclerViewClass.visibility = View.GONE
                             binding!!.tvNoClass.visibility = View.VISIBLE
                         }
-                    }catch (e : Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         binding!!.recyclerViewClass.visibility = View.GONE
                         binding!!.tvNoClass.visibility = View.VISIBLE
@@ -114,69 +147,97 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
                 }
 
             })
-        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+        } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
     }
 
-    fun getSection(classId : String){
+    fun getSection(classId: String) {
         this.classId = classId
-        if (Utils.isNetworkAvailable(mActivity!!)){
+        if (Utils.isNetworkAvailable(mActivity!!)) {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
-            val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithNewKeyHeader(mActivity!!,Utils.getStaffToken(mActivity!!),Utils.getStaffId(mActivity!!)).create(ApiInterfaceStaff::class.java)
+            val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
+            val apiInterfaceWithHeader: ApiInterfaceStaff =
+                APIClientStaff.getRetroFitClientWithNewKeyHeader(
+                    mActivity!!,
+                    Utils.getStaffToken(mActivity!!),
+                    Utils.getStaffId(mActivity!!),
+                    dbId!!
+                ).create(ApiInterfaceStaff::class.java)
 
             val jsonObject = JSONObject()
             jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
             jsonObject.put(Constants.ParamsStaff.CLASS_ID, classId)
 
-            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+            val requestBody: RequestBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                jsonObject.toString()
+            )
 
-            Utils.printLog("Url",Constants.BASE_URL_STAFF+"getClassSections")
+            Utils.printLog("Url", Constants.BASE_URL_STAFF + "getClassSections")
 
             val call: Call<ResponseBody> = apiInterfaceWithHeader.getClassSections(requestBody)
-            call.enqueue(object :Callback<ResponseBody>{
+            call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
                     Utils.hideProgressBar()
-                    try{
+                    try {
                         binding!!.nestesdScrollView.post(Runnable {
                             binding!!.nestesdScrollView.fullScroll(
                                 View.FOCUS_DOWN
                             )
                         })
                         val responseStr = response.body()!!.string()
-                        if (!responseStr.isNullOrEmpty()){
+                        if (!responseStr.isNullOrEmpty()) {
                             (sectionListSpinn as ArrayList<Section?>).clear()
                             val responseJsonObject = JSONObject(responseStr)
                             val sectionListJsonArr = responseJsonObject.optJSONArray("section_list")
-                            if (sectionListJsonArr != null){
-                                val modelResponse = Utils.getObject(responseStr, SectionResponse::class.java) as SectionResponse
-                                if (modelResponse.getSectionList() != null && modelResponse.getSectionList()!!.isNotEmpty()){
+                            if (sectionListJsonArr != null) {
+                                val modelResponse = Utils.getObject(
+                                    responseStr,
+                                    SectionResponse::class.java
+                                ) as SectionResponse
+                                if (modelResponse.getSectionList() != null && modelResponse.getSectionList()!!
+                                        .isNotEmpty()
+                                ) {
                                     binding!!.recyclerViewSection.visibility = View.VISIBLE
                                     binding!!.tvNoSection.visibility = View.GONE
                                     sectionListSpinn = modelResponse.getSectionList()
-                                    binding!!.recyclerViewSection.layoutManager = GridLayoutManager(mActivity,3,RecyclerView.VERTICAL,false)
-                                    binding!!.recyclerViewSection.adapter = SectionAdapter(mActivity!!,sectionListSpinn)
-                                }else{
+                                    binding!!.recyclerViewSection.layoutManager = GridLayoutManager(
+                                        mActivity,
+                                        3,
+                                        RecyclerView.VERTICAL,
+                                        false
+                                    )
+                                    binding!!.recyclerViewSection.adapter =
+                                        SectionAdapter(mActivity!!, sectionListSpinn)
+                                } else {
                                     binding!!.recyclerViewClass.visibility = View.GONE
                                     binding!!.tvNoClass.visibility = View.VISIBLE
                                 }
-                            }else {
+                            } else {
                                 val message = responseJsonObject.optString("message")
                                 if (!message.isEmpty())
-                                    Utils.showToastPopup(mActivity!!,message)
-                                else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
+                                    Utils.showToastPopup(mActivity!!, message)
+                                else Utils.showToastPopup(
+                                    mActivity!!,
+                                    getString(R.string.did_not_fetch_data)
+                                )
                                 binding!!.recyclerViewClass.visibility = View.GONE
                                 binding!!.tvNoClass.visibility = View.VISIBLE
                             }
-                        }else {
-                            Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                        } else {
+                            Utils.showToastPopup(
+                                mActivity!!,
+                                getString(R.string.response_null_or_empty_validation)
+                            )
                             binding!!.recyclerViewClass.visibility = View.GONE
                             binding!!.tvNoClass.visibility = View.VISIBLE
                         }
-                    }catch (e : Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         binding!!.recyclerViewClass.visibility = View.GONE
                         binding!!.tvNoClass.visibility = View.VISIBLE
@@ -192,13 +253,13 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
                 }
 
             })
-        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+        } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
     }
 
-    fun selectSection(sectionId : String){
+    fun selectSection(sectionId: String) {
         val bundle = Bundle()
-        bundle.putString(Constants.StaffStudentProfile.CLASS_ID,classId)
-        bundle.putString(Constants.StaffStudentProfile.SECTION_ID,sectionId)
+        bundle.putString(Constants.StaffStudentProfile.CLASS_ID, classId)
+        bundle.putString(Constants.StaffStudentProfile.SECTION_ID, sectionId)
         startActivity(Intent(mActivity, StudentListActivity::class.java).putExtras(bundle))
     }
 

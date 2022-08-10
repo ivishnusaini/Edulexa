@@ -16,6 +16,7 @@ import com.edulexa.api.APIClientStaff
 import com.edulexa.api.ApiInterfaceStaff
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityK12DiaryStaffBinding
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -29,6 +30,7 @@ class K12DiaryActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityK12DiaryStaffBinding? = null
     var studentId = ""
+    var preference : Preference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityK12DiaryStaffBinding.inflate(layoutInflater)
@@ -38,6 +40,7 @@ class K12DiaryActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun init() {
         mActivity = this
+        preference = Preference().getInstance(mActivity!!)
         setUpClickListener()
         getBundleData()
         getTimelineData()
@@ -62,11 +65,14 @@ class K12DiaryActivity : AppCompatActivity(), View.OnClickListener {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
+            val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
             val apiInterfaceWithHeader: ApiInterfaceStaff =
                 APIClientStaff.getRetroFitClientWithNewKeyHeader(
                     mActivity!!,
                     Utils.getStaffToken(mActivity!!),
-                    Utils.getStaffId(mActivity!!)
+                    Utils.getStaffId(mActivity!!),
+                    dbId!!
                 ).create(ApiInterfaceStaff::class.java)
 
             val jsonObject = JSONObject()
@@ -171,11 +177,14 @@ class K12DiaryActivity : AppCompatActivity(), View.OnClickListener {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
+            val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
             val apiInterfaceWithHeader: ApiInterfaceStaff =
                 APIClientStaff.getRetroFitClientWithNewKeyHeader(
                     mActivity!!,
                     Utils.getStaffToken(mActivity!!),
-                    Utils.getStaffId(mActivity!!)
+                    Utils.getStaffId(mActivity!!),
+                    dbId!!
                 ).create(ApiInterfaceStaff::class.java)
 
             val jsonObject = JSONObject()

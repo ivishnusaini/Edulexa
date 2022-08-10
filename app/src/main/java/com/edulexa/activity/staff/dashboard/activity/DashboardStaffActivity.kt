@@ -2,6 +2,7 @@ package com.edulexa.activity.staff.dashboard.activity
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -14,15 +15,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.staff.dashboard.adapter.DashboardNotificationAdapter
 import com.edulexa.activity.staff.dashboard.adapter.DashboardStaffAdapter
 import com.edulexa.activity.staff.dashboard.model.DashboardModel
+import com.edulexa.activity.staff.dashboard.model.notifications.NotificationResponse
 import com.edulexa.activity.staff.student_profile.adapter.StudentListAdapter
 import com.edulexa.activity.staff.student_profile.model.student_list.StudentListResponse
 import com.edulexa.api.APIClientStaff
 import com.edulexa.api.ApiInterfaceStaff
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityDashboardStaffBinding
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
+import com.google.gson.Gson
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -34,6 +39,7 @@ import retrofit2.Response
 class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityDashboardStaffBinding? = null
+    var preference : Preference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardStaffBinding.inflate(layoutInflater)
@@ -47,6 +53,7 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun init() {
         mActivity = this
+        preference = Preference().getInstance(mActivity!!)
         setUpclickListener()
         getNotificationData()
         setUpDashboardData()
@@ -54,6 +61,7 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setUpclickListener() {
         binding!!.tvLogout.setOnClickListener(this)
+        binding!!.tvViewAll.setOnClickListener(this)
     }
 
     private fun getNotificationData(){
@@ -61,9 +69,11 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
+            val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
             val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithNewKeyHeader(mActivity!!,
                 Utils.getStaffToken(mActivity!!),
-                Utils.getStaffId(mActivity!!)).create(ApiInterfaceStaff::class.java)
+                Utils.getStaffId(mActivity!!),dbId!!).create(ApiInterfaceStaff::class.java)
 
             val jsonObject = JSONObject()
             jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
@@ -83,18 +93,22 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
                     Utils.hideProgressBar()
                     try{
                         val responseStr = response.body()!!.string()
+                        Utils.printLog("response",responseStr)
                         if (!responseStr.isNullOrEmpty()){
                             val responseJsonObject = JSONObject(responseStr)
-                            val status = responseJsonObject.optInt("status")
-                            if (status == 200){
-                                val modelResponse = Utils.getObject(responseStr, StudentListResponse::class.java) as StudentListResponse
-                                if (modelResponse.getStudentList()!!.isNotEmpty()){
+                            val notificationJsonObj = responseJsonObject.optJSONObject("notification")
+                            if (notificationJsonObj != null){
+                                val modelResponse = Utils.getObject(responseStr, NotificationResponse::class.java) as NotificationResponse
+                                if (modelResponse.getNotification()!!.getData()!!.isNotEmpty()){
+                                    Constants.AppSaveData.staffNotificationList = modelResponse.getNotification()!!.getData()
                                     binding!!.recyclerViewNoticeBoard.visibility = View.VISIBLE
+                                    binding!!.tvViewAll.visibility = View.VISIBLE
                                     binding!!.tvNoData.visibility = View.GONE
-                                    binding!!.recyclerView.layoutManager = LinearLayoutManager(mActivity, RecyclerView.VERTICAL,false)
-                                    binding!!.recyclerView.adapter = StudentListAdapter(mActivity!!,modelResponse.getStudentList())
+                                    binding!!.recyclerViewNoticeBoard.layoutManager = LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL,false)
+                                    binding!!.recyclerViewNoticeBoard.adapter = DashboardNotificationAdapter(mActivity!!,modelResponse.getNotification()!!.getData())
                                 }else{
                                     binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                                    binding!!.tvViewAll.visibility = View.GONE
                                     binding!!.tvNoData.visibility = View.VISIBLE
                                 }
                             }else {
@@ -103,16 +117,19 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
                                     Utils.showToastPopup(mActivity!!,message)
                                 else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
                                 binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                                binding!!.tvViewAll.visibility = View.GONE
                                 binding!!.tvNoData.visibility = View.VISIBLE
                             }
                         }else {
                             Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
                             binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                            binding!!.tvViewAll.visibility = View.GONE
                             binding!!.tvNoData.visibility = View.VISIBLE
                         }
                     }catch (e : Exception){
                         e.printStackTrace()
                         binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                        binding!!.tvViewAll.visibility = View.GONE
                         binding!!.tvNoData.visibility = View.VISIBLE
                     }
 
@@ -122,6 +139,7 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
                     Utils.hideProgressBar()
                     Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
                     binding!!.recyclerViewNoticeBoard.visibility = View.GONE
+                    binding!!.tvViewAll.visibility = View.GONE
                     binding!!.tvNoData.visibility = View.VISIBLE
                 }
 
@@ -211,5 +229,10 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
         val id = view!!.id
         if (id == R.id.tv_logout)
             logoutPopup()
+        else if (id == R.id.tv_view_all){
+            val bundle = Bundle()
+            bundle.putString(Constants.StaffNotification.FROM_WHERE,"view_all")
+            startActivity(Intent(mActivity,ViewAllNotificationActivity::class.java).putExtras(bundle))
+        }
     }
 }

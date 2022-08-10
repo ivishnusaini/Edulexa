@@ -1,5 +1,6 @@
 package com.edulexa.api
 
+import com.edulexa.activity.staff.dashboard.model.notifications.DatumNotification
 import com.edulexa.activity.student.chat.model.group.GroupUser
 import com.edulexa.activity.student.live_classes.model.DatumLiveClass
 
@@ -98,6 +99,10 @@ class Constants {
     object StaffK12Timeline{
         val STUDENT_ID = "student_id"
     }
+    object StaffNotification{
+        val FROM_WHERE = "from_where"
+        val DATUM_NOTIFICATION = "datum_notification"
+    }
 
     object AppSaveData {
         var gallerystudenttype = "all"
@@ -105,6 +110,9 @@ class Constants {
         var listOnGoing : List<DatumLiveClass>? = null
         var listCompleted : List<DatumLiveClass>? = null
         var listGroupUsers : List<GroupUser?>? = null
+
+        /*Staff*/
+        var staffNotificationList : List<DatumNotification?>? = null
     }
 
     object Preference {

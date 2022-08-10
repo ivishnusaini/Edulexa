@@ -18,6 +18,7 @@ import com.edulexa.api.ApiInterfaceStaff
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityStudentListStaffBinding
 import com.edulexa.databinding.ActivityStudentProfileClassListStaffBinding
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -32,6 +33,7 @@ class StudentListActivity : AppCompatActivity(), View.OnClickListener {
     var binding: ActivityStudentListStaffBinding? = null
     var classId = ""
     var sectionId = ""
+    var preference : Preference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStudentListStaffBinding.inflate(layoutInflater)
@@ -40,6 +42,7 @@ class StudentListActivity : AppCompatActivity(), View.OnClickListener {
     }
     private fun init() {
         mActivity = this
+        preference = Preference().getInstance(mActivity!!)
         setUpClickListener()
         getBundleData()
         getStudentList()
@@ -61,9 +64,11 @@ class StudentListActivity : AppCompatActivity(), View.OnClickListener {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
+            val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
             val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithNewKeyHeader(mActivity!!,
                 Utils.getStaffToken(mActivity!!),
-                Utils.getStaffId(mActivity!!)).create(ApiInterfaceStaff::class.java)
+                Utils.getStaffId(mActivity!!),dbId!!).create(ApiInterfaceStaff::class.java)
 
             val jsonObject = JSONObject()
             jsonObject.put(Constants.ParamsStaff.CLASS_ID, classId)

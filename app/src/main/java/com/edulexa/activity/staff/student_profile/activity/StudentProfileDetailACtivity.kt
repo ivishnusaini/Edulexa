@@ -18,6 +18,7 @@ import com.edulexa.api.ApiInterfaceStaff
 import com.edulexa.api.Constants
 import com.edulexa.databinding.ActivityStudentListStaffBinding
 import com.edulexa.databinding.ActivityStudentProfileDetailStaffBinding
+import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -100,11 +101,15 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
+            val preference = Preference().getInstance(mActivity!!)
+            val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
             val apiInterfaceWithHeader: ApiInterfaceStaff =
                 APIClientStaff.getRetroFitClientWithNewKeyHeader(
                     mActivity!!,
                     Utils.getStaffToken(mActivity!!),
-                    Utils.getStaffId(mActivity!!)
+                    Utils.getStaffId(mActivity!!),
+                    dbId!!
                 ).create(ApiInterfaceStaff::class.java)
 
             val jsonObject = JSONObject()

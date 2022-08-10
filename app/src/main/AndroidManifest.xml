@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ViewAllNotificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.staff.k12_diary.activity.AddTimelineActivity"
             android:exported="false" />
         <activity
