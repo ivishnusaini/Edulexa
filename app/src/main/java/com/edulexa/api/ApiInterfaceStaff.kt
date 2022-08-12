@@ -14,11 +14,25 @@ interface ApiInterfaceStaff {
                     @Part(Constants.ParamsStaff.PASSWORD) password: RequestBody?,
                     @Part(Constants.ParamsStaff.DEVICETOKEN) deviceToken: RequestBody?): Call<ResponseBody>
 
+
+    @Multipart
+    @POST("getClasses")
+    fun getClasses(@Part(Constants.ParamsStaff.STAFF_ID) staffId: RequestBody?): Call<ResponseBody>
+
+
+
+
+
+
+
+
+
+
     @POST("getNotifications")
     fun getNotifications(@Body requestBody : RequestBody): Call<ResponseBody>
 
-    @POST("getClasses")
-    fun getClasses(@Body requestBody : RequestBody): Call<ResponseBody>
+    /*@POST("getClasses")
+    fun getClasses(@Body requestBody : RequestBody): Call<ResponseBody>*/
 
     @POST("getClassSections")
     fun getClassSections(@Body requestBody : RequestBody): Call<ResponseBody>
@@ -37,4 +51,7 @@ interface ApiInterfaceStaff {
 
     @POST("add_student_timeline")
     fun addStudentTimeline(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getcustomlessonplan")
+    fun getcustomlessonplan(@Body requestBody : RequestBody): Call<ResponseBody>
 }

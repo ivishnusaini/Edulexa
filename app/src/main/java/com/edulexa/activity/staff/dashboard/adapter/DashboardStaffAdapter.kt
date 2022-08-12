@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.staff.custom_lesson_plan.activity.CustomLessonClassListActivity
 import com.edulexa.activity.staff.dashboard.model.DashboardModel
 import com.edulexa.activity.staff.student_profile.activity.StudentProfileClassListActivity
 import com.edulexa.activity.student.attendance.adapter.AttendanceStudentMonthAdapter
@@ -38,10 +39,12 @@ class DashboardStaffAdapter(context: Activity,list : List<DashboardModel>) :
             binding!!.tvDashboardStaff.text = list!![position].getModuleName()
 
             viewHolder.itemView.setOnClickListener {
-                val moduleName = binding!!.tvDashboardStaff.text.toString()
-                when(moduleName){
+                when(list!![position].getModuleName()){
                     context!!.getString(R.string.dashboard_staff_student_profile) -> {
                         context!!.startActivity(Intent(context,StudentProfileClassListActivity::class.java))
+                    }
+                    context!!.getString(R.string.dashboard_staff_custom_lesson_plan) -> {
+                        context!!.startActivity(Intent(context,CustomLessonClassListActivity::class.java))
                     }
                 }
             }

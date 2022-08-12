@@ -104,6 +104,15 @@ class Constants {
         val DATUM_NOTIFICATION = "datum_notification"
     }
 
+    object StaffCustomLessonPlan{
+        val CLASS_ID = "class_id"
+        val SECTION_ID = "section_id"
+        val SECTION_NAME = "section_name"
+        val SUBJECT_ID = "subject_id"
+        val ID = "id"
+        val FORM_FIELD = "form_field"
+    }
+
     object AppSaveData {
         var gallerystudenttype = "all"
         var listUpcoming : List<DatumLiveClass>? = null
@@ -199,6 +208,8 @@ class Constants {
         const val TIMELINE_TITLE = "timeline_title"
         const val TIMELINE_DESC = "timeline_desc"
         const val TIMELINE_DOC = "timeline_doc"
+        const val DATE = "date"
+        const val SUBJECT_ID = "subject_id"
     }
 
     object ParamsStudent {

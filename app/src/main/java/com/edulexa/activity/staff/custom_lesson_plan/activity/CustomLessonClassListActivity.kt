@@ -1,21 +1,23 @@
-package com.edulexa.activity.staff.student_profile.activity
+package com.edulexa.activity.staff.custom_lesson_plan.activity
 
 import android.app.Activity
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
-import com.edulexa.activity.staff.student_profile.adapter.ClassListAdapter
-import com.edulexa.activity.staff.student_profile.adapter.SectionAdapter
+import com.edulexa.activity.staff.custom_lesson_plan.adapter.ClassListCustomLessonAdapter
+import com.edulexa.activity.staff.custom_lesson_plan.adapter.SectionCustomLessonAdapter
 import com.edulexa.activity.staff.student_profile.model.class_list.ClassData
 import com.edulexa.activity.staff.student_profile.model.class_list.ClassResponse
 import com.edulexa.activity.staff.student_profile.model.section.Section
 import com.edulexa.activity.staff.student_profile.model.section.SectionResponse
-import com.edulexa.api.*
-import com.edulexa.databinding.ActivityStudentProfileClassListStaffBinding
+import com.edulexa.api.APIClientStaff
+import com.edulexa.api.ApiInterfaceStaff
+import com.edulexa.api.Constants
+import com.edulexa.databinding.ActivityCustomLessonClassListStaffBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
@@ -26,27 +28,25 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListener {
+class CustomLessonClassListActivity : AppCompatActivity(),View.OnClickListener {
     var mActivity: Activity? = null
-    var binding: ActivityStudentProfileClassListStaffBinding? = null
+    var binding: ActivityCustomLessonClassListStaffBinding? = null
     var classListSpinn: List<ClassData?>? = ArrayList()
     var sectionListSpinn: List<Section?>? = ArrayList()
     var classId: String = ""
     var preference: Preference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStudentProfileClassListStaffBinding.inflate(layoutInflater)
+        binding = ActivityCustomLessonClassListStaffBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         init()
     }
-
     private fun init() {
         mActivity = this
         preference = Preference().getInstance(mActivity!!)
         setUpClickListener()
         getClassList()
     }
-
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
     }
@@ -66,11 +66,17 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
                     dbId!!
                 ).create(ApiInterfaceStaff::class.java)
 
-            val staffIdRequestBody = RequestBody.create(MediaType.parse("text/plain"), Utils.getStaffId(mActivity!!))
+            val jsonObject = JSONObject()
+            jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+
+            val requestBody: RequestBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                jsonObject.toString()
+            )
 
             Utils.printLog("Url", Constants.BASE_URL_STAFF + "getClasses")
 
-            val call: Call<ResponseBody> = apiInterfaceWithHeader.getClasses(staffIdRequestBody)
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.getClasses(requestBody)
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
@@ -101,7 +107,7 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
                                         false
                                     )
                                     binding!!.recyclerViewClass.adapter =
-                                        ClassListAdapter(mActivity!!, classListSpinn)
+                                        ClassListCustomLessonAdapter(mActivity!!, classListSpinn)
                                 } else {
                                     binding!!.recyclerViewClass.visibility = View.GONE
                                     binding!!.tvNoClass.visibility = View.VISIBLE
@@ -207,7 +213,7 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
                                         false
                                     )
                                     binding!!.recyclerViewSection.adapter =
-                                        SectionAdapter(mActivity!!, sectionListSpinn)
+                                        SectionCustomLessonAdapter(mActivity!!, sectionListSpinn)
                                 } else {
                                     binding!!.recyclerViewClass.visibility = View.GONE
                                     binding!!.tvNoClass.visibility = View.VISIBLE
@@ -250,11 +256,13 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
         } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
     }
 
-    fun selectSection(sectionId: String) {
+    fun selectSection(sectionId: String,sectionName : String,id : String) {
         val bundle = Bundle()
-        bundle.putString(Constants.StaffStudentProfile.CLASS_ID, classId)
-        bundle.putString(Constants.StaffStudentProfile.SECTION_ID, sectionId)
-        startActivity(Intent(mActivity, StudentListActivity::class.java).putExtras(bundle))
+        bundle.putString(Constants.StaffCustomLessonPlan.CLASS_ID, classId)
+        bundle.putString(Constants.StaffCustomLessonPlan.SECTION_ID, sectionId)
+        bundle.putString(Constants.StaffCustomLessonPlan.SECTION_NAME, sectionName)
+        bundle.putString(Constants.StaffCustomLessonPlan.ID, id)
+        startActivity(Intent(mActivity, SelectSubjectActivity::class.java).putExtras(bundle))
     }
 
     override fun onClick(view: View?) {

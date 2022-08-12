@@ -19,7 +19,19 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ViewAllNotificationActivity"
+            android:name=".activity.staff.custom_lesson_plan.activity.AddCustomLessonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.custom_lesson_plan.activity.CustomLessonPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.custom_lesson_plan.activity.SelectSubjectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.custom_lesson_plan.activity.CustomLessonClassListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.dashboard.activity.ViewAllNotificationActivity"
             android:exported="false" />
         <activity
             android:name=".activity.staff.k12_diary.activity.AddTimelineActivity"

@@ -431,4 +431,53 @@
     <string name="view_all_notification_no_data">No Data</string>
     <string name="view_all_notification_view_all">View All</string>
 
+    <!--Custom Lesson Plan-->
+    <string name="custom_lesson_plan_staff_classes">Classes</string>
+    <string name="custom_lesson_plan_staff_no_classe">No Class</string>
+    <string name="custom_lesson_plan_staff_no_section">No Section</string>
+    <string name="custom_lesson_plan_staff_subjects">Subjects</string>
+    <string name="custom_lesson_plan_staff_no_subject">No Subject</string>
+    <string name="custom_lesson_plan_staff_lesson_list">Lesson List</string>
+    <string name="custom_lesson_plan_staff_subject">Subject</string>
+    <string name="custom_lesson_plan_staff_date">Select date</string>
+    <string name="custom_lesson_plan_staff_no_data">No Data</string>
+    <string name="add_custom_lesson_plan_staff">Add Custom Lesson</string>
+    <string name="add_custom_lesson_plan_staff_class">Class</string>
+    <string name="add_custom_lesson_plan_staff_section">Section</string>
+    <string name="add_custom_lesson_plan_staff_subject">Subject</string>
+    <string name="add_custom_lesson_plan_staff_upload_date">Upload Date</string>
+    <string name="add_custom_lesson_plan_staff_select_date">Select date</string>
+    <string name="add_custom_lesson_plan_staff_show_on_date">Show On Date</string>
+    <string name="add_custom_lesson_plan_staff_upload_document">Upload Document</string>
+    <string name="add_custom_lesson_plan_staff_title">Title</string>
+    <string name="add_custom_lesson_plan_staff_enter_title">Enter title</string>
+    <string name="add_custom_lesson_plan_staff_lesson">Lesson</string>
+    <string name="add_custom_lesson_plan_staff_enter_lesson">Enter lesson</string>
+    <string name="add_custom_lesson_plan_staff_topic">Topic</string>
+    <string name="add_custom_lesson_plan_staff_enter_topic">Enter Topic</string>
+    <string name="add_custom_lesson_plan_staff_general_objective">General Objective</string>
+    <string name="add_custom_lesson_plan_staff_enter_general_objective">Enter general objective</string>
+    <string name="add_custom_lesson_plan_staff_teaching_method">Teaching Method</string>
+    <string name="add_custom_lesson_plan_staff_enter_teaching_method">Enter teaching method</string>
+    <string name="add_custom_lesson_plan_staff_previous_knowledge">Previous Knowledge</string>
+    <string name="add_custom_lesson_plan_staff_enter_previous_knowledge">Enter previous knowledge</string>
+    <string name="add_custom_lesson_plan_staff_comprensive_question">Comprehensive Questions</string>
+    <string name="add_custom_lesson_plan_staff_enter_comprensive_question">Enter comprehensive question</string>
+    <string name="add_custom_lesson_plan_staff_lecture_youtube_url">Lecture Youtube Url</string>
+    <string name="add_custom_lesson_plan_staff_enter_lecture_youtube_url">Enter youtube url</string>
+    <string name="add_custom_lesson_plan_staff_period">Period</string>
+    <string name="add_custom_lesson_plan_staff_enter_period">Enter period</string>
+    <string name="add_custom_lesson_plan_staff_teaching_aids">Teaching Aids</string>
+    <string name="add_custom_lesson_plan_staff_enter_teaching_aids">Enter teaching aids</string>
+    <string name="add_custom_lesson_plan_staff_portion_actually_taught">Portion Actually Taught</string>
+    <string name="add_custom_lesson_plan_staff_enter_portion_actually_taught">Enter portion actually taught</string>
+    <string name="add_custom_lesson_plan_staff_homework_assigned">Homework Assigned</string>
+    <string name="add_custom_lesson_plan_staff_enter_homework_assigned">Enter homework assigned</string>
+    <string name="add_custom_lesson_plan_staff_enter_homework_not_assigned_reason">Homework Not Assigned Reason</string>
+    <string name="add_custom_lesson_plan_staff_enter_enter_homework_not_assigned_reason">Enter homework not assigned reason</string>
+    <string name="add_custom_lesson_plan_staff_description">Description</string>
+    <string name="add_custom_lesson_plan_staff_enter_description">Enter description</string>
+    <string name="add_custom_lesson_plan_staff_attach_document">Attach Document</string>
+    <string name="add_custom_lesson_plan_staff_add">Add</string>
+
 </resources>

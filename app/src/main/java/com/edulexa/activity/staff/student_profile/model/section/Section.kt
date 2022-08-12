@@ -28,6 +28,8 @@ class Section {
     private var section: String? = null
 
     fun getId(): String? {
+        if (id == null)
+            return ""
         return id
     }
 
