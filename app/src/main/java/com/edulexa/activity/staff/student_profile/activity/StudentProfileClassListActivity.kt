@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.staff.student_profile.adapter.ClassListAdapter
@@ -19,6 +20,7 @@ import com.edulexa.databinding.ActivityStudentProfileClassListStaffBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -66,11 +68,14 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
                     dbId!!
                 ).create(ApiInterfaceStaff::class.java)
 
-            val staffIdRequestBody = RequestBody.create(MediaType.parse("text/plain"), Utils.getStaffId(mActivity!!))
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+            val requestBody = builder.build()
 
             Utils.printLog("Url", Constants.BASE_URL_STAFF + "getClasses")
 
-            val call: Call<ResponseBody> = apiInterfaceWithHeader.getClasses(staffIdRequestBody)
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.getClasses(requestBody)
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
@@ -97,7 +102,7 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
                                     binding!!.recyclerViewClass.layoutManager = GridLayoutManager(
                                         mActivity,
                                         3,
-                                        RecyclerView.VERTICAL,
+                                        LinearLayoutManager.VERTICAL,
                                         false
                                     )
                                     binding!!.recyclerViewClass.adapter =
@@ -160,14 +165,12 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
                     dbId!!
                 ).create(ApiInterfaceStaff::class.java)
 
-            val jsonObject = JSONObject()
-            jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
-            jsonObject.put(Constants.ParamsStaff.CLASS_ID, classId)
 
-            val requestBody: RequestBody = RequestBody.create(
-                MediaType.parse("application/json; charset=utf-8"),
-                jsonObject.toString()
-            )
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+            builder.addFormDataPart(Constants.ParamsStaff.CLASS_ID,  classId)
+            val requestBody = builder.build()
 
             Utils.printLog("Url", Constants.BASE_URL_STAFF + "getClassSections")
 
@@ -203,7 +206,7 @@ class StudentProfileClassListActivity : AppCompatActivity(), View.OnClickListene
                                     binding!!.recyclerViewSection.layoutManager = GridLayoutManager(
                                         mActivity,
                                         3,
-                                        RecyclerView.VERTICAL,
+                                        LinearLayoutManager.VERTICAL,
                                         false
                                     )
                                     binding!!.recyclerViewSection.adapter =

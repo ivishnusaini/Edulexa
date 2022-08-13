@@ -21,6 +21,7 @@ import com.edulexa.databinding.ActivityStudentProfileClassListStaffBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -70,11 +71,12 @@ class StudentListActivity : AppCompatActivity(), View.OnClickListener {
                 Utils.getStaffToken(mActivity!!),
                 Utils.getStaffId(mActivity!!),dbId!!).create(ApiInterfaceStaff::class.java)
 
-            val jsonObject = JSONObject()
-            jsonObject.put(Constants.ParamsStaff.CLASS_ID, classId)
-            jsonObject.put(Constants.ParamsStaff.SECTION_ID, sectionId)
 
-            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart(Constants.ParamsStaff.CLASS_ID, classId)
+            builder.addFormDataPart(Constants.ParamsStaff.SECTION_ID,  sectionId)
+            val requestBody = builder.build()
 
             Utils.printLog("Url", Constants.BASE_URL_STAFF+"getStudentsByClass")
 

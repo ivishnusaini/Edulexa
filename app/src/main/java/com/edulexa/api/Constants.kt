@@ -210,6 +210,7 @@ class Constants {
         const val TIMELINE_DOC = "timeline_doc"
         const val DATE = "date"
         const val SUBJECT_ID = "subject_id"
+        const val CLASS_SECTION_ID = "class_section_id"
     }
 
     object ParamsStudent {

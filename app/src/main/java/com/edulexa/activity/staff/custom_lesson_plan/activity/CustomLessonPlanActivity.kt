@@ -32,6 +32,7 @@ import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import com.google.gson.Gson
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -128,15 +129,15 @@ class CustomLessonPlanActivity : AppCompatActivity(), View.OnClickListener {
                 Utils.getStaffToken(mActivity!!),
                 Utils.getStaffId(mActivity!!),dbId!!).create(ApiInterfaceStaff::class.java)
 
-            val jsonObject = JSONObject()
-            jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
-            jsonObject.put(Constants.ParamsStaff.ROLE_ID, Utils.getStaffRoleId(mActivity!!))
-            jsonObject.put(Constants.ParamsStaff.CLASS_ID, classId)
-            jsonObject.put(Constants.ParamsStaff.SECTION_ID, sectionId)
-            jsonObject.put(Constants.ParamsStaff.SUBJECT_ID, subjectId)
-            jsonObject.put(Constants.ParamsStaff.DATE, binding!!.tvDate.text.toString())
-
-            val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+            builder.addFormDataPart(Constants.ParamsStaff.ROLE_ID, Utils.getStaffRoleId(mActivity!!))
+            builder.addFormDataPart(Constants.ParamsStaff.CLASS_ID, classId)
+            builder.addFormDataPart(Constants.ParamsStaff.SECTION_ID, sectionId)
+            builder.addFormDataPart(Constants.ParamsStaff.SUBJECT_ID, subjectId)
+            builder.addFormDataPart(Constants.ParamsStaff.DATE,binding!!.tvDate.text.toString())
+            val requestBody = builder.build()
 
             Utils.printLog("Url", Constants.BASE_URL_STAFF+"getcustomlessonplan")
 

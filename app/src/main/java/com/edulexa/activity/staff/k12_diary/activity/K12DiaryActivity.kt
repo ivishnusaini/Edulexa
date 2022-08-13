@@ -19,6 +19,7 @@ import com.edulexa.databinding.ActivityK12DiaryStaffBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -38,12 +39,17 @@ class K12DiaryActivity : AppCompatActivity(), View.OnClickListener {
         init()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getTimelineData()
+    }
+
     private fun init() {
         mActivity = this
         preference = Preference().getInstance(mActivity!!)
         setUpClickListener()
         getBundleData()
-        getTimelineData()
+        Utils.showProgressBar(mActivity!!)
     }
 
     private fun setUpClickListener() {
@@ -62,7 +68,6 @@ class K12DiaryActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun getTimelineData() {
         if (Utils.isNetworkAvailable(mActivity!!)) {
-            Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
             val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
@@ -75,15 +80,13 @@ class K12DiaryActivity : AppCompatActivity(), View.OnClickListener {
                     dbId!!
                 ).create(ApiInterfaceStaff::class.java)
 
-            val jsonObject = JSONObject()
-            jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
-            jsonObject.put(Constants.ParamsStaff.STUDENT_ID, studentId)
-            jsonObject.put(Constants.ParamsStaff.ROLE_ID, Utils.getStaffRoleId(mActivity!!))
 
-            val requestBody: RequestBody = RequestBody.create(
-                MediaType.parse("application/json; charset=utf-8"),
-                jsonObject.toString()
-            )
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID,  Utils.getStaffId(mActivity!!))
+            builder.addFormDataPart(Constants.ParamsStaff.STUDENT_ID, studentId)
+            builder.addFormDataPart(Constants.ParamsStaff.ROLE_ID,  Utils.getStaffRoleId(mActivity!!))
+            val requestBody = builder.build()
 
             Utils.printLog("Url", Constants.BASE_URL_STAFF + "view_student_timeline")
 
@@ -187,13 +190,13 @@ class K12DiaryActivity : AppCompatActivity(), View.OnClickListener {
                     dbId!!
                 ).create(ApiInterfaceStaff::class.java)
 
-            val jsonObject = JSONObject()
-            jsonObject.put(Constants.ParamsStaff.TIMELINE_ID, timelineId)
 
-            val requestBody: RequestBody = RequestBody.create(
-                MediaType.parse("application/json; charset=utf-8"),
-                jsonObject.toString()
-            )
+            val timelineIdRequestBody = RequestBody.create(MediaType.parse("text/plain"), timelineId)
+
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart(Constants.ParamsStaff.TIMELINE_ID, timelineId)
+            val requestBody = builder.build()
 
             Utils.printLog("Url", Constants.BASE_URL_STAFF + "delete_student_timeline")
 

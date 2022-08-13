@@ -1,9 +1,12 @@
 package com.edulexa.activity.staff.student_profile.model.class_list
 
+import android.widget.RelativeLayout
+import android.widget.TextView
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class ClassData {
+
     private var selectFlag = false
 
     fun isSelectFlag(): Boolean {

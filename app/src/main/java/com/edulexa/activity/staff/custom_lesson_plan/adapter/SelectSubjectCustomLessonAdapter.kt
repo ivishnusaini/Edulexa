@@ -40,7 +40,7 @@ class SelectSubjectCustomLessonAdapter(context: Activity, list: List<Subject?>?)
     ) {
         try {
             binding!!.tvClass.text = list!![position]!!.getName()
-            if (list!![position]!!.isSelect()){
+            /*if (list!![position]!!.isSelect()){
                 binding!!.tvClass.setTextColor(ContextCompat.getColor(context!!,R.color.white))
                 binding!!.classLay.setBackgroundResource(R.drawable.bg_button_5)
                 binding!!.classLay.backgroundTintList = ContextCompat.getColorStateList(context!!,R.color.colorPrimary)
@@ -48,9 +48,9 @@ class SelectSubjectCustomLessonAdapter(context: Activity, list: List<Subject?>?)
                 binding!!.tvClass.setTextColor(ContextCompat.getColor(context!!,R.color.primaray_text_color))
                 binding!!.classLay.setBackgroundResource(R.drawable.bg_border_5)
                 binding!!.classLay.backgroundTintList = ContextCompat.getColorStateList(context!!,R.color.card_view_bg)
-            }
+            }*/
             viewHolder.itemView.setOnClickListener {
-                resetAll(position)
+                /*resetAll(position)*/
                 (context as SelectSubjectActivity).selectSubject(list!![position]!!.getId()!!)
             }
         } catch (e: Exception) {
