@@ -40,7 +40,7 @@ import retrofit2.Response
 class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityDashboardStaffBinding? = null
-    var preference : Preference? = null
+    var preference: Preference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardStaffBinding.inflate(layoutInflater)
@@ -65,27 +65,33 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.tvViewAll.setOnClickListener(this)
     }
 
-    private fun getNotificationData(){
-        if (Utils.isNetworkAvailable(mActivity!!)){
+    private fun getNotificationData() {
+        if (Utils.isNetworkAvailable(mActivity!!)) {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
             val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
 
-            val apiInterfaceWithHeader: ApiInterfaceStaff = APIClientStaff.getRetroFitClientWithNewKeyHeader(mActivity!!,
-                Utils.getStaffToken(mActivity!!),
-                Utils.getStaffId(mActivity!!),dbId!!).create(ApiInterfaceStaff::class.java)
+            val apiInterfaceWithHeader: ApiInterfaceStaff =
+                APIClientStaff.getRetroFitClientWithNewKeyHeader(
+                    mActivity!!,
+                    Utils.getStaffToken(mActivity!!),
+                    Utils.getStaffId(mActivity!!), dbId!!
+                ).create(ApiInterfaceStaff::class.java)
 
 
             val builder = MultipartBody.Builder()
             builder.setType(MultipartBody.FORM)
             builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
-            builder.addFormDataPart(Constants.ParamsStaff.MODULE_ID,  Constants.MODULE_ID)
-            builder.addFormDataPart(Constants.ParamsStaff.ROLE_ID, Utils.getStaffRoleId(mActivity!!))
+            builder.addFormDataPart(Constants.ParamsStaff.MODULE_ID, Constants.MODULE_ID)
+            builder.addFormDataPart(
+                Constants.ParamsStaff.ROLE_ID,
+                Utils.getStaffRoleId(mActivity!!)
+            )
             val requestBody = builder.build()
 
 
-            Utils.printLog("Url", Constants.BASE_URL_STAFF+"getNotifications")
+            Utils.printLog("Url", Constants.BASE_URL_STAFF + "getNotifications")
 
             val call: Call<ResponseBody> = apiInterfaceWithHeader.getNotifications(requestBody)
             call.enqueue(object : Callback<ResponseBody> {
@@ -94,42 +100,62 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
                     response: Response<ResponseBody>
                 ) {
                     Utils.hideProgressBar()
-                    try{
+                    try {
                         val responseStr = response.body()!!.string()
-                        Utils.printLog("response",responseStr)
-                        if (!responseStr.isNullOrEmpty()){
+                        Utils.printLog("response", responseStr)
+                        if (!responseStr.isNullOrEmpty()) {
                             val responseJsonObject = JSONObject(responseStr)
-                            val notificationJsonObj = responseJsonObject.optJSONObject("notification")
-                            if (notificationJsonObj != null){
-                                val modelResponse = Utils.getObject(responseStr, NotificationResponse::class.java) as NotificationResponse
-                                if (modelResponse.getNotification()!!.getData()!!.isNotEmpty()){
-                                    Constants.AppSaveData.staffNotificationList = modelResponse.getNotification()!!.getData()
+                            val notificationJsonObj =
+                                responseJsonObject.optJSONObject("notification")
+                            if (notificationJsonObj != null) {
+                                val modelResponse = Utils.getObject(
+                                    responseStr,
+                                    NotificationResponse::class.java
+                                ) as NotificationResponse
+                                if (modelResponse.getNotification()!!.getData()!!.isNotEmpty()) {
+                                    Constants.AppSaveData.staffNotificationList =
+                                        modelResponse.getNotification()!!.getData()
                                     binding!!.recyclerViewNoticeBoard.visibility = View.VISIBLE
                                     binding!!.tvViewAll.visibility = View.VISIBLE
                                     binding!!.tvNoData.visibility = View.GONE
-                                    binding!!.recyclerViewNoticeBoard.layoutManager = LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL,false)
-                                    binding!!.recyclerViewNoticeBoard.adapter = DashboardNotificationAdapter(mActivity!!,modelResponse.getNotification()!!.getData())
-                                }else{
+                                    binding!!.recyclerViewNoticeBoard.layoutManager =
+                                        LinearLayoutManager(
+                                            mActivity,
+                                            RecyclerView.HORIZONTAL,
+                                            false
+                                        )
+                                    binding!!.recyclerViewNoticeBoard.adapter =
+                                        DashboardNotificationAdapter(
+                                            mActivity!!,
+                                            modelResponse.getNotification()!!.getData()
+                                        )
+                                } else {
                                     binding!!.recyclerViewNoticeBoard.visibility = View.GONE
                                     binding!!.tvViewAll.visibility = View.GONE
                                     binding!!.tvNoData.visibility = View.VISIBLE
                                 }
-                            }else {
+                            } else {
                                 val message = responseJsonObject.optString("message")
                                 if (!message.isEmpty())
-                                    Utils.showToastPopup(mActivity!!,message)
-                                else Utils.showToastPopup(mActivity!!,getString(R.string.did_not_fetch_data))
+                                    Utils.showToastPopup(mActivity!!, message)
+                                else Utils.showToastPopup(
+                                    mActivity!!,
+                                    getString(R.string.did_not_fetch_data)
+                                )
                                 binding!!.recyclerViewNoticeBoard.visibility = View.GONE
                                 binding!!.tvViewAll.visibility = View.GONE
                                 binding!!.tvNoData.visibility = View.VISIBLE
                             }
-                        }else {
-                            Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
+                        } else {
+                            Utils.showToastPopup(
+                                mActivity!!,
+                                getString(R.string.response_null_or_empty_validation)
+                            )
                             binding!!.recyclerViewNoticeBoard.visibility = View.GONE
                             binding!!.tvViewAll.visibility = View.GONE
                             binding!!.tvNoData.visibility = View.VISIBLE
                         }
-                    }catch (e : Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         binding!!.recyclerViewNoticeBoard.visibility = View.GONE
                         binding!!.tvViewAll.visibility = View.GONE
@@ -147,38 +173,148 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
             })
-        }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+        } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
 
     }
 
     private fun setUpDashboardData() {
-        binding!!.recyclerView.layoutManager =
-            GridLayoutManager(mActivity, 3, RecyclerView.VERTICAL, false)
-        binding!!.recyclerView.adapter = DashboardStaffAdapter(mActivity!!,getModuleList())
+        try {
+            binding!!.tvName.text = getString(
+                R.string.concat_string_with_text_format,
+                Utils.getStaffLoginResponse(mActivity)!!.getRecord()!!.getName(),
+                " ",
+                Utils.getStaffLoginResponse(mActivity)!!.getRecord()!!.getSurname()
+            )
+            binding!!.recyclerView.layoutManager =
+                GridLayoutManager(mActivity, 3, RecyclerView.VERTICAL, false)
+            binding!!.recyclerView.adapter = DashboardStaffAdapter(mActivity!!, getModuleList())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
-    private fun getModuleList() : List<DashboardModel>{
-        val moduleList : List<DashboardModel> = ArrayList()
-        (moduleList as ArrayList<DashboardModel>).add(DashboardModel(R.drawable.student_profile_staff,getString(R.string.dashboard_staff_student_profile)))
-        moduleList.add(DashboardModel(R.drawable.custom_lesson_staff,getString(R.string.dashboard_staff_custom_lesson_plan)))
-        moduleList.add(DashboardModel(R.drawable.online_exam_staff,getString(R.string.dashboard_staff_online_exam)))
-        moduleList.add(DashboardModel(R.drawable.homework_staff,getString(R.string.dashboard_staff_homework)))
-        moduleList.add(DashboardModel(R.drawable.lesson_plan_staff,getString(R.string.dashboard_staff_lesson_plan)))
-        moduleList.add(DashboardModel(R.drawable.circular_staff,getString(R.string.dashboard_staff_circular)))
-        moduleList.add(DashboardModel(R.drawable.events_staff,getString(R.string.dashboard_staff_events)))
-        moduleList.add(DashboardModel(R.drawable.gallery_staff,getString(R.string.dashboard_staff_gallery)))
-        moduleList.add(DashboardModel(R.drawable.school_family_staff,getString(R.string.dashboard_staff_school_family)))
-        moduleList.add(DashboardModel(R.drawable.syllabus_status_staff,getString(R.string.dashboard_staff_syllabus_status)))
-        moduleList.add(DashboardModel(R.drawable.create_exam_staff,getString(R.string.dashboard_staff_create_exam)))
-        moduleList.add(DashboardModel(R.drawable.student_admission_staff,getString(R.string.dashboard_staff_student_admission)))
-        moduleList.add(DashboardModel(R.drawable.attendance_staff,getString(R.string.dashboard_staff_attendance)))
-        moduleList.add(DashboardModel(R.drawable.add_lesson_staff,getString(R.string.dashboard_staff_add_lesson)))
-        moduleList.add(DashboardModel(R.drawable.add_topic_staff,getString(R.string.dashboard_staff_add_topic)))
-        moduleList.add(DashboardModel(R.drawable.approve_leave_staff,getString(R.string.dashboard_staff_approve_leave)))
-        moduleList.add(DashboardModel(R.drawable.apply_leave_staff,getString(R.string.dashboard_staff_apply_leave)))
-        moduleList.add(DashboardModel(R.drawable.view_all_staff,getString(R.string.dashboard_staff_view_all)))
-        moduleList.add(DashboardModel(R.drawable.staff_meeting_staff,getString(R.string.dashboard_staff_staff_meeting)))
-        moduleList.add(DashboardModel(R.drawable.live_class_staff,getString(R.string.dashboard_staff_live_classes)))
+    private fun getModuleList(): List<DashboardModel> {
+        val moduleList: List<DashboardModel> = ArrayList()
+        (moduleList as ArrayList<DashboardModel>).add(
+            DashboardModel(
+                R.drawable.student_profile_staff,
+                getString(R.string.dashboard_staff_student_profile)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.custom_lesson_staff,
+                getString(R.string.dashboard_staff_custom_lesson_plan)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.online_exam_staff,
+                getString(R.string.dashboard_staff_online_exam)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.homework_staff,
+                getString(R.string.dashboard_staff_homework)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.lesson_plan_staff,
+                getString(R.string.dashboard_staff_lesson_plan)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.circular_staff,
+                getString(R.string.dashboard_staff_circular)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.events_staff,
+                getString(R.string.dashboard_staff_events)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.gallery_staff,
+                getString(R.string.dashboard_staff_gallery)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.school_family_staff,
+                getString(R.string.dashboard_staff_school_family)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.syllabus_status_staff,
+                getString(R.string.dashboard_staff_syllabus_status)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.create_exam_staff,
+                getString(R.string.dashboard_staff_create_exam)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.student_admission_staff,
+                getString(R.string.dashboard_staff_student_admission)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.attendance_staff,
+                getString(R.string.dashboard_staff_attendance)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.add_lesson_staff,
+                getString(R.string.dashboard_staff_add_lesson)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.add_topic_staff,
+                getString(R.string.dashboard_staff_add_topic)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.approve_leave_staff,
+                getString(R.string.dashboard_staff_approve_leave)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.apply_leave_staff,
+                getString(R.string.dashboard_staff_apply_leave)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.view_all_staff,
+                getString(R.string.dashboard_staff_view_all)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.staff_meeting_staff,
+                getString(R.string.dashboard_staff_staff_meeting)
+            )
+        )
+        moduleList.add(
+            DashboardModel(
+                R.drawable.live_class_staff,
+                getString(R.string.dashboard_staff_live_classes)
+            )
+        )
         return moduleList
     }
 
@@ -232,10 +368,14 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
         val id = view!!.id
         if (id == R.id.tv_logout)
             logoutPopup()
-        else if (id == R.id.tv_view_all){
+        else if (id == R.id.tv_view_all) {
             val bundle = Bundle()
-            bundle.putString(Constants.StaffNotification.FROM_WHERE,"view_all")
-            startActivity(Intent(mActivity,ViewAllNotificationActivity::class.java).putExtras(bundle))
+            bundle.putString(Constants.StaffNotification.FROM_WHERE, "view_all")
+            startActivity(
+                Intent(mActivity, ViewAllNotificationActivity::class.java).putExtras(
+                    bundle
+                )
+            )
         }
     }
 }
