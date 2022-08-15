@@ -113,6 +113,10 @@ class Constants {
         val FORM_FIELD = "form_field"
     }
 
+    object StaffOnlineExam {
+        val ONLINE_EXAM_ID = "online_exam_id"
+    }
+
     object AppSaveData {
         var gallerystudenttype = "all"
         var listUpcoming : List<DatumLiveClass>? = null
@@ -236,6 +240,10 @@ class Constants {
         const val PUBLISH_RESULT = "publish_result"
         const val DURATION = "duration"
         const val DESCRIPTION = "description"
+        const val EXAM_FROM = "exam_from"
+        const val EXAM_TO = "exam_to"
+        const val PASSING_PERCENTAGE = "passing_percentage"
+        const val PASSING_MARK_TYPE = "passing_mark_type"
     }
 
     object ParamsStudent {

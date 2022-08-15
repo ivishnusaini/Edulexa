@@ -521,5 +521,10 @@
     <string name="online_exam_staff_class_validation">Please select class</string>
     <string name="online_exam_staff_section_validation">Please select section</string>
     <string name="online_exam_staff_description_validation">Please enter description</string>
+    <string name="online_exam_staff_from_date_validation">Please select from date</string>
+    <string name="online_exam_staff_to_date_validation">Please select to date</string>
+    <string name="online_exam_staff_from_time_validation">Please select from time</string>
+    <string name="online_exam_staff_to_time_validation">Please select to time</string>
+    <string name="online_exam_staff_passing_details_validation">Please enter passing details</string>
 
 </resources>
