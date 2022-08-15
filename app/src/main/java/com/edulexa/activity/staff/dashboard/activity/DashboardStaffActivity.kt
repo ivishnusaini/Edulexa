@@ -83,7 +83,7 @@ class DashboardStaffActivity : AppCompatActivity(), View.OnClickListener {
             val builder = MultipartBody.Builder()
             builder.setType(MultipartBody.FORM)
             builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
-            builder.addFormDataPart(Constants.ParamsStaff.MODULE_ID, Constants.MODULE_ID)
+            builder.addFormDataPart(Constants.ParamsStaff.MODULE_ID, Constants.MODULE_ID_VALUE)
             builder.addFormDataPart(
                 Constants.ParamsStaff.ROLE_ID,
                 Utils.getStaffRoleId(mActivity!!)

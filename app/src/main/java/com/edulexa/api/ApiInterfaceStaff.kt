@@ -48,4 +48,13 @@ interface ApiInterfaceStaff {
 
     @POST("addcustomlessonplan")
     fun addCustomLessonPlan(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("onlineexam")
+    fun getOnlineExam(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("sendOnlineExamNotification")
+    fun sendOnlineExamNotification(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("deleteOnlineExam")
+    fun deleteOnlineExam(@Body requestBody : RequestBody): Call<ResponseBody>
 }

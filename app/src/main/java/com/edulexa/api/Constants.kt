@@ -35,7 +35,7 @@ class Constants {
 
         val STAFF_API_WEBSERVICE = "staff_api/webservice/"
         val SITE_WEBVIEWLOGIN_USERNAME = "site/webviewLogin?username="
-        val MODULE_ID = "13"
+        val MODULE_ID_VALUE = "13"
         /*Staff Base Url and Value*/
     }
 
@@ -229,6 +229,8 @@ class Constants {
         const val UPLOAD_DATE = "upload_date"
         const val FILE = "file"
         const val LESSON_ID = "lesson_id"
+        const val EXAM_ID = "EXAM_ID"
+        const val ONLINEEXAM_ID = "onlineexam_id"
     }
 
     object ParamsStudent {

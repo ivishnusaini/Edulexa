@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.staff.custom_lesson_plan.activity.CustomLessonClassListActivity
 import com.edulexa.activity.staff.dashboard.model.DashboardModel
+import com.edulexa.activity.staff.online_exam.activity.OnlineExamActivity
 import com.edulexa.activity.staff.student_profile.activity.StudentProfileClassListActivity
 import com.edulexa.activity.student.attendance.adapter.AttendanceStudentMonthAdapter
 import com.edulexa.databinding.ItemStaffDashboardBinding
@@ -45,6 +46,12 @@ class DashboardStaffAdapter(context: Activity,list : List<DashboardModel>) :
                     }
                     context!!.getString(R.string.dashboard_staff_custom_lesson_plan) -> {
                         context!!.startActivity(Intent(context,CustomLessonClassListActivity::class.java))
+                    }
+                    context!!.getString(R.string.dashboard_staff_online_exam) -> {
+                        context!!.startActivity(Intent(context,OnlineExamActivity::class.java))
+                    }
+                    context!!.getString(R.string.dashboard_staff_homework) -> {
+
                     }
                 }
             }

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_exam_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:background="@null"
+                    android:inputType="textCapWords"
+                    android:hint="@string/online_exam_staff_enter_title"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp"/>
+
+            </LinearLayout>
+
+            <com.edulexa.views.MediumTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/online_exam_staff_time"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_exam_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:hint="@string/online_exam_staff_exam_duration"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp"/>
+
+            </LinearLayout>
+
+
+            <com.edulexa.views.MediumTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/online_exam_staff_class"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/bg_button_5"
+                android:backgroundTint="@color/card_view_bg">
+
+                <Spinner
+                    android:id="@+id/class_spinn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_drop_down"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+
+            <com.edulexa.views.MediumTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/online_exam_staff_section"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/primaray_text_color"/>
+
+
+            <LinearLayout
+                android:id="@+id/section_lay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/bg_button_5"
+                android:backgroundTint="@color/card_view_bg"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp">
+
+                <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/online_exam_staff_section"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_exam_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
+                    android:hint="@string/online_exam_staff_enter_description"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/PPF_createAndAdd_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/ripple_effect_0"
+        android:text="@string/online_exam_staff_create_add_question"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

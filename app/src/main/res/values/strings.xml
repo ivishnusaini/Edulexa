@@ -488,4 +488,23 @@
     <string name="add_custom_lesson_plan_staff_file_validation">Please enter youtube url or upload file</string>
     <string name="add_custom_lesson_plan_staff_delete_consent">Are you sure ?</string>
 
+    <!--Online Exam-->
+    <string name="online_exam_staff">Online Exam</string>
+    <string name="online_exam_staff_practise_exam">Practice Exam</string>
+    <string name="online_exam_staff_no_data">No Data</string>
+    <string name="online_exam_staff_exam_name">Exam Name</string>
+    <string name="online_exam_staff_exam_type">Exam Type :</string>
+    <string name="online_exam_staff_questions">Questions</string>
+    <string name="online_exam_staff_subjective">Subjective</string>
+    <string name="online_exam_staff_Results">Results</string>
+    <string name="online_exam_staff_notification_successfully_send">Successfully send</string>
+    <string name="online_exam_staff_add_exam">Add Exam</string>
+    <string name="online_exam_staff_enter_title">Exam Title</string>
+    <string name="online_exam_staff_enter_description">Exam description</string>
+    <string name="online_exam_staff_time">Time</string>
+    <string name="online_exam_staff_class">Class</string>
+    <string name="online_exam_staff_section">Section</string>
+    <string name="online_exam_staff_exam_duration">Duration (In Min)</string>
+    <string name="online_exam_staff_create_add_question">Create And Add Questions</string>
+
 </resources>

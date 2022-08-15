@@ -19,11 +19,17 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <!-- Staff Section -->
-
+        <activity
+            android:name=".activity.staff.online_exam.activity.AddExamActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.staff.online_exam.activity.OnlineExamActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.staff.custom_lesson_plan.activity.AddCustomLessonActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.staff.custom_lesson_plan.activity.CustomLessonPlanActivity"
             android:exported="false" />
@@ -39,7 +45,7 @@
         <activity
             android:name=".activity.staff.k12_diary.activity.AddTimelineActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.staff.k12_diary.activity.K12DiaryActivity"
             android:exported="false" />
