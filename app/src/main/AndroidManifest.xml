@@ -20,12 +20,13 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".activity.staff.online_exam.activity.AddQuestionActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <!-- Staff Section -->
         <activity
             android:name=".activity.staff.online_exam.activity.AddExamActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".activity.staff.online_exam.activity.OnlineExamActivity"
             android:exported="false" />

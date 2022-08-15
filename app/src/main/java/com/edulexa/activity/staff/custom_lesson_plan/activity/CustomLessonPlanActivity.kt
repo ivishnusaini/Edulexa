@@ -240,6 +240,7 @@ class CustomLessonPlanActivity : AppCompatActivity(), View.OnClickListener {
             cvCancel.setOnClickListener { v: View? -> dialog.dismiss() }
             cvOk.setOnClickListener { v: View? ->
                 if (Utils.isNetworkAvailable(mActivity!!)){
+                    Utils.showProgressBar(mActivity!!)
                     Utils.hideKeyboard(mActivity!!)
 
                     val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)

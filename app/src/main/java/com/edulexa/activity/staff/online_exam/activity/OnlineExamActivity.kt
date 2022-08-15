@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.edulexa.R
 import com.edulexa.activity.staff.custom_lesson_plan.activity.AddCustomLessonActivity
 import com.edulexa.activity.staff.online_exam.adapter.OnlineExamListAdapter
@@ -182,6 +183,7 @@ class OnlineExamActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun filterListAccToStaffLogin() {
         try {
+            binding!!.recyclerView.layoutManager = LinearLayoutManager(mActivity!!,LinearLayoutManager.VERTICAL,false)
             val roleId = Utils.getStaffRoleId(mActivity!!)
             val staffId = Utils.getStaffId(mActivity!!)
             if (roleId == "1" || roleId == "7") {
@@ -219,6 +221,7 @@ class OnlineExamActivity : AppCompatActivity(), View.OnClickListener {
 
     fun sendNotification(examId : String){
         if (Utils.isNetworkAvailable(mActivity!!)) {
+            Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
             val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
@@ -285,7 +288,7 @@ class OnlineExamActivity : AppCompatActivity(), View.OnClickListener {
             ) { dialog: DialogInterface?, whichButton: Int ->
                 if (Utils.isNetworkAvailable(mActivity!!)) {
                     Utils.hideKeyboard(mActivity!!)
-
+                    Utils.showProgressBar(mActivity!!)
                     val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
 
                     val apiInterfaceWithHeader: ApiInterfaceStaff =
@@ -320,6 +323,7 @@ class OnlineExamActivity : AppCompatActivity(), View.OnClickListener {
                                     val jsonObject = JSONObject(responseStr)
                                     val message = jsonObject.optString("message")
                                     Utils.showToast(mActivity!!,message)
+                                    getExamList()
                                 } else {
                                     Utils.showToastPopup(
                                         mActivity!!,
