@@ -12,7 +12,7 @@
         android:text=""
         android:layout_centerVertical="true"
         android:paddingStart="15dp"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_12ssp"
         android:textColor="@color/primaray_text_color"
         android:paddingEnd="15dp"/>
 

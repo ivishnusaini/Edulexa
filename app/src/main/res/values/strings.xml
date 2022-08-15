@@ -506,5 +506,20 @@
     <string name="online_exam_staff_section">Section</string>
     <string name="online_exam_staff_exam_duration">Duration (In Min)</string>
     <string name="online_exam_staff_create_add_question">Create And Add Questions</string>
+    <string name="online_exam_staff_date">Date</string>
+    <string name="online_exam_staff_from_date">From date</string>
+    <string name="online_exam_staff_from_time">From time</string>
+    <string name="online_exam_staff_to_date">To Date</string>
+    <string name="online_exam_staff_to_time">To Time</string>
+    <string name="online_exam_staff_passing_marks">Passing Marks</string>
+    <string name="online_exam_staff_number">Number</string>
+    <string name="online_exam_staff_percentage">Percentage</string>
+    <string name="online_exam_staff_passing_enter_here">Enter here</string>
+    <string name="online_exam_staff_select_class_first">Please select the class first</string>
+    <string name="online_exam_staff_title_validation">Please enter title</string>
+    <string name="online_exam_staff_duration_validation">Please enter duration</string>
+    <string name="online_exam_staff_class_validation">Please select class</string>
+    <string name="online_exam_staff_section_validation">Please select section</string>
+    <string name="online_exam_staff_description_validation">Please enter description</string>
 
 </resources>

@@ -57,4 +57,7 @@ interface ApiInterfaceStaff {
 
     @POST("deleteOnlineExam")
     fun deleteOnlineExam(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("createPracticeExam")
+    fun createPracticeExam(@Body requestBody : RequestBody): Call<ResponseBody>
 }

@@ -231,6 +231,11 @@ class Constants {
         const val LESSON_ID = "lesson_id"
         const val EXAM_ID = "EXAM_ID"
         const val ONLINEEXAM_ID = "onlineexam_id"
+        const val EXAM = "exam"
+        const val IS_ACTIVE = "is_active"
+        const val PUBLISH_RESULT = "publish_result"
+        const val DURATION = "duration"
+        const val DESCRIPTION = "description"
     }
 
     object ParamsStudent {
