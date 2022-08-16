@@ -265,7 +265,7 @@ class AddCustomLessonActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun onActivityCamera() {
         cameraOnActivityLaunch = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(), @SuppressLint("NotifyDataSetChanged")
+            StartActivityForResult(), @SuppressLint("NotifyDataSetChanged")
             fun(result: ActivityResult) {
                 if (result.resultCode == RESULT_OK) {
                     try {
@@ -288,7 +288,7 @@ class AddCustomLessonActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun onActivityGallery() {
         galleryOnActivityLaunch = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
+            StartActivityForResult()
         ) { result ->
             if (result.resultCode == RESULT_OK) {
                 try {

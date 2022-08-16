@@ -526,5 +526,22 @@
     <string name="online_exam_staff_from_time_validation">Please select from time</string>
     <string name="online_exam_staff_to_time_validation">Please select to time</string>
     <string name="online_exam_staff_passing_details_validation">Please enter passing details</string>
+    <string name="online_exam_staff_add_question">Add question</string>
+    <string name="online_exam_staff_write_question_here">Write question here</string>
+    <string name="online_exam_staff_attachment">Attachment</string>
+    <string name="online_exam_staff_question_type">Question Type</string>
+    <string name="online_exam_staff_subject">Subject</string>
+    <string name="online_exam_staff_marks">Marks</string>
+    <string name="online_exam_staff_submit">Submit</string>
+    <string name="online_exam_staff_add_more">Add More</string>
+    <string name="online_exam_staff_select_correct_answar">Please select the correct options</string>
+    <string name="online_exam_staff_mcq_option_a">Option A</string>
+    <string name="online_exam_staff_mcq_option_b">Option B</string>
+    <string name="online_exam_staff_mcq_option_c">Option C</string>
+    <string name="online_exam_staff_mcq_option_d">Option D</string>
+    <string name="online_exam_staff_integer_answer">Answer</string>
+    <string name="online_exam_staff_integer_write_answer">Write an answer</string>
+    <string name="online_exam_staff_question_type_validation">Please select question type</string>
+    <string name="online_exam_staff_subject_validation">Please select subject</string>
 
 </resources>

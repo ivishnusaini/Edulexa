@@ -319,12 +319,11 @@ class PracticeExamFragment : Fragment(), View.OnClickListener {
 
     private fun addPracticeExam(){
         val titleStr = binding!!.etExamTitle.text.toString().trim()
-        val durationStr = binding!!.etExamTitle.text.toString().trim()
         val timeInMinuteStr = binding!!.etExamDuration.text.toString().trim()
         val descriptionStr = binding!!.etExamDescription.text.toString().trim()
         if (titleStr.isEmpty())
             Utils.showToastPopup(mActivity!!,getString(R.string.online_exam_staff_title_validation))
-        else if (durationStr.isEmpty())
+        else if (timeInMinuteStr.isEmpty())
             Utils.showToastPopup(mActivity!!,getString(R.string.online_exam_staff_duration_validation))
         else if (classId.isEmpty())
             Utils.showToastPopup(mActivity!!,getString(R.string.online_exam_staff_class_validation))
@@ -354,7 +353,7 @@ class PracticeExamFragment : Fragment(), View.OnClickListener {
                 builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
                 builder.addFormDataPart(Constants.ParamsStaff.IS_ACTIVE, "1")
                 builder.addFormDataPart(Constants.ParamsStaff.PUBLISH_RESULT, "0")
-                builder.addFormDataPart(Constants.ParamsStaff.DURATION, durationStr)
+                builder.addFormDataPart(Constants.ParamsStaff.DURATION, timeInMinuteStr)
                 builder.addFormDataPart(Constants.ParamsStaff.DESCRIPTION, descriptionStr)
                 builder.addFormDataPart(Constants.ParamsStaff.CLASS_ID, classId)
                 builder.addFormDataPart(Constants.ParamsStaff.SECTION_ID, sectionId)

@@ -244,6 +244,18 @@ class Constants {
         const val EXAM_TO = "exam_to"
         const val PASSING_PERCENTAGE = "passing_percentage"
         const val PASSING_MARK_TYPE = "passing_mark_type"
+        const val ONLINE_EXAM_ID = "online_exam_id"
+        const val QUESTION_ID = "question_id"
+        const val QUESTION_TYPE_ID = "question_type_id"
+        const val CORRECT = "correct"
+        const val QUESTION = "question"
+        const val QUESTION_MARK = "question_mark"
+        const val QUESTION_NMARK = "question_nmark"
+        const val OPT_A = "opt_a"
+        const val OPT_B = "opt_b"
+        const val OPT_C = "opt_c"
+        const val OPT_D = "opt_d"
+        const val ATTACH_FILE = "attach_file"
     }
 
     object ParamsStudent {

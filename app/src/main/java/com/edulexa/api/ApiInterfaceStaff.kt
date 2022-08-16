@@ -63,4 +63,10 @@ interface ApiInterfaceStaff {
 
     @POST("createOnlineExam")
     fun createOnlineExam(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getQuestionTypeList")
+    fun getQuestionTypeList(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("addQuestion")
+    fun addQuestion(@Body requestBody : RequestBody): Call<ResponseBody>
 }

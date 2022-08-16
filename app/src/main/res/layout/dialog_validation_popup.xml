@@ -49,7 +49,7 @@
                 android:background="@drawable/ripple_effect_25"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/ok"
-                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
