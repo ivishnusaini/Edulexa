@@ -18,10 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
+        <!-- Staff Section -->
+        <activity
+            android:name=".activity.staff.online_exam.activity.ExamwiseQuestionAddActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.staff.online_exam.activity.ExamWiseQuestionsActivity"
             android:exported="false" />
-        <!-- Staff Section -->
         <activity
             android:name=".activity.staff.online_exam.activity.EditExamActivity"
             android:exported="false" />

@@ -118,6 +118,8 @@ class Constants {
         val EXAM_MODEL = "exam_model"
         val EXAM_TYPE = "exam_type"
         val EXAM_ID = "exam_id"
+        val TYPE = "type"
+        val QUESTION_ID = "question_id"
     }
 
     object AppSaveData {
@@ -260,6 +262,7 @@ class Constants {
         const val OPT_D = "opt_d"
         const val ATTACH_FILE = "attach_file"
         const val ID = "id"
+        const val IMG_URL = "img_url"
     }
 
     object ParamsStudent {

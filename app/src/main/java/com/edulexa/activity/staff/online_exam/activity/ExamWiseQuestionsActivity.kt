@@ -1,6 +1,7 @@
 package com.edulexa.activity.staff.online_exam.activity
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,6 +18,7 @@ import com.edulexa.databinding.ActivityAddExamStaffBinding
 import com.edulexa.databinding.ActivityExamWiseQuestionsStaffBinding
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
+import com.google.gson.Gson
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -39,12 +41,17 @@ class ExamWiseQuestionsActivity : AppCompatActivity(),View.OnClickListener {
         setContentView(binding!!.root)
         init()
     }
+
+    override fun onResume() {
+        super.onResume()
+        getQuestionsList()
+    }
     private fun init() {
         mActivity = this
         preference = Preference().getInstance(mActivity!!)
         setUpClickListener()
         getBundleData()
-        getQuestionsList()
+        Utils.showProgressBar(mActivity!!)
     }
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
@@ -66,7 +73,6 @@ class ExamWiseQuestionsActivity : AppCompatActivity(),View.OnClickListener {
 
     private fun getQuestionsList(){
         if (Utils.isNetworkAvailable(mActivity!!)) {
-            Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
 
             val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
@@ -109,7 +115,7 @@ class ExamWiseQuestionsActivity : AppCompatActivity(),View.OnClickListener {
                                 ) as ExamwiseQuestionsResponse
                                 if (modelResponse.getQuestions()!!.isNotEmpty()) {
                                     binding!!.recyclerView.layoutManager = LinearLayoutManager(mActivity,LinearLayoutManager.VERTICAL,false)
-                                    binding!!.recyclerView.adapter = ExamwiseQuestionsAdapter(mActivity!!,modelResponse.getQuestions())
+                                    binding!!.recyclerView.adapter = ExamwiseQuestionsAdapter(mActivity!!,modelResponse.getQuestions(),examId,examType)
                                 } else {
                                     binding!!.recyclerView.visibility = View.GONE
                                     binding!!.tvNoData.visibility = View.VISIBLE
@@ -154,5 +160,12 @@ class ExamWiseQuestionsActivity : AppCompatActivity(),View.OnClickListener {
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
+        else if (id == R.id.add_question_lay){
+            val bundle = Bundle()
+            bundle.putString(Constants.StaffOnlineExam.EXAM_TYPE, examType)
+            bundle.putString(Constants.StaffOnlineExam.EXAM_ID, examId)
+            bundle.putString(Constants.StaffOnlineExam.TYPE, "add")
+            startActivity(Intent(mActivity, ExamwiseQuestionAddActivity::class.java).putExtras(bundle))
+        }
     }
 }

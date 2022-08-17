@@ -8,22 +8,22 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.AdapterView
-import android.widget.CompoundButton
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.edulexa.R
 import com.edulexa.activity.staff.online_exam.adapter.add_question.QuestionTypeSpinnerAdapter
 import com.edulexa.activity.staff.online_exam.adapter.add_question.SubjectSpinnerAdapter
 import com.edulexa.activity.staff.online_exam.model.add_question.QuestionType
 import com.edulexa.activity.staff.online_exam.model.add_question.QuestionTypeResponse
 import com.edulexa.activity.staff.online_exam.model.add_question.Subject
+import com.edulexa.activity.staff.online_exam.model.examwise_questions.QuestionExamWise
 import com.edulexa.api.APIClientStaff
 import com.edulexa.api.ApiInterfaceStaff
 import com.edulexa.api.Constants
-import com.edulexa.databinding.ActivityAddQuestionStaffBinding
+import com.edulexa.databinding.ActivityExamwiseQuestionAddStaffBinding
 import com.edulexa.support.FileUtils
 import com.edulexa.support.Preference
 import com.edulexa.support.Utils
@@ -38,12 +38,15 @@ import retrofit2.Response
 import java.io.File
 import java.util.*
 
-class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
+class ExamwiseQuestionAddActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
-    var binding: ActivityAddQuestionStaffBinding? = null
+    var binding: ActivityExamwiseQuestionAddStaffBinding? = null
     var preference: Preference? = null
 
-    var onlineExamId = ""
+    var examId = ""
+    var examType = ""
+    var questionId = ""
+    var questionExamModel: QuestionExamWise? = null
 
     var cameraOnActivityLaunch: ActivityResultLauncher<Intent>? = null
     var galleryOnActivityLaunch: ActivityResultLauncher<Intent>? = null
@@ -64,7 +67,7 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddQuestionStaffBinding.inflate(layoutInflater)
+        binding = ActivityExamwiseQuestionAddStaffBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         init()
     }
@@ -81,64 +84,24 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
 
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
-        binding!!.ivGallery.setOnClickListener(this)
-        binding!!.ivCamera.setOnClickListener(this)
-        binding!!.ivRemove.setOnClickListener(this)
-        binding!!.btnSubmit.setOnClickListener(this)
-        binding!!.btnAddMore.setOnClickListener(this)
-
-        binding!!.questionTypeSpinn.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    if (questionTypeListSpinn!![position]!!.getId() != null) {
-                        questionTypeId = questionTypeListSpinn!![position]!!.getId()!!
-                        questionType = questionTypeListSpinn!![position]!!.getName()!!
-                        showAnswerView()
-                    }
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
-        binding!!.subjectSpinn.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    if (subjectListSpinn!![position]!!.getId() != null) {
-                        subjectId = subjectListSpinn!![position]!!.getId()!!
-                    } else subjectId = ""
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
-
-
-        binding!!.mcqCheckboxOptionA.setOnCheckedChangeListener { p0, boolean ->
-            isOptAChecked = boolean
-        }
-        binding!!.mcqCheckboxOptionB.setOnCheckedChangeListener { p0, boolean ->
-            isOptBChecked = boolean
-        }
-        binding!!.mcqCheckboxOptionC.setOnCheckedChangeListener { p0, boolean ->
-            isOptCChecked = boolean
-        }
-        binding!!.mcqCheckboxOptionD.setOnCheckedChangeListener { p0, boolean ->
-            isOptDChecked = boolean
-        }
     }
 
     private fun getBundleData() {
         try {
             val bundle = intent.extras
-            onlineExamId = bundle!!.getString(Constants.StaffOnlineExam.ONLINE_EXAM_ID)!!
+            val type = bundle!!.getString(Constants.StaffOnlineExam.TYPE)!!
+            examId = bundle.getString(Constants.StaffOnlineExam.EXAM_ID)!!
+            examType = bundle.getString(Constants.StaffOnlineExam.EXAM_TYPE)!!
+            if (type == "edit") {
+                binding!!.btnAddMore.visibility = View.GONE
+                val questionExamModelStr = bundle.getString(Constants.StaffOnlineExam.EXAM_MODEL)!!
+                questionExamModel = Utils.getObject(
+                    questionExamModelStr,
+                    QuestionExamWise::class.java
+                ) as QuestionExamWise
+                questionId = bundle.getString(Constants.StaffOnlineExam.QUESTION_ID)!!
+                setUpData()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -192,11 +155,98 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
         }
     }
 
+    private fun setUpData() {
+        try {
+            if (questionExamModel != null){
+                binding!!.etQuestion.setText(questionExamModel!!.getQuestion())
+                binding!!.etQuestion.setSelection(questionExamModel!!.getQuestion()!!.length)
+                binding!!.etExamMarks.setText(questionExamModel!!.getMark())
+                binding!!.etExamMarks.setSelection(questionExamModel!!.getMark()!!.length)
+                if (questionExamModel!!.getImgUrl() != "") {
+                    binding!!.ivImage.setBackgroundResource(0)
+                    Utils.setImageUsingGlide(mActivity!!,questionExamModel!!.getImgUrl(),binding!!.ivImage)
+                    binding!!.ivRemove.visibility = View.VISIBLE
+                }
+                /*setQuestionType()
+                setObjectMultipleChoiceOption()
+                setIntegerTypeOption()
+                setSubject()*/
+            }
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+    }
+
+    /*private fun setQuestionType() {
+        val qTypeId: String = questionExamModel!!.getqType()!!
+        var position = -1
+        var qTypeStr = ""
+        for (i in questionTypeListSpinn!!.indices) {
+            if (qTypeId == questionTypeListSpinn!![i]!!.getId()) {
+                position = i
+                qTypeStr = questionTypeListSpinn!![i]!!.getName()!!
+                break
+            }
+        }
+        if (position != -1) {
+            binding!!.questionTypeSpinn.setSelection(position)
+            questionTypeId = qTypeId
+            questionType = qTypeStr
+            showAnswerView()
+        }
+    }
+
+    private fun setObjectMultipleChoiceOption() {
+        binding!!.etMcqOptionA.setText(questionExamModel!!.getOptA())
+        binding!!.etMcqOptionA.setSelection(questionExamModel!!.getOptA()!!.length)
+        binding!!.etMcqOptionA.setText(questionExamModel!!.getOptB())
+        binding!!.etMcqOptionA.setSelection(questionExamModel!!.getOptB()!!.length)
+        binding!!.etMcqOptionA.setText(questionExamModel!!.getOptC())
+        binding!!.etMcqOptionA.setSelection(questionExamModel!!.getOptC()!!.length)
+        binding!!.etMcqOptionA.setText(questionExamModel!!.getOptD())
+        binding!!.etMcqOptionA.setSelection(questionExamModel!!.getOptD().length)
+        when (questionExamModel!!.getCorrect()) {
+            "opt_a" -> binding!!.mcqCheckboxOptionA.isChecked = true
+            "opt_b" -> binding!!.mcqCheckboxOptionB.isChecked = true
+            "opt_c" -> binding!!.mcqCheckboxOptionC.isChecked = true
+            "opt_d" -> binding!!.mcqCheckboxOptionD.isChecked = true
+        }
+    }
+
+    private fun setIntegerTypeOption() {
+        binding!!.etIntegerAnswer.setText(questionExamModel!!.getOptA())
+    }
+
+    private fun setSubject() {
+        val subjectId: String = questionExamModel.getSubjectId()
+        var position = -1
+        var subjectName = ""
+        for (i in subjectList.indices) {
+            if (subjectId == subjectList.get(i).getId()) {
+                position = i
+                subjectName = subjectList.get(i).getClassName()
+                break
+            }
+        }
+        if (position != -1) {
+            binding!!.subjectSpinn.setSelection(position)
+            this.subjectId = subjectId
+            subjectName = subjectName
+        }
+    }*/
+
     private fun removeImage() {
-        binding!!.ivImage.setImageURI(null)
-        binding!!.ivImage.setBackgroundResource(R.drawable.ic_no_data_found)
-        binding!!.ivRemove.setVisibility(View.GONE)
-        uploadImageFile = null
+        try {
+            binding!!.ivImage.setImageURI(null)
+            Glide.with(mActivity!!).clear(binding!!.ivImage)
+            binding!!.ivImage.setBackgroundResource(R.drawable.ic_no_data_found)
+            binding!!.ivRemove.setVisibility(View.GONE)
+            uploadImageFile = null
+            if (questionExamModel != null)
+                questionExamModel!!.setImgUrl("")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun getQuesTypeList() {
@@ -243,9 +293,16 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
                                 if (modelResponse.getTypeList()!!
                                         .isNotEmpty()
                                 ) {
-                                    for (model in modelResponse.getTypeList()!!){
-                                        if (model!!.getName() != "Match Box"){
-                                            (questionTypeListSpinn as ArrayList<QuestionType?>).add(model)
+                                    for (model in modelResponse.getTypeList()!!) {
+                                        if (model!!.getName() != "Match Box") {
+                                            if (examType == "Practice") {
+                                                if (model.getName()!!.lowercase() != "subjective")
+                                                    (questionTypeListSpinn as ArrayList<QuestionType?>).add(
+                                                        model
+                                                    )
+                                            } else (questionTypeListSpinn as ArrayList<QuestionType?>).add(
+                                                model
+                                            )
                                         }
                                     }
                                     val questionType = QuestionType()
@@ -325,7 +382,7 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
         }
     }
 
-    private fun submitQuestion(type : String) {
+    private fun submitQuestion(type: String) {
         val titleStr = binding!!.etQuestion.text.toString().trim()
         val marksStr = binding!!.etExamMarks.text.toString().trim()
         val integerAnsStr = binding!!.etIntegerAnswer.text.toString().trim()
@@ -351,7 +408,7 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
             var optionBStr = ""
             var optionCStr = ""
             var optionDStr = ""
-            if (questionType == "MCQ" || questionType == "Multiple Option"){
+            if (questionType == "MCQ" || questionType == "Multiple Option") {
                 if (isOptAChecked)
                     correctAnswers += "opt_a,"
                 if (isOptBChecked)
@@ -366,13 +423,13 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
                 optionCStr = binding!!.etMcqOptionC.text.toString().trim()
                 optionDStr = binding!!.etMcqOptionD.text.toString().trim()
 
-            }else if (questionType == "Integer"){
+            } else if (questionType == "Integer") {
                 correctAnswers = "opt_a"
                 optionAStr = integerAnsStr
                 optionBStr = ""
                 optionCStr = ""
                 optionDStr = ""
-            }else if (questionType == "Subjective"){
+            } else if (questionType == "Subjective") {
                 correctAnswers = ""
                 optionAStr = ""
                 optionBStr = ""
@@ -393,32 +450,13 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
                         dbId!!
                     ).create(ApiInterfaceStaff::class.java)
 
-
-                val jsonObject = JSONObject()
-                jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
-                jsonObject.put(Constants.ParamsStaff.ONLINE_EXAM_ID, onlineExamId)
-                jsonObject.put(Constants.ParamsStaff.QUESTION_ID, "")
-                jsonObject.put(Constants.ParamsStaff.QUESTION_TYPE_ID, questionTypeId)
-                jsonObject.put(Constants.ParamsStaff.CORRECT, correctAnswers)
-                jsonObject.put(Constants.ParamsStaff.SUBJECT_ID, subjectId)
-                jsonObject.put(Constants.ParamsStaff.QUESTION, titleStr)
-                jsonObject.put(Constants.ParamsStaff.QUESTION_MARK, marksStr)
-                jsonObject.put(Constants.ParamsStaff.QUESTION_NMARK, "0")
-                jsonObject.put(Constants.ParamsStaff.OPT_A, optionAStr)
-                jsonObject.put(Constants.ParamsStaff.OPT_B, optionBStr)
-                jsonObject.put(Constants.ParamsStaff.OPT_C, optionCStr)
-                jsonObject.put(Constants.ParamsStaff.OPT_D, optionDStr)
-                jsonObject.put(Constants.ParamsStaff.ATTACH_FILE, uploadImageFile)
-                Utils.printLog("Params:",jsonObject.toString())
-
-
                 val builder = MultipartBody.Builder()
                 builder.setType(MultipartBody.FORM)
                 builder.addFormDataPart(
                     Constants.ParamsStaff.STAFF_ID,
                     Utils.getStaffId(mActivity!!)
                 )
-                builder.addFormDataPart(Constants.ParamsStaff.ONLINE_EXAM_ID, onlineExamId)
+                builder.addFormDataPart(Constants.ParamsStaff.ONLINE_EXAM_ID, examId)
                 builder.addFormDataPart(Constants.ParamsStaff.QUESTION_ID, "")
                 builder.addFormDataPart(Constants.ParamsStaff.QUESTION_TYPE_ID, questionTypeId)
                 builder.addFormDataPart(Constants.ParamsStaff.CORRECT, correctAnswers)
@@ -430,9 +468,17 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
                 builder.addFormDataPart(Constants.ParamsStaff.OPT_B, optionBStr)
                 builder.addFormDataPart(Constants.ParamsStaff.OPT_C, optionCStr)
                 builder.addFormDataPart(Constants.ParamsStaff.OPT_D, optionDStr)
+                builder.addFormDataPart(Constants.ParamsStaff.QUESTION_ID, questionId)
+                if (questionExamModel != null)
+                    builder.addFormDataPart(
+                        Constants.ParamsStaff.IMG_URL,
+                        questionExamModel!!.getImgUrl()!!
+                    )
                 if (uploadImageFile != null)
                     builder.addFormDataPart(
-                        Constants.ParamsStaff.ATTACH_FILE, uploadImageFile!!.name, RequestBody.create(
+                        Constants.ParamsStaff.ATTACH_FILE,
+                        uploadImageFile!!.name,
+                        RequestBody.create(
                             MediaType.parse("multipart/form-data"), uploadImageFile!!
                         )
                     )
@@ -454,7 +500,7 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
                                 val responseJsonObject = JSONObject(responseStr)
                                 val message =
                                     responseJsonObject.optString("message")
-                                Utils.showToast(mActivity!!,message)
+                                Utils.showToast(mActivity!!, message)
                                 if (type == "add_more")
                                     resetAllData()
                                 else onBackPressed()
@@ -490,7 +536,7 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
         submitQuestion("add_more")
     }
 
-    private fun resetAllData(){
+    private fun resetAllData() {
         binding!!.etQuestion.setText("")
         binding!!.etExamMarks.setText("")
         binding!!.etMcqOptionA.setText("")

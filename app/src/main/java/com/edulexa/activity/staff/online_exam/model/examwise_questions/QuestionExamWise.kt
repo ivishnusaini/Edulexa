@@ -89,6 +89,8 @@ class QuestionExamWise {
     }
 
     fun getId(): String? {
+        if (id == null)
+            return ""
         return id
     }
 
