@@ -390,6 +390,24 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
                     ).create(ApiInterfaceStaff::class.java)
 
 
+                val jsonObject = JSONObject()
+                jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+                jsonObject.put(Constants.ParamsStaff.ONLINE_EXAM_ID, onlineExamId)
+                jsonObject.put(Constants.ParamsStaff.QUESTION_ID, "")
+                jsonObject.put(Constants.ParamsStaff.QUESTION_TYPE_ID, questionTypeId)
+                jsonObject.put(Constants.ParamsStaff.CORRECT, correctAnswers)
+                jsonObject.put(Constants.ParamsStaff.SUBJECT_ID, subjectId)
+                jsonObject.put(Constants.ParamsStaff.QUESTION, titleStr)
+                jsonObject.put(Constants.ParamsStaff.QUESTION_MARK, marksStr)
+                jsonObject.put(Constants.ParamsStaff.QUESTION_NMARK, "0")
+                jsonObject.put(Constants.ParamsStaff.OPT_A, optionAStr)
+                jsonObject.put(Constants.ParamsStaff.OPT_B, optionBStr)
+                jsonObject.put(Constants.ParamsStaff.OPT_C, optionCStr)
+                jsonObject.put(Constants.ParamsStaff.OPT_D, optionDStr)
+                jsonObject.put(Constants.ParamsStaff.ATTACH_FILE, uploadImageFile)
+                Utils.printLog("Params:",jsonObject.toString())
+
+
                 val builder = MultipartBody.Builder()
                 builder.setType(MultipartBody.FORM)
                 builder.addFormDataPart(

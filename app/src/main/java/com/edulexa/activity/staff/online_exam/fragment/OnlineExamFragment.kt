@@ -474,9 +474,7 @@ class OnlineExamFragment : Fragment(),View.OnClickListener {
                 sectionId = ""
                 setSectionSpinnerAdapter()
             }else Utils.showToastPopup(mActivity!!,getString(R.string.online_exam_staff_select_class_first))
-        }else if (id == R.id.btn_create_add_question)
-            addOnlineExam()
-        else if (id == R.id.tv_from_date) {
+        } else if (id == R.id.tv_from_date) {
             binding!!.tvFromDate.text = getString(R.string.online_exam_staff_from_date)
             Utils.hideKeyboard(mActivity!!)
             val fromDateDialog = DatePickerDialog(
@@ -518,6 +516,7 @@ class OnlineExamFragment : Fragment(),View.OnClickListener {
                 false
             )
             mTimePicker.show()
-        }
+        }else if (id == R.id.btn_create_add_question)
+            addOnlineExam()
     }
 }

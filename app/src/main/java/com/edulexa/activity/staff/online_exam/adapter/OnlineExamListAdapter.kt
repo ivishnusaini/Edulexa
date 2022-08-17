@@ -2,14 +2,20 @@ package com.edulexa.activity.staff.online_exam.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.staff.online_exam.activity.EditExamActivity
 import com.edulexa.activity.staff.online_exam.activity.OnlineExamActivity
 import com.edulexa.activity.staff.online_exam.model.list.ExamOnlineExamStaff
+import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
+import com.edulexa.api.Constants
 import com.edulexa.databinding.ItemStaffOnlineExamListBinding
+import com.google.gson.Gson
 
 class OnlineExamListAdapter(context: Activity, list: List<ExamOnlineExamStaff?>?) :
     RecyclerView.Adapter<OnlineExamListAdapter.ViewHolder>() {
@@ -53,6 +59,13 @@ class OnlineExamListAdapter(context: Activity, list: List<ExamOnlineExamStaff?>?
 
             binding!!.ivNotification.setOnClickListener {
                 (context as OnlineExamActivity).sendNotification(list!![position]!!.getId()!!)
+            }
+            binding!!.ivEditExam.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString(Constants.StaffOnlineExam.ONLINE_EXAM_ID, list!![position]!!.getId())
+                bundle.putString(Constants.StaffOnlineExam.EXAM_MODEL, Gson().toJson(list!![position]!!))
+                bundle.putString(Constants.StaffOnlineExam.EXAM_TYPE, list!![position]!!.getIsPractice())
+                context!!.startActivity(Intent(context, EditExamActivity::class.java).putExtras(bundle))
             }
             binding!!.ivDelete.setOnClickListener {
                 (context as OnlineExamActivity).showDeleteExamDialog(list!![position]!!.getId()!!)

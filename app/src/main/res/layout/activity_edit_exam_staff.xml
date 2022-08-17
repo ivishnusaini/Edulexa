@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/top_lay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.student.fee.activity.FeeStudentActivity">
+
+    <RelativeLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/header_bg_staff">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_back_white" />
+
+        <com.edulexa.views.MediumTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_toEndOf="@+id/iv_back"
+            android:text="@string/online_exam_staff_edit_exam"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:background="@drawable/header_top_right_radius"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_save">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border_5"
+                    android:backgroundTint="@color/card_view_bg"
+                    android:orientation="vertical">
+
+                    <com.edulexa.views.RegularEditText
+                        android:id="@+id/et_exam_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@null"
+                        android:hint="@string/online_exam_staff_enter_title"
+                        android:inputType="textCapWords"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_12ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/from_to_date_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <com.edulexa.views.MediumTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/online_exam_staff_date"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_button_5"
+                            android:backgroundTint="@color/card_view_bg"
+                            android:orientation="horizontal">
+
+                            <com.edulexa.views.RegularTextView
+                                android:id="@+id/tv_from_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingEnd="@dimen/_10sdp"
+                                android:text="@string/online_exam_staff_from_date"
+                                android:textColor="@color/primaray_text_color"
+                                android:textSize="@dimen/_12ssp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_button_5"
+                            android:backgroundTint="@color/card_view_bg"
+                            android:orientation="horizontal">
+
+                            <com.edulexa.views.RegularTextView
+                                android:id="@+id/tv_to_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingEnd="@dimen/_10sdp"
+                                android:text="@string/online_exam_staff_to_date"
+                                android:textColor="@color/primaray_text_color"
+                                android:textSize="@dimen/_12ssp" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <com.edulexa.views.MediumTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/online_exam_staff_time"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <LinearLayout
+                    android:id="@+id/from_to_time_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_5"
+                        android:backgroundTint="@color/card_view_bg"
+                        android:orientation="horizontal">
+
+                        <com.edulexa.views.RegularTextView
+                            android:id="@+id/tv_from_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:text="@string/online_exam_staff_from_time"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_12ssp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_5"
+                        android:backgroundTint="@color/card_view_bg"
+                        android:orientation="horizontal">
+
+                        <com.edulexa.views.RegularTextView
+                            android:id="@+id/tv_to_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:text="@string/online_exam_staff_to_time"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_12ssp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/bg_border_5"
+                    android:backgroundTint="@color/card_view_bg"
+                    android:orientation="vertical">
+
+                    <com.edulexa.views.RegularEditText
+                        android:id="@+id/et_exam_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@null"
+                        android:hint="@string/online_exam_staff_exam_duration"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_12ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/passing_marks_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.edulexa.views.MediumTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/online_exam_staff_passing_marks"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <RadioGroup
+                            android:id="@+id/radio_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/OEF_number_radioButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="@string/online_exam_staff_number" />
+
+                            <RadioButton
+                                android:id="@+id/OEF_percentage_radioButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/online_exam_staff_percentage" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/bg_border_5"
+                        android:backgroundTint="@color/card_view_bg"
+                        android:orientation="vertical">
+
+                        <com.edulexa.views.RegularEditText
+                            android:id="@+id/et_exam_passing_marks"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@null"
+                            android:hint="@string/online_exam_staff_passing_enter_here"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:textColor="@color/primaray_text_color"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border_5"
+                    android:backgroundTint="@color/card_view_bg"
+                    android:orientation="vertical">
+
+                    <com.edulexa.views.RegularEditText
+                        android:id="@+id/et_exam_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@null"
+                        android:hint="@string/online_exam_staff_enter_description"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:textColor="@color/primaray_text_color"
+                        android:textSize="@dimen/_12ssp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ripple_effect_0"
+            android:text="@string/online_exam_staff_save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -93,6 +93,8 @@ class ExamOnlineExamStaff {
     private var subjectiveQuestion: Int? = null
 
     fun getId(): String? {
+        if (id == null)
+            return ""
         return id
     }
 
@@ -119,6 +121,8 @@ class ExamOnlineExamStaff {
     }
 
     fun getExamFrom(): String? {
+        if (examFrom == null)
+            return ""
         return examFrom
     }
 
@@ -127,6 +131,8 @@ class ExamOnlineExamStaff {
     }
 
     fun getExamTo(): String? {
+        if (examTo == null)
+            return ""
         return examTo
     }
 
@@ -151,6 +157,8 @@ class ExamOnlineExamStaff {
     }
 
     fun getDuration(): String? {
+        if (duration == null)
+            return ""
         return duration
     }
 
@@ -159,6 +167,8 @@ class ExamOnlineExamStaff {
     }
 
     fun getPassingPercentage(): String? {
+        if (passingPercentage == null)
+            return ""
         return passingPercentage
     }
 
@@ -175,6 +185,8 @@ class ExamOnlineExamStaff {
     }
 
     fun getDescription(): String? {
+        if (description == null)
+            return ""
         return description
     }
 

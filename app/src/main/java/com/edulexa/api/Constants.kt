@@ -115,6 +115,8 @@ class Constants {
 
     object StaffOnlineExam {
         val ONLINE_EXAM_ID = "online_exam_id"
+        val EXAM_MODEL = "exam_model"
+        val EXAM_TYPE = "exam_type"
     }
 
     object AppSaveData {
@@ -256,6 +258,7 @@ class Constants {
         const val OPT_C = "opt_c"
         const val OPT_D = "opt_d"
         const val ATTACH_FILE = "attach_file"
+        const val ID = "id"
     }
 
     object ParamsStudent {
