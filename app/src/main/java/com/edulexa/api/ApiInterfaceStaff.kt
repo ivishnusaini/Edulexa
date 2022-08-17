@@ -75,4 +75,7 @@ interface ApiInterfaceStaff {
 
     @POST("editPracticeExam")
     fun editPracticeExam(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getByOnlineExamQuestion")
+    fun getByOnlineExamQuestion(@Body requestBody : RequestBody): Call<ResponseBody>
 }

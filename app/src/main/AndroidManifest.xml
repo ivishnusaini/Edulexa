@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.staff.online_exam.activity.ExamWiseQuestionsActivity"
+            android:exported="false" />
         <!-- Staff Section -->
         <activity
             android:name=".activity.staff.online_exam.activity.EditExamActivity"

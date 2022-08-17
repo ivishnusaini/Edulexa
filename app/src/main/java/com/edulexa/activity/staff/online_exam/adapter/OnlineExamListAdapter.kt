@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.staff.online_exam.activity.EditExamActivity
+import com.edulexa.activity.staff.online_exam.activity.ExamWiseQuestionsActivity
 import com.edulexa.activity.staff.online_exam.activity.OnlineExamActivity
 import com.edulexa.activity.staff.online_exam.model.list.ExamOnlineExamStaff
 import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
@@ -66,6 +67,12 @@ class OnlineExamListAdapter(context: Activity, list: List<ExamOnlineExamStaff?>?
                 bundle.putString(Constants.StaffOnlineExam.EXAM_MODEL, Gson().toJson(list!![position]!!))
                 bundle.putString(Constants.StaffOnlineExam.EXAM_TYPE, list!![position]!!.getIsPractice())
                 context!!.startActivity(Intent(context, EditExamActivity::class.java).putExtras(bundle))
+            }
+            binding!!.tvQuestions.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString(Constants.StaffOnlineExam.EXAM_ID, list!![position]!!.getId())
+                bundle.putString(Constants.StaffOnlineExam.EXAM_TYPE, list!![position]!!.getIsPractice())
+                context!!.startActivity(Intent(context, ExamWiseQuestionsActivity::class.java).putExtras(bundle))
             }
             binding!!.ivDelete.setOnClickListener {
                 (context as OnlineExamActivity).showDeleteExamDialog(list!![position]!!.getId()!!)

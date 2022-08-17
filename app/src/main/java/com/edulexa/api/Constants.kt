@@ -117,6 +117,7 @@ class Constants {
         val ONLINE_EXAM_ID = "online_exam_id"
         val EXAM_MODEL = "exam_model"
         val EXAM_TYPE = "exam_type"
+        val EXAM_ID = "exam_id"
     }
 
     object AppSaveData {
