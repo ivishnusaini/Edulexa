@@ -260,6 +260,7 @@ class Constants {
         const val OPT_B = "opt_b"
         const val OPT_C = "opt_c"
         const val OPT_D = "opt_d"
+        const val OPT_E = "opt_e"
         const val ATTACH_FILE = "attach_file"
         const val ID = "id"
         const val IMG_URL = "img_url"

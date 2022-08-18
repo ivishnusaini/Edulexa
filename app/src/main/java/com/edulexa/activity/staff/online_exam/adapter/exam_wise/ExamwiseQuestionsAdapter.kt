@@ -72,6 +72,10 @@ class ExamwiseQuestionsAdapter(context: Activity, list: List<QuestionExamWise?>?
                 context!!.startActivity(Intent(context, ExamwiseQuestionAddActivity::class.java).putExtras(bundle))
             }
 
+            binding!!.ivDelete.setOnClickListener {
+                (context as ExamWiseQuestionsActivity).deleteQuestion(list!![position]!!.getId()!!)
+            }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }

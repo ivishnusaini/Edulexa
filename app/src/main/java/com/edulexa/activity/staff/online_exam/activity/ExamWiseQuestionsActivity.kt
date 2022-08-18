@@ -114,6 +114,8 @@ class ExamWiseQuestionsActivity : AppCompatActivity(),View.OnClickListener {
                                     ExamwiseQuestionsResponse::class.java
                                 ) as ExamwiseQuestionsResponse
                                 if (modelResponse.getQuestions()!!.isNotEmpty()) {
+                                    binding!!.recyclerView.visibility = View.VISIBLE
+                                    binding!!.tvNoData.visibility = View.GONE
                                     binding!!.recyclerView.layoutManager = LinearLayoutManager(mActivity,LinearLayoutManager.VERTICAL,false)
                                     binding!!.recyclerView.adapter = ExamwiseQuestionsAdapter(mActivity!!,modelResponse.getQuestions(),examId,examType)
                                 } else {
@@ -131,6 +133,68 @@ class ExamWiseQuestionsActivity : AppCompatActivity(),View.OnClickListener {
                                 binding!!.recyclerView.visibility = View.GONE
                                 binding!!.tvNoData.visibility = View.VISIBLE
                             }
+                        } else {
+                            Utils.showToastPopup(
+                                mActivity!!,
+                                getString(R.string.response_null_or_empty_validation)
+                            )
+                            binding!!.recyclerView.visibility = View.GONE
+                            binding!!.tvNoData.visibility = View.VISIBLE
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        binding!!.recyclerView.visibility = View.GONE
+                        binding!!.tvNoData.visibility = View.VISIBLE
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Utils.hideProgressBar()
+                    Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                }
+
+            })
+        } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+
+    }
+
+    fun deleteQuestion(questionId : String){
+        if (Utils.isNetworkAvailable(mActivity!!)) {
+            Utils.hideKeyboard(mActivity!!)
+
+            val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
+            val apiInterfaceWithHeader: ApiInterfaceStaff =
+                APIClientStaff.getRetroFitClientWithNewKeyHeader(
+                    mActivity!!,
+                    Utils.getStaffToken(mActivity!!),
+                    Utils.getStaffId(mActivity!!), dbId!!
+                ).create(ApiInterfaceStaff::class.java)
+
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+            builder.addFormDataPart(Constants.ParamsStaff.QUESTION_ID, questionId)
+            builder.addFormDataPart(
+                Constants.ParamsStaff.ROLE_ID,
+                Utils.getStaffRoleId(mActivity!!)
+            )
+            val requestBody = builder.build()
+
+            Utils.printLog("Url", Constants.BASE_URL_STAFF + "deleteQuetion")
+
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.deleteQuetion(requestBody)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    Utils.hideProgressBar()
+                    try {
+                        val responseStr = response.body()!!.string()
+                        if (!responseStr.isNullOrEmpty()) {
+                            Utils.showToast(mActivity!!,getString(R.string.online_exam_staff_delete_successfully))
+                            getQuestionsList()
                         } else {
                             Utils.showToastPopup(
                                 mActivity!!,

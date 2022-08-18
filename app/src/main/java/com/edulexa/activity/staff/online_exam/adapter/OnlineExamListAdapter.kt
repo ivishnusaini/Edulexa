@@ -12,6 +12,7 @@ import com.edulexa.R
 import com.edulexa.activity.staff.online_exam.activity.EditExamActivity
 import com.edulexa.activity.staff.online_exam.activity.ExamWiseQuestionsActivity
 import com.edulexa.activity.staff.online_exam.activity.OnlineExamActivity
+import com.edulexa.activity.staff.online_exam.activity.SubjectiveActivity
 import com.edulexa.activity.staff.online_exam.model.list.ExamOnlineExamStaff
 import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
 import com.edulexa.api.Constants
@@ -73,6 +74,11 @@ class OnlineExamListAdapter(context: Activity, list: List<ExamOnlineExamStaff?>?
                 bundle.putString(Constants.StaffOnlineExam.EXAM_ID, list!![position]!!.getId())
                 bundle.putString(Constants.StaffOnlineExam.EXAM_TYPE, list!![position]!!.getIsPractice())
                 context!!.startActivity(Intent(context, ExamWiseQuestionsActivity::class.java).putExtras(bundle))
+            }
+            binding!!.tvSubjective.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString(Constants.StaffOnlineExam.EXAM_ID, list!![position]!!.getId())
+                context!!.startActivity(Intent(context, SubjectiveActivity::class.java).putExtras(bundle))
             }
             binding!!.ivDelete.setOnClickListener {
                 (context as OnlineExamActivity).showDeleteExamDialog(list!![position]!!.getId()!!)

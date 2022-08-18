@@ -408,6 +408,7 @@ class AddQuestionActivity : AppCompatActivity(), View.OnClickListener{
                 jsonObject.put(Constants.ParamsStaff.OPT_B, optionBStr)
                 jsonObject.put(Constants.ParamsStaff.OPT_C, optionCStr)
                 jsonObject.put(Constants.ParamsStaff.OPT_D, optionDStr)
+                jsonObject.put(Constants.ParamsStaff.OPT_E, "")
                 jsonObject.put(Constants.ParamsStaff.ATTACH_FILE, uploadImageFile)
                 Utils.printLog("Params:",jsonObject.toString())
 

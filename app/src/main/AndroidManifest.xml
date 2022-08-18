@@ -20,8 +20,15 @@
         android:usesCleartextTraffic="true">
         <!-- Staff Section -->
         <activity
-            android:name=".activity.staff.online_exam.activity.ExamwiseQuestionAddActivity"
+            android:name=".activity.staff.online_exam.activity.SubjectiveInfoActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.staff.online_exam.activity.SubjectiveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.online_exam.activity.ExamwiseQuestionAddActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".activity.staff.online_exam.activity.ExamWiseQuestionsActivity"
             android:exported="false" />

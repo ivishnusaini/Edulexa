@@ -78,4 +78,10 @@ interface ApiInterfaceStaff {
 
     @POST("getByOnlineExamQuestion")
     fun getByOnlineExamQuestion(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("deleteQuetion")
+    fun deleteQuetion(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("subjectiveMarkReport")
+    fun subjectiveMarkReport(@Body requestBody : RequestBody): Call<ResponseBody>
 }

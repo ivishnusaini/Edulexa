@@ -179,6 +179,19 @@ class EditExamActivity : AppCompatActivity(),View.OnClickListener {
                         dbId!!
                     ).create(ApiInterfaceStaff::class.java)
 
+                val jsonObject = JSONObject()
+                jsonObject.put(Constants.ParamsStaff.EXAM, titleStr)
+                jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+                jsonObject.put(Constants.ParamsStaff.EXAM_ID, onlineExamId)
+                jsonObject.put(Constants.ParamsStaff.IS_ACTIVE, "1")
+                jsonObject.put(Constants.ParamsStaff.PUBLISH_RESULT, "0")
+                jsonObject.put(Constants.ParamsStaff.EXAM_FROM, examFrom)
+                jsonObject.put(Constants.ParamsStaff.EXAM_TO, examTo)
+                jsonObject.put(Constants.ParamsStaff.DURATION, durationStr)
+                jsonObject.put(Constants.ParamsStaff.DESCRIPTION, descriptionStr)
+                jsonObject.put(Constants.ParamsStaff.PASSING_PERCENTAGE, passingMarksStr)
+                jsonObject.put(Constants.ParamsStaff.PASSING_MARK_TYPE, marksType)
+                Utils.printLog("param", jsonObject.toString())
 
                 val builder = MultipartBody.Builder()
                 builder.setType(MultipartBody.FORM)
@@ -260,6 +273,15 @@ class EditExamActivity : AppCompatActivity(),View.OnClickListener {
                         dbId!!
                     ).create(ApiInterfaceStaff::class.java)
 
+                val jsonObject = JSONObject()
+                jsonObject.put(Constants.ParamsStaff.EXAM, titleStr)
+                jsonObject.put(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+                jsonObject.put(Constants.ParamsStaff.IS_ACTIVE, "1")
+                jsonObject.put(Constants.ParamsStaff.PUBLISH_RESULT, "0")
+                jsonObject.put(Constants.ParamsStaff.DURATION, timeInMinuteStr)
+                jsonObject.put(Constants.ParamsStaff.DESCRIPTION, descriptionStr)
+                jsonObject.put(Constants.ParamsStaff.ID, examId)
+                Utils.printLog("param", jsonObject.toString())
 
                 val builder = MultipartBody.Builder()
                 builder.setType(MultipartBody.FORM)

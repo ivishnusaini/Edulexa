@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.AdapterView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -84,6 +85,58 @@ class ExamwiseQuestionAddActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
+        binding!!.ivGallery.setOnClickListener(this)
+        binding!!.ivCamera.setOnClickListener(this)
+        binding!!.ivRemove.setOnClickListener(this)
+        binding!!.btnSubmit.setOnClickListener(this)
+        binding!!.btnAddMore.setOnClickListener(this)
+
+        binding!!.questionTypeSpinn.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (questionTypeListSpinn!![position]!!.getId() != null) {
+                        questionTypeId = questionTypeListSpinn!![position]!!.getId()!!
+                        questionType = questionTypeListSpinn!![position]!!.getName()!!
+                        showAnswerView()
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+        binding!!.subjectSpinn.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (subjectListSpinn!![position]!!.getId() != null) {
+                        subjectId = subjectListSpinn!![position]!!.getId()!!
+                    } else subjectId = ""
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+
+
+        binding!!.mcqCheckboxOptionA.setOnCheckedChangeListener { p0, boolean ->
+            isOptAChecked = boolean
+        }
+        binding!!.mcqCheckboxOptionB.setOnCheckedChangeListener { p0, boolean ->
+            isOptBChecked = boolean
+        }
+        binding!!.mcqCheckboxOptionC.setOnCheckedChangeListener { p0, boolean ->
+            isOptCChecked = boolean
+        }
+        binding!!.mcqCheckboxOptionD.setOnCheckedChangeListener { p0, boolean ->
+            isOptDChecked = boolean
+        }
     }
 
     private fun getBundleData() {
@@ -100,7 +153,6 @@ class ExamwiseQuestionAddActivity : AppCompatActivity(), View.OnClickListener {
                     QuestionExamWise::class.java
                 ) as QuestionExamWise
                 questionId = bundle.getString(Constants.StaffOnlineExam.QUESTION_ID)!!
-                setUpData()
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -167,17 +219,17 @@ class ExamwiseQuestionAddActivity : AppCompatActivity(), View.OnClickListener {
                     Utils.setImageUsingGlide(mActivity!!,questionExamModel!!.getImgUrl(),binding!!.ivImage)
                     binding!!.ivRemove.visibility = View.VISIBLE
                 }
-                /*setQuestionType()
+                setQuestionType()
                 setObjectMultipleChoiceOption()
                 setIntegerTypeOption()
-                setSubject()*/
+                setSubject()
             }
         }catch (e : Exception){
             e.printStackTrace()
         }
     }
 
-    /*private fun setQuestionType() {
+    private fun setQuestionType() {
         val qTypeId: String = questionExamModel!!.getqType()!!
         var position = -1
         var qTypeStr = ""
@@ -204,7 +256,7 @@ class ExamwiseQuestionAddActivity : AppCompatActivity(), View.OnClickListener {
         binding!!.etMcqOptionA.setText(questionExamModel!!.getOptC())
         binding!!.etMcqOptionA.setSelection(questionExamModel!!.getOptC()!!.length)
         binding!!.etMcqOptionA.setText(questionExamModel!!.getOptD())
-        binding!!.etMcqOptionA.setSelection(questionExamModel!!.getOptD().length)
+        binding!!.etMcqOptionA.setSelection(questionExamModel!!.getOptD()!!.length)
         when (questionExamModel!!.getCorrect()) {
             "opt_a" -> binding!!.mcqCheckboxOptionA.isChecked = true
             "opt_b" -> binding!!.mcqCheckboxOptionB.isChecked = true
@@ -218,22 +270,21 @@ class ExamwiseQuestionAddActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setSubject() {
-        val subjectId: String = questionExamModel.getSubjectId()
+        val subjectId: String = questionExamModel!!.getSubjectId()!!
         var position = -1
         var subjectName = ""
-        for (i in subjectList.indices) {
-            if (subjectId == subjectList.get(i).getId()) {
+        for (i in subjectListSpinn!!.indices) {
+            if (subjectId == subjectListSpinn!![i]!!.getId()) {
                 position = i
-                subjectName = subjectList.get(i).getClassName()
+                subjectName = subjectListSpinn!![i]!!.getName()!!
                 break
             }
         }
         if (position != -1) {
             binding!!.subjectSpinn.setSelection(position)
             this.subjectId = subjectId
-            subjectName = subjectName
         }
-    }*/
+    }
 
     private fun removeImage() {
         try {
@@ -330,6 +381,7 @@ class ExamwiseQuestionAddActivity : AppCompatActivity(), View.OnClickListener {
                                         SubjectSpinnerAdapter(mActivity!!, subjectListSpinn)
                                     binding!!.subjectSpinn.adapter = subjectSpinnerAdapter
                                 }
+                                setUpData()
                             } else {
                                 val message = responseJsonObject.optString("message")
                                 if (!message.isEmpty())
@@ -468,6 +520,7 @@ class ExamwiseQuestionAddActivity : AppCompatActivity(), View.OnClickListener {
                 builder.addFormDataPart(Constants.ParamsStaff.OPT_B, optionBStr)
                 builder.addFormDataPart(Constants.ParamsStaff.OPT_C, optionCStr)
                 builder.addFormDataPart(Constants.ParamsStaff.OPT_D, optionDStr)
+                builder.addFormDataPart(Constants.ParamsStaff.OPT_E, "")
                 builder.addFormDataPart(Constants.ParamsStaff.QUESTION_ID, questionId)
                 if (questionExamModel != null)
                     builder.addFormDataPart(

@@ -545,5 +545,7 @@
     <string name="online_exam_staff_subject_validation">Please select subject</string>
     <string name="online_exam_staff_edit_exam">Edit Exam</string>
     <string name="online_exam_staff_save">Save</string>
+    <string name="online_exam_staff_delete_successfully">Delete successfully</string>
+    <string name="online_exam_staff_student_list">Students List</string>
 
 </resources>
