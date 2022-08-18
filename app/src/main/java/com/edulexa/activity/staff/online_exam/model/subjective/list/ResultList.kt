@@ -105,6 +105,8 @@ class ResultList {
     }
 
     fun getOnlineexamStudentId(): String? {
+        if (onlineexamStudentId == null)
+            return ""
         return onlineexamStudentId
     }
 

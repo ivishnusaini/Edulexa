@@ -547,5 +547,7 @@
     <string name="online_exam_staff_save">Save</string>
     <string name="online_exam_staff_delete_successfully">Delete successfully</string>
     <string name="online_exam_staff_student_list">Students List</string>
+    <string name="online_exam_staff_question_info">Question Info</string>
+    <string name="online_exam_staff_attachments">Attachments</string>
 
 </resources>

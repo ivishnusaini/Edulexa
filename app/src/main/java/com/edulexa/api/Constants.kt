@@ -120,6 +120,7 @@ class Constants {
         val EXAM_ID = "exam_id"
         val TYPE = "type"
         val QUESTION_ID = "question_id"
+        val ONLINEEXAM_STUDENT_ID = "onlineexam_student_id"
     }
 
     object AppSaveData {
@@ -264,6 +265,7 @@ class Constants {
         const val ATTACH_FILE = "attach_file"
         const val ID = "id"
         const val IMG_URL = "img_url"
+        const val ONLINEEXAM_STUDENT_ID = "onlineexam_student_id"
     }
 
     object ParamsStudent {
