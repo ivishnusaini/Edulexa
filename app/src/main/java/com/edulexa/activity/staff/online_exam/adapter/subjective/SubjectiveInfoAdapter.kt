@@ -2,23 +2,13 @@ package com.edulexa.activity.staff.online_exam.adapter.subjective
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.staff.online_exam.activity.*
-import com.edulexa.activity.staff.online_exam.model.list.ExamOnlineExamStaff
 import com.edulexa.activity.staff.online_exam.model.subjective.info.QuestionResult
-import com.edulexa.activity.staff.online_exam.model.subjective.list.ResultList
-import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
-import com.edulexa.api.Constants
-import com.edulexa.databinding.ItemStaffOnlineExamListBinding
-import com.edulexa.databinding.ItemStaffOnlineExamSubjectiveBinding
 import com.edulexa.databinding.ItemStaffSubmittedSubjectiveBinding
-import com.google.gson.Gson
 
 class SubjectiveInfoAdapter(context: Activity, list: List<QuestionResult?>?) :
     RecyclerView.Adapter<SubjectiveInfoAdapter.ViewHolder>() {
@@ -48,7 +38,14 @@ class SubjectiveInfoAdapter(context: Activity, list: List<QuestionResult?>?) :
         @SuppressLint("RecyclerView") position: Int
     ) {
         try {
-
+            binding!!.tvQuestion.loadData(
+                list!![position]!!.getQuestion()!!,
+                "text/html; charset=utf-8",
+                "UTF-8"
+            )
+            binding!!.tvAns.text = context!!.getString(R.string.library_student_string_format,"Ans : ",list!![position]!!.getSelectOption())
+            binding!!.etMark.hint =
+                context!!.getString(R.string.library_student_string_format,"Max : ",list!![position]!!.getMark())
 
         } catch (e: Exception) {
             e.printStackTrace()
