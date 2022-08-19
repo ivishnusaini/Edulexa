@@ -549,5 +549,6 @@
     <string name="online_exam_staff_student_list">Students List</string>
     <string name="online_exam_staff_question_info">Question Info</string>
     <string name="online_exam_staff_attachments">Attachments</string>
+    <string name="online_exam_staff_images">Images</string>
 
 </resources>

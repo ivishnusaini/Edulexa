@@ -33,7 +33,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/online_exam_staff_student_list"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 

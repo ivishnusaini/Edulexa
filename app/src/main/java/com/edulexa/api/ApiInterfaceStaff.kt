@@ -87,4 +87,7 @@ interface ApiInterfaceStaff {
 
     @POST("getStudentSubjectiveExam")
     fun getStudentSubjectiveExam(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getExamResult")
+    fun getExamResult(@Body requestBody : RequestBody): Call<ResponseBody>
 }

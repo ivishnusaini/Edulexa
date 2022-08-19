@@ -105,6 +105,8 @@ class QuestionResult {
     private var imagesArray: List<ImagesArray?>? = null
 
     fun getImagesArray(): List<ImagesArray?>? {
+        if (imagesArray == null)
+            return ArrayList()
         return imagesArray
     }
 

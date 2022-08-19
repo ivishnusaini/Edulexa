@@ -20,6 +20,15 @@
         android:usesCleartextTraffic="true">
         <!-- Staff Section -->
         <activity
+            android:name=".activity.staff.online_exam.activity.StudentResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.online_exam.activity.SubjectiveImageViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.online_exam.activity.SubjectiveImagesActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.staff.online_exam.activity.SubjectiveInfoActivity"
             android:exported="false" />
         <activity
