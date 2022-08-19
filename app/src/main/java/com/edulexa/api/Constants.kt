@@ -1,6 +1,7 @@
 package com.edulexa.api
 
 import com.edulexa.activity.staff.dashboard.model.notifications.DatumNotification
+import com.edulexa.activity.staff.homework.model.homeworklist.Homework
 import com.edulexa.activity.student.chat.model.group.GroupUser
 import com.edulexa.activity.student.live_classes.model.DatumLiveClass
 
@@ -126,6 +127,10 @@ class Constants {
         val IMAGEURL = "imageUrl"
     }
 
+    object StaffHomework {
+        val HOMEWORK_ID = "homework_id"
+    }
+
     object AppSaveData {
         var gallerystudenttype = "all"
         var listUpcoming : List<DatumLiveClass>? = null
@@ -135,6 +140,7 @@ class Constants {
 
         /*Staff*/
         var staffNotificationList : List<DatumNotification?>? = null
+        var homeworkList : List<Homework?>? = null
     }
 
     object Preference {

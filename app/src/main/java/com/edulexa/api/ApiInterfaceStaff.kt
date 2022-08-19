@@ -90,4 +90,7 @@ interface ApiInterfaceStaff {
 
     @POST("getExamResult")
     fun getExamResult(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("homeworkList")
+    fun homeworkList(@Body requestBody : RequestBody): Call<ResponseBody>
 }

@@ -551,4 +551,11 @@
     <string name="online_exam_staff_attachments">Attachments</string>
     <string name="online_exam_staff_images">Images</string>
 
+
+    <!--Homework-->
+    <string name="homework_staff_homework_list">Homework List</string>
+    <string name="homework_staff_select_month_year">Select month/year</string>
+    <string name="homework_staff_filter_by">Filter By</string>
+    <string name="homework_staff_apply">Apply</string>
+
 </resources>

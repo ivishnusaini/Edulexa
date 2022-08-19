@@ -18,7 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
-        <!-- Staff Section -->
+        <activity
+            android:name=".activity.staff.homework.activity.EvaluationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.staff.homework.activity.HomeworkActivity"
+            android:exported="false" /> <!-- Staff Section -->
         <activity
             android:name=".activity.staff.online_exam.activity.StudentResultActivity"
             android:exported="false" />
