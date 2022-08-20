@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.staff.homework.activity.AddHomeworkActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.staff.homework.activity.HomeworkImagesActivity"
             android:exported="false" />
         <activity

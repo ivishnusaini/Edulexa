@@ -281,6 +281,7 @@ class Constants {
         const val COMMENT = "comment"
         const val RESUBMIT = "resubmit"
         const val STUDENT_SESSION_ID = "student_session_id"
+        const val SUBJECT_GROUP_ID = "subject_group_id"
     }
 
     object ParamsStudent {

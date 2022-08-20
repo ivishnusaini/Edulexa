@@ -99,4 +99,10 @@ interface ApiInterfaceStaff {
 
     @POST("addEvaluvation")
     fun addEvaluvation(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getSubjectGroupByClassAndSection")
+    fun getSubjectGroupByClassAndSection(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getGroupSubjects")
+    fun getGroupSubjects(@Body requestBody : RequestBody): Call<ResponseBody>
 }

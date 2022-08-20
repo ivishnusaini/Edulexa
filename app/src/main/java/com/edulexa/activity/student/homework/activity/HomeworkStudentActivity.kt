@@ -106,7 +106,7 @@ class HomeworkStudentActivity : AppCompatActivity(), View.OnClickListener {
                                 binding!!.subjectSpinnLay.visibility = View.VISIBLE
                                 val modelResponse = Utils.getObject(responseStr, SubjectListResponse::class.java) as SubjectListResponse
                                 if (modelResponse.getData() != null){
-                                    if (modelResponse.getData()!!.size > 0){
+                                    if (modelResponse.getData()!!.isNotEmpty()){
                                         val subjectListDatum = SubjectListDatum()
                                         subjectListDatum.setSubjectName("Select Subject")
                                         subjectListSpinn = modelResponse.getData() as List<SubjectListDatum?>

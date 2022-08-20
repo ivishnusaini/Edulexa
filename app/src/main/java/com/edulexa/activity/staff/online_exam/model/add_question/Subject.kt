@@ -45,6 +45,8 @@ class Subject {
     private var updatedAt: String? = null
 
     fun getId(): String? {
+        if (id == null)
+            return ""
         return id
     }
 

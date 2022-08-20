@@ -557,6 +557,7 @@
     <string name="homework_staff_select_month_year">Select month/year</string>
     <string name="homework_staff_filter_by">Filter By</string>
     <string name="homework_staff_apply">Apply</string>
+    <string name="homework_staff_student_evaluation">Student Evaluation</string>
     <string name="homework_staff_evaluation_date">Evaluation Date</string>
     <string name="homework_staff_save">Save</string>
     <string name="homework_staff_attachments">Attachments</string>
@@ -564,5 +565,17 @@
     <string name="homework_staff_re_submit">Re-Submit…</string>
     <string name="homework_staff_description">Description</string>
     <string name="homework_staff_select_name_validation">Please select name</string>
+    <string name="homework_staff_add_homework_validation">Add Homework</string>
+    <string name="homework_staff_add_homework_select_criteria">Select Criteria</string>
+    <string name="homework_staff_add_homework_class">Class</string>
+    <string name="homework_staff_add_homework_section">Section</string>
+    <string name="homework_staff_add_homework_subject_group">Subject Group</string>
+    <string name="homework_staff_add_homework_subject">Subject</string>
+    <string name="homework_staff_add_homework_date">Homework Date</string>
+    <string name="homework_staff_add_homework_select_homework_date">Select homework date</string>
+    <string name="homework_staff_add_homework_submission_date">Submission Date</string>
+    <string name="homework_staff_add_homework_select_submission_date">Select submission date</string>
+    <string name="homework_staff_add_homework_description">Description</string>
+    <string name="homework_staff_add_homework_add">Add</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.edulexa.activity.staff.online_exam.adapter.add_question
+package com.edulexa.activity.staff.homework.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.edulexa.R
-import com.edulexa.activity.staff.online_exam.model.add_question.Subject
+import com.edulexa.activity.branch_code.model.Branch
+import com.edulexa.activity.staff.homework.model.subject_group.SubjectGroup
+import com.edulexa.activity.staff.student_profile.model.class_list.ClassData
 
-class SubjectSpinnerAdapter(context: Activity, list : List<Subject?>?) : BaseAdapter() {
+class SubjectGroupSpinnerAdapter(context: Activity, list : List<SubjectGroup?>?) : BaseAdapter() {
     var context: Activity? = null
-    var list : List<Subject?>? = null
+    var list : List<SubjectGroup?>? = null
     var inflter: LayoutInflater? = null
     init {
         this.context = context

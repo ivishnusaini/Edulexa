@@ -33,7 +33,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/homework_staff_homework_list"
+            android:text="@string/homework_staff_student_evaluation"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 

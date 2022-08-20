@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -44,7 +45,7 @@ import java.util.*
 class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityHomeworkStaffBinding? = null
-    var preference : Preference? = null
+    var preference: Preference? = null
 
     var classListSpinn: List<ClassData?>? = ArrayList()
     var classSpinnerAdapter: ClassSpinnerAdapter? = null
@@ -53,8 +54,8 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
     var sectionId = ""
     var dateSTr = ""
 
-    var dialogBinding : DialogStaffHomeworkFilterBinding? = null
-    var tvMonthYear : TextView? = null
+    var dialogBinding: DialogStaffHomeworkFilterBinding? = null
+    var tvMonthYear: TextView? = null
 
     var myCalendar: Calendar? = null
     var fromDateSetListener: DatePickerDialog.OnDateSetListener? = null
@@ -65,6 +66,7 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding!!.root)
         init()
     }
+
     private fun init() {
         mActivity = this
         preference = Preference().getInstance(mActivity!!)
@@ -73,8 +75,10 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
         getHomeWorkList()
 
     }
+
     private fun setUpClickListener() {
         binding!!.ivBack.setOnClickListener(this)
+        binding!!.ivAdd.setOnClickListener(this)
         binding!!.ivFilter.setOnClickListener(this)
     }
 
@@ -96,7 +100,7 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
         dateSTr = dialogBinding!!.tvMonthYear.text.toString()
     }
 
-    private fun getHomeWorkList(){
+    private fun getHomeWorkList() {
         if (Utils.isNetworkAvailable(mActivity!!)) {
             Utils.showProgressBar(mActivity!!)
             Utils.hideKeyboard(mActivity!!)
@@ -113,7 +117,10 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
             builder.setType(MultipartBody.FORM)
             builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
             builder.addFormDataPart(Constants.ParamsStaff.MODULE_ID, Utils.getStaffId(mActivity!!))
-            builder.addFormDataPart(Constants.ParamsStaff.ROLE_ID, Utils.getStaffRoleId(mActivity!!))
+            builder.addFormDataPart(
+                Constants.ParamsStaff.ROLE_ID,
+                Utils.getStaffRoleId(mActivity!!)
+            )
             builder.addFormDataPart(Constants.ParamsStaff.CLASS_ID, classId)
             builder.addFormDataPart(Constants.ParamsStaff.SECTION_ID, sectionId)
             builder.addFormDataPart(Constants.ParamsStaff.DATE, dateSTr)
@@ -136,7 +143,8 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
                         val responseStr = response.body()!!.string()
                         if (!responseStr.isNullOrEmpty()) {
                             val responseJsonObject = JSONObject(responseStr)
-                            val homeworkListJsonArr = responseJsonObject.optJSONArray("homeworklist")
+                            val homeworkListJsonArr =
+                                responseJsonObject.optJSONArray("homeworklist")
                             if (homeworkListJsonArr != null) {
                                 val modelResponse = Utils.getObject(
                                     responseStr,
@@ -145,10 +153,16 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
                                 if (modelResponse.getHomeworklist()!!.isNotEmpty()) {
                                     binding!!.recyclerView.visibility = View.VISIBLE
                                     binding!!.tvNoData.visibility = View.VISIBLE
-                                    Constants.AppSaveData.homeworkList = modelResponse.getHomeworklist()
-                                    binding!!.recyclerView.layoutManager = LinearLayoutManager(mActivity,
-                                        LinearLayoutManager.VERTICAL,false)
-                                    binding!!.recyclerView.adapter = HomeworkListAdapter(mActivity!!,Constants.AppSaveData.homeworkList)
+                                    Constants.AppSaveData.homeworkList =
+                                        modelResponse.getHomeworklist()
+                                    binding!!.recyclerView.layoutManager = LinearLayoutManager(
+                                        mActivity,
+                                        LinearLayoutManager.VERTICAL, false
+                                    )
+                                    binding!!.recyclerView.adapter = HomeworkListAdapter(
+                                        mActivity!!,
+                                        Constants.AppSaveData.homeworkList
+                                    )
                                 } else {
                                     binding!!.recyclerView.visibility = View.GONE
                                     binding!!.tvNoData.visibility = View.VISIBLE
@@ -324,7 +338,8 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
                                     section.setSection("Select section")
                                     sectionListSpinn = modelResponse.getSectionList()
                                     (sectionListSpinn as ArrayList<Section?>).add(0, section)
-                                    dialogBinding!!.sectionSpinn.adapter = SectionSpinnerAdapter(mActivity!!, sectionListSpinn)
+                                    dialogBinding!!.sectionSpinn.adapter =
+                                        SectionSpinnerAdapter(mActivity!!, sectionListSpinn)
                                 }
                             } else {
                                 val message = responseJsonObject.optString("message")
@@ -358,8 +373,7 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-
-    private fun showFilterPopup(){
+    private fun showFilterPopup() {
         try {
             val dialog = Dialog(mActivity!!)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -370,21 +384,22 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
             tvMonthYear = dialogBinding!!.tvMonthYear
             getClassList()
 
-            dialogBinding!!.classSpinn.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    if (classListSpinn!![position]!!.getId() != "") {
-                        classId = classListSpinn!![position]!!.getId()!!
-                        getSection()
+            dialogBinding!!.classSpinn.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View,
+                        position: Int,
+                        id: Long
+                    ) {
+                        if (classListSpinn!![position]!!.getId() != "") {
+                            classId = classListSpinn!![position]!!.getId()!!
+                            getSection()
+                        }
                     }
-                }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                }
             dialogBinding!!.sectionSpinn.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
@@ -427,11 +442,12 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
-        else if (id == R.id.iv_filter){
+        else if (id == R.id.iv_filter) {
             classId = ""
             sectionId = ""
             dateSTr = ""
             showFilterPopup()
-        }
+        } else if (id == R.id.iv_add)
+            startActivity(Intent(mActivity!!, AddHomeworkActivity::class.java))
     }
 }

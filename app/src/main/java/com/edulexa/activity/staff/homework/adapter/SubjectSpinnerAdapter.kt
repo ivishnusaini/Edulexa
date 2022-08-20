@@ -1,4 +1,4 @@
-package com.edulexa.activity.staff.online_exam.adapter.add_question
+package com.edulexa.activity.staff.homework.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.edulexa.R
-import com.edulexa.activity.staff.online_exam.model.add_question.Subject
+import com.edulexa.activity.staff.homework.model.subject.Subject
 
 class SubjectSpinnerAdapter(context: Activity, list : List<Subject?>?) : BaseAdapter() {
     var context: Activity? = null
