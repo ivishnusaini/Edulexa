@@ -93,4 +93,10 @@ interface ApiInterfaceStaff {
 
     @POST("homeworkList")
     fun homeworkList(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("evaluation")
+    fun evaluation(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("addEvaluvation")
+    fun addEvaluvation(@Body requestBody : RequestBody): Call<ResponseBody>
 }

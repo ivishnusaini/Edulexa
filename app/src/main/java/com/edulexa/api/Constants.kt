@@ -129,6 +129,7 @@ class Constants {
 
     object StaffHomework {
         val HOMEWORK_ID = "homework_id"
+        val IMAGES = "images"
     }
 
     object AppSaveData {
@@ -275,6 +276,11 @@ class Constants {
         const val ID = "id"
         const val IMG_URL = "img_url"
         const val ONLINEEXAM_STUDENT_ID = "onlineexam_student_id"
+        const val HOMEWORK_ID = "homework_id"
+        const val STUDENT_LIST = "student_list"
+        const val COMMENT = "comment"
+        const val RESUBMIT = "resubmit"
+        const val STUDENT_SESSION_ID = "student_session_id"
     }
 
     object ParamsStudent {

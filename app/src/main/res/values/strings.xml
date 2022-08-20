@@ -557,5 +557,12 @@
     <string name="homework_staff_select_month_year">Select month/year</string>
     <string name="homework_staff_filter_by">Filter By</string>
     <string name="homework_staff_apply">Apply</string>
+    <string name="homework_staff_evaluation_date">Evaluation Date</string>
+    <string name="homework_staff_save">Save</string>
+    <string name="homework_staff_attachments">Attachments</string>
+    <string name="homework_staff_enter_comment">Enter comment…</string>
+    <string name="homework_staff_re_submit">Re-Submit…</string>
+    <string name="homework_staff_description">Description</string>
+    <string name="homework_staff_select_name_validation">Please select name</string>
 
 </resources>

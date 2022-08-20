@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:background="@drawable/bg_border_5"
+    android:backgroundTint="@color/card_view_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/name_checkbox"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center_vertical" />
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text=""
+                android:textColor="#6d6d6d"
+                android:textSize="@dimen/_14ssp" />
+
+            <ImageView
+                android:id="@+id/iv_download"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_download"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <com.edulexa.views.RegularTextView
+            android:id="@+id/tv_attached_images"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_button_5"
+            android:gravity="center"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="@string/homework_staff_attachments"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_weight="2"
+            android:background="@drawable/bg_border_5"
+            android:backgroundTint="@color/card_view_bg">
+
+            <com.edulexa.views.RegularEditText
+                android:id="@+id/et_comment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autofillHints=""
+                android:background="@null"
+                android:hint="@string/homework_staff_enter_comment"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:textColor="#de6969"
+                android:textColorHint="#de6969"
+                android:textSize="@dimen/_12ssp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_weight="1">
+
+            <com.edulexa.views.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/homework_staff_re_submit"
+                android:textColor="#6d6d6d"
+                android:textSize="@dimen/_14ssp" />
+
+            <CheckBox
+                android:id="@+id/resubmit_checkbox"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_5sdp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
