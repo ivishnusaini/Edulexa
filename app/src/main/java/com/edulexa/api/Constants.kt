@@ -289,6 +289,7 @@ class Constants {
         const val HOMEWORK_DATE = "homework_date"
         const val SUBMIT_DATE = "submit_date"
         const val USERFILE = "userfile[]"
+        const val SYLLABUS_ID = "syllabus_id"
     }
 
     object ParamsStudent {

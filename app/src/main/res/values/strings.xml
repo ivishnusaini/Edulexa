@@ -584,4 +584,19 @@
     <string name="homework_staff_select_upload_image_size_validation">Please upload file size less than or equal 10 MB</string>
     <string name="homework_staff_select_description_validation">Please enter description</string>
 
+
+    <!--Lesson Plan-->
+    <string name="lesson_plan_staff">Lesson Plan</string>
+    <string name="lesson_plan_staff_date">Date</string>
+    <string name="lesson_plan_staff_select_date">Select date</string>
+    <string name="lesson_plan_staff_no_data">No data</string>
+    <string name="lesson_plan_staff_class">Class :</string>
+    <string name="lesson_plan_staff_section">Section :</string>
+    <string name="lesson_plan_staff_subject_name">Subject Name :</string>
+    <string name="lesson_plan_staff_time">Time :</string>
+    <string name="lesson_plan_staff_edit">Edit</string>
+    <string name="lesson_plan_staff_delete">Delete</string>
+    <string name="lesson_plan_staff_add">Add</string>
+    <string name="lesson_plan_staff_view">View</string>
+
 </resources>

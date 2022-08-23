@@ -108,4 +108,10 @@ interface ApiInterfaceStaff {
 
     @POST("addHomework")
     fun addHomework(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("lessionPlan")
+    fun lessionPlan(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("deletesubjectsyllabus")
+    fun deletesubjectsyllabus(@Body requestBody : RequestBody): Call<ResponseBody>
 }
