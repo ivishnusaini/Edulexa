@@ -28,8 +28,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.edulexa.R
 import com.edulexa.activity.staff.custom_lesson_plan.adapter.ClassSpinnerAdapter
 import com.edulexa.activity.staff.custom_lesson_plan.adapter.MultiSectionSelectAdapter
+import com.edulexa.activity.staff.homework.adapter.EvaluationListAdapter
 import com.edulexa.activity.staff.homework.adapter.SubjectGroupSpinnerAdapter
 import com.edulexa.activity.staff.homework.adapter.SubjectSpinnerAdapter
+import com.edulexa.activity.staff.homework.model.evaluation.EvaluationResponse
 import com.edulexa.activity.staff.homework.model.subject.Subject
 import com.edulexa.activity.staff.homework.model.subject.SubjectResponse
 import com.edulexa.activity.staff.homework.model.subject_group.SubjectGroup
@@ -50,7 +52,9 @@ import com.edulexa.support.Preference
 import com.edulexa.support.Utils
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
+import okhttp3.MediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -89,6 +93,7 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
     var documentActivityLaunch: ActivityResultLauncher<Intent>? = null
 
     var uploadImageFile: File? = null
+    var fileSize: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -182,6 +187,7 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
                     } else
                         subjectId = ""
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
     }
@@ -199,7 +205,7 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setUpSubmissionDate() {
         myCalendar = Calendar.getInstance()
-        homeworkDateSetListener =
+        submissionDateSetListener =
             DatePickerDialog.OnDateSetListener { view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
                 myCalendar!!.set(Calendar.YEAR, year)
                 myCalendar!!.set(Calendar.MONTH, monthOfYear)
@@ -227,6 +233,9 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
                         if (filePath != null) {
                             uploadImageFile = File(filePath)
                             binding!!.tvUploadDocument.text = uploadImageFile!!.name
+                            val fileSizeKb: Int =
+                                (uploadImageFile!!.length() / 1024).toString().toInt()
+                            fileSize = fileSizeKb / 1024
                         }
                     } catch (e: java.lang.Exception) {
                         e.printStackTrace()
@@ -250,6 +259,8 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
                     if (filePath != null) {
                         uploadImageFile = File(filePath)
                         binding!!.tvUploadDocument.text = uploadImageFile!!.name
+                        val fileSizeKb: Int = (uploadImageFile!!.length() / 1024).toString().toInt()
+                        fileSize = fileSizeKb / 1024
                     }
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
@@ -271,6 +282,8 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
                     if (filePath != null) {
                         uploadImageFile = File(filePath)
                         binding!!.tvUploadDocument.text = uploadImageFile!!.name
+                        val fileSizeKb: Int = (uploadImageFile!!.length() / 1024).toString().toInt()
+                        fileSize = fileSizeKb / 1024
                     }
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
@@ -433,9 +446,8 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
                                         .isNotEmpty()
                                 ) {
                                     sectionListSpinn = modelResponse.getSectionList()
-                                    if (sectionListSpinn!!.isNotEmpty()){
-                                        sectionId = sectionListSpinn!![0]!!.getSectionId()!!
-                                        getSubjectGroup()
+                                    if (sectionListSpinn!!.isNotEmpty()) {
+                                        getSubjectGroup(sectionListSpinn!![0]!!.getSectionId()!!)
                                     }
 
                                 }
@@ -470,7 +482,7 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun getSubjectGroup() {
+    private fun getSubjectGroup(sectionId : String) {
         (subjectGroupListSpinn as ArrayList<SubjectGroup?>).clear()
         if (subjectGroupSpinnerAdapter != null)
             subjectGroupSpinnerAdapter!!.notifyDataSetChanged()
@@ -501,7 +513,8 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
 
             Utils.printLog("Url", Constants.BASE_URL_STAFF + "getSubjectGroupByClassAndSection")
 
-            val call: Call<ResponseBody> = apiInterfaceWithHeader.getSubjectGroupByClassAndSection(requestBody)
+            val call: Call<ResponseBody> =
+                apiInterfaceWithHeader.getSubjectGroupByClassAndSection(requestBody)
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
@@ -512,7 +525,8 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
                         val responseStr = response.body()!!.string()
                         if (!responseStr.isNullOrEmpty()) {
                             val responseJsonObject = JSONObject(responseStr)
-                            val subjectGroupListJsonArr = responseJsonObject.optJSONArray("subject_group_list")
+                            val subjectGroupListJsonArr =
+                                responseJsonObject.optJSONArray("subject_group_list")
                             if (subjectGroupListJsonArr != null) {
                                 val modelResponse = Utils.getObject(
                                     responseStr,
@@ -522,9 +536,15 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
                                     val subjectGroup = SubjectGroup()
                                     subjectGroup.setName("Select subject group")
                                     subjectGroupListSpinn = modelResponse.getSubjectGroupList()
-                                    (subjectGroupListSpinn as ArrayList<SubjectGroup?>).add(0, subjectGroup)
+                                    (subjectGroupListSpinn as ArrayList<SubjectGroup?>).add(
+                                        0,
+                                        subjectGroup
+                                    )
                                     subjectGroupSpinnerAdapter =
-                                        SubjectGroupSpinnerAdapter(mActivity!!, subjectGroupListSpinn)
+                                        SubjectGroupSpinnerAdapter(
+                                            mActivity!!,
+                                            subjectGroupListSpinn
+                                        )
                                     binding!!.subjectGroupSpinn.adapter = subjectGroupSpinnerAdapter
                                 }
                             } else {
@@ -606,7 +626,8 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
                                     subject.setName("Select subject")
                                     subjectListSpinn = modelResponse.getSubjectList()
                                     (subjectListSpinn as ArrayList<Subject?>).add(0, subject)
-                                    subjectSpinnerAdapter = SubjectSpinnerAdapter(mActivity!!, subjectListSpinn)
+                                    subjectSpinnerAdapter =
+                                        SubjectSpinnerAdapter(mActivity!!, subjectListSpinn)
                                     binding!!.subjectSpinn.adapter = subjectSpinnerAdapter
                                 }
                             } else {
@@ -768,6 +789,130 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun addHomework() {
+        val descriptionStr = binding!!.etDescription.text.toString().trim()
+        if (classId == "")
+            Utils.showToastPopup(
+                mActivity!!,
+                getString(R.string.add_custom_lesson_plan_staff_select_class_validation)
+            )
+        else if (sectionId == "")
+            Utils.showToastPopup(
+                mActivity!!,
+                getString(R.string.add_custom_lesson_plan_staff_select_section_validation)
+            )
+        else if (subjectGroupId == "")
+            Utils.showToastPopup(
+                mActivity!!,
+                getString(R.string.homework_staff_select_subject_group_validation)
+            )
+        else if (subjectId == "")
+            Utils.showToastPopup(
+                mActivity!!,
+                getString(R.string.add_custom_lesson_plan_staff_select_subject_validation)
+            )
+        else if (binding!!.tvHomeworkDate.text.toString() == getString(R.string.homework_staff_add_homework_select_homework_date))
+            Utils.showToastPopup(
+                mActivity!!,
+                getString(R.string.homework_staff_select_homework_date_validation)
+            )
+        else if (binding!!.tvSubmissionDate.text.toString() == getString(R.string.homework_staff_add_homework_select_submission_date))
+            Utils.showToastPopup(
+                mActivity!!,
+                getString(R.string.homework_staff_select_submission_date_validation)
+            )
+        else if (uploadImageFile == null)
+            Utils.showToastPopup(
+                mActivity!!,
+                getString(R.string.homework_staff_select_upload_image_validation)
+            )
+        else if (fileSize > 10)
+            Utils.showToastPopup(
+                mActivity!!,
+                getString(R.string.homework_staff_select_upload_image_size_validation)
+            )
+        else if (descriptionStr.isEmpty())
+            Utils.showToastPopup(
+                mActivity!!,
+                getString(R.string.homework_staff_select_description_validation)
+            )
+        else {
+            if (Utils.isNetworkAvailable(mActivity!!)) {
+                Utils.showProgressBar(mActivity!!)
+                Utils.hideKeyboard(mActivity!!)
+                val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
+                val apiInterfaceWithHeader: ApiInterfaceStaff =
+                    APIClientStaff.getRetroFitClientWithNewKeyHeader(
+                        mActivity!!,
+                        Utils.getStaffToken(mActivity!!),
+                        Utils.getStaffId(mActivity!!), dbId!!
+                    ).create(ApiInterfaceStaff::class.java)
+
+                val builder = MultipartBody.Builder()
+                builder.setType(MultipartBody.FORM)
+                builder.addFormDataPart(
+                    Constants.ParamsStaff.STAFF_ID,
+                    Utils.getStaffId(mActivity!!)
+                )
+                builder.addFormDataPart(Constants.ParamsStaff.CLASS_ID, classId)
+                builder.addFormDataPart(Constants.ParamsStaff.SECTION_ID, sectionId)
+                builder.addFormDataPart(Constants.ParamsStaff.SUBJECT_GROUP_ID, subjectGroupId)
+                builder.addFormDataPart(Constants.ParamsStaff.SUBJECT_ID, subjectId)
+                builder.addFormDataPart(
+                    Constants.ParamsStaff.HOMEWORK_DATE,
+                    binding!!.tvHomeworkDate.text.toString()
+                )
+                builder.addFormDataPart(
+                    Constants.ParamsStaff.SUBMIT_DATE,
+                    binding!!.tvSubmissionDate.text.toString()
+                )
+                builder.addFormDataPart(Constants.ParamsStaff.DESCRIPTION, descriptionStr)
+                if (uploadImageFile != null)
+                    builder.addFormDataPart(
+                        Constants.ParamsStaff.USERFILE, uploadImageFile!!.name, RequestBody.create(
+                            MediaType.parse("multipart/form-data"), uploadImageFile!!
+                        )
+                    )
+                val requestBody = builder.build()
+
+                Utils.printLog("Url", Constants.BASE_URL_STAFF + "addHomework")
+
+                val call: Call<ResponseBody> = apiInterfaceWithHeader.addHomework(requestBody)
+                call.enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        Utils.hideProgressBar()
+                        try {
+                            val responseStr = response.body()!!.string()
+                            if (!responseStr.isNullOrEmpty()) {
+                                val responseJsonObject = JSONObject(responseStr)
+                                val message = responseJsonObject.optString("message")
+                                val homeworkId = responseJsonObject.optString("homework_id")
+                                Utils.showToast(mActivity!!,message)
+                                if (homeworkId != "")
+                                    onBackPressed()
+                            } else {
+                                Utils.showToastPopup(
+                                    mActivity!!,
+                                    getString(R.string.response_null_or_empty_validation)
+                                )
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Utils.hideProgressBar()
+                        Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                    }
+
+                })
+            } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+
+        }
 
     }
 
@@ -775,14 +920,13 @@ class AddHomeworkActivity : AppCompatActivity(), View.OnClickListener {
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
-        else if (id == R.id.section_lay){
-            if (classId != ""){
+        else if (id == R.id.section_lay) {
+            if (classId != "") {
                 sectionId = ""
                 sectionName = ""
                 setSectionSpinnerAdapter()
             }
-        }
-        else if (id == R.id.upload_homework_date_lay) {
+        } else if (id == R.id.upload_homework_date_lay) {
             binding!!.tvHomeworkDate.text =
                 getString(R.string.homework_staff_add_homework_select_homework_date)
             Utils.hideKeyboard(mActivity!!)

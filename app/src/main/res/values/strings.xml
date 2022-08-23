@@ -577,5 +577,11 @@
     <string name="homework_staff_add_homework_select_submission_date">Select submission date</string>
     <string name="homework_staff_add_homework_description">Description</string>
     <string name="homework_staff_add_homework_add">Add</string>
+    <string name="homework_staff_select_subject_group_validation">Please select subject group</string>
+    <string name="homework_staff_select_homework_date_validation">Please select homework date</string>
+    <string name="homework_staff_select_submission_date_validation">Please select submission date</string>
+    <string name="homework_staff_select_upload_image_validation">Please upload image</string>
+    <string name="homework_staff_select_upload_image_size_validation">Please upload file size less than or equal 10 MB</string>
+    <string name="homework_staff_select_description_validation">Please enter description</string>
 
 </resources>

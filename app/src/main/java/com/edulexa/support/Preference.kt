@@ -1,5 +1,6 @@
 package com.edulexa.support
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import com.edulexa.R

@@ -105,4 +105,7 @@ interface ApiInterfaceStaff {
 
     @POST("getGroupSubjects")
     fun getGroupSubjects(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("addHomework")
+    fun addHomework(@Body requestBody : RequestBody): Call<ResponseBody>
 }

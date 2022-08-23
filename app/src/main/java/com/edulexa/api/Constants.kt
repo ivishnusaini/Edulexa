@@ -282,6 +282,9 @@ class Constants {
         const val RESUBMIT = "resubmit"
         const val STUDENT_SESSION_ID = "student_session_id"
         const val SUBJECT_GROUP_ID = "subject_group_id"
+        const val HOMEWORK_DATE = "homework_date"
+        const val SUBMIT_DATE = "submit_date"
+        const val USERFILE = "userfile[]"
     }
 
     object ParamsStudent {
