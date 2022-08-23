@@ -283,9 +283,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     val apiInterfaceWithHeader: ApiInterfaceStudent = APIClientStudent.getRetroFitClientWithHeader(mActivity!!).create(ApiInterfaceStudent::class.java)
 
                     val jsonObject = JSONObject()
-                    jsonObject.put(Constants.ParamsStudent.USERNAME, binding!!.etUserName.text.toString().trim())
-                    jsonObject.put(Constants.ParamsStudent.PASSWORD, binding!!.etPassword.text.toString().trim())
-                    jsonObject.put(Constants.ParamsStudent.DEVICETOKEN, firebaseToken)
+                    jsonObject.put(Constants.Preference.USERNAME_STUDENT, binding!!.etUserName.text.toString().trim())
+                    jsonObject.put(Constants.Preference.PASSWORD_STUDENT, binding!!.etPassword.text.toString().trim())
+                    jsonObject.put(Constants.Preference.DEVICETOKEN, firebaseToken)
 
                     val requestBody: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
 

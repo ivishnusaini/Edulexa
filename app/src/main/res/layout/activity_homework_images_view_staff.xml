@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="@dimen/_100sdp"
@@ -27,15 +26,16 @@
             android:src="@drawable/ic_back_white" />
 
         <com.edulexa.views.MediumTextView
-            android:id="@+id/tv_online_exam_detail_title"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/student_list_staff"
+            android:text="@string/online_exam_staff_images"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
+
 
     </RelativeLayout>
 
@@ -43,22 +43,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_60sdp"
-        android:background="@drawable/header_top_right_radius">
+        android:background="@drawable/header_top_right_radius"
+        android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <ImageView
+            android:id="@+id/iv_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.edulexa.views.RegularTextView
-            android:id="@+id/tv_no_data"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
-            android:gravity="center"
-            android:text="@string/student_list_staff_no_data"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            android:visibility="gone" />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/app_name"/>
 
     </RelativeLayout>
 

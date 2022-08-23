@@ -12,7 +12,14 @@ import com.edulexa.activity.staff.k12_diary.activity.K12DiaryActivity
 import com.edulexa.activity.staff.student_profile.adapter.StudentListAdapter
 import com.edulexa.activity.staff.student_profile.model.student_list.StudentListResponse
 import com.edulexa.activity.staff.student_profile.model.student_profile_detail.StudentViewResponse
+import com.edulexa.activity.student.attendance.activity.AttendanceStudentActivity
+import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlanActivity
+import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
+import com.edulexa.activity.student.fee.activity.FeeStudentActivity
+import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
+import com.edulexa.activity.student.online_exam.activity.OnlineExamListActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
+import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
 import com.edulexa.api.APIClientStaff
 import com.edulexa.api.ApiInterfaceStaff
 import com.edulexa.api.Constants
@@ -41,6 +48,7 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
     var studentNameStr = ""
     var classNameStr = ""
     var sectionNameStr = ""
+    var preference : Preference? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStudentProfileDetailStaffBinding.inflate(layoutInflater)
@@ -50,6 +58,7 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
 
     private fun init() {
         mActivity = this
+        preference = Preference().getInstance(mActivity!!)
         setUpClickListener()
         getBundleData()
         setUpStudentProfileData()
@@ -192,6 +201,17 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
+        val studentLoginResponse = Utils.getStudentLoginResponse(mActivity)
+        studentLoginResponse!!.setId(userIdStr)
+        studentLoginResponse.setToken(tokenStr)
+        val record = studentLoginResponse.getRecord()
+        record!!.setClass_(classNameStr)
+        record.setSection(sectionNameStr)
+        studentLoginResponse.setRecord(record)
+        Utils.saveStudentLoginResponse(mActivity,studentLoginResponse)
+        preference!!.putString(Constants.Preference.STUDENT_ID,studentId)
+        preference!!.putString(Constants.Preference.STUDENT_SESSION_ID,studentSessionIdStr)
+
         val id = view!!.id
         if (id == R.id.iv_back)
             onBackPressed()
@@ -200,21 +220,24 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
             bundle.putString(Constants.StaffK12Timeline.STUDENT_ID, studentId)
             startActivity(Intent(mActivity, K12DiaryActivity::class.java).putExtras(bundle))
         } else if (id == R.id.cv_homework) {
-
+            startActivity(Intent(mActivity!!, HomeworkStudentActivity::class.java))
         } else if (id == R.id.cv_school_fee) {
-
+            startActivity(Intent(mActivity!!, FeeStudentActivity::class.java))
         } else if (id == R.id.cv_live_class_attendance) {
-
+            startActivity(Intent(mActivity!!, AttendanceStudentActivity::class.java))
         } else if (id == R.id.cv_online_exam) {
-
+            startActivity(Intent(mActivity!!, OnlineExamListActivity::class.java))
         } else if (id == R.id.cv_report_card) {
-
+            startActivity(Intent(mActivity!!, ReportCardStudentActivity::class.java))
         } else if (id == R.id.cv_shared_lesson) {
-
+            startActivity(Intent(mActivity!!, CustomLessonPlanActivity::class.java))
         } else if (id == R.id.cv_profile) {
 
         } else if (id == R.id.cv_login_as_student) {
-
+            preference!!.putString(Constants.Preference.CLASS_ID,classIdStr)
+            preference!!.putString(Constants.Preference.SECTION_ID,sectionIdStr)
+            preference!!.putString(Constants.Preference.USERNAME_STUDENT,studentNameStr)
+            startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
         }
     }
 }

@@ -130,6 +130,7 @@ class Constants {
     object StaffHomework {
         val HOMEWORK_ID = "homework_id"
         val IMAGES = "images"
+        val IMAGEURL = "imageUrl"
     }
 
     object AppSaveData {
@@ -168,6 +169,9 @@ class Constants {
         const val SECTION_ID = "section_id"
         const val ZOOM_SDK_KEY = "zoom_sdk_key"
         const val ZOOM_SDK_SECRAT = "zoom_sdk_secrat"
+        const val USERNAME_STUDENT = "username"
+        const val PASSWORD_STUDENT = "password"
+        const val DEVICETOKEN = "deviceToken"
 
         /*Staff*/
         const val STAFF_BASE_URL = "staff_base_url"
@@ -288,9 +292,6 @@ class Constants {
     }
 
     object ParamsStudent {
-        const val USERNAME = "username"
-        const val PASSWORD = "password"
-        const val DEVICETOKEN = "deviceToken"
         const val STUDENT_ID = "student_id"
         const val DATE_FROM = "Date_from"
         const val DATE_TO = "date_to"
