@@ -18,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Edulexa"
         android:usesCleartextTraffic="true">
+        <!-- Staff Section -->
+        <activity
+            android:name=".activity.staff.lesson_plan.activity.AddSyllabusActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.staff.lesson_plan.activity.LessonListActivity"
             android:exported="false" />
@@ -35,7 +39,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.staff.homework.activity.HomeworkActivity"
-            android:exported="false" /> <!-- Staff Section -->
+            android:exported="false" />
         <activity
             android:name=".activity.staff.online_exam.activity.StudentResultActivity"
             android:exported="false" />

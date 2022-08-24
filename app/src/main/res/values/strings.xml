@@ -598,5 +598,17 @@
     <string name="lesson_plan_staff_delete">Delete</string>
     <string name="lesson_plan_staff_add">Add</string>
     <string name="lesson_plan_staff_view">View</string>
+    <string name="add_syllabus_staff">Add Syllabus</string>
+    <string name="add_syllabus_staff_lesson">Lesson</string>
+    <string name="add_syllabus_staff_topic">Topic</string>
+    <string name="add_syllabus_staff_presentation_name">Presentation name</string>
+    <string name="add_syllabus_staff_sub_topic_name">Sub Topic name</string>
+    <string name="add_syllabus_staff_teaching_methd">Teaching method</string>
+    <string name="add_syllabus_staff_general_objective">General objective</string>
+    <string name="add_syllabus_staff_previous_knowledge">Previous knowledge</string>
+    <string name="add_syllabus_staff_compprehensive_question">Comprehensive question</string>
+    <string name="add_syllabus_staff_youtube_url">Youtube url (optional)</string>
+    <string name="add_syllabus_staff_add">Add</string>
+    <string name="add_syllabus_staff_attachment">Attachment</string>
 
 </resources>

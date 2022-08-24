@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/header_bg_staff">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_back_white" />
+
+        <com.edulexa.views.MediumTextView
+            android:id="@+id/tv_online_exam_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_toEndOf="@+id/iv_back"
+            android:text="@string/add_syllabus_staff"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp" />
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:background="@drawable/header_top_right_radius">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <com.edulexa.views.MediumTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/add_syllabus_staff_lesson"
+                android:textColor="@color/primaray_text_color"
+                android:textSize="@dimen/_14ssp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/bg_button_5"
+                android:backgroundTint="@color/card_view_bg">
+
+                <Spinner
+                    android:id="@+id/lesson_spinn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_drop_down"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+            <com.edulexa.views.MediumTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/add_syllabus_staff_topic"
+                android:textColor="@color/primaray_text_color"
+                android:textSize="@dimen/_14ssp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/bg_button_5"
+                android:backgroundTint="@color/card_view_bg">
+
+                <Spinner
+                    android:id="@+id/topic_spinn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_drop_down"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg"
+                android:orientation="vertical">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_presentation"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@null"
+                    android:hint="@string/add_syllabus_staff_presentation_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg"
+                android:orientation="vertical">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_sub_topic_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@null"
+                    android:hint="@string/add_syllabus_staff_sub_topic_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg"
+                android:orientation="vertical">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_teaching_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@null"
+                    android:hint="@string/add_syllabus_staff_teaching_methd"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg"
+                android:orientation="vertical">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_general_objective"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@null"
+                    android:hint="@string/add_syllabus_staff_general_objective"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg"
+                android:orientation="vertical">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_previous_knowledge"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@null"
+                    android:hint="@string/add_syllabus_staff_previous_knowledge"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg"
+                android:orientation="vertical">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_comprensive_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@null"
+                    android:hint="@string/add_syllabus_staff_compprehensive_question"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_border_5"
+                android:backgroundTint="@color/card_view_bg"
+                android:orientation="vertical">
+
+                <com.edulexa.views.RegularEditText
+                    android:id="@+id/et_youtube"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@null"
+                    android:hint="@string/add_syllabus_staff_youtube_url"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <com.edulexa.views.RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/add_custom_lesson_plan_staff_attach_document"
+                android:textColor="@color/primaray_text_color"
+                android:textSize="@dimen/_14ssp" />
+
+
+            <RelativeLayout
+                android:id="@+id/upload_document_lay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/bg_button_5"
+                android:backgroundTint="@color/card_view_bg">
+
+                <com.edulexa.views.RegularTextView
+                    android:id="@+id/tv_upload_document"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/add_custom_lesson_plan_staff_upload_document"
+                    android:textColor="#707070"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/download_attachment_lay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:visibility="gone">
+
+                <com.edulexa.views.RegularTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/add_syllabus_staff_attachment"
+                    android:textColor="@color/primaray_text_color"
+                    android:textSize="@dimen/_14ssp" />
+
+                <ImageView
+                    android:id="@+id/iv_download"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_download"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+            <com.edulexa.views.RegularTextView
+                android:id="@+id/tv_add"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/ripple_effect_5"
+                android:gravity="center"
+                android:paddingStart="@dimen/_30sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                android:text="@string/add_syllabus_staff_add"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

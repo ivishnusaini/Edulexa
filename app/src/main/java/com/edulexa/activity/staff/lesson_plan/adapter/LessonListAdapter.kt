@@ -2,15 +2,19 @@ package com.edulexa.activity.staff.lesson_plan.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.staff.custom_lesson_plan.activity.CustomLessonPlanActivity
+import com.edulexa.activity.staff.homework.activity.EvaluationActivity
 import com.edulexa.activity.staff.lesson_plan.activity.LessonListActivity
 import com.edulexa.activity.staff.lesson_plan.model.list.TimetableLessonPlan
 import com.edulexa.activity.staff.online_exam.activity.*
+import com.edulexa.api.Constants
 import com.edulexa.databinding.ItemStaffLessonPlanListBinding
 import com.edulexa.support.Utils
 
@@ -61,6 +65,12 @@ class LessonListAdapter(context: Activity, list: List<TimetableLessonPlan?>?) :
                     binding!!.tvDelete.visibility = View.GONE
                     binding!!.tvEdit.text = context!!.getString(R.string.lesson_plan_staff_view)
                 }
+            }
+
+            binding!!.tvAdd.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString(Constants.StaffLessonList.HOMEWORK_ID, list!![position]!!.getId())
+                context!!.startActivity(Intent(context, EvaluationActivity::class.java).putExtras(bundle))
             }
 
             binding!!.tvDelete.setOnClickListener {

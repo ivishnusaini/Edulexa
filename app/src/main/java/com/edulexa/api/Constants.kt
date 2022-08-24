@@ -133,6 +133,12 @@ class Constants {
         val IMAGEURL = "imageUrl"
     }
 
+    object StaffLessonList {
+        val HOMEWORK_ID = "homework_id"
+        val IMAGES = "images"
+        val IMAGEURL = "imageUrl"
+    }
+
     object AppSaveData {
         var gallerystudenttype = "all"
         var listUpcoming : List<DatumLiveClass>? = null
