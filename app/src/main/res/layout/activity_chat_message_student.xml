@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="@dimen/_100sdp"
@@ -44,8 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_60sdp"
-        android:paddingBottom="@dimen/_5sdp"
-        android:background="@drawable/header_top_right_radius">
+        android:background="@drawable/header_top_right_radius"
+        android:paddingBottom="@dimen/_5sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,8 +102,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:background="@drawable/bg_border_25"
             android:orientation="horizontal"
             android:paddingHorizontal="15dp">

@@ -114,4 +114,19 @@ interface ApiInterfaceStaff {
 
     @POST("deletesubjectsyllabus")
     fun deletesubjectsyllabus(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getSubjectGroupClassSectionsId")
+    fun getSubjectGroupClassSectionsId(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getlessonBysubjectid")
+    fun getlessonBysubjectId(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getTopicBylessonid")
+    fun getTopicBylessonId(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("editSubjectSyllabus")
+    fun editSubjectSyllabus(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("addSyllabus")
+    fun addSyllabus(@Body requestBody : RequestBody): Call<ResponseBody>
 }

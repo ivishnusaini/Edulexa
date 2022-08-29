@@ -153,6 +153,8 @@ class TimetableLessonPlan {
     }
 
     fun getClassId(): String? {
+        if (classId == null)
+            return ""
         return classId
     }
 
@@ -161,6 +163,8 @@ class TimetableLessonPlan {
     }
 
     fun getSectionId(): String? {
+        if (sectionId == null)
+            return ""
         return sectionId
     }
 
@@ -169,6 +173,8 @@ class TimetableLessonPlan {
     }
 
     fun getSubjectGroupId(): String? {
+        if (subjectGroupId == null)
+            return ""
         return subjectGroupId
     }
 
@@ -177,6 +183,8 @@ class TimetableLessonPlan {
     }
 
     fun getSubjectGroupSubjectId(): String? {
+        if (subjectGroupSubjectId == null)
+            return ""
         return subjectGroupSubjectId
     }
 
@@ -185,6 +193,8 @@ class TimetableLessonPlan {
     }
 
     fun getStaffId(): String? {
+        if (staffId == null)
+            return ""
         return staffId
     }
 

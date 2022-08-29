@@ -610,5 +610,8 @@
     <string name="add_syllabus_staff_youtube_url">Youtube url (optional)</string>
     <string name="add_syllabus_staff_add">Add</string>
     <string name="add_syllabus_staff_attachment">Attachment</string>
+    <string name="add_syllabus_staff_select_lesson_validation">Please select lesson</string>
+    <string name="add_syllabus_staff_select_topic_validation">Please select topic</string>
+    <string name="add_syllabus_staff_upload_less_than_10_mb_validation">Please upload file size less than or equal 10 MB</string>
 
 </resources>

@@ -134,9 +134,17 @@ class Constants {
     }
 
     object StaffLessonList {
-        val HOMEWORK_ID = "homework_id"
-        val IMAGES = "images"
-        val IMAGEURL = "imageUrl"
+        val STAFF_ID = "staff_id"
+        val CLASS_ID = "class_id"
+        val SECTION_ID = "section_id"
+        val SUBJECT_GROUP_ID = "subject_group_id"
+        val SUBJECT_GROUP_SUBJECT_ID = "subject_group_subject_id"
+        val TIME_FROM = "time_from"
+        val TIME_TO = "time_to"
+        val DATE = "date"
+        val ROLE_ID = "role_id"
+        val SYLLABUS_ID = "syllabus_id"
+        val TYPE = "type"
     }
 
     object AppSaveData {
@@ -296,6 +304,14 @@ class Constants {
         const val SUBMIT_DATE = "submit_date"
         const val USERFILE = "userfile[]"
         const val SYLLABUS_ID = "syllabus_id"
+        const val SUBJECT_GROUP_SUBJECT_ID = "subject_group_subject_id"
+        const val SUBJECT_GROUP_CLASS_SECTIONS_ID = "subject_group_class_sections_id"
+        const val CREATED_FOR = "created_for"
+        const val TOPIC_ID = "topic_id"
+        const val TIME_FROM = "time_from"
+        const val TIME_TO = "time_to"
+        const val PRESENTATION = "presentation"
+        const val SUB_TOPIC = "sub_topic"
     }
 
     object ParamsStudent {

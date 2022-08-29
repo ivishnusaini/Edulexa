@@ -126,7 +126,7 @@ class LessonListActivity : AppCompatActivity(), View.OnClickListener {
                                     )
                                     binding!!.recyclerView.adapter = LessonListAdapter(
                                         mActivity!!,
-                                        modelResponse.getResult()!!.getTimetable()
+                                        modelResponse.getResult()!!.getTimetable(),binding!!.tvDate.text.toString()
                                     )
                                 } else {
                                     binding!!.recyclerView.visibility = View.GONE
