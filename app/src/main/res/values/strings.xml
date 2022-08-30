@@ -619,5 +619,17 @@
     <string name="circular_staff_from_publish_date">From Publish Date</string>
     <string name="circular_staff_publish_date">Publish Date</string>
     <string name="circular_staff_no_data">No Data</string>
+    <string name="circular_staff_successfully_delete">Successfully delete</string>
+    <string name="circular_staff_post_message">Post Message</string>
+    <string name="circular_staff_post_news">Post News</string>
+    <string name="circular_staff_title">Title</string>
+    <string name="circular_staff_enter_title">Enter title</string>
+    <string name="circular_staff_attach_document">Attach Document</string>
+    <string name="circular_staff_upload_document">Upload Document</string>
+    <string name="circular_staff_circular_date">Circular Date</string>
+    <string name="circular_staff_select_circular_date">Select circular date</string>
+    <string name="circular_staff_select_publish_date">Select publish date</string>
+    <string name="circular_staff_message">Message</string>
+    <string name="circular_staff_enter_message">Enter message</string>
 
 </resources>

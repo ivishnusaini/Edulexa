@@ -198,6 +198,70 @@ class CircularActivity : AppCompatActivity(),View.OnClickListener {
     }
 
     fun deleNotification(notificationId : String){
+        if (Utils.isNetworkAvailable(mActivity!!)) {
+            Utils.showProgressBar(mActivity!!)
+            Utils.hideKeyboard(mActivity!!)
+            val dbId = preference!!.getString(Constants.Preference.BRANCH_ID)
+
+            val apiInterfaceWithHeader: ApiInterfaceStaff =
+                APIClientStaff.getRetroFitClientWithNewKeyHeader(
+                    mActivity!!,
+                    Utils.getStaffToken(mActivity!!),
+                    Utils.getStaffId(mActivity!!), dbId!!
+                ).create(ApiInterfaceStaff::class.java)
+
+            val builder = MultipartBody.Builder()
+            builder.setType(MultipartBody.FORM)
+            builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+            builder.addFormDataPart(Constants.ParamsStaff.MODULE_ID, Utils.getStaffId(mActivity!!))
+            builder.addFormDataPart(
+                Constants.ParamsStaff.ROLE_ID,
+                Utils.getStaffRoleId(mActivity!!)
+            )
+            builder.addFormDataPart(Constants.ParamsStaff.STAFF_ID, Utils.getStaffId(mActivity!!))
+            builder.addFormDataPart(Constants.ParamsStaff.NOTIFICATION_ID, notificationId)
+            builder.addFormDataPart(
+                Constants.ParamsStaff.ROLE_ID,
+                Utils.getStaffRoleId(mActivity!!)
+            )
+            val requestBody = builder.build()
+
+            Utils.printLog("Url", Constants.BASE_URL_STAFF + "deleteNotification")
+
+            val call: Call<ResponseBody> = apiInterfaceWithHeader.deleteNotification(requestBody)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    Utils.hideProgressBar()
+                    try {
+                        val responseStr = response.body()!!.string()
+                        if (!responseStr.isNullOrEmpty()) {
+                            Utils.showToast(mActivity!!,getString(R.string.circular_staff_successfully_delete))
+                            getCircularList()
+                        } else {
+                            Utils.showToastPopup(
+                                mActivity!!,
+                                getString(R.string.response_null_or_empty_validation)
+                            )
+                            binding!!.recyclerView.visibility = View.GONE
+                            binding!!.tvNoData.visibility = View.VISIBLE
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        binding!!.recyclerView.visibility = View.GONE
+                        binding!!.tvNoData.visibility = View.VISIBLE
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Utils.hideProgressBar()
+                    Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                }
+
+            })
+        } else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
 
     }
 

@@ -312,6 +312,7 @@ class Constants {
         const val TIME_TO = "time_to"
         const val PRESENTATION = "presentation"
         const val SUB_TOPIC = "sub_topic"
+        const val NOTIFICATION_ID = "notification_id"
     }
 
     object ParamsStudent {

@@ -129,4 +129,7 @@ interface ApiInterfaceStaff {
 
     @POST("addSyllabus")
     fun addSyllabus(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("deleteNotification")
+    fun deleteNotification(@Body requestBody : RequestBody): Call<ResponseBody>
 }
