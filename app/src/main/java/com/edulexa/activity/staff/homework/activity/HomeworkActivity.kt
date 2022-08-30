@@ -152,7 +152,7 @@ class HomeworkActivity : AppCompatActivity(), View.OnClickListener {
                                 ) as HomeworkResponse
                                 if (modelResponse.getHomeworklist()!!.isNotEmpty()) {
                                     binding!!.recyclerView.visibility = View.VISIBLE
-                                    binding!!.tvNoData.visibility = View.VISIBLE
+                                    binding!!.tvNoData.visibility = View.GONE
                                     Constants.AppSaveData.homeworkList =
                                         modelResponse.getHomeworklist()
                                     binding!!.recyclerView.layoutManager = LinearLayoutManager(

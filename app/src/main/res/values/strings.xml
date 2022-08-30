@@ -614,4 +614,10 @@
     <string name="add_syllabus_staff_select_topic_validation">Please select topic</string>
     <string name="add_syllabus_staff_upload_less_than_10_mb_validation">Please upload file size less than or equal 10 MB</string>
 
+    <!--Circulars-->
+    <string name="circular_staff">Circulars</string>
+    <string name="circular_staff_from_publish_date">From Publish Date</string>
+    <string name="circular_staff_publish_date">Publish Date</string>
+    <string name="circular_staff_no_data">No Data</string>
+
 </resources>

@@ -54,6 +54,9 @@ class DashboardStaffAdapter(context: Activity,list : List<DashboardModel>) :
                     context!!.getString(R.string.dashboard_staff_lesson_plan) -> {
                         context!!.startActivity(Intent(context, LessonListActivity::class.java))
                     }
+                    context!!.getString(R.string.dashboard_staff_circular) -> {
+                        context!!.startActivity(Intent(context, LessonListActivity::class.java))
+                    }
                 }
             }
         } catch (e: Exception) {

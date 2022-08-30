@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="@dimen/_100sdp"
@@ -33,7 +32,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/iv_back"
-            android:text="@string/custom_lesson_plan_staff_lesson_list"
+            android:text="@string/circular_staff"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 
@@ -74,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="@string/custom_lesson_plan_staff_date"
+                    android:text="@string/circular_staff_from_publish_date"
                     android:textSize="@dimen/_14ssp" />
 
                 <LinearLayout
@@ -93,7 +92,7 @@
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/_10sdp"
                         android:paddingEnd="@dimen/_10sdp"
-                        android:text="@string/custom_lesson_plan_staff_date"
+                        android:text="@string/circular_staff_publish_date"
                         android:textColor="@color/primaray_text_color"
                         android:textSize="@dimen/_12ssp" />
 
@@ -114,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/custom_lesson_plan_staff_no_data"
+            android:text="@string/circular_staff_no_data"
             android:textColor="@color/primaray_text_color"
             android:textSize="@dimen/_14ssp"
             android:visibility="gone" />
