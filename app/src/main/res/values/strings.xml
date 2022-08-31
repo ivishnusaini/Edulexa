@@ -631,5 +631,11 @@
     <string name="circular_staff_select_publish_date">Select publish date</string>
     <string name="circular_staff_message">Message</string>
     <string name="circular_staff_enter_message">Enter message</string>
+    <string name="circular_staff_group">Group</string>
+    <string name="circular_staff_individual">Individual</string>
+    <string name="circular_staff_class">Class</string>
+    <string name="circular_staff_message_to">Message To</string>
+    <string name="circular_staff_section">Section</string>
+    <string name="circular_staff_send">Send</string>
 
 </resources>
