@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
 import com.edulexa.activity.staff.k12_diary.activity.K12DiaryActivity
+import com.edulexa.activity.staff.lesson_plan.activity.AddSyllabusActivity
 import com.edulexa.activity.staff.student_profile.adapter.StudentListAdapter
 import com.edulexa.activity.staff.student_profile.model.student_list.StudentListResponse
 import com.edulexa.activity.staff.student_profile.model.student_profile_detail.StudentViewResponse
@@ -17,6 +18,8 @@ import com.edulexa.activity.student.custom_lesson_plan.activity.CustomLessonPlan
 import com.edulexa.activity.student.dashboard.activity.DashboardStudentActivity
 import com.edulexa.activity.student.fee.activity.FeeStudentActivity
 import com.edulexa.activity.student.homework.activity.HomeworkStudentActivity
+import com.edulexa.activity.student.login.RecordStudent
+import com.edulexa.activity.student.login.StudentLoginResponse
 import com.edulexa.activity.student.online_exam.activity.OnlineExamListActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardDetailActivity
 import com.edulexa.activity.student.report_card.activity.ReportCardStudentActivity
@@ -201,11 +204,11 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        val studentLoginResponse = Utils.getStudentLoginResponse(mActivity)
-        studentLoginResponse!!.setId(userIdStr)
+        val studentLoginResponse = StudentLoginResponse()
+        studentLoginResponse.setId(userIdStr)
         studentLoginResponse.setToken(tokenStr)
-        val record = studentLoginResponse.getRecord()
-        record!!.setClass_(classNameStr)
+        val record = RecordStudent()
+        record.setClass_(classNameStr)
         record.setSection(sectionNameStr)
         studentLoginResponse.setRecord(record)
         Utils.saveStudentLoginResponse(mActivity,studentLoginResponse)
@@ -237,7 +240,10 @@ class StudentProfileDetailACtivity : AppCompatActivity(), View.OnClickListener {
             preference!!.putString(Constants.Preference.CLASS_ID,classIdStr)
             preference!!.putString(Constants.Preference.SECTION_ID,sectionIdStr)
             preference!!.putString(Constants.Preference.USERNAME_STUDENT,studentNameStr)
-            startActivity(Intent(mActivity!!, DashboardStudentActivity::class.java))
+            val bundle = Bundle()
+            bundle.putString(Constants.StaffStudentProfile.FROM_WHERE, "staff")
+            startActivity(Intent(mActivity, DashboardStudentActivity::class.java).putExtras(bundle))
+
         }
     }
 }

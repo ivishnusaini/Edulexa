@@ -7,7 +7,8 @@ import com.edulexa.activity.student.live_classes.model.DatumLiveClass
 
 class Constants {
     companion object {
-        val BASE_URL_SCHOOL_CODE = "https://edulexa.online/beta/staff_api/app/web_url"
+//        val BASE_URL_SCHOOL_CODE = "https://edulexa.online/beta/staff_api/app/web_url"
+        val BASE_URL_SCHOOL_CODE = "https://demo.edulexa.online/staff_api/app/web_url"
 
         /*Student Base Url and Value*/
         var BASE_URL_STUDENT = ""
@@ -95,6 +96,7 @@ class Constants {
         val ROLL_NO = "roll_no"
         val CLASS = "class"
         val SECTION = "section"
+        val FROM_WHERE = "from_where"
     }
 
     object StaffK12Timeline{

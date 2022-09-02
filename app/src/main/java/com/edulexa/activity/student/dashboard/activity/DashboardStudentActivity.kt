@@ -42,7 +42,8 @@ import kotlin.collections.ArrayList
 class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     var mActivity: Activity? = null
     var binding: ActivityDashboardStudentBinding? = null
-    var preference : Preference? = null
+    var preference: Preference? = null
+    var fromWhere = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardStudentBinding.inflate(layoutInflater)
@@ -51,13 +52,17 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
-        exitAppPopup()
+        if (fromWhere == "staff")
+            finish()
+        else
+            exitAppPopup()
     }
 
     private fun init() {
         mActivity = this
         preference = Preference().getInstance(mActivity!!)
         setUpclickListener()
+        getBundleData()
         setUpData()
         getDashboardData();
     }
@@ -65,6 +70,15 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     private fun setUpclickListener() {
         binding!!.menuLay.setOnClickListener(this)
         binding!!.tvLogout.setOnClickListener(this)
+    }
+
+    private fun getBundleData() {
+        try {
+            val bundle = intent.extras
+            fromWhere = bundle!!.getString(Constants.StaffStudentProfile.FROM_WHERE)!!
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun setUpData() {
@@ -181,11 +195,25 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                                     )
                                 }
                                 if (modelResponse.getDashboardDatum() != null)
-                                    setUpDashboardData(modelResponse.getDashboardDatum()!!.getModuleList())
-                                if (modelResponse.getDashboardDatum()!!.getLiveClassConfig() != null){
-                                    if (modelResponse.getDashboardDatum()!!.getLiveClassConfig()!!.size > 0){
-                                        preference!!.putString(Constants.Preference.ZOOM_SDK_KEY,modelResponse.getDashboardDatum()!!.getLiveClassConfig()!!.get(0)!!.getApiKey())
-                                        preference!!.putString(Constants.Preference.ZOOM_SDK_SECRAT,modelResponse.getDashboardDatum()!!.getLiveClassConfig()!!.get(0)!!.getApiSecret())
+                                    setUpDashboardData(
+                                        modelResponse.getDashboardDatum()!!.getModuleList()
+                                    )
+                                if (modelResponse.getDashboardDatum()!!
+                                        .getLiveClassConfig() != null
+                                ) {
+                                    if (modelResponse.getDashboardDatum()!!
+                                            .getLiveClassConfig()!!.size > 0
+                                    ) {
+                                        preference!!.putString(
+                                            Constants.Preference.ZOOM_SDK_KEY,
+                                            modelResponse.getDashboardDatum()!!
+                                                .getLiveClassConfig()!!.get(0)!!.getApiKey()
+                                        )
+                                        preference!!.putString(
+                                            Constants.Preference.ZOOM_SDK_SECRAT,
+                                            modelResponse.getDashboardDatum()!!
+                                                .getLiveClassConfig()!!.get(0)!!.getApiSecret()
+                                        )
                                     }
                                 }
                             }
@@ -228,24 +256,24 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setUpDashboardData(list: List<ModuleDashboard?>?) {
-        try{
-        if (list != null && list.size > 0) {
-            binding!!.recyclerView.layoutManager =
-                GridLayoutManager(mActivity, 3, RecyclerView.VERTICAL, false)
-            val dashboardList: ArrayList<DashboardModuleModel> = ArrayList()
-            for (model in list) {
-                if (model!!.getIsActive().equals("1"))
-                    dashboardList.add(
-                        DashboardModuleModel(
-                            model.getName()!!,
-                            model.getIconLink()!!,
-                            model.getShortCode()!!
+        try {
+            if (list != null && list.size > 0) {
+                binding!!.recyclerView.layoutManager =
+                    GridLayoutManager(mActivity, 3, RecyclerView.VERTICAL, false)
+                val dashboardList: ArrayList<DashboardModuleModel> = ArrayList()
+                for (model in list) {
+                    if (model!!.getIsActive().equals("1"))
+                        dashboardList.add(
+                            DashboardModuleModel(
+                                model.getName()!!,
+                                model.getIconLink()!!,
+                                model.getShortCode()!!
+                            )
                         )
-                    )
+                }
+                binding!!.recyclerView.adapter = DashboardStudentAdapter(mActivity!!, dashboardList)
             }
-            binding!!.recyclerView.adapter = DashboardStudentAdapter(mActivity!!, dashboardList)
-        }
-        }catch (e : Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
@@ -289,7 +317,7 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
             .requestChildFocus(binding!!.recyclerView, binding!!.recyclerView)
     }
 
-    private fun dialogLogout(){
+    private fun dialogLogout() {
         try {
             val dialog = Dialog(mActivity!!)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -305,18 +333,26 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                 Utils.hideKeyboard(mActivity!!)
                 dialog.dismiss()
 
-                if (Utils.isNetworkAvailable(mActivity!!)){
+                if (Utils.isNetworkAvailable(mActivity!!)) {
                     Utils.showProgressBar(mActivity!!)
                     Utils.hideKeyboard(mActivity!!)
 
-                    val branchId = Preference().getInstance(mActivity!!)!!.getString(Constants.Preference.BRANCH_ID)!!
+                    val branchId = Preference().getInstance(mActivity!!)!!
+                        .getString(Constants.Preference.BRANCH_ID)!!
                     val accessToken = Utils.getStudentLoginResponse(mActivity)!!.getToken()!!
                     val userId = Utils.getStudentUserId(mActivity!!)
 
-                    val apiInterfaceWithHeader: ApiInterfaceStudent = APIClientStudent.getRetroFitClientWithNewKeyHeader(mActivity!!, accessToken,branchId,userId).create(
-                        ApiInterfaceStudent::class.java)
+                    val apiInterfaceWithHeader: ApiInterfaceStudent =
+                        APIClientStudent.getRetroFitClientWithNewKeyHeader(
+                            mActivity!!,
+                            accessToken,
+                            branchId,
+                            userId
+                        ).create(
+                            ApiInterfaceStudent::class.java
+                        )
 
-                    Utils.printLog("Url", Constants.DOMAIN_STUDENT+"/Webservice/logout")
+                    Utils.printLog("Url", Constants.DOMAIN_STUDENT + "/Webservice/logout")
 
                     val call: Call<ResponseBody> = apiInterfaceWithHeader.logout()
                     call.enqueue(object : Callback<ResponseBody> {
@@ -325,31 +361,50 @@ class DashboardStudentActivity : AppCompatActivity(), View.OnClickListener {
                             response: Response<ResponseBody>
                         ) {
                             Utils.hideProgressBar()
-                            try{
+                            try {
                                 val responseStr = response.body()!!.string()
-                                if (!responseStr.isNullOrEmpty()){
+                                if (!responseStr.isNullOrEmpty()) {
                                     val jsonObjectResponse = JSONObject(responseStr)
                                     val statusCode = jsonObjectResponse.optInt("status")
                                     val message = jsonObjectResponse.optString("message")
-                                    if (statusCode == 200){
+                                    if (statusCode == 200) {
                                         preference!!.clearPreference()
-                                        preference!!.putString(Constants.Preference.STUDENT_IS_LOGIN,Constants.Preference.STUDENT_IS_LOGIN_NO)
-                                        preference!!.putString(Constants.Preference.APP_TYPE,Constants.Preference.APP_TYPE_STUDENT)
-                                        preference!!.putString(Constants.Preference.LOGOUTSTATUS,Constants.Preference.LOGOUTSTATUS_VALUE)
-                                        startActivity(Intent(mActivity,LoginActivity::class.java))
+                                        preference!!.putString(
+                                            Constants.Preference.STUDENT_IS_LOGIN,
+                                            Constants.Preference.STUDENT_IS_LOGIN_NO
+                                        )
+                                        preference!!.putString(
+                                            Constants.Preference.APP_TYPE,
+                                            Constants.Preference.APP_TYPE_STUDENT
+                                        )
+                                        preference!!.putString(
+                                            Constants.Preference.LOGOUTSTATUS,
+                                            Constants.Preference.LOGOUTSTATUS_VALUE
+                                        )
+                                        startActivity(Intent(mActivity, LoginActivity::class.java))
                                         finishAffinity()
-                                    }else Utils.showToast(mActivity!!,message)
-                                }else Utils.showToastPopup(mActivity!!, getString(R.string.response_null_or_empty_validation))
-                            }catch (e : Exception){
+                                    } else Utils.showToast(mActivity!!, message)
+                                } else Utils.showToastPopup(
+                                    mActivity!!,
+                                    getString(R.string.response_null_or_empty_validation)
+                                )
+                            } catch (e: Exception) {
                                 e.printStackTrace()
                             }
                         }
+
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                             Utils.hideProgressBar()
-                            Utils.showToastPopup(mActivity!!, getString(R.string.api_response_failure))
+                            Utils.showToastPopup(
+                                mActivity!!,
+                                getString(R.string.api_response_failure)
+                            )
                         }
                     })
-                }else Utils.showToastPopup(mActivity!!, getString(R.string.internet_connection_error))
+                } else Utils.showToastPopup(
+                    mActivity!!,
+                    getString(R.string.internet_connection_error)
+                )
 
             }
             dialog.show()
