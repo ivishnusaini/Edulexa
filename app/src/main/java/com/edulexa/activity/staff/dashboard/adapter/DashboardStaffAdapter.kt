@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edulexa.R
+import com.edulexa.activity.staff.circular.activity.CircularActivity
 import com.edulexa.activity.staff.custom_lesson_plan.activity.CustomLessonClassListActivity
 import com.edulexa.activity.staff.dashboard.model.DashboardModel
 import com.edulexa.activity.staff.homework.activity.HomeworkActivity
@@ -55,7 +56,7 @@ class DashboardStaffAdapter(context: Activity,list : List<DashboardModel>) :
                         context!!.startActivity(Intent(context, LessonListActivity::class.java))
                     }
                     context!!.getString(R.string.dashboard_staff_circular) -> {
-                        context!!.startActivity(Intent(context, LessonListActivity::class.java))
+                        context!!.startActivity(Intent(context, CircularActivity::class.java))
                     }
                 }
             }

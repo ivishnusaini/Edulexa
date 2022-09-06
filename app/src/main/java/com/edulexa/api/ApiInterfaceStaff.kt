@@ -132,4 +132,7 @@ interface ApiInterfaceStaff {
 
     @POST("deleteNotification")
     fun deleteNotification(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getRolesClassListForNotifications")
+    fun getRolesClassListForNotifications(@Body requestBody : RequestBody): Call<ResponseBody>
 }

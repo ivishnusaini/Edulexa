@@ -221,7 +221,6 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_button_5"
-                    android:backgroundTint="@color/secondary_text_color"
                     android:gravity="center"
                     android:text="@string/circular_staff_group"
                     android:textColor="@color/white"
