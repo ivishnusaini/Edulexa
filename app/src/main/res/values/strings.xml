@@ -637,5 +637,11 @@
     <string name="circular_staff_message_to">Message To</string>
     <string name="circular_staff_section">Section</string>
     <string name="circular_staff_send">Send</string>
+    <string name="circular_staff_enter_title_validation">Please enter title</string>
+    <string name="circular_staff_select_circular_date_validation">Please select circular date</string>
+    <string name="circular_staff_select_publish_date_validation">Please select publish date</string>
+    <string name="circular_staff_enter_message_validation">Please enter message</string>
+    <string name="circular_staff_select_role_type_validation">Please select role type</string>
+    <string name="circular_staff_select_section_validation">Please select section</string>
 
 </resources>

@@ -315,6 +315,14 @@ class Constants {
         const val PRESENTATION = "presentation"
         const val SUB_TOPIC = "sub_topic"
         const val NOTIFICATION_ID = "notification_id"
+        const val GROUP_TITLE = "group_title"
+        const val GROUP_MESSAGE = "group_message"
+        const val PUBLISH_DATE = "publish_date"
+        const val USER = "user"
+        const val TITLE = "title"
+        const val MESSAGE = "message"
+        const val SECTION = "section"
+        const val CLASS = "class"
     }
 
     object ParamsStudent {

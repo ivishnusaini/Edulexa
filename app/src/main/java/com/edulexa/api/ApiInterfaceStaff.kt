@@ -135,4 +135,10 @@ interface ApiInterfaceStaff {
 
     @POST("getRolesClassListForNotifications")
     fun getRolesClassListForNotifications(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("sendGroup")
+    fun sendGroup(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("sendClass")
+    fun sendClass(@Body requestBody : RequestBody): Call<ResponseBody>
 }

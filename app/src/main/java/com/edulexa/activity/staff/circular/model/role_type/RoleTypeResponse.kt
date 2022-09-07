@@ -14,6 +14,8 @@ class RoleTypeResponse {
     private var classlist: List<ClassListRole?>? = null
 
     fun getRoles(): List<Role?>? {
+        if (roles == null)
+            return ArrayList()
         return roles
     }
 
