@@ -644,4 +644,8 @@
     <string name="circular_staff_select_role_type_validation">Please select role type</string>
     <string name="circular_staff_select_section_validation">Please select section</string>
 
+    <!--School Family-->
+    <string name="school_family_staff">School Family</string>
+    <string name="school_family_staff_no_data">No Data</string>
+
 </resources>

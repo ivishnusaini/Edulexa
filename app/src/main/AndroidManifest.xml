@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true">
         <!-- Staff Section -->
         <activity
+            android:name=".activity.staff.school_family.activity.SchoolFamilyActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.staff.circular.activity.PostNewMessageActivity"
             android:exported="false" />
         <activity

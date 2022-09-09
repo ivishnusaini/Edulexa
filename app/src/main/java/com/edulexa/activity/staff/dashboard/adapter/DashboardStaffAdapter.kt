@@ -12,6 +12,7 @@ import com.edulexa.activity.staff.dashboard.model.DashboardModel
 import com.edulexa.activity.staff.homework.activity.HomeworkActivity
 import com.edulexa.activity.staff.lesson_plan.activity.LessonListActivity
 import com.edulexa.activity.staff.online_exam.activity.OnlineExamActivity
+import com.edulexa.activity.staff.school_family.activity.SchoolFamilyActivity
 import com.edulexa.activity.staff.student_profile.activity.StudentProfileClassListActivity
 import com.edulexa.databinding.ItemStaffDashboardBinding
 
@@ -57,6 +58,9 @@ class DashboardStaffAdapter(context: Activity,list : List<DashboardModel>) :
                     }
                     context!!.getString(R.string.dashboard_staff_circular) -> {
                         context!!.startActivity(Intent(context, CircularActivity::class.java))
+                    }
+                    context!!.getString(R.string.dashboard_staff_school_family) -> {
+                        context!!.startActivity(Intent(context, SchoolFamilyActivity::class.java))
                     }
                 }
             }

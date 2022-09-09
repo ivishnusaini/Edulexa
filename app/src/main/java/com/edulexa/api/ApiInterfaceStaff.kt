@@ -141,4 +141,7 @@ interface ApiInterfaceStaff {
 
     @POST("sendClass")
     fun sendClass(@Body requestBody : RequestBody): Call<ResponseBody>
+
+    @POST("getStaffList")
+    fun getStaffList(@Body requestBody : RequestBody): Call<ResponseBody>
 }

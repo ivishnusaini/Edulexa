@@ -638,7 +638,7 @@ class PostNewMessageActivity : AppCompatActivity(), View.OnClickListener {
                         if (!responseStr.isNullOrEmpty()) {
                             val responseJsonObject = JSONObject(responseStr)
                             val message = responseJsonObject.optString("msg")
-                            Utils.showToast(mActivity!!,message)
+                            Utils.showToast(mActivity!!, message)
                             onBackPressed()
                         } else {
                             Utils.showToastPopup(
@@ -735,7 +735,7 @@ class PostNewMessageActivity : AppCompatActivity(), View.OnClickListener {
                         if (!responseStr.isNullOrEmpty()) {
                             val responseJsonObject = JSONObject(responseStr)
                             val message = responseJsonObject.optString("msg")
-                            Utils.showToast(mActivity!!,message)
+                            Utils.showToast(mActivity!!, message)
                             onBackPressed()
                         } else {
                             Utils.showToastPopup(
